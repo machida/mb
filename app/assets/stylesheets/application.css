@@ -1,0 +1,137 @@
+/*
+ * This is a manifest file that'll be compiled into application.css.
+ *
+ * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
+ * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
+ * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
+ * depending on specificity.
+ *
+ * Consider organizing styles into separate files for maintainability.
+ */
+
+/*= require syntax_highlighting */
+/*= require github-markdown */
+/*= require markdown-overrides */
+/*= require buttons */
+/*= require breakpoints */
+/*= require container */
+/*= require text-input */
+/*= require card */
+/*= require dropdown */
+
+/* =================================================================
+   CSS Variables for Colors and Typography
+   ================================================================= */
+:root {
+  /* Primary colors */
+  --color-text-primary: #1e293b;    /* Slate-800 */
+  --color-text-secondary: #6b7280;  /* Gray-500 */
+  --color-text-muted: #9ca3af;      /* Gray-400 */
+  --color-text-light: #d1d5db;      /* Gray-300 */
+
+  /* Link colors */
+  --color-link: #1e40af;            /* Blue-800 */
+  --color-link-hover: #1e3a8a;      /* Blue-900 */
+
+  /* Status colors */
+  --color-error: #dc2626;           /* Red-600 */
+  --color-warning: #d97706;         /* Yellow-600 */
+  --color-success: #059669;         /* Green-600 */
+
+  /* Background colors */
+  --color-bg-primary: #ffffff;      /* White */
+  --color-bg-secondary: #f9fafb;    /* Gray-50 */
+  --color-bg-muted: #f3f4f6;        /* Gray-100 */
+
+  /* Border colors */
+  --color-border-light: #e5e7eb;    /* Gray-200 */
+  --color-border-default: #d1d5db;  /* Gray-300 */
+  --color-border-dark: #9ca3af;     /* Gray-400 */
+
+  /* Typography */
+  --font-family-base: YakuHanJPs, "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  --font-family-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+/* Base typography */
+body {
+  color: var(--color-text-primary);
+  font-family: var(--font-family-base);
+}
+
+/* Typography utility classes */
+.font-base {
+  font-family: var(--font-family-base);
+}
+
+.font-mono {
+  font-family: var(--font-family-mono);
+}
+
+/* Text color utility classes */
+.text-primary {
+  color: var(--color-text-primary);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-light {
+  color: var(--color-text-light);
+}
+
+.text-link {
+  color: var(--color-link);
+}
+
+.text-link:hover {
+  color: var(--color-link-hover);
+}
+
+.text-error {
+  color: var(--color-error);
+}
+
+.text-warning {
+  color: var(--color-warning);
+}
+
+.text-success {
+  color: var(--color-success);
+}
+
+/* Background utility classes */
+.bg-primary {
+  background-color: var(--color-bg-primary);
+}
+
+.bg-secondary {
+  background-color: var(--color-bg-secondary);
+}
+
+.bg-muted {
+  background-color: var(--color-bg-muted);
+}
+
+/* Border utility classes */
+.border-light {
+  border-color: var(--color-border-light);
+}
+
+.border-default {
+  border-color: var(--color-border-default);
+}
+
+.border-dark {
+  border-color: var(--color-border-dark);
+}
+
+/* Toast styles */
+.toast-notification {
+  @apply relative;
+}

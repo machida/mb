@@ -1,0 +1,93 @@
+<div class="l--container is-lg">
+  <h1 class="text-3xl font-bold mb-6 spec-site-settings-title">サイト設定</h1>
+  
+  <%= form_with url: admin_site_settings_path, method: :patch, local: true, class: "space-y-6" do |f| %>
+    <div>
+      <%= label_tag "site_settings[site_title]", "サイトタイトル", class: "block text-sm font-medium mb-1" %>
+      <%= text_field_tag "site_settings[site_title]", 
+                         @settings[:site_title], 
+                         class: "a-text-input spec-site-title-input" %>
+      <div class="text-xs text-gray-500 mt-1">
+        ブラウザのタブやOGPで使用されるサイトタイトルです
+      </div>
+    </div>
+    
+    <div data-controller="thumbnail-upload" data-thumbnail-upload-upload-url-value="<%= admin_site_settings_upload_image_path %>">
+      <%= label_tag "site_settings[default_og_image]", "デフォルトOG画像", class: "block text-sm font-medium mb-1" %>
+      
+      <!-- Hidden file input -->
+      <input type="file" accept="image/*" class="hidden" data-thumbnail-upload-target="input" data-action="change->thumbnail-upload#fileSelected">
+      
+      <!-- Hidden URL field -->
+      <%= text_field_tag "site_settings[default_og_image]", 
+                         @settings[:default_og_image], 
+                         class: "hidden spec-default-og-image-input", 
+                         data: { thumbnail_upload_target: "url" } %>
+      
+      <!-- Drop zone -->
+      <div class="border-2 border-dashed border-gray-300 rounded-lg transition-colors" data-thumbnail-upload-target="dropzone">
+        <div class="flex flex-col items-center justify-center py-8">
+          <svg class="w-12 h-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+          </svg>
+          <p class="text-gray-600 text-center mb-2">
+            画像をドラッグ&ドロップするか
+          </p>
+          <button type="button" class="a-button is-md is-primary" data-action="click->thumbnail-upload#selectFile">
+            ファイルを選択
+          </button>
+          <p class="text-xs text-gray-500 mt-2">JPG, PNG, GIF (最大5MB)</p>
+        </div>
+      </div>
+      
+      <!-- Preview area -->
+      <div class="mt-4">
+        <% if @settings[:default_og_image].present? && !@settings[:default_og_image].include?('example.com') %>
+          <img data-thumbnail-upload-target="preview" src="<%= @settings[:default_og_image] %>" class="max-w-xs h-auto rounded-lg border border-gray-300" alt="">
+          <div class="mt-2">
+            <button type="button" class="a-button is-sm is-danger" data-action="click->thumbnail-upload#clearThumbnail" data-thumbnail-upload-target="clearButton">
+              画像を削除
+            </button>
+          </div>
+        <% else %>
+          <img data-thumbnail-upload-target="preview" class="hidden max-w-xs h-auto rounded-lg border border-gray-300" alt="">
+          <div class="hidden mt-2">
+            <button type="button" class="a-button is-sm is-danger" data-action="click->thumbnail-upload#clearThumbnail" data-thumbnail-upload-target="clearButton">
+              画像を削除
+            </button>
+          </div>
+        <% end %>
+      </div>
+      
+      <div class="text-xs text-gray-500 mt-1">
+        記事にサムネイル画像が設定されていない場合に使用される画像です
+      </div>
+    </div>
+    
+    <div>
+      <%= label_tag "site_settings[top_page_description]", "トップページの説明文", class: "block text-sm font-medium mb-1" %>
+      <%= text_area_tag "site_settings[top_page_description]", 
+                        @settings[:top_page_description], 
+                        rows: 3,
+                        class: "a-text-input spec-top-page-description-input" %>
+      <div class="text-xs text-gray-500 mt-1">
+        トップページのmeta descriptionとOGPで使用される説明文です
+      </div>
+    </div>
+    
+    <div>
+      <%= label_tag "site_settings[copyright]", "著作権者名", class: "block text-sm font-medium mb-1" %>
+      <%= text_field_tag "site_settings[copyright]", 
+                         @settings[:copyright], 
+                         class: "a-text-input spec-copyright-input" %>
+      <div class="text-xs text-gray-500 mt-1">
+        「© <%= Date.current.year %> [ここに入力した名前]. All rights reserved.」の形式で表示されます
+      </div>
+    </div>
+    
+    <div class="flex gap-4">
+      <%= submit_tag "設定を保存", class: "a-button is-lg is-primary spec-save-button" %>
+      <%= link_to "キャンセル", admin_articles_path, class: "a-button is-lg is-border-secondary spec-cancel-button" %>
+    </div>
+  <% end %>
+</div>

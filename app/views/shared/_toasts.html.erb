@@ -1,0 +1,39 @@
+<% if notice %>
+  <div class="toast-notification js-toast-notification" data-controller="toast">
+    <div data-toast-target="toast" class="bg-green-500 text-white px-6 py-3 rounded-lg  transform translate-x-full transition-transform duration-300 ease-in-out max-w-sm js-toast-element">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <span><%= notice %></span>
+        </div>
+        <button data-action="click->toast#close" class="ml-4 hover:opacity-70 js-toast-close">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<% if alert %>
+  <div class="toast-notification js-toast-notification" data-controller="toast">
+    <div data-toast-target="toast" class="bg-red-500 text-white px-6 py-3 rounded-lg  transform translate-x-full transition-transform duration-300 ease-in-out max-w-sm js-toast-element">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 15.5c-.77.833.192 2.5 1.732 2.5z"></path>
+          </svg>
+          <span><%= alert %></span>
+        </div>
+        <button data-action="click->toast#close" class="ml-4 hover:opacity-70 js-toast-close">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,17 @@
+{
+  "name": "mb",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "lint": "npm run lint:js && npm run lint:erb",
+    "lint:js": "eslint app/javascript/**/*.js",
+    "lint:erb": "bundle exec erblint --lint-all",
+    "lint:fix": "npm run lint:js -- --fix && npm run lint:erb -- --autocorrect",
+    "format": "prettier --write app/javascript/**/*.js",
+    "build": "rails assets:precompile"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5"
+  }
+}

@@ -1,0 +1,68 @@
+<div class="l--container is-lg">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2"><%= @year %>年<%= @month %>月の記事</h1>
+    <p class="text-gray-500"><%= @articles.count %>件の記事があります</p>
+  </div>
+
+  <!-- ナビゲーション -->
+  <div class="mb-6 flex gap-4">
+    <%= link_to archive_year_path(@year), class: "a-button is-md is-primary" do %>
+      ← <%= @year %>年の一覧
+    <% end %>
+    
+    <% if @month > 1 %>
+      <%= link_to archive_month_path(@year, @month - 1), class: "a-button is-md is-secondary" do %>
+        ← <%= @month - 1 %>月
+      <% end %>
+    <% end %>
+    
+    <% if @month < 12 %>
+      <%= link_to archive_month_path(@year, @month + 1), class: "a-button is-md is-secondary" do %>
+        <%= @month + 1 %>月 →
+      <% end %>
+    <% end %>
+  </div>
+
+  <!-- 記事一覧 -->
+  <div class="space-y-6">
+    <% @articles.each do |article| %>
+      <article class="a-card is-hover">
+        <div class="flex justify-between items-start mb-2">
+          <h2 class="text-xl font-semibold">
+            <%= link_to article.title, article_path(article), 
+                        class: "text-link" %>
+          </h2>
+          <time class="text-gray-500 text-sm">
+            <%= format_date_with_weekday(article.created_at) %>
+          </time>
+        </div>
+        
+        <% if article.summary.present? %>
+          <p class="mb-3"><%= article.summary %></p>
+        <% end %>
+        
+        <% if show_author_info? %>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-gray-500">著者: <%= article.author %></span>
+          </div>
+        <% end %>
+      </article>
+    <% end %>
+  </div>
+
+  <% if @articles.empty? %>
+    <div class="text-center py-12">
+      <p class="text-gray-500 text-lg"><%= @year %>年<%= @month %>月の記事はまだありません</p>
+    </div>
+  <% end %>
+
+  <!-- Pagination -->
+  <div class="mt-8 flex justify-center spec-pagination">
+    <%= paginate @articles %>
+  </div>
+
+  <!-- ナビゲーション -->
+  <div class="mt-8 text-center">
+    <%= link_to "トップページに戻る", root_path, class: "a-button is-lg is-secondary" %>
+  </div>
+</div>

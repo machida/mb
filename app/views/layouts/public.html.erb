@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || SiteSetting.site_title %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="description" content="<%= content_for(:description) || SiteSetting.top_page_description %>">
+    <meta property="og:title" content="<%= content_for(:title) || SiteSetting.site_title %>">
+    <meta property="og:description" content="<%= content_for(:description) || SiteSetting.top_page_description %>">
+    <meta property="og:site_name" content="<%= SiteSetting.site_title %>">
+    <% default_og_image_url = SiteSetting.default_og_image_url %>
+    <% if default_og_image_url.present? %>
+      <meta property="og:image" content="<%= default_og_image_url %>">
+      <meta property="og:image:width" content="1200">
+      <meta property="og:image:height" content="630">
+    <% end %>
+    <%= csrf_meta_tags %>
+    <meta name="csrf-token" content="<%= form_authenticity_token %>" class="js-csrf-token">
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# YakuHanJP font %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/yakuhanjp@4.1.1/dist/css/yakuhanjp_s.css">
+
+    <%# Material Icons %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-white min-h-screen flex flex-col layout-public">
+    <% if controller_name == 'articles' && action_name == 'index' %>
+      <!-- Main Visual Header for Top Page -->
+      <header class="main-visual py-16">
+        <div class="l--container is-lg text-center">
+          <h1 class="text-4xl font-bold mb-4">
+            <%= SiteSetting.site_title %>
+          </h1>
+          <% if SiteSetting.top_page_description.present? %>
+            <p class="text-lg text-secondary max-w-2xl mx-auto">
+              <%= SiteSetting.top_page_description %>
+            </p>
+          <% end %>
+        </div>
+      </header>
+
+      <!-- Public Main Content for Top Page -->
+      <main class="flex-1 l--container is-lg mt-8">
+        <%= yield %>
+      </main>
+    <% else %>
+      <!-- Regular Header for Other Pages -->
+      <header class="bg-white">
+        <div class="l--container is-lg">
+          <div class="flex justify-between items-center h-16">
+            <div>
+              <h1 class="text-2xl font-bold">
+                <%= link_to SiteSetting.site_title, root_path, class: "hover:text-gray-600" %>
+              </h1>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Public Main Content for Other Pages -->
+      <main class="flex-1 l--container is-lg mt-8">
+        <%= yield %>
+      </main>
+    <% end %>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-8">
+      <div class="l--container is-lg">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+          <p class="text-sm text-gray-300">© <%= Date.current.year %><%= SiteSetting.copyright %>. All rights reserved.</p>
+
+          <nav class="flex items-center gap-4">
+            <% if current_user_signed_in? %>
+              <%= link_to "記事管理", admin_articles_path, class: "text-gray-300 hover:text-white text-sm spec-admin-link" %>
+              <span class="text-gray-500">|</span>
+              <%= link_to "ログアウト", admin_logout_path, method: :delete, class: "text-gray-300 hover:text-white text-sm spec-logout-link" %>
+            <% else %>
+              <%= link_to "ログイン", admin_login_path, class: "text-gray-300 hover:text-white text-sm spec-login-link" %>
+            <% end %>
+          </nav>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2 js-toast-container">
+      <%= render 'shared/toasts' %>
+    </div>
+  </body>
+</html>

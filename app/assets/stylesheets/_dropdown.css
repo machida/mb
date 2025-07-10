@@ -1,0 +1,79 @@
+/* ドロップダウンメニューのスタイル */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border-light);
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  min-width: 12rem;
+  z-index: 50;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+}
+
+.dropdown-menu.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu-item {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  color: var(--color-text-primary);
+  font-size: 0.875rem;
+  text-decoration: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.dropdown-menu-item:hover {
+  background-color: var(--color-bg-muted);
+  color: var(--color-text-primary);
+}
+
+.dropdown-menu-item:first-child {
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.dropdown-menu-item:last-child {
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.dropdown-menu-separator {
+  height: 1px;
+  background-color: var(--color-border-light);
+  margin: 0.25rem 0;
+}
+
+.dropdown-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  color: var(--color-text-secondary);
+  transition: color 0.15s ease;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.dropdown-button:hover {
+  color: var(--color-text-primary);
+}
+
+.dropdown-button[aria-expanded="true"] {
+  color: var(--color-text-primary);
+}

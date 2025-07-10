@@ -1,0 +1,29 @@
+/* Card styles */
+.a-card {
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border-default);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+}
+
+/* Card variants */
+.a-card.is-hover {
+  transition: background-color 0.2s ease-in-out;
+}
+
+.a-card.is-hover:hover {
+  background-color: var(--color-bg-secondary);
+}
+
+/* Card sizes */
+.a-card.is-sm {
+  padding: 1rem;
+}
+
+.a-card.is-md {
+  padding: 1.5rem;
+}
+
+.a-card.is-lg {
+  padding: 2rem;
+}

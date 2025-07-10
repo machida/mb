@@ -1,0 +1,67 @@
+<div class="l--container is-lg">
+  <div class="flex justify-between items-center mb-8">
+    <div class="flex items-center gap-4">
+      <h1 class="text-3xl font-bold">下書き記事</h1>
+      <span class="bg-yellow-500 text-white px-3 py-1 rounded-full text-sm">
+        <%= @articles.count %>件
+      </span>
+    </div>
+    <div class="flex gap-4">
+      <%= link_to "全ての記事", admin_articles_path, class: "a-button is-md is-primary" %>
+    </div>
+  </div>
+
+  <% if @articles.any? %>
+    <div class="space-y-6">
+      <% @articles.each do |article| %>
+        <article class="a-card is-hover">
+          <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center gap-3">
+              <h2 class="text-xl font-semibold">
+                <%= link_to article.title, admin_article_path(article), 
+                            class: "text-link" %>
+              </h2>
+              <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">
+                下書き
+              </span>
+            </div>
+            <time class="text-gray-500 text-sm">
+              <%= format_date_with_weekday(article.created_at) %>
+            </time>
+          </div>
+          
+          <% if article.summary.present? %>
+            <p class="mb-3"><%= truncate(article.summary, length: 150) %></p>
+          <% end %>
+          
+          <div class="flex justify-between items-center">
+            <div class="flex items-center gap-4 text-sm text-gray-500">
+              <span>著者: <%= article.author %></span>
+              <% if article.updated_at != article.created_at %>
+                <span>更新日: <%= format_date_with_weekday(article.updated_at) %></span>
+              <% end %>
+            </div>
+            <div class="flex gap-2">
+              <%= link_to "編集", edit_admin_article_path(article), class: "a-button is-sm is-border-secondary" %>
+              <%= link_to "削除", admin_article_path(article), method: :delete, 
+                          data: { confirm: "本当に削除しますか？" }, class: "a-button is-sm is-danger" %>
+            </div>
+          </div>
+        </article>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="text-center py-12">
+      <svg class="w-16 h-16 text-yellow-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+      </svg>
+      <p class="text-gray-500 text-lg">下書きの記事がありません</p>
+      <p class="text-gray-400 text-sm mt-2">新しい記事を作成して下書き保存してみましょう</p>
+    </div>
+  <% end %>
+
+  <!-- Pagination -->
+  <div class="mt-8 flex justify-center spec-pagination">
+    <%= paginate @articles %>
+  </div>
+</div>

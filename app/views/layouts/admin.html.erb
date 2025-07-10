@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "管理画面 - #{SiteSetting.site_title}" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <meta name="csrf-token" content="<%= form_authenticity_token %>" class="js-csrf-token">
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# YakuHanJP font %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/yakuhanjp@4.1.1/dist/css/yakuhanjp_s.css">
+
+    <%# Material Icons %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-gray-100 min-h-screen flex flex-col layout-admin">
+    <!-- Admin Header -->
+    <header class="bg-white border-b border-gray-200">
+      <div class="l--container is-lg">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center">
+            <h1 class="text-xl font-semibold">
+              <%= link_to "管理画面", admin_articles_path, class: "hover:text-gray-600" %>
+            </h1>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <% if current_user_signed_in? %>
+              <%= link_to admin_articles_path, class: "text-gray-500 hover:text-gray-700 p-2", title: "記事管理" do %>
+                <span class="material-icons">table_chart</span>
+              <% end %>
+
+              <%= link_to admin_site_settings_path, class: "text-gray-500 hover:text-gray-700 p-2", title: "サイト設定" do %>
+                <span class="material-icons">settings</span>
+              <% end %>
+
+              <div class="dropdown">
+                <button class="dropdown-button js-dropdown-button" aria-expanded="false" title="ユーザーメニュー">
+                  <span class="material-icons">person</span>
+                </button>
+                <div class="dropdown-menu js-dropdown-menu">
+                  <%= link_to edit_admin_profile_path, class: "dropdown-menu-item" do %>
+                    プロフィール編集
+                  <% end %>
+                  <div class="dropdown-menu-separator"></div>
+                  <%= link_to admin_logout_path, method: :delete, class: "dropdown-menu-item" do %>
+                    サインアウト
+                  <% end %>
+                </div>
+              </div>
+
+              <%= link_to "新しい記事を作成", new_admin_article_path, class: "a-button is-md is-border-secondary" %>
+            <% end %>
+          </div>
+
+        </div>
+      </div>
+    </header>
+
+    <!-- Admin Main Content -->
+    <main class="l--container is-lg py-6">
+      <div class="py-6">
+        <%= yield %>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-auto">
+      <div class="l--container is-lg">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div class="flex items-center gap-4">
+            <%= link_to "サイトを表示", root_path, class: "text-gray-300 hover:text-white text-sm" %>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <p class="text-sm text-gray-300">© <%= Date.current.year %> <%= SiteSetting.site_title %>. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2 js-toast-container">
+      <%= render 'shared/toasts' %>
+    </div>
+  </body>
+</html>
