@@ -1,0 +1,71 @@
+# Configuration for CodeRabbit AI Code Reviews
+# https://docs.coderabbit.ai/
+
+# Language settings
+language: en-US
+
+# Review settings
+reviews:
+  # Enable automatic reviews for pull requests
+  auto_review: true
+  
+  # Include draft pull requests in reviews
+  include_drafts: false
+  
+  # Review request on push to pull request
+  review_on_push: true
+
+# Chat settings
+chat:
+  # Enable chat functionality
+  auto_reply: false
+
+# Path-based settings
+path_filters:
+  # Files to always review
+  include:
+    - "**/*.rb"
+    - "**/*.js"
+    - "**/*.ts"
+    - "**/*.css"
+    - "**/*.scss"
+    - "**/*.erb"
+    - "**/*.yml"
+    - "**/*.yaml"
+    - "Gemfile"
+    - "Dockerfile"
+    
+  # Files to exclude from review
+  exclude:
+    - "node_modules/**"
+    - "vendor/**"
+    - "log/**"
+    - "tmp/**"
+    - "storage/**"
+    - "public/assets/**"
+    - "app/assets/builds/**"
+    - "db/schema.rb"
+    - "*.lock"
+    - "*.min.js"
+    - "*.min.css"
+
+# Knowledge base settings
+knowledge_base:
+  # Opt in to learnings from your codebase
+  learnings: true
+  
+  # Enable insights from your repository
+  insights: true
+
+# Tone and style
+tone_instructions: |
+  - Focus on Rails 8 best practices and conventions
+  - Pay attention to security considerations
+  - Suggest improvements for maintainability and performance
+  - Consider Propshaft asset pipeline patterns
+  - Review CSS architecture and naming conventions
+  - Check for proper error handling and logging
+  - Ensure consistent code style across the project
+
+# Early access features
+early_access: false
