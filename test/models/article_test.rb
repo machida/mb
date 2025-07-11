@@ -95,4 +95,65 @@ class ArticleTest < ActiveSupport::TestCase
     assert_includes draft_articles, draft_article
     assert_not_includes draft_articles, published_article
   end
+
+  test "og_image_url should return thumbnail when present" do
+    @article.thumbnail = "https://example.com/thumbnail.jpg"
+    @article.save!
+    
+    assert_equal "https://example.com/thumbnail.jpg", @article.og_image_url
+  end
+
+  test "og_image_url should return default og image when thumbnail not present" do
+    SiteSetting.set("default_og_image", "https://example.com/default.jpg")
+    @article.thumbnail = nil
+    @article.save!
+    
+    assert_equal "https://example.com/default.jpg", @article.og_image_url
+  end
+
+  test "og_image_url should return nil when neither thumbnail nor default og image present" do
+    # Clear default_og_image setting by removing it entirely
+    SiteSetting.find_by(name: "default_og_image")&.destroy
+    @article.thumbnail = nil
+    @article.save!
+    
+    assert_nil @article.og_image_url
+  end
+
+  test "should allow blank summary" do
+    @article.summary = ""
+    assert @article.valid?
+    
+    @article.summary = nil
+    assert @article.valid?
+  end
+
+  test "should allow blank thumbnail" do
+    @article.thumbnail = ""
+    assert @article.valid?
+    
+    @article.thumbnail = nil
+    assert @article.valid?
+  end
+
+  test "should handle long title and body" do
+    @article.title = "A" * 1000
+    @article.body = "B" * 10000
+    assert @article.valid?
+  end
+
+  test "published? and draft? should be opposite" do
+    @article.draft = false
+    assert @article.published?
+    assert_not @article.draft?
+    
+    @article.draft = true
+    assert_not @article.published?
+    assert @article.draft?
+  end
+
+  test "should handle author with special characters" do
+    @article.author = "user-123_test"
+    assert @article.valid?
+  end
 end
