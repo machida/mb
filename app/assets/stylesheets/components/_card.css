@@ -1,0 +1,22 @@
+/* Card Component Styles */
+
+.a-card {
+  @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6;
+}
+
+.a-card.is-hover {
+  @apply hover:shadow-md transition-shadow;
+}
+
+/* Card sizes */
+.a-card.is-sm {
+  @apply p-4;
+}
+
+.a-card.is-md {
+  @apply p-6;
+}
+
+.a-card.is-lg {
+  @apply p-8;
+}

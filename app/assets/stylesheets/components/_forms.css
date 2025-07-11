@@ -31,15 +31,6 @@
   @apply text-xs text-red-600;
 }
 
-/* Card Component */
-.a-card {
-  @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6;
-}
-
-.a-card.is-hover {
-  @apply hover:shadow-md transition-shadow;
-}
-
 /* Dropdown Component */
 .dropdown {
   @apply relative;
