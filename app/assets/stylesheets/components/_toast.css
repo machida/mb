@@ -1,0 +1,16 @@
+/* Toast Notification Component */
+
+.a--toast-notification {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 50;
+}
+
+.a--toast-notification .js-toast-element {
+  margin-bottom: 0.5rem;
+}
+
+.a--toast-notification .js-toast-element:last-child {
+  margin-bottom: 0;
+}

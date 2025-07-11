@@ -26,7 +26,7 @@ class Admin::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
     assert_equal @admin.id, session[:admin_id]
     follow_redirect!
-    assert_select ".toast-notification", text: /ログインしました/
+    assert_select ".spec--toast-notification", text: /ログインしました/
   end
 
   test "should not login with invalid email" do
@@ -64,6 +64,6 @@ class Admin::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
     assert_nil session[:admin_id]
     follow_redirect!
-    assert_select ".toast-notification", text: /ログアウトしました/
+    assert_select ".spec--toast-notification", text: /ログアウトしました/
   end
 end
