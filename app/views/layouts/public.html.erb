@@ -44,7 +44,7 @@
       <!-- Main Visual Header for Top Page -->
       <header class="main-visual py-16">
         <div class="l--container is-lg text-center">
-          <h1 class="text-4xl font-bold mb-4 spec-main-title">
+          <h1 class="text-4xl font-bold mb-4 spec--main-title">
             <%= SiteSetting.site_title %>
           </h1>
           <% if SiteSetting.top_page_description.present? %>
@@ -87,11 +87,11 @@
 
           <nav class="flex items-center gap-4">
             <% if current_user_signed_in? %>
-              <%= link_to "記事管理", admin_articles_path, class: "text-gray-300 hover:text-white text-sm spec-admin-link" %>
+              <%= link_to "記事管理", admin_articles_path, class: "text-gray-300 hover:text-white text-sm spec--admin-link" %>
               <span class="text-gray-500">|</span>
-              <%= link_to "ログアウト", admin_logout_path, method: :delete, class: "text-gray-300 hover:text-white text-sm spec-logout-link" %>
+              <%= link_to "ログアウト", admin_logout_path, method: :delete, class: "text-gray-300 hover:text-white text-sm spec--logout-link" %>
             <% else %>
-              <%= link_to "ログイン", admin_login_path, class: "text-gray-300 hover:text-white text-sm spec-login-link" %>
+              <%= link_to "ログイン", admin_login_path, class: "text-gray-300 hover:text-white text-sm spec--login-link" %>
             <% end %>
           </nav>
         </div>

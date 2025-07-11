@@ -1,6 +1,6 @@
 <div>
   <div class="mb-8">
-    <h1 class="text-3xl font-bold mb-2 spec-archive-year-title"><%= @year %>年の記事</h1>
+    <h1 class="text-3xl font-bold mb-2 spec--archive-year-title"><%= @year %>年の記事</h1>
     <p class="text-gray-500"><%= @articles.count %>件の記事があります</p>
   </div>
 
@@ -11,7 +11,7 @@
       <% (1..12).each do |month| %>
         <% count = @monthly_counts[sprintf("%02d", month)] || 0 %>
         <% if count > 0 %>
-          <%= link_to archive_month_path(@year, month), class: "a-button is-sm is-primary text-center" do %>
+          <%= link_to archive_month_path(@year, month), class: "a--button is-sm is-primary text-center" do %>
             <%= month %>月<br>
             <span class="text-sm">(<%= count %>)</span>
           <% end %>
@@ -28,7 +28,7 @@
   <!-- 記事一覧 -->
   <div class="space-y-6">
     <% @articles.each do |article| %>
-      <article class="a-card is-hover">
+      <article class="a--card is-hover">
         <div class="flex justify-between items-start mb-2">
           <h2 class="text-xl font-semibold">
             <%= link_to article.title, article_path(article), 
@@ -59,12 +59,12 @@
   <% end %>
 
   <!-- Pagination -->
-  <div class="mt-8 flex justify-center spec-pagination">
+  <div class="mt-8 flex justify-center spec--pagination">
     <%= paginate @articles %>
   </div>
 
   <!-- ナビゲーション -->
   <div class="mt-8 text-center">
-    <%= link_to "トップページに戻る", root_path, class: "a-button is-lg is-secondary" %>
+    <%= link_to "トップページに戻る", root_path, class: "a--button is-lg is-secondary" %>
   </div>
 </div>

@@ -13,7 +13,7 @@ class Admin::SessionsControllerTest < ActionDispatch::IntegrationTest
   test "should get login page" do
     get admin_login_path
     assert_response :success
-    assert_select ".spec-login-title", "管理者ログイン"
+    assert_select ".spec--login-title", "管理者ログイン"
     assert_select "form[action=?]", admin_login_path
   end
 

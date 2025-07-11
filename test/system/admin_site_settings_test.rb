@@ -16,11 +16,11 @@ class AdminSiteSettingsTest < ApplicationSystemTestCase
     visit admin_site_settings_path
     assert_current_path admin_site_settings_path
     
-    assert_selector ".spec-site-settings-title", text: "サイト設定"
-    assert_selector ".spec-site-title-input"
-    assert_selector ".spec-default-og-image-input", visible: false
-    assert_selector ".spec-top-page-description-input"
-    assert_selector ".spec-copyright-input"
+    assert_selector ".spec--site-settings-title", text: "サイト設定"
+    assert_selector ".spec--site-title-input"
+    assert_selector ".spec--default-og-image-input", visible: false
+    assert_selector ".spec--top-page-description-input"
+    assert_selector ".spec--copyright-input"
   end
 
   test "should update site settings" do
@@ -29,14 +29,14 @@ class AdminSiteSettingsTest < ApplicationSystemTestCase
     visit admin_articles_path
     visit admin_site_settings_path
     
-    find(".spec-site-title-input").fill_in with: "新しいブログタイトル"
-    find(".spec-top-page-description-input").fill_in with: "新しい説明文です"
-    find(".spec-copyright-input").fill_in with: "新しいブログ"
+    find(".spec--site-title-input").fill_in with: "新しいブログタイトル"
+    find(".spec--top-page-description-input").fill_in with: "新しい説明文です"
+    find(".spec--copyright-input").fill_in with: "新しいブログ"
     
-    find(".spec-save-button").click
+    find(".spec--save-button").click
     
     assert_current_path admin_site_settings_path
-    assert_selector ".spec-toast-notification", text: "サイト設定を更新しました"
+    assert_selector ".spec--toast-notification", text: "サイト設定を更新しました"
     
     # Check values were saved
     assert_equal "新しいブログタイトル", SiteSetting.site_title

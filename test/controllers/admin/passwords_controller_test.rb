@@ -24,9 +24,9 @@ class Admin::PasswordsControllerTest < ActionDispatch::IntegrationTest
     login_as_admin
     get edit_admin_password_path
     assert_response :success
-    assert_select ".spec-password-edit-title", "パスワード変更"
-    assert_select ".spec-password-input"
-    assert_select ".spec-password-confirmation-input"
+    assert_select ".spec--password-edit-title", "パスワード変更"
+    assert_select ".spec--password-input"
+    assert_select ".spec--password-confirmation-input"
   end
 
   test "should update password with valid data" do
@@ -57,7 +57,7 @@ class Admin::PasswordsControllerTest < ActionDispatch::IntegrationTest
     }
     
     assert_response :unprocessable_entity
-    assert_select ".spec-error-messages"
+    assert_select ".spec--error-messages"
     
     # Password should not have changed
     @admin.reload
@@ -75,7 +75,7 @@ class Admin::PasswordsControllerTest < ActionDispatch::IntegrationTest
     }
     
     assert_response :unprocessable_entity
-    assert_select ".spec-error-messages"
+    assert_select ".spec--error-messages"
   end
 
   test "should not update with mismatched confirmation" do
@@ -89,7 +89,7 @@ class Admin::PasswordsControllerTest < ActionDispatch::IntegrationTest
     }
     
     assert_response :unprocessable_entity
-    assert_select ".spec-error-messages"
+    assert_select ".spec--error-messages"
   end
 
   test "should not allow access without login" do

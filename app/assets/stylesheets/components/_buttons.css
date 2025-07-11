@@ -1,6 +1,6 @@
 /* Button Component Styles */
 
-.a-button {
+.a--button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -14,165 +14,165 @@
   cursor: pointer;
 }
 
-.a-button:focus {
+.a--button:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
   box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #3b82f6;
 }
 
 /* Button Sizes */
-.a-button.is-xs {
+.a--button.is-xs {
   padding: 0.25rem 0.5rem;
   font-size: 0.75rem;
   line-height: 1rem;
 }
 
-.a-button.is-sm {
+.a--button.is-sm {
   padding: 0.375rem 0.75rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
 
-.a-button.is-md {
+.a--button.is-md {
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
 
-.a-button.is-lg {
+.a--button.is-lg {
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
   line-height: 1.5rem;
 }
 
-.a-button.is-xl {
+.a--button.is-xl {
   padding: 0.75rem 1.5rem;
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
 
 /* Button Variants */
-.a-button.is-primary {
+.a--button.is-primary {
   background-color: #2563eb;
   color: #ffffff;
 }
 
-.a-button.is-primary:hover {
+.a--button.is-primary:hover {
   background-color: #1d4ed8;
 }
 
-.a-button.is-primary:focus {
+.a--button.is-primary:focus {
   box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #3b82f6;
 }
 
-.a-button.is-secondary {
+.a--button.is-secondary {
   background-color: #4b5563;
   color: #ffffff;
 }
 
-.a-button.is-secondary:hover {
+.a--button.is-secondary:hover {
   background-color: #374151;
 }
 
-.a-button.is-secondary:focus {
+.a--button.is-secondary:focus {
   box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #6b7280;
 }
 
-.a-button.is-warning {
+.a--button.is-warning {
   background-color: #d97706;
   color: #ffffff;
 }
 
-.a-button.is-warning:hover {
+.a--button.is-warning:hover {
   background-color: #b45309;
 }
 
-.a-button.is-warning:focus {
+.a--button.is-warning:focus {
   box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #f59e0b;
 }
 
-.a-button.is-danger {
+.a--button.is-danger {
   background-color: #dc2626;
   color: #ffffff;
 }
 
-.a-button.is-danger:hover {
+.a--button.is-danger:hover {
   background-color: #b91c1c;
 }
 
-.a-button.is-danger:focus {
+.a--button.is-danger:focus {
   box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #ef4444;
 }
 
 /* Border Button Variants */
-.a-button.is-border-primary {
+.a--button.is-border-primary {
   background-color: transparent;
   border: 1px solid #2563eb;
   color: #2563eb;
 }
 
-.a-button.is-border-primary:hover {
+.a--button.is-border-primary:hover {
   background-color: #eff6ff;
 }
 
-.a-button.is-border-primary:focus {
+.a--button.is-border-primary:focus {
   box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #3b82f6;
 }
 
-.a-button.is-border-secondary {
+.a--button.is-border-secondary {
   background-color: transparent;
   border: 1px solid #d1d5db;
   color: #374151;
 }
 
-.a-button.is-border-secondary:hover {
+.a--button.is-border-secondary:hover {
   background-color: #f9fafb;
 }
 
-.a-button.is-border-secondary:focus {
+.a--button.is-border-secondary:focus {
   box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #6b7280;
 }
 
-.a-button.is-border-warning {
+.a--button.is-border-warning {
   background-color: transparent;
   border: 1px solid #d97706;
   color: #d97706;
 }
 
-.a-button.is-border-warning:hover {
+.a--button.is-border-warning:hover {
   background-color: #fffbeb;
 }
 
-.a-button.is-border-warning:focus {
+.a--button.is-border-warning:focus {
   box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #f59e0b;
 }
 
-.a-button.is-border-danger {
+.a--button.is-border-danger {
   background-color: transparent;
   border: 1px solid #dc2626;
   color: #dc2626;
 }
 
-.a-button.is-border-danger:hover {
+.a--button.is-border-danger:hover {
   background-color: #fef2f2;
 }
 
-.a-button.is-border-danger:focus {
+.a--button.is-border-danger:focus {
   box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #ef4444;
 }
 
 /* Button States */
-.a-button:disabled {
+.a--button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.a-button:disabled:hover {
+.a--button:disabled:hover {
   background-color: currentColor;
 }
 
 /* Button Width */
-.a-button.is-flex {
+.a--button.is-flex {
   display: flex;
   width: 100%;
 }

@@ -1,25 +1,25 @@
-<div class="spec-articles-container max-w-4xl mx-auto">
+<div class="spec--articles-container max-w-4xl mx-auto">
 
   <div class="space-y-6">
     <% @articles.each do |article| %>
-      <article class="a-card is-hover spec-article-item">
+      <article class="a--card is-hover spec--article-item">
         <div class="flex justify-between items-start mb-2">
-          <h2 class="text-xl font-semibold spec-article-title">
+          <h2 class="text-xl font-semibold spec--article-title">
             <%= link_to article.title, article_path(article), 
                         class: "text-link" %>
           </h2>
-          <time class="text-gray-500 text-sm spec-article-date">
+          <time class="text-gray-500 text-sm spec--article-date">
             <%= format_date_with_weekday(article.created_at) %>
           </time>
         </div>
         
         <% if article.summary.present? %>
-          <p class="mb-3 spec-article-summary"><%= article.summary %></p>
+          <p class="mb-3 spec--article-summary"><%= article.summary %></p>
         <% end %>
         
         <% if show_author_info? %>
           <div class="flex justify-between items-center">
-            <span class="text-sm text-gray-500 spec-article-author">著者: <%= article.author %></span>
+            <span class="text-sm text-gray-500 spec--article-author">著者: <%= article.author %></span>
           </div>
         <% end %>
       </article>
@@ -27,13 +27,13 @@
   </div>
 
   <% if @articles.empty? %>
-    <div class="text-center py-12 spec-no-articles">
-      <p class="text-gray-500 text-lg spec-no-articles-message">記事がまだありません</p>
+    <div class="text-center py-12 spec--no-articles">
+      <p class="text-gray-500 text-lg spec--no-articles-message">記事がまだありません</p>
     </div>
   <% end %>
 
   <!-- Pagination -->
-  <div class="mt-8 flex justify-center spec-pagination">
+  <div class="mt-8 flex justify-center spec--pagination">
     <%= paginate @articles %>
   </div>
 </div>

@@ -42,25 +42,25 @@ class Admin::ArticlesControllerTest < ActionDispatch::IntegrationTest
     login_as_admin
     get admin_articles_path
     assert_response :success
-    assert_select ".spec-article-index-title", "全ての記事"
+    assert_select ".spec--article-index-title", "全ての記事"
     # Check that both articles are displayed
-    assert_select ".spec-articles-list > article", count: 2
+    assert_select ".spec--articles-list > article", count: 2
   end
 
   test "should get drafts page" do
     login_as_admin
     get drafts_admin_articles_path
     assert_response :success
-    assert_select ".spec-draft-index-title", "下書き記事"
+    assert_select ".spec--draft-index-title", "下書き記事"
     # Check that only draft article is displayed
-    assert_select ".spec-draft-articles-list > article", count: 1
+    assert_select ".spec--draft-articles-list > article", count: 1
   end
 
   test "should get new when authenticated" do
     login_as_admin
     get new_admin_article_path
     assert_response :success
-    assert_select ".spec-new-article-title", "新しい記事を作成"
+    assert_select ".spec--new-article-title", "新しい記事を作成"
   end
 
   test "should create article as published" do
@@ -105,7 +105,7 @@ class Admin::ArticlesControllerTest < ActionDispatch::IntegrationTest
     login_as_admin
     get edit_admin_article_path(@article)
     assert_response :success
-    assert_select ".spec-edit-article-title", "記事を編集"
+    assert_select ".spec--edit-article-title", "記事を編集"
   end
 
   test "should update article" do

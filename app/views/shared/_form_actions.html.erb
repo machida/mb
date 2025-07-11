@@ -1,21 +1,21 @@
 <%
   # デフォルト値の設定
   primary_label = local_assigns.fetch(:primary_label, "保存")
-  primary_class = local_assigns.fetch(:primary_class, "spec-save-button")
+  primary_class = local_assigns.fetch(:primary_class, "spec--save-button")
   secondary_label = local_assigns.fetch(:secondary_label, nil)
-  secondary_class = local_assigns.fetch(:secondary_class, "spec-draft-button")
+  secondary_class = local_assigns.fetch(:secondary_class, "spec--draft-button")
   cancel_path = local_assigns.fetch(:cancel_path, nil)
   cancel_label = local_assigns.fetch(:cancel_label, "キャンセル")
 %>
 
 <div class="flex gap-4">
-  <%= form.submit primary_label, class: "a-button is-lg is-primary #{primary_class}" %>
+  <%= form.submit primary_label, class: "a--button is-lg is-primary #{primary_class}" %>
   
   <% if secondary_label.present? %>
-    <%= form.submit secondary_label, class: "a-button is-lg is-warning #{secondary_class}" %>
+    <%= form.submit secondary_label, class: "a--button is-lg is-warning #{secondary_class}" %>
   <% end %>
   
   <% if cancel_path.present? %>
-    <%= link_to cancel_label, cancel_path, class: "a-button is-lg is-border-secondary spec-cancel-button" %>
+    <%= link_to cancel_label, cancel_path, class: "a--button is-lg is-border-secondary spec--cancel-button" %>
   <% end %>
 </div>

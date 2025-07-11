@@ -1,20 +1,20 @@
 <div>
   <div class="flex justify-between items-center mb-8">
     <div class="flex items-center gap-4">
-      <h1 class="text-3xl font-bold spec-draft-index-title">下書き記事</h1>
+      <h1 class="text-3xl font-bold spec--draft-index-title">下書き記事</h1>
       <span class="bg-yellow-500 text-white px-3 py-1 rounded-full text-sm">
         <%= @articles.count %>件
       </span>
     </div>
     <div class="flex gap-4">
-      <%= link_to "全ての記事", admin_articles_path, class: "a-button is-md is-primary" %>
+      <%= link_to "全ての記事", admin_articles_path, class: "a--button is-md is-primary" %>
     </div>
   </div>
 
   <% if @articles.any? %>
-    <div class="space-y-6 spec-draft-articles-list">
+    <div class="space-y-6 spec--draft-articles-list">
       <% @articles.each do |article| %>
-        <article class="a-card is-hover">
+        <article class="a--card is-hover">
           <div class="flex justify-between items-start mb-2">
             <div class="flex items-center gap-3">
               <h2 class="text-xl font-semibold">
@@ -42,9 +42,9 @@
               <% end %>
             </div>
             <div class="flex gap-2">
-              <%= link_to "編集", edit_admin_article_path(article), class: "a-button is-sm is-border-secondary" %>
+              <%= link_to "編集", edit_admin_article_path(article), class: "a--button is-sm is-border-secondary" %>
               <%= link_to "削除", admin_article_path(article), method: :delete, 
-                          data: { confirm: "本当に削除しますか？" }, class: "a-button is-sm is-danger" %>
+                          data: { confirm: "本当に削除しますか？" }, class: "a--button is-sm is-danger" %>
             </div>
           </div>
         </article>
@@ -61,7 +61,7 @@
   <% end %>
 
   <!-- Pagination -->
-  <div class="mt-8 flex justify-center spec-pagination">
+  <div class="mt-8 flex justify-center spec--pagination">
     <%= paginate @articles %>
   </div>
 </div>

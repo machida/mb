@@ -1,5 +1,5 @@
-<div class="spec-new-article-form">
-  <h1 class="text-3xl font-bold mb-6 spec-new-article-title">新しい記事を作成</h1>
+<div class="spec--new-article-form">
+  <h1 class="text-3xl font-bold mb-6 spec--new-article-title">新しい記事を作成</h1>
   
   <%= form_with model: [:admin, @article], local: true, class: "space-y-6" do |f| %>
     <% if @article.errors.any? %>
@@ -14,12 +14,12 @@
     
     <div>
       <%= f.label :title, "タイトル", class: "block text-sm font-medium mb-1" %>
-      <%= f.text_field :title, class: "a-text-input spec-title-input" %>
+      <%= f.text_field :title, class: "a--text-input spec--title-input" %>
     </div>
     
     <div>
       <%= f.label :summary, "概要", class: "block text-sm font-medium mb-1" %>
-      <%= f.text_area :summary, rows: 3, class: "a-text-input spec-summary-input" %>
+      <%= f.text_area :summary, rows: 3, class: "a--text-input spec--summary-input" %>
     </div>
     
     <div>
@@ -34,7 +34,7 @@
             画像をドラッグ&ドロップするか、貼り付けてアップロードできます
           </div>
           <%= f.text_area :body, rows: 15, 
-                          class: "a-text-input font-mono text-sm spec-body-input js-markdown-textarea",
+                          class: "a--text-input font-mono text-sm spec--body-input js-markdown-textarea",
                           data: { 
                             controller: "image-upload", 
                             action: "input->markdown-preview#update keyup->markdown-preview#update dragover->image-upload#dragover dragleave->image-upload#dragleave drop->image-upload#drop",
@@ -60,7 +60,7 @@
       <input type="file" accept="image/*" class="hidden" data-thumbnail-upload-target="input" data-action="change->thumbnail-upload#fileSelected">
       
       <!-- Hidden URL field -->
-      <%= f.text_field :thumbnail, class: "hidden spec-thumbnail-input", data: { thumbnail_upload_target: "url" } %>
+      <%= f.text_field :thumbnail, class: "hidden spec--thumbnail-input", data: { thumbnail_upload_target: "url" } %>
       
       <!-- Drop zone -->
       <div class="border-2 border-dashed border-gray-300 rounded-lg transition-colors" data-thumbnail-upload-target="dropzone">
@@ -71,7 +71,7 @@
           <p class="text-gray-600 text-center mb-2">
             画像をドラッグ&ドロップするか
           </p>
-          <button type="button" class="a-button is-md is-primary" data-action="click->thumbnail-upload#selectFile">
+          <button type="button" class="a--button is-md is-primary" data-action="click->thumbnail-upload#selectFile">
             ファイルを選択
           </button>
           <p class="text-xs text-gray-500 mt-2">JPG, PNG, GIF (最大5MB)</p>
@@ -82,7 +82,7 @@
       <div class="mt-4">
         <img data-thumbnail-upload-target="preview" class="hidden max-w-xs h-auto rounded-lg border border-gray-300" alt="">
         <div class="hidden mt-2">
-          <button type="button" class="a-button is-sm is-danger" data-action="click->thumbnail-upload#clearThumbnail" data-thumbnail-upload-target="clearButton">
+          <button type="button" class="a--button is-sm is-danger" data-action="click->thumbnail-upload#clearThumbnail" data-thumbnail-upload-target="clearButton">
             画像を削除
           </button>
         </div>
@@ -94,9 +94,9 @@
     </div>
     
     <div class="flex gap-4">
-      <%= f.submit "公開", class: "a-button is-lg is-primary spec-publish-button" %>
-      <%= f.submit "下書き保存", class: "a-button is-lg is-warning spec-draft-button" %>
-      <%= link_to "キャンセル", admin_articles_path, class: "a-button is-lg is-border-secondary spec-cancel-button" %>
+      <%= f.submit "公開", class: "a--button is-lg is-primary spec--publish-button" %>
+      <%= f.submit "下書き保存", class: "a--button is-lg is-warning spec--draft-button" %>
+      <%= link_to "キャンセル", admin_articles_path, class: "a--button is-lg is-border-secondary spec--cancel-button" %>
     </div>
   <% end %>
 </div>

@@ -12,9 +12,9 @@
         </div>
       </div>
       <div class="flex gap-2">
-        <%= link_to "編集", edit_admin_article_path(@article), class: "a-button is-md is-border-secondary" %>
+        <%= link_to "編集", edit_admin_article_path(@article), class: "a--button is-md is-border-secondary" %>
         <%= link_to "削除", admin_article_path(@article), method: :delete, 
-                    data: { confirm: "本当に削除しますか？" }, class: "a-button is-md is-danger" %>
+                    data: { confirm: "本当に削除しますか？" }, class: "a--button is-md is-danger" %>
       </div>
     </div>
   </div>
@@ -31,9 +31,9 @@
   </div>
 
   <div class="mt-8 pt-4 border-t flex gap-2">
-    <%= link_to "記事管理に戻る", admin_articles_path, class: "a-button is-lg is-secondary" %>
+    <%= link_to "記事管理に戻る", admin_articles_path, class: "a--button is-lg is-secondary" %>
     <% unless @article.draft? %>
-      <%= link_to "公開ページを見る", article_path(@article), class: "a-button is-lg is-primary" %>
+      <%= link_to "公開ページを見る", article_path(@article), class: "a--button is-lg is-primary" %>
     <% end %>
   </div>
 </div>

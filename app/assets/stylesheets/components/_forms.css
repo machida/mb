@@ -1,6 +1,6 @@
 /* Form Component Styles */
 
-.a-text-input {
+.a--text-input {
   display: block;
   width: 100%;
   padding: 0.5rem 0.75rem;
@@ -12,50 +12,50 @@
   color: #111827;
 }
 
-.a-text-input:focus {
+.a--text-input:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
   border-color: #3b82f6;
   box-shadow: 0 0 0 1px #3b82f6;
 }
 
-.a-text-input::placeholder {
+.a--text-input::placeholder {
   color: #9ca3af;
 }
 
-.a-text-input:invalid {
+.a--text-input:invalid {
   border-color: #fca5a5;
 }
 
-.a-text-input:invalid:focus {
+.a--text-input:invalid:focus {
   border-color: #ef4444;
   box-shadow: 0 0 0 1px #ef4444;
 }
 
-.a-text-input:disabled {
+.a--text-input:disabled {
   background-color: #f9fafb;
   color: #6b7280;
   cursor: not-allowed;
 }
 
 /* Form Layout */
-.a-form-group > * + * {
+.a--form-group > * + * {
   margin-top: 0.25rem;
 }
 
-.a-form-label {
+.a--form-label {
   display: block;
   font-size: 0.875rem;
   font-weight: 500;
   color: #374151;
 }
 
-.a-form-help {
+.a--form-help {
   font-size: 0.75rem;
   color: #6b7280;
 }
 
-.a-form-error {
+.a--form-error {
   font-size: 0.75rem;
   color: #dc2626;
 }

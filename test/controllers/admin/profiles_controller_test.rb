@@ -27,7 +27,7 @@ class Admin::ProfilesControllerTest < ActionDispatch::IntegrationTest
     login_as_admin
     get edit_admin_profile_path
     assert_response :success
-    assert_select ".spec-profile-edit-title", "プロフィール編集"
+    assert_select ".spec--profile-edit-title", "プロフィール編集"
   end
 
   test "should update email and user_id" do
@@ -58,7 +58,7 @@ class Admin::ProfilesControllerTest < ActionDispatch::IntegrationTest
     }
     
     assert_response :unprocessable_entity
-    assert_select ".spec-error-messages"
+    assert_select ".spec--error-messages"
   end
 
   test "should not update with invalid user_id" do
@@ -72,7 +72,7 @@ class Admin::ProfilesControllerTest < ActionDispatch::IntegrationTest
     }
     
     assert_response :unprocessable_entity
-    assert_select ".spec-error-messages"
+    assert_select ".spec--error-messages"
   end
 
 
@@ -95,7 +95,7 @@ class Admin::ProfilesControllerTest < ActionDispatch::IntegrationTest
     }
     
     assert_response :unprocessable_entity
-    assert_select ".spec-error-messages"
+    assert_select ".spec--error-messages"
   end
 
   test "should not update with duplicate user_id" do
@@ -117,6 +117,6 @@ class Admin::ProfilesControllerTest < ActionDispatch::IntegrationTest
     }
     
     assert_response :unprocessable_entity
-    assert_select ".spec-error-messages"
+    assert_select ".spec--error-messages"
   end
 end
