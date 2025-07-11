@@ -54,7 +54,7 @@ class AdminPasswordsTest < ApplicationSystemTestCase
     
     click_button "パスワードを変更"
     
-    assert_current_path admin_password_path
+    assert_current_path edit_admin_password_path
     assert_selector ".spec-error-messages"
   end
 
@@ -67,7 +67,7 @@ class AdminPasswordsTest < ApplicationSystemTestCase
     
     click_button "パスワードを変更"
     
-    assert_current_path admin_password_path
+    assert_current_path edit_admin_password_path
     assert_selector ".spec-error-messages"
   end
 
