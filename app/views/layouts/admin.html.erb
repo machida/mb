@@ -51,7 +51,7 @@
                   <span class="material-icons">person</span>
                 </button>
                 <div class="dropdown-menu js-dropdown-menu">
-                  <%= link_to edit_admin_profile_path, class: "dropdown-menu-item" do %>
+                  <%= link_to edit_admin_profile_path, class: "dropdown-menu-item spec-profile-edit-link" do %>
                     プロフィール編集
                   <% end %>
                   <div class="dropdown-menu-separator"></div>
@@ -61,7 +61,7 @@
                 </div>
               </div>
 
-              <%= link_to "新しい記事を作成", new_admin_article_path, class: "a-button is-md is-border-secondary" %>
+              <%= link_to "新しい記事を作成", new_admin_article_path, class: "a-button is-md is-border-secondary spec-new-article-link" %>
             <% end %>
           </div>
 
