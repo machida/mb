@@ -2,7 +2,7 @@ module ApplicationHelper
   class HTMLWithSyntaxHighlighting < Redcarpet::Render::HTML
     def block_code(code, language)
       if language.present?
-        formatter = Rouge::Formatters::HTML.new(css_class: 'highlight')
+        formatter = Rouge::Formatters::HTML.new(css_class: "highlight")
         lexer = Rouge::Lexer.find(language) || Rouge::Lexers::PlainText
         highlighted = formatter.format(lexer.lex(code))
         "<div class=\"highlight\"><pre><code>#{highlighted}</code></pre></div>"
@@ -13,17 +13,17 @@ module ApplicationHelper
   end
 
   def markdown(text)
-    return '' if text.blank?
-    
+    return "" if text.blank?
+
     renderer = HTMLWithSyntaxHighlighting.new(
       filter_html: true,
       no_links: false,
       no_images: false,
       with_toc_data: false,
       hard_wrap: true,
-      link_attributes: { target: '_blank' }
+      link_attributes: { target: "_blank" }
     )
-    
+
     markdown = Redcarpet::Markdown.new(renderer,
       autolink: true,
       tables: true,
@@ -34,7 +34,7 @@ module ApplicationHelper
       highlight: true,
       quote: true
     )
-    
+
     markdown.render(text).html_safe
   end
 

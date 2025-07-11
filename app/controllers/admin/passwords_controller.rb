@@ -19,7 +19,7 @@ class Admin::PasswordsController < Admin::BaseController
     end
 
     if @admin.update(password_params)
-      redirect_to edit_admin_profile_path, notice: 'パスワードが正常に更新されました。'
+      redirect_to edit_admin_profile_path, notice: "パスワードが正常に更新されました。"
     else
       render :edit, status: :unprocessable_entity
     end

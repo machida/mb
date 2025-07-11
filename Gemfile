@@ -51,10 +51,10 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
-  
+
   # ERB linting
   gem "erb_lint", require: false
-  
+
   # Testing gems
   gem "mocha", "~> 2.1"
 end

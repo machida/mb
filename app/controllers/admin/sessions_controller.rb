@@ -1,11 +1,11 @@
 class Admin::SessionsController < Admin::BaseController
-  skip_before_action :require_admin, only: [:new, :create]
+  skip_before_action :require_admin, only: [ :new, :create ]
   def new
   end
 
   def create
     admin = Admin.find_by(email: params[:email])
-    
+
     if admin && admin.authenticate(params[:password])
       session[:admin_id] = admin.id
       redirect_to root_path, notice: "ログインしました"
