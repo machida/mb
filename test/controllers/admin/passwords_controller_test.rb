@@ -43,7 +43,7 @@ class Admin::PasswordsControllerTest < ActionDispatch::IntegrationTest
     assert @admin.authenticate("newpassword456")
     assert_redirected_to edit_admin_profile_path
     follow_redirect!
-    assert_match "パスワードを変更しました", response.body
+    assert_match "パスワードが正常に更新されました", response.body
   end
 
   test "should not update with blank password" do
