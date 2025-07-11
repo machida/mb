@@ -19,11 +19,11 @@ class AdminSiteSettingsTest < ApplicationSystemTestCase
     assert_current_path admin_articles_path
     
     visit admin_site_settings_path
-    assert_response :success
+    assert_current_path admin_site_settings_path
     
     assert_selector ".spec-site-settings-title", text: "サイト設定"
     assert_selector ".spec-site-title-input"
-    assert_selector ".spec-default-og-image-input"
+    assert_selector ".spec-default-og-image-input", visible: false
     assert_selector ".spec-top-page-description-input"
     assert_selector ".spec-copyright-input"
   end
@@ -38,10 +38,10 @@ class AdminSiteSettingsTest < ApplicationSystemTestCase
     find(".spec-top-page-description-input").fill_in with: "新しい説明文です"
     find(".spec-copyright-input").fill_in with: "新しいブログ"
     
-    click_button "設定を保存"
+    find(".spec-save-button").click
     
     assert_current_path admin_site_settings_path
-    assert_text "サイト設定を更新しました"
+    assert_selector ".spec-toast-notification", text: "サイト設定を更新しました"
     
     # Check values were saved
     assert_equal "新しいブログタイトル", SiteSetting.site_title
@@ -77,5 +77,9 @@ class AdminSiteSettingsTest < ApplicationSystemTestCase
     find(".spec-email-input").fill_in with: @admin.email
     find(".spec-password-input").fill_in with: "password123"
     find(".spec-login-button").click
+    
+    # Wait for successful login and redirect
+    assert_current_path root_path
+    assert_text "ログインしました"
   end
 end

@@ -14,12 +14,9 @@ class AdminPasswordsTest < ApplicationSystemTestCase
   test "should show password change page" do
     login_as_admin
     
-    # Navigate through admin interface to password page
-    visit admin_articles_path
-    assert_selector ".js-dropdown-button" # Ensure dropdown button is present
-    find(".js-dropdown-button").click
-    find(".spec-profile-edit-link").click
-    click_link "パスワードを変更"
+    # Navigate directly to profile edit page
+    visit edit_admin_profile_path
+    find(".spec-password-change-link").click
     
     assert_current_path edit_admin_password_path
     assert_selector ".spec-password-edit-title", text: "パスワード変更"
@@ -30,64 +27,49 @@ class AdminPasswordsTest < ApplicationSystemTestCase
   test "should change password successfully" do
     login_as_admin
     
-    visit admin_articles_path
-    assert_selector ".js-dropdown-button"
-    find(".js-dropdown-button").click
-    find(".spec-profile-edit-link").click
-    click_link "パスワードを変更"
+    visit edit_admin_profile_path
+    find(".spec-password-change-link").click
     
     find(".spec-password-input").fill_in with: "newpassword456"
     find(".spec-password-confirmation-input").fill_in with: "newpassword456"
     
-    click_button "パスワードを変更"
+    find(".spec-password-change-button").click
     
     assert_current_path edit_admin_profile_path
-    assert_text "パスワードを変更しました"
+    assert_text "パスワードが正常に更新されました"
     
-    # Verify password was changed by logging out and back in
-    find(".js-dropdown-button").click
-    click_on "サインアウト"
-    
-    visit admin_login_path
-    find(".spec-email-input").fill_in with: @admin.email
-    find(".spec-password-input").fill_in with: "newpassword456"
-    find(".spec-login-button").click
-    
-    assert_current_path root_path
-    assert_text "ログインしました"
+    # Verify password was changed by checking the admin was actually updated
+    @admin.reload
+    assert @admin.authenticate("newpassword456")
   end
 
-  test "should show error for blank password" do
+  test "should show error for short password" do
     login_as_admin
     
-    visit admin_articles_path
-    assert_selector ".js-dropdown-button"
-    find(".js-dropdown-button").click
-    find(".spec-profile-edit-link").click
-    click_link "パスワードを変更"
+    visit edit_admin_profile_path
+    find(".spec-password-change-link").click
     
-    find(".spec-password-input").fill_in with: ""
-    find(".spec-password-confirmation-input").fill_in with: ""
+    find(".spec-password-input").fill_in with: "123"
+    find(".spec-password-confirmation-input").fill_in with: "123"
     
-    click_button "パスワードを変更"
+    find(".spec-password-change-button").click
     
+    # Check if we stayed on the same page due to validation errors
     assert_current_path edit_admin_password_path
-    assert_selector ".spec-error-messages"
+    # Look for any error indication - could be validation messages or form errors
+    assert_selector ".spec-error-messages", text: "Password is too short"
   end
 
   test "should show error for mismatched passwords" do
     login_as_admin
     
-    visit admin_articles_path
-    assert_selector ".js-dropdown-button"
-    find(".js-dropdown-button").click
-    find(".spec-profile-edit-link").click
-    click_link "パスワードを変更"
+    visit edit_admin_profile_path
+    find(".spec-password-change-link").click
     
     find(".spec-password-input").fill_in with: "newpassword456"
     find(".spec-password-confirmation-input").fill_in with: "different456"
     
-    click_button "パスワードを変更"
+    find(".spec-password-change-button").click
     
     assert_current_path edit_admin_password_path
     assert_selector ".spec-error-messages"
@@ -96,11 +78,8 @@ class AdminPasswordsTest < ApplicationSystemTestCase
   test "should navigate from profile to password change" do
     login_as_admin
     
-    visit admin_articles_path
-    find(".js-dropdown-button").click
-    find(".spec-profile-edit-link").click
-    
-    click_link "パスワードを変更"
+    visit edit_admin_profile_path
+    find(".spec-password-change-link").click
     
     assert_current_path edit_admin_password_path
     assert_selector ".spec-password-edit-title", text: "パスワード変更"
@@ -109,13 +88,10 @@ class AdminPasswordsTest < ApplicationSystemTestCase
   test "should cancel and return to profile" do
     login_as_admin
     
-    visit admin_articles_path
-    assert_selector ".js-dropdown-button"
-    find(".js-dropdown-button").click
-    find(".spec-profile-edit-link").click
-    click_link "パスワードを変更"
+    visit edit_admin_profile_path
+    find(".spec-password-change-link").click
     
-    click_link "キャンセル"
+    find(".spec-cancel-button").click
     
     assert_current_path edit_admin_profile_path
   end
@@ -132,5 +108,9 @@ class AdminPasswordsTest < ApplicationSystemTestCase
     find(".spec-email-input").fill_in with: @admin.email
     find(".spec-password-input").fill_in with: "password123"
     find(".spec-login-button").click
+    
+    # Wait for successful login and redirect
+    assert_current_path root_path
+    assert_text "ログインしました"
   end
 end

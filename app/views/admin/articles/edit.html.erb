@@ -108,10 +108,10 @@
     
     <div class="flex gap-4">
       <% if @article.draft? %>
-        <%= f.submit "公開", class: "a-button is-lg is-primary" %>
+        <%= f.submit "公開", class: "a-button is-lg is-primary spec-update-button" %>
         <%= f.submit "下書き保存", class: "a-button is-lg is-warning" %>
       <% else %>
-        <%= f.submit "更新", class: "a-button is-lg is-primary" %>
+        <%= f.submit "更新", class: "a-button is-lg is-primary spec-update-button" %>
         <%= f.submit "下書き保存", class: "a-button is-lg is-warning" %>
       <% end %>
       <%= link_to "キャンセル", admin_articles_path, class: "a-button is-lg is-border-secondary" %>
