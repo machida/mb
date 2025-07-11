@@ -13,7 +13,13 @@ class AdminSiteSettingsTest < ApplicationSystemTestCase
 
   test "should show site settings page" do
     login_as_admin
+    
+    # Navigate to admin area first
+    visit admin_articles_path
+    assert_current_path admin_articles_path
+    
     visit admin_site_settings_path
+    assert_response :success
     
     assert_selector ".spec-site-settings-title", text: "サイト設定"
     assert_selector ".spec-site-title-input"
@@ -24,6 +30,8 @@ class AdminSiteSettingsTest < ApplicationSystemTestCase
 
   test "should update site settings" do
     login_as_admin
+    
+    visit admin_articles_path
     visit admin_site_settings_path
     
     find(".spec-site-title-input").fill_in with: "新しいブログタイトル"
@@ -48,6 +56,8 @@ class AdminSiteSettingsTest < ApplicationSystemTestCase
     SiteSetting.set("copyright", "テスト著作者")
     
     login_as_admin
+    
+    visit admin_articles_path
     visit admin_site_settings_path
     
     assert_field "site_settings[site_title]", with: "テストタイトル"

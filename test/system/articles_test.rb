@@ -71,6 +71,7 @@ class ArticlesTest < ApplicationSystemTestCase
     login_as_admin
     
     visit admin_articles_path
+    assert_selector ".spec-new-article-link"
     find(".spec-new-article-link").click
     
     find(".spec-title-input").fill_in with: "New Test Article"

@@ -16,6 +16,7 @@ class AdminPasswordsTest < ApplicationSystemTestCase
     
     # Navigate through admin interface to password page
     visit admin_articles_path
+    assert_selector ".js-dropdown-button" # Ensure dropdown button is present
     find(".js-dropdown-button").click
     find(".spec-profile-edit-link").click
     click_link "パスワードを変更"
@@ -30,6 +31,7 @@ class AdminPasswordsTest < ApplicationSystemTestCase
     login_as_admin
     
     visit admin_articles_path
+    assert_selector ".js-dropdown-button"
     find(".js-dropdown-button").click
     find(".spec-profile-edit-link").click
     click_link "パスワードを変更"
@@ -59,6 +61,7 @@ class AdminPasswordsTest < ApplicationSystemTestCase
     login_as_admin
     
     visit admin_articles_path
+    assert_selector ".js-dropdown-button"
     find(".js-dropdown-button").click
     find(".spec-profile-edit-link").click
     click_link "パスワードを変更"
@@ -76,6 +79,7 @@ class AdminPasswordsTest < ApplicationSystemTestCase
     login_as_admin
     
     visit admin_articles_path
+    assert_selector ".js-dropdown-button"
     find(".js-dropdown-button").click
     find(".spec-profile-edit-link").click
     click_link "パスワードを変更"
@@ -106,6 +110,7 @@ class AdminPasswordsTest < ApplicationSystemTestCase
     login_as_admin
     
     visit admin_articles_path
+    assert_selector ".js-dropdown-button"
     find(".js-dropdown-button").click
     find(".spec-profile-edit-link").click
     click_link "パスワードを変更"
