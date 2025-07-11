@@ -84,7 +84,7 @@ class ImageUploadService
 
   def self.upload_to_local(file, filename, upload_type)
     require "image_processing/vips"
-    
+
     # ローカル保存（開発環境用）
     upload_dir = Rails.root.join("public", "uploads", "images")
     FileUtils.mkdir_p(upload_dir) unless Dir.exist?(upload_dir)
@@ -108,7 +108,7 @@ class ImageUploadService
     else
       source_path = file.path
     end
-    
+
     processed_image = ImageProcessing::Vips.source(source_path)
 
     if upload_type == "content"
@@ -144,27 +144,27 @@ class ImageUploadService
   # VIPSの動作確認テスト
   def self.vips_working?
     require "image_processing/vips"
-    
+
     # VIPSで1x1ピクセルの黒い画像を作成
     image = Vips::Image.black(1, 1)
-    
+
     # テスト用一時ファイルを作成
     source_file = Tempfile.new([ "vips_source", ".jpg" ])
     result_file = Tempfile.new([ "vips_result", ".webp" ])
-    
+
     source_file.close
     result_file.close
-    
+
     # 元画像を保存
     image.write_to_file(source_file.path)
-    
+
     # VIPS処理テスト: リサイズとフォーマット変換
     ImageProcessing::Vips
       .source(source_file.path)
       .resize_to_limit(10, 10)
       .convert("webp")
       .call(destination: result_file.path)
-    
+
     # 結果ファイルが存在し、サイズが0以上であることを確認
     File.exist?(result_file.path) && File.size(result_file.path) > 0
   rescue => e
