@@ -130,5 +130,5 @@ body {
 
 /* Toast styles */
 .toast-notification {
-  @apply relative;
+  position: relative;
 }

@@ -1,22 +1,30 @@
 /* Card Component Styles */
 
 .a-card {
-  @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+  padding: 1.5rem;
 }
 
 .a-card.is-hover {
-  @apply hover:shadow-md transition-shadow;
+  transition: box-shadow 0.15s ease-in-out;
+}
+
+.a-card.is-hover:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 /* Card sizes */
 .a-card.is-sm {
-  @apply p-4;
+  padding: 1rem;
 }
 
 .a-card.is-md {
-  @apply p-6;
+  padding: 1.5rem;
 }
 
 .a-card.is-lg {
-  @apply p-8;
+  padding: 2rem;
 }

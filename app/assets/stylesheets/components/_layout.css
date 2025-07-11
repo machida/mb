@@ -1,23 +1,41 @@
 /* Layout Component Styles */
 
 .l--container {
-  @apply w-full mx-auto px-4 sm:px-6 lg:px-8;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .l--container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .l--container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 .l--container.is-sm {
-  @apply max-w-2xl;
+  max-width: 42rem;
 }
 
 .l--container.is-md {
-  @apply max-w-4xl;
+  max-width: 56rem;
 }
 
 .l--container.is-lg {
-  @apply max-w-6xl;
+  max-width: 72rem;
 }
 
 .l--container.is-xl {
-  @apply max-w-7xl;
+  max-width: 80rem;
 }
 
 /* Layout Helpers */
@@ -31,14 +49,22 @@
 
 /* Main Visual (Hero) Component */
 .main-visual {
-  @apply bg-gradient-to-r from-blue-600 to-purple-600 text-white;
+  background: linear-gradient(to right, #2563eb, #7c3aed);
+  color: #ffffff;
 }
 
 /* Toast Notification Component */
 .toast-notification {
-  @apply fixed top-4 right-4 z-50;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 50;
 }
 
 .toast-notification .js-toast-element {
-  @apply mb-2 last:mb-0;
+  margin-bottom: 0.5rem;
+}
+
+.toast-notification .js-toast-element:last-child {
+  margin-bottom: 0;
 }

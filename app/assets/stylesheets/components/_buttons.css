@@ -1,75 +1,178 @@
 /* Button Component Styles */
 
 .a-button {
-  @apply inline-flex items-center justify-center font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
-  @apply relative border-none text-decoration-none whitespace-nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  position: relative;
+  border: none;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.a-button:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #3b82f6;
 }
 
 /* Button Sizes */
 .a-button.is-xs {
-  @apply px-2 py-1 text-xs;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
 .a-button.is-sm {
-  @apply px-3 py-1.5 text-sm;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .a-button.is-md {
-  @apply px-4 py-2 text-sm;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .a-button.is-lg {
-  @apply px-6 py-3 text-base;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 .a-button.is-xl {
-  @apply px-6 py-4 text-lg;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 
 /* Button Variants */
 .a-button.is-primary {
-  @apply bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500;
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.a-button.is-primary:hover {
+  background-color: #1d4ed8;
+}
+
+.a-button.is-primary:focus {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #3b82f6;
 }
 
 .a-button.is-secondary {
-  @apply bg-gray-600 text-white hover:bg-gray-700 focus:ring-gray-500;
+  background-color: #4b5563;
+  color: #ffffff;
+}
+
+.a-button.is-secondary:hover {
+  background-color: #374151;
+}
+
+.a-button.is-secondary:focus {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #6b7280;
 }
 
 .a-button.is-warning {
-  @apply bg-yellow-600 text-white hover:bg-yellow-700 focus:ring-yellow-500;
+  background-color: #d97706;
+  color: #ffffff;
+}
+
+.a-button.is-warning:hover {
+  background-color: #b45309;
+}
+
+.a-button.is-warning:focus {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #f59e0b;
 }
 
 .a-button.is-danger {
-  @apply bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
+  background-color: #dc2626;
+  color: #ffffff;
+}
+
+.a-button.is-danger:hover {
+  background-color: #b91c1c;
+}
+
+.a-button.is-danger:focus {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #ef4444;
 }
 
 /* Border Button Variants */
 .a-button.is-border-primary {
-  @apply border border-blue-600 text-blue-600 hover:bg-blue-50 focus:ring-blue-500 bg-transparent;
+  background-color: transparent;
+  border: 1px solid #2563eb;
+  color: #2563eb;
+}
+
+.a-button.is-border-primary:hover {
+  background-color: #eff6ff;
+}
+
+.a-button.is-border-primary:focus {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #3b82f6;
 }
 
 .a-button.is-border-secondary {
-  @apply border border-gray-300 text-gray-700 hover:bg-gray-50 focus:ring-gray-500 bg-transparent;
+  background-color: transparent;
+  border: 1px solid #d1d5db;
+  color: #374151;
+}
+
+.a-button.is-border-secondary:hover {
+  background-color: #f9fafb;
+}
+
+.a-button.is-border-secondary:focus {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #6b7280;
 }
 
 .a-button.is-border-warning {
-  @apply border border-yellow-600 text-yellow-600 hover:bg-yellow-50 focus:ring-yellow-500 bg-transparent;
+  background-color: transparent;
+  border: 1px solid #d97706;
+  color: #d97706;
+}
+
+.a-button.is-border-warning:hover {
+  background-color: #fffbeb;
+}
+
+.a-button.is-border-warning:focus {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #f59e0b;
 }
 
 .a-button.is-border-danger {
-  @apply border border-red-600 text-red-600 hover:bg-red-50 focus:ring-red-500 bg-transparent;
+  background-color: transparent;
+  border: 1px solid #dc2626;
+  color: #dc2626;
+}
+
+.a-button.is-border-danger:hover {
+  background-color: #fef2f2;
+}
+
+.a-button.is-border-danger:focus {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #ef4444;
 }
 
 /* Button States */
 .a-button:disabled {
-  @apply opacity-50 cursor-not-allowed;
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .a-button:disabled:hover {
-  @apply bg-current;
+  background-color: currentColor;
 }
 
 /* Button Width */
 .a-button.is-flex {
-  @apply flex w-full;
+  display: flex;
+  width: 100%;
 }
