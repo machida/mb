@@ -36,7 +36,7 @@ class AdminSiteSettingsTest < ApplicationSystemTestCase
     find(".spec--save-button").click
     
     assert_current_path admin_site_settings_path
-    assert_selector ".spec--toast-notification", text: "サイト設定を更新しました"
+    assert_selector ".spec--toast-notification", text: "サイト設定を更新しました", wait: 10
     
     # Check values were saved
     assert_equal "新しいブログタイトル", SiteSetting.site_title

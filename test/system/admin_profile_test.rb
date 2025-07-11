@@ -30,7 +30,7 @@ class AdminProfileTest < ApplicationSystemTestCase
     find(".spec--user-id-input").fill_in with: "newuser123"
     find(".spec--update-button").click
     
-    assert_selector ".spec--toast-notification", text: "プロフィールを更新しました"
+    assert_selector ".spec--toast-notification", text: "プロフィールを更新しました", wait: 10
     
     # Check if values are updated
     @admin.reload

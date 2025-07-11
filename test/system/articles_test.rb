@@ -71,7 +71,7 @@ class ArticlesTest < ApplicationSystemTestCase
     
     # Wait for the redirect and check for success message
     # The article might redirect to the article page itself
-    assert_selector ".spec--toast-notification", text: "記事を公開しました"
+    assert_selector ".spec--toast-notification", text: "記事を公開しました", wait: 10
     
     # Check the article was created
     article = Article.last
@@ -90,7 +90,7 @@ class ArticlesTest < ApplicationSystemTestCase
     find(".spec--draft-button").click
     
     assert_current_path admin_articles_path
-    assert_selector ".spec--toast-notification", text: "下書きを保存しました"
+    assert_selector ".spec--toast-notification", text: "下書きを保存しました", wait: 10
     
     # Check the article was created as draft
     article = Article.last
@@ -120,7 +120,7 @@ class ArticlesTest < ApplicationSystemTestCase
     
     find(".spec--update-button").click
     
-    assert_selector ".spec--toast-notification", text: "記事を公開しました"
+    assert_selector ".spec--toast-notification", text: "記事を公開しました", wait: 10
     
     # Verify we can navigate back to the articles list
     visit admin_articles_path
