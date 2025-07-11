@@ -24,6 +24,7 @@ class AdminProfileTest < ApplicationSystemTestCase
   test "admin can access profile edit page" do
     login_as_admin
     
+    # Navigate to admin area to access admin layout
     visit admin_articles_path
     assert_selector ".js-dropdown-button"
     find(".js-dropdown-button").click
@@ -38,7 +39,9 @@ class AdminProfileTest < ApplicationSystemTestCase
   test "admin can update email and user_id" do
     login_as_admin
     
-    visit edit_admin_profile_path
+    visit admin_articles_path
+    find(".js-dropdown-button").click
+    find(".spec-profile-edit-link").click
     
     find(".spec-email-input").fill_in with: "new@example.com"
     find(".spec-user-id-input").fill_in with: "newuser123"
@@ -55,7 +58,9 @@ class AdminProfileTest < ApplicationSystemTestCase
   test "admin can navigate to password change page" do
     login_as_admin
     
-    visit edit_admin_profile_path
+    visit admin_articles_path
+    find(".js-dropdown-button").click
+    find(".spec-profile-edit-link").click
     
     click_link "パスワードを変更"
     
@@ -66,7 +71,9 @@ class AdminProfileTest < ApplicationSystemTestCase
   test "admin sees validation errors for invalid input" do
     login_as_admin
     
-    visit edit_admin_profile_path
+    visit admin_articles_path
+    find(".js-dropdown-button").click
+    find(".spec-profile-edit-link").click
     
     find(".spec-email-input").fill_in with: ""
     find(".spec-user-id-input").fill_in with: ""
@@ -81,7 +88,9 @@ class AdminProfileTest < ApplicationSystemTestCase
   test "admin can cancel profile edit" do
     login_as_admin
     
-    visit edit_admin_profile_path
+    visit admin_articles_path
+    find(".js-dropdown-button").click
+    find(".spec-profile-edit-link").click
     find(".spec-cancel-button").click
     
     assert_current_path admin_articles_path

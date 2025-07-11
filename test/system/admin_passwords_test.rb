@@ -28,7 +28,11 @@ class AdminPasswordsTest < ApplicationSystemTestCase
 
   test "should change password successfully" do
     login_as_admin
-    visit edit_admin_password_path
+    
+    visit admin_articles_path
+    find(".js-dropdown-button").click
+    find(".spec-profile-edit-link").click
+    click_link "パスワードを変更"
     
     find(".spec-password-input").fill_in with: "newpassword456"
     find(".spec-password-confirmation-input").fill_in with: "newpassword456"
@@ -53,7 +57,11 @@ class AdminPasswordsTest < ApplicationSystemTestCase
 
   test "should show error for blank password" do
     login_as_admin
-    visit edit_admin_password_path
+    
+    visit admin_articles_path
+    find(".js-dropdown-button").click
+    find(".spec-profile-edit-link").click
+    click_link "パスワードを変更"
     
     find(".spec-password-input").fill_in with: ""
     find(".spec-password-confirmation-input").fill_in with: ""
@@ -66,7 +74,11 @@ class AdminPasswordsTest < ApplicationSystemTestCase
 
   test "should show error for mismatched passwords" do
     login_as_admin
-    visit edit_admin_password_path
+    
+    visit admin_articles_path
+    find(".js-dropdown-button").click
+    find(".spec-profile-edit-link").click
+    click_link "パスワードを変更"
     
     find(".spec-password-input").fill_in with: "newpassword456"
     find(".spec-password-confirmation-input").fill_in with: "different456"
@@ -79,7 +91,10 @@ class AdminPasswordsTest < ApplicationSystemTestCase
 
   test "should navigate from profile to password change" do
     login_as_admin
-    visit edit_admin_profile_path
+    
+    visit admin_articles_path
+    find(".js-dropdown-button").click
+    find(".spec-profile-edit-link").click
     
     click_link "パスワードを変更"
     
@@ -89,7 +104,11 @@ class AdminPasswordsTest < ApplicationSystemTestCase
 
   test "should cancel and return to profile" do
     login_as_admin
-    visit edit_admin_password_path
+    
+    visit admin_articles_path
+    find(".js-dropdown-button").click
+    find(".spec-profile-edit-link").click
+    click_link "パスワードを変更"
     
     click_link "キャンセル"
     
