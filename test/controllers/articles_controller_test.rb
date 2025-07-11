@@ -33,7 +33,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     get root_path
     assert_response :success
-    assert_select "h1", "マチダのブログ"
+    assert_select ".spec-main-title", "マチダのブログ"
   end
 
   test "index should only show published articles" do
@@ -41,30 +41,30 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     
     # Check that only published articles are shown
-    assert_select "h2 a", text: @published_article.title
+    assert_select ".spec-article-title a", text: @published_article.title
     assert_no_match @draft_article.title, response.body
     
     # Check that only one article is shown (the published one)
-    assert_select "article", count: 1
+    assert_select ".spec-article-item", count: 1
   end
 
   test "should show published article" do
     get article_path(@published_article)
     assert_response :success
-    assert_select "h1", @published_article.title
-    assert_select ".markdown-body"
+    assert_select ".spec-article-title", @published_article.title
+    assert_select ".spec-article-content"
   end
 
   test "should show archive year" do
     get archive_year_path(@published_article.created_at.year)
     assert_response :success
-    assert_select "h1", "#{@published_article.created_at.year}年の記事"
+    assert_select ".spec-archive-year-title", "#{@published_article.created_at.year}年の記事"
   end
 
   test "should show archive month" do
     get archive_month_path(@published_article.created_at.year, @published_article.created_at.month)
     assert_response :success
-    assert_select "h1", "#{@published_article.created_at.year}年#{@published_article.created_at.month}月の記事"
+    assert_select ".spec-archive-month-title", "#{@published_article.created_at.year}年#{@published_article.created_at.month}月の記事"
   end
 
   test "archive should only show published articles" do

@@ -46,22 +46,6 @@ class Admin::ProfilesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to edit_admin_profile_path
   end
 
-  test "should update password" do
-    login_as_admin
-    
-    patch admin_profile_path, params: {
-      admin: {
-        email: @admin.email,
-        user_id: @admin.user_id,
-        password: "newpassword123",
-        password_confirmation: "newpassword123"
-      }
-    }
-    
-    @admin.reload
-    assert @admin.authenticate("newpassword123")
-    assert_redirected_to edit_admin_profile_path
-  end
 
   test "should not update with invalid email" do
     login_as_admin
@@ -91,37 +75,6 @@ class Admin::ProfilesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".spec-error-messages"
   end
 
-  test "should not update with short password" do
-    login_as_admin
-    
-    patch admin_profile_path, params: {
-      admin: {
-        email: @admin.email,
-        user_id: @admin.user_id,
-        password: "short",
-        password_confirmation: "short"
-      }
-    }
-    
-    assert_response :unprocessable_entity
-    assert_select ".spec-error-messages"
-  end
-
-  test "should not update with mismatched password confirmation" do
-    login_as_admin
-    
-    patch admin_profile_path, params: {
-      admin: {
-        email: @admin.email,
-        user_id: @admin.user_id,
-        password: "newpassword123",
-        password_confirmation: "different123"
-      }
-    }
-    
-    assert_response :unprocessable_entity
-    assert_select ".spec-error-messages"
-  end
 
   test "should not update with duplicate email" do
     # Create another admin

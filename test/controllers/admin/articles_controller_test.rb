@@ -42,18 +42,18 @@ class Admin::ArticlesControllerTest < ActionDispatch::IntegrationTest
     login_as_admin
     get admin_articles_path
     assert_response :success
-    assert_select "h1", "全ての記事"
+    assert_select ".spec-article-index-title", "全ての記事"
     # Check that both articles are displayed
-    assert_select "div.space-y-4 > div", count: 2
+    assert_select ".spec-articles-list > article", count: 2
   end
 
   test "should get drafts page" do
     login_as_admin
     get drafts_admin_articles_path
     assert_response :success
-    assert_select "h1", "下書き記事"
+    assert_select ".spec-draft-index-title", "下書き記事"
     # Check that only draft article is displayed
-    assert_select "div.space-y-4 > div", count: 1
+    assert_select ".spec-draft-articles-list > article", count: 1
   end
 
   test "should get new when authenticated" do
@@ -105,7 +105,7 @@ class Admin::ArticlesControllerTest < ActionDispatch::IntegrationTest
     login_as_admin
     get edit_admin_article_path(@article)
     assert_response :success
-    assert_select "h1", "記事を編集"
+    assert_select ".spec-edit-article-title", "記事を編集"
   end
 
   test "should update article" do
@@ -147,8 +147,16 @@ class Admin::ArticlesControllerTest < ActionDispatch::IntegrationTest
   test "should upload image" do
     login_as_admin
     
+    # VIPSで実際の画像を作成
+    require "image_processing/vips"
+    vips_image = Vips::Image.black(100, 100)
+    temp_file = Tempfile.new([ "test_upload", ".jpg" ])
+    temp_file.close
+    vips_image.write_to_file(temp_file.path)
+    
+    image_data = File.binread(temp_file.path)
     image = Rack::Test::UploadedFile.new(
-      StringIO.new("fake image data"),
+      StringIO.new(image_data),
       "image/jpeg",
       original_filename: "test.jpg"
     )
@@ -160,6 +168,8 @@ class Admin::ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert json_response['url']
     assert json_response['markdown']
     assert_includes json_response['markdown'], '![画像]'
+  ensure
+    temp_file&.unlink
   end
 
   test "should reject non-image upload" do

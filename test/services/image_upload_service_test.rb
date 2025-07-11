@@ -2,8 +2,19 @@ require "test_helper"
 
 class ImageUploadServiceTest < ActiveSupport::TestCase
   def setup
+    # VIPSで実際の画像ファイルを作成
+    require "image_processing/vips"
+    image = Vips::Image.black(100, 100)
+    
+    @temp_image_file = Tempfile.new([ "test_image", ".jpg" ])
+    @temp_image_file.close
+    image.write_to_file(@temp_image_file.path)
+    
+    # ファイルを開いてStringIOに読み込み
+    image_data = File.binread(@temp_image_file.path)
+    
     @valid_image = Rack::Test::UploadedFile.new(
-      StringIO.new("fake image data"),
+      StringIO.new(image_data),
       "image/jpeg",
       original_filename: "test.jpg"
     )
@@ -19,6 +30,10 @@ class ImageUploadServiceTest < ActiveSupport::TestCase
       "image/jpeg",
       original_filename: "large.jpg"
     )
+  end
+
+  def teardown
+    @temp_image_file&.unlink
   end
 
   test "should upload valid image in development" do
@@ -66,6 +81,24 @@ class ImageUploadServiceTest < ActiveSupport::TestCase
     
     result = ImageUploadService.upload(@valid_image)
     
-    assert_equal "アップロードに失敗しました", result[:error]
+    assert_equal "画像処理に失敗しました", result[:error]
+  end
+
+  test "VIPS should be working correctly" do
+    assert ImageUploadService.vips_working?, "VIPS should be available and working"
+  end
+
+  test "should process images with correct format based on upload type" do
+    Rails.env.stubs(:production?).returns(false)
+    
+    # サムネイル用（JPEG形式）
+    thumbnail_result = ImageUploadService.upload(@valid_image, upload_type: "thumbnail")
+    assert_not thumbnail_result[:error]
+    assert thumbnail_result[:url].end_with?(".jpg")
+    
+    # コンテンツ用（WebP形式）
+    content_result = ImageUploadService.upload(@valid_image, upload_type: "content")
+    assert_not content_result[:error]
+    assert content_result[:url].end_with?(".webp")
   end
 end

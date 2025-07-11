@@ -1,7 +1,7 @@
 <div class="l--container is-lg">
   <div class="flex justify-between items-center mb-8">
     <div class="flex items-center gap-4">
-      <h1 class="text-3xl font-bold">下書き記事</h1>
+      <h1 class="text-3xl font-bold spec-draft-index-title">下書き記事</h1>
       <span class="bg-yellow-500 text-white px-3 py-1 rounded-full text-sm">
         <%= @articles.count %>件
       </span>
@@ -12,7 +12,7 @@
   </div>
 
   <% if @articles.any? %>
-    <div class="space-y-6">
+    <div class="space-y-6 spec-draft-articles-list">
       <% @articles.each do |article| %>
         <article class="a-card is-hover">
           <div class="flex justify-between items-start mb-2">

@@ -16,11 +16,11 @@ class Admin::SiteSettingsControllerTest < ActionDispatch::IntegrationTest
   test "should show site settings page" do
     get admin_site_settings_path
     assert_response :success
-    assert_select "h1", "サイト設定"
-    assert_select "input[name='site_settings[site_title]']"
-    assert_select "input[name='site_settings[default_og_image]']"
-    assert_select "textarea[name='site_settings[top_page_description]']"
-    assert_select "input[name='site_settings[copyright]']"
+    assert_select ".spec-site-settings-title", "サイト設定"
+    assert_select ".spec-site-title-input"
+    assert_select ".spec-default-og-image-input"
+    assert_select ".spec-top-page-description-input"
+    assert_select ".spec-copyright-input"
     # Check for thumbnail upload components
     assert_select "div[data-controller='thumbnail-upload']"
   end

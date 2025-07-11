@@ -84,15 +84,32 @@ class ImageUploadService
 
   def self.upload_to_local(file, filename, upload_type)
     require "image_processing/vips"
-
+    
     # ローカル保存（開発環境用）
     upload_dir = Rails.root.join("public", "uploads", "images")
     FileUtils.mkdir_p(upload_dir) unless Dir.exist?(upload_dir)
 
-    file_path = upload_dir.join(filename)
+    file_path = upload_dir.join(filename).to_s
 
     # アップロードタイプに応じた画像処理
-    processed_image = ImageProcessing::Vips.source(file.tempfile)
+    # tempfileまたはファイルから読み込み可能なパスを取得
+    if file.respond_to?(:tempfile)
+      if file.tempfile.respond_to?(:path)
+        source_path = file.tempfile.path
+      else
+        # StringIOの場合は一時ファイルに書き出す
+        temp_source = Tempfile.new([ "upload_source", ".tmp" ])
+        temp_source.binmode
+        file.tempfile.rewind
+        temp_source.write(file.tempfile.read)
+        temp_source.close
+        source_path = temp_source.path
+      end
+    else
+      source_path = file.path
+    end
+    
+    processed_image = ImageProcessing::Vips.source(source_path)
 
     if upload_type == "content"
       # 記事本文用: 最大2000px、WebP形式
@@ -117,7 +134,44 @@ class ImageUploadService
       markdown: "![画像](#{image_url})"
     }
   rescue => e
-    Rails.logger.error "Local upload error: #{e.message}"
-    { error: "アップロードに失敗しました" }
+    Rails.logger.error "Image processing error: #{e.message}"
+    { error: "画像処理に失敗しました" }
+  ensure
+    # StringIOから作成した一時ファイルをクリーンアップ
+    temp_source&.unlink if defined?(temp_source) && temp_source.respond_to?(:unlink)
+  end
+
+  # VIPSの動作確認テスト
+  def self.vips_working?
+    require "image_processing/vips"
+    
+    # VIPSで1x1ピクセルの黒い画像を作成
+    image = Vips::Image.black(1, 1)
+    
+    # テスト用一時ファイルを作成
+    source_file = Tempfile.new([ "vips_source", ".jpg" ])
+    result_file = Tempfile.new([ "vips_result", ".webp" ])
+    
+    source_file.close
+    result_file.close
+    
+    # 元画像を保存
+    image.write_to_file(source_file.path)
+    
+    # VIPS処理テスト: リサイズとフォーマット変換
+    ImageProcessing::Vips
+      .source(source_file.path)
+      .resize_to_limit(10, 10)
+      .convert("webp")
+      .call(destination: result_file.path)
+    
+    # 結果ファイルが存在し、サイズが0以上であることを確認
+    File.exist?(result_file.path) && File.size(result_file.path) > 0
+  rescue => e
+    Rails.logger.error "VIPS test failed: #{e.message}"
+    false
+  ensure
+    source_file&.unlink
+    result_file&.unlink
   end
 end

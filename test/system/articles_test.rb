@@ -43,9 +43,9 @@ class ArticlesTest < ApplicationSystemTestCase
     visit root_path
     click_on @published_article.title
     
-    assert_selector "h1", text: @published_article.title
-    assert_selector ".markdown-content h1", text: "Published Content"
-    assert_selector ".markdown-content strong", text: "bold"
+    assert_selector ".spec-article-title", text: @published_article.title
+    assert_selector ".spec-article-content h1", text: "Published Content"
+    assert_selector ".spec-article-content strong", text: "bold"
     assert_text @published_article.summary
   end
 
@@ -147,13 +147,13 @@ class ArticlesTest < ApplicationSystemTestCase
   test "archive navigation" do
     visit archive_year_path(@published_article.created_at.year)
     
-    assert_selector "h1", text: "#{@published_article.created_at.year}年の記事"
+    assert_selector ".spec-archive-year-title", text: "#{@published_article.created_at.year}年の記事"
     assert_selector "article", count: 1
     
     # Click on month archive
     click_on "#{@published_article.created_at.month}月"
     
-    assert_selector "h1", text: "#{@published_article.created_at.year}年#{@published_article.created_at.month}月の記事"
+    assert_selector ".spec-archive-month-title", text: "#{@published_article.created_at.year}年#{@published_article.created_at.month}月の記事"
     assert_selector "article", count: 1
   end
 
