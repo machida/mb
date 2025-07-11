@@ -12,12 +12,9 @@
 /*= require syntax_highlighting */
 /*= require github-markdown */
 /*= require markdown-overrides */
-/*= require buttons */
 /*= require breakpoints */
 /*= require container */
-/*= require text-input */
-/*= require card */
-/*= require dropdown */
+/*= require_tree ./components */
 
 /* =================================================================
    CSS Variables for Colors and Typography
