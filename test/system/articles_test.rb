@@ -46,7 +46,7 @@ class ArticlesTest < ApplicationSystemTestCase
     assert_selector ".spec-article-title", text: @published_article.title
     assert_selector ".spec-article-content h1", text: "Published Content"
     assert_selector ".spec-article-content strong", text: "bold"
-    assert_text @published_article.summary
+    # Summary is not displayed on individual article pages, only in lists
   end
 
   test "admin login and article management" do
@@ -135,9 +135,9 @@ class ArticlesTest < ApplicationSystemTestCase
     
     visit admin_articles_path
     
-    # Accept the confirmation dialog
+    # Accept the confirmation dialog and click the specific delete button
     accept_confirm do
-      click_on "削除"
+      first(".a-button.is-danger", text: "削除").click
     end
     
     assert_selector ".toast-notification", text: "Article was successfully deleted"

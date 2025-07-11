@@ -25,13 +25,13 @@ class AdminProfileTest < ApplicationSystemTestCase
     login_as_admin
     
     visit admin_articles_path
+    find(".js-dropdown-button").click
     find(".spec-profile-edit-link").click
     
     assert_selector ".spec-profile-edit-title", text: "プロフィール編集"
     assert_selector ".spec-email-input"
     assert_selector ".spec-user-id-input"
-    assert_selector ".spec-password-input"
-    assert_selector ".spec-password-confirmation-input"
+    assert_selector ".spec-password-change-link", text: "パスワードを変更"
   end
 
   test "admin can update email and user_id" do
@@ -51,26 +51,15 @@ class AdminProfileTest < ApplicationSystemTestCase
     assert_equal "newuser123", @admin.user_id
   end
 
-  test "admin can update password" do
+  test "admin can navigate to password change page" do
     login_as_admin
     
     visit edit_admin_profile_path
     
-    find(".spec-password-input").fill_in with: "newpassword123"
-    find(".spec-password-confirmation-input").fill_in with: "newpassword123"
-    find(".spec-update-button").click
+    click_link "パスワードを変更"
     
-    assert_selector ".toast-notification", text: "プロフィールを更新しました"
-    
-    # Test new password works
-    find(".spec-logout-link").click
-    
-    visit admin_login_path
-    find(".spec-email-input").fill_in with: @admin.email
-    find(".spec-password-input").fill_in with: "newpassword123"
-    find(".spec-login-button").click
-    
-    assert_selector ".toast-notification", text: "ログインしました"
+    assert_current_path edit_admin_password_path
+    assert_selector ".spec-password-edit-title", text: "パスワード変更"
   end
 
   test "admin sees validation errors for invalid input" do
@@ -87,31 +76,6 @@ class AdminProfileTest < ApplicationSystemTestCase
     assert_text "User can't be blank"
   end
 
-  test "admin sees validation errors for short password" do
-    login_as_admin
-    
-    visit edit_admin_profile_path
-    
-    find(".spec-password-input").fill_in with: "short"
-    find(".spec-password-confirmation-input").fill_in with: "short"
-    find(".spec-update-button").click
-    
-    assert_selector ".spec-error-messages"
-    assert_text "Password is too short"
-  end
-
-  test "admin sees validation errors for mismatched password" do
-    login_as_admin
-    
-    visit edit_admin_profile_path
-    
-    find(".spec-password-input").fill_in with: "newpassword123"
-    find(".spec-password-confirmation-input").fill_in with: "different123"
-    find(".spec-update-button").click
-    
-    assert_selector ".spec-error-messages"
-    assert_text "Password confirmation doesn't match"
-  end
 
   test "admin can cancel profile edit" do
     login_as_admin
