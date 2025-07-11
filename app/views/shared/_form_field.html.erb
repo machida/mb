@@ -1,0 +1,41 @@
+<%
+  # パラメータのデフォルト値設定
+  type = local_assigns.fetch(:type, "text")
+  required = local_assigns.fetch(:required, false)
+  placeholder = local_assigns.fetch(:placeholder, "")
+  help_text = local_assigns.fetch(:help_text, "")
+  spec_class = local_assigns.fetch(:spec_class, "")
+  rows = local_assigns.fetch(:rows, 3)
+  css_class = "a-text-input #{spec_class}".strip
+%>
+
+<div class="space-y-1">
+  <%= form.label field, label, class: "block text-sm font-medium text-gray-700" %>
+  
+  <% if type == "textarea" %>
+    <%= form.text_area field, 
+                      rows: rows,
+                      required: required,
+                      placeholder: placeholder,
+                      class: css_class %>
+  <% elsif type == "email" %>
+    <%= form.email_field field,
+                        required: required,
+                        placeholder: placeholder,
+                        class: css_class %>
+  <% elsif type == "password" %>
+    <%= form.password_field field,
+                           required: required,
+                           placeholder: placeholder,
+                           class: css_class %>
+  <% else %>
+    <%= form.text_field field,
+                       required: required,
+                       placeholder: placeholder,
+                       class: css_class %>
+  <% end %>
+  
+  <% if help_text.present? %>
+    <p class="text-xs text-gray-500 mt-1"><%= help_text %></p>
+  <% end %>
+</div>

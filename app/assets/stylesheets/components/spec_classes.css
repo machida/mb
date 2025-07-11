@@ -1,0 +1,66 @@
+/* 
+  Test-specific CSS classes with .spec- prefix
+  These classes are used exclusively for testing purposes
+  and should not affect visual styling
+*/
+
+.spec-main-title,
+.spec-article-title,
+.spec-site-settings-title,
+.spec-profile-edit-title,
+.spec-password-edit-title,
+.spec-edit-article-title,
+.spec-new-article-title,
+.spec-article-index-title,
+.spec-draft-section-title,
+.spec-archive-year-title,
+.spec-archive-month-title {
+  /* These classes are for testing only - no visual styles */
+}
+
+.spec-email-input,
+.spec-password-input,
+.spec-title-input,
+.spec-summary-input,
+.spec-body-input,
+.spec-thumbnail-input,
+.spec-user-id-input,
+.spec-password-confirmation-input,
+.spec-site-title-input,
+.spec-default-og-image-input,
+.spec-top-page-description-input,
+.spec-copyright-input {
+  /* These classes are for testing only - no visual styles */
+}
+
+.spec-login-button,
+.spec-logout-button,
+.spec-publish-button,
+.spec-draft-button,
+.spec-update-button,
+.spec-delete-button,
+.spec-save-button,
+.spec-cancel-button,
+.spec-password-change-button,
+.spec-dropdown-button,
+.spec-new-article-link,
+.spec-admin-link,
+.spec-profile-edit-link,
+.spec-password-change-link {
+  /* These classes are for testing only - no visual styles */
+}
+
+.spec-article-item,
+.spec-article-content,
+.spec-published-articles-list,
+.spec-articles-list,
+.spec-toast-notification,
+.spec-error-messages,
+.spec-pagination {
+  /* These classes are for testing only - no visual styles */
+}
+
+/* 
+  Note: All .spec- classes should remain empty of visual styles
+  Their sole purpose is to provide stable selectors for testing
+*/

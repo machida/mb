@@ -6,27 +6,11 @@ class AdminProfileTest < ApplicationSystemTestCase
     Article.destroy_all
     Admin.destroy_all
     
-    @admin = Admin.create!(
-      email: "admin@example.com",
-      user_id: "admin123",
-      password: "password123",
-      password_confirmation: "password123"
-    )
-  end
-
-  def login_as_admin
-    visit admin_login_path
-    find(".spec-email-input").fill_in with: @admin.email
-    find(".spec-password-input").fill_in with: "password123"
-    find(".spec-login-button").click
-    
-    # Wait for successful login and redirect
-    assert_current_path root_path
-    assert_text "ログインしました"
+    @admin = create_admin
   end
 
   test "admin can access profile edit page" do
-    login_as_admin
+    login_as_admin(@admin)
     
     # Navigate directly to profile edit page
     visit edit_admin_profile_path
@@ -38,7 +22,7 @@ class AdminProfileTest < ApplicationSystemTestCase
   end
 
   test "admin can update email and user_id" do
-    login_as_admin
+    login_as_admin(@admin)
     
     visit edit_admin_profile_path
     
@@ -55,7 +39,7 @@ class AdminProfileTest < ApplicationSystemTestCase
   end
 
   test "admin can navigate to password change page" do
-    login_as_admin
+    login_as_admin(@admin)
     
     visit edit_admin_profile_path
     
@@ -66,7 +50,7 @@ class AdminProfileTest < ApplicationSystemTestCase
   end
 
   test "admin sees validation errors for invalid email" do
-    login_as_admin
+    login_as_admin(@admin)
     
     visit edit_admin_profile_path
     
@@ -82,7 +66,7 @@ class AdminProfileTest < ApplicationSystemTestCase
 
 
   test "admin can cancel profile edit" do
-    login_as_admin
+    login_as_admin(@admin)
     
     visit edit_admin_profile_path
     find(".spec-cancel-button").click

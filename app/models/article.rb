@@ -17,13 +17,11 @@ class Article < ApplicationRecord
     draft
   end
 
+  def service
+    @service ||= ArticleService.new(self)
+  end
+
   def og_image_url
-    if thumbnail.present?
-      # アップロード時に既にOGサイズにリサイズされているので、サムネイル画像をそのまま使用
-      thumbnail
-    elsif SiteSetting.default_og_image.present?
-      # デフォルトOG画像も既にOGサイズにリサイズされているので、そのまま使用
-      SiteSetting.default_og_image
-    end
+    service.og_image_url
   end
 end

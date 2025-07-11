@@ -3,16 +3,11 @@ require "application_system_test_case"
 class AdminPasswordsTest < ApplicationSystemTestCase
   def setup
     Admin.destroy_all
-    @admin = Admin.create!(
-      email: "admin@example.com",
-      user_id: "admin123",
-      password: "password123",
-      password_confirmation: "password123"
-    )
+    @admin = create_admin
   end
 
   test "should show password change page" do
-    login_as_admin
+    login_as_admin(@admin)
     
     # Navigate directly to profile edit page
     visit edit_admin_profile_path
@@ -25,7 +20,7 @@ class AdminPasswordsTest < ApplicationSystemTestCase
   end
 
   test "should change password successfully" do
-    login_as_admin
+    login_as_admin(@admin)
     
     visit edit_admin_profile_path
     find(".spec-password-change-link").click
@@ -44,7 +39,7 @@ class AdminPasswordsTest < ApplicationSystemTestCase
   end
 
   test "should show error for short password" do
-    login_as_admin
+    login_as_admin(@admin)
     
     visit edit_admin_profile_path
     find(".spec-password-change-link").click
@@ -61,7 +56,7 @@ class AdminPasswordsTest < ApplicationSystemTestCase
   end
 
   test "should show error for mismatched passwords" do
-    login_as_admin
+    login_as_admin(@admin)
     
     visit edit_admin_profile_path
     find(".spec-password-change-link").click
@@ -76,7 +71,7 @@ class AdminPasswordsTest < ApplicationSystemTestCase
   end
 
   test "should navigate from profile to password change" do
-    login_as_admin
+    login_as_admin(@admin)
     
     visit edit_admin_profile_path
     find(".spec-password-change-link").click
@@ -86,7 +81,7 @@ class AdminPasswordsTest < ApplicationSystemTestCase
   end
 
   test "should cancel and return to profile" do
-    login_as_admin
+    login_as_admin(@admin)
     
     visit edit_admin_profile_path
     find(".spec-password-change-link").click
@@ -101,16 +96,5 @@ class AdminPasswordsTest < ApplicationSystemTestCase
     assert_current_path admin_login_path
   end
 
-  private
-
-  def login_as_admin
-    visit admin_login_path
-    find(".spec-email-input").fill_in with: @admin.email
-    find(".spec-password-input").fill_in with: "password123"
-    find(".spec-login-button").click
-    
-    # Wait for successful login and redirect
-    assert_current_path root_path
-    assert_text "ログインしました"
-  end
+  # Common helper methods moved to ApplicationSystemTestCase
 end

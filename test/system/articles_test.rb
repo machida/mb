@@ -6,27 +6,20 @@ class ArticlesTest < ApplicationSystemTestCase
     Article.destroy_all
     Admin.destroy_all
     
-    @admin = Admin.create!(
-      email: "admin@example.com",
-      user_id: "admin123",
-      password: "password123",
-      password_confirmation: "password123"
-    )
+    @admin = create_admin
     
-    @published_article = Article.create!(
+    @published_article = create_published_article(
       title: "Published Article",
       body: "# Published Content\n\nThis is published content with **bold** text.",
       summary: "Published summary",
-      author: @admin.user_id,
-      draft: false
+      author: @admin.user_id
     )
     
-    @draft_article = Article.create!(
+    @draft_article = create_draft_article(
       title: "Draft Article",
       body: "# Draft Content\n\nThis is draft content.",
       summary: "Draft summary",
-      author: @admin.user_id,
-      draft: true
+      author: @admin.user_id
     )
   end
 
@@ -50,14 +43,7 @@ class ArticlesTest < ApplicationSystemTestCase
   end
 
   test "admin login and article management" do
-    visit admin_login_path
-    
-    find(".spec-email-input").fill_in with: @admin.email
-    find(".spec-password-input").fill_in with: "password123"
-    find(".spec-login-button").click
-    
-    assert_current_path root_path
-    assert_selector ".spec-toast-notification", text: "ログインしました"
+    login_as_admin(@admin)
     
     find(".spec-admin-link").click
     assert_current_path admin_articles_path
@@ -68,7 +54,7 @@ class ArticlesTest < ApplicationSystemTestCase
   end
 
   test "creating a new article" do
-    login_as_admin
+    login_as_admin(@admin)
     
     visit admin_articles_path
     assert_selector ".spec-new-article-link"
@@ -94,7 +80,7 @@ class ArticlesTest < ApplicationSystemTestCase
   end
 
   test "creating a draft article" do
-    login_as_admin
+    login_as_admin(@admin)
     
     visit new_admin_article_path
     
@@ -113,7 +99,7 @@ class ArticlesTest < ApplicationSystemTestCase
   end
 
   test "editing an article" do
-    login_as_admin
+    login_as_admin(@admin)
     
     visit admin_articles_path
     
@@ -142,7 +128,7 @@ class ArticlesTest < ApplicationSystemTestCase
   end
 
   test "deleting an article" do
-    login_as_admin
+    login_as_admin(@admin)
     
     visit admin_articles_path
     
@@ -172,16 +158,5 @@ class ArticlesTest < ApplicationSystemTestCase
     assert_selector "article", count: 1
   end
 
-  private
-
-  def login_as_admin
-    visit admin_login_path
-    find(".spec-email-input").fill_in with: @admin.email
-    find(".spec-password-input").fill_in with: "password123"
-    find(".spec-login-button").click
-    
-    # Wait for successful login and redirect
-    assert_current_path root_path
-    assert_text "ログインしました"
-  end
+  # Common helper methods moved to ApplicationSystemTestCase
 end

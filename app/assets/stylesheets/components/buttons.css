@@ -1,0 +1,52 @@
+/* Button Component Styles */
+
+.a-button {
+  @apply inline-flex items-center justify-center font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+
+/* Button Sizes */
+.a-button.is-sm {
+  @apply px-3 py-1.5 text-sm;
+}
+
+.a-button.is-md {
+  @apply px-4 py-2 text-sm;
+}
+
+.a-button.is-lg {
+  @apply px-6 py-3 text-base;
+}
+
+/* Button Variants */
+.a-button.is-primary {
+  @apply bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500;
+}
+
+.a-button.is-secondary {
+  @apply bg-gray-600 text-white hover:bg-gray-700 focus:ring-gray-500;
+}
+
+.a-button.is-warning {
+  @apply bg-yellow-600 text-white hover:bg-yellow-700 focus:ring-yellow-500;
+}
+
+.a-button.is-danger {
+  @apply bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
+}
+
+.a-button.is-border-primary {
+  @apply border border-blue-600 text-blue-600 hover:bg-blue-50 focus:ring-blue-500;
+}
+
+.a-button.is-border-secondary {
+  @apply border border-gray-300 text-gray-700 hover:bg-gray-50 focus:ring-gray-500;
+}
+
+/* Button States */
+.a-button:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+.a-button:disabled:hover {
+  @apply bg-current;
+}

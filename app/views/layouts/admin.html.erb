@@ -36,34 +36,7 @@
             </h1>
           </div>
 
-          <div class="flex items-center gap-4">
-            <% if current_user_signed_in? %>
-              <%= link_to admin_articles_path, class: "text-gray-500 hover:text-gray-700 p-2", title: "記事管理" do %>
-                <span class="material-icons">table_chart</span>
-              <% end %>
-
-              <%= link_to admin_site_settings_path, class: "text-gray-500 hover:text-gray-700 p-2", title: "サイト設定" do %>
-                <span class="material-icons">settings</span>
-              <% end %>
-
-              <div class="dropdown">
-                <button class="dropdown-button js-dropdown-button spec-dropdown-button" aria-expanded="false" title="ユーザーメニュー">
-                  <span class="material-icons">person</span>
-                </button>
-                <div class="dropdown-menu js-dropdown-menu">
-                  <%= link_to edit_admin_profile_path, class: "dropdown-menu-item spec-profile-edit-link" do %>
-                    プロフィール編集
-                  <% end %>
-                  <div class="dropdown-menu-separator"></div>
-                  <%= link_to admin_logout_path, method: :delete, class: "dropdown-menu-item spec-logout-button" do %>
-                    サインアウト
-                  <% end %>
-                </div>
-              </div>
-
-              <%= link_to "新しい記事を作成", new_admin_article_path, class: "a-button is-md is-border-secondary spec-new-article-link" %>
-            <% end %>
-          </div>
+          <%= render 'shared/admin_navigation' %>
 
         </div>
       </div>

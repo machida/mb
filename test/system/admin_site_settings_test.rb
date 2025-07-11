@@ -3,16 +3,11 @@ require "application_system_test_case"
 class AdminSiteSettingsTest < ApplicationSystemTestCase
   def setup
     Admin.destroy_all
-    @admin = Admin.create!(
-      email: "admin@example.com",
-      user_id: "admin123",
-      password: "password123",
-      password_confirmation: "password123"
-    )
+    @admin = create_admin
   end
 
   test "should show site settings page" do
-    login_as_admin
+    login_as_admin(@admin)
     
     # Navigate to admin area first
     visit admin_articles_path
@@ -29,7 +24,7 @@ class AdminSiteSettingsTest < ApplicationSystemTestCase
   end
 
   test "should update site settings" do
-    login_as_admin
+    login_as_admin(@admin)
     
     visit admin_articles_path
     visit admin_site_settings_path
@@ -55,7 +50,7 @@ class AdminSiteSettingsTest < ApplicationSystemTestCase
     SiteSetting.set("top_page_description", "テスト説明")
     SiteSetting.set("copyright", "テスト著作者")
     
-    login_as_admin
+    login_as_admin(@admin)
     
     visit admin_articles_path
     visit admin_site_settings_path
@@ -70,16 +65,5 @@ class AdminSiteSettingsTest < ApplicationSystemTestCase
     assert_current_path admin_login_path
   end
 
-  private
-
-  def login_as_admin
-    visit admin_login_path
-    find(".spec-email-input").fill_in with: @admin.email
-    find(".spec-password-input").fill_in with: "password123"
-    find(".spec-login-button").click
-    
-    # Wait for successful login and redirect
-    assert_current_path root_path
-    assert_text "ログインしました"
-  end
+  # Common helper methods moved to ApplicationSystemTestCase
 end
