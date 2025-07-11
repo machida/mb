@@ -9,7 +9,6 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
-/*= require syntax_highlighting */
 /*= require github-markdown */
 /*= require markdown-overrides */
 /*= require breakpoints */
