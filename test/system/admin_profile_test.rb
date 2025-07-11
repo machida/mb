@@ -25,6 +25,7 @@ class AdminProfileTest < ApplicationSystemTestCase
     login_as_admin
     
     visit admin_articles_path
+    assert_selector ".js-dropdown-button"
     find(".js-dropdown-button").click
     find(".spec-profile-edit-link").click
     

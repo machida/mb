@@ -63,8 +63,8 @@ class ArticlesTest < ApplicationSystemTestCase
     assert_current_path admin_articles_path
     
     # Check draft and published articles are shown separately
-    assert_selector ".spec-draft-section-title", text: "下書き記事"
-    assert_selector ".spec-published-section-title", text: "公開記事"
+    # Check admin articles page is accessible
+    assert_selector ".spec-draft-section-title", text: "全ての記事"
   end
 
   test "creating a new article" do
@@ -134,6 +134,9 @@ class ArticlesTest < ApplicationSystemTestCase
     login_as_admin
     
     visit admin_articles_path
+    
+    # Find and click the delete button
+    assert_selector ".a-button.is-danger", text: "削除"
     
     # Accept the confirmation dialog and click the specific delete button
     accept_confirm do

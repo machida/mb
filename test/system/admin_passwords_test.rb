@@ -13,8 +13,14 @@ class AdminPasswordsTest < ApplicationSystemTestCase
 
   test "should show password change page" do
     login_as_admin
-    visit edit_admin_password_path
     
+    # Navigate through admin interface to password page
+    visit admin_articles_path
+    find(".js-dropdown-button").click
+    find(".spec-profile-edit-link").click
+    click_link "パスワードを変更"
+    
+    assert_current_path edit_admin_password_path
     assert_selector ".spec-password-edit-title", text: "パスワード変更"
     assert_selector ".spec-password-input"
     assert_selector ".spec-password-confirmation-input"
