@@ -45,7 +45,7 @@
         <div>
           <label class="block text-sm font-medium mb-1">プレビュー</label>
           <div class="w-full h-96 px-3 py-2 border border-gray-300 rounded-md bg-gray-50 overflow-y-auto">
-            <div data-markdown-preview-target="preview" class="markdown-body js-markdown-preview">
+            <div data-markdown-preview-target="preview" class="a--markdown-body js-markdown-preview">
               <% if @article.body.present? %>
                 <%= markdown(@article.body) %>
               <% else %>
