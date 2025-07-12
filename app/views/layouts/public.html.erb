@@ -85,7 +85,9 @@
     <footer class="py-8">
       <div class="l--container is-lg">
         <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-          <small class="text-sm text-primary">© <%= Date.current.year %><%= SiteSetting.copyright %>. All rights reserved.</small>
+          <% if SiteSetting.copyright.present? %>
+            <small class="text-sm text-primary">© <%= Date.current.year %> <%= SiteSetting.copyright %>. All rights reserved.</small>
+          <% end %>
 
           <nav class="flex items-center gap-4">
             <% if current_user_signed_in? %>

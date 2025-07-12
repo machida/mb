@@ -6,7 +6,7 @@
 SiteSetting.set('site_title', 'マチダのブログ')
 SiteSetting.set('top_page_description', 'マチダのブログへようこそ。技術やライフスタイルについて書いています。')
 SiteSetting.set('default_og_image', 'https://example.com/default-og-image.jpg')
-SiteSetting.set('copyright', '© 2025 マチダのブログ. All rights reserved.')
+SiteSetting.set('copyright', 'マチダのブログ')
 
 puts "初期サイト設定を作成しました！"
 

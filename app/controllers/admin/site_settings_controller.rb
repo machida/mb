@@ -10,7 +10,10 @@ class Admin::SiteSettingsController < Admin::BaseController
 
   def update
     settings_params.each do |key, value|
-      if value.present?
+      if key == "copyright"
+        # 著作権者名は空白も含めて常に更新を許可（trimも実行）
+        SiteSetting.set(key, value.to_s.strip)
+      elsif value.present?
         SiteSetting.set(key, value)
       elsif key == "default_og_image" && value.blank?
         # デフォルトOG画像が削除された場合は空文字を設定

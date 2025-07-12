@@ -1,6 +1,6 @@
 class SiteSetting < ApplicationRecord
   validates :name, presence: true, uniqueness: true
-  validates :value, presence: true
+  validates :value, presence: true, unless: :copyright_setting?
 
   # キャッシュを使って設定値を取得するクラスメソッド
   def self.get(name, default_value = nil)
@@ -43,5 +43,11 @@ class SiteSetting < ApplicationRecord
 
   def self.copyright_text
     "© #{Date.current.year} #{copyright}. All rights reserved."
+  end
+
+  private
+
+  def copyright_setting?
+    name == "copyright"
   end
 end
