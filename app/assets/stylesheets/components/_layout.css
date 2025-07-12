@@ -4,42 +4,49 @@
  * IMPORTANT: Do not nest l--container inside another l--container
  * Each page should have only one l--container at the root level
  */
+
+/* Container layout system */
 .l--container {
+  margin-inline: auto;
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
 
-@media (min-width: 640px) {
+/* Responsive padding */
+@media (max-width: 47.9375rem) {
   .l--container {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline: 1rem;
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 48rem) {
   .l--container {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-inline: 2rem;
   }
+}
+
+/* Container size modifiers */
+.l--container.is-xs {
+  max-width: 20rem; /* 320px */
 }
 
 .l--container.is-sm {
-  max-width: 42rem;
+  max-width: 40rem; /* 640px */
 }
 
 .l--container.is-md {
-  max-width: 56rem;
+  max-width: 48rem; /* 768px */
 }
 
 .l--container.is-lg {
-  max-width: 72rem;
+  max-width: 64rem; /* 1024px */
 }
 
 .l--container.is-xl {
-  max-width: 80rem;
+  max-width: 80rem; /* 1280px */
+}
+
+.l--container.is-xxl {
+  max-width: 96rem; /* 1536px */
 }
 
 /* Layout Helpers */
