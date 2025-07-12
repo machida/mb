@@ -57,9 +57,3 @@
 .layout-admin {
   /* Admin layout specific styles */
 }
-
-/* Main Visual (Hero) Component */
-.main-visual {
-  background: linear-gradient(to right, var(--color-gradient-primary), var(--color-gradient-secondary));
-  color: var(--color-bg-primary);
-}
