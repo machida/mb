@@ -9,7 +9,6 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
-/*= require breakpoints */
 /*= require_tree ./components */
 
 /* =================================================================

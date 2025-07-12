@@ -2,79 +2,79 @@
 
 /* xs breakpoint (0 - 39.9375rem / 0 - 639px) */
 @media (min-width: 0) {
-  .mq-xs-up { display: block; }
+  .block-xs-up { display: block; }
 }
 @media (max-width: 39.9375rem) {
-  .mq-xs-down { display: block; }
+  .block-xs-down { display: block; }
 }
 @media (min-width: 0) and (max-width: 39.9375rem) {
-  .mq-xs-only { display: block; }
+  .block-xs-only { display: block; }
 }
 
 /* sm breakpoint (40rem - 47.9375rem / 640px - 767px) */
 @media (min-width: 40rem) {
-  .mq-sm-up { display: block; }
+  .block-sm-up { display: block; }
 }
 @media (max-width: 47.9375rem) {
-  .mq-sm-down { display: block; }
+  .block-sm-down { display: block; }
 }
 @media (min-width: 40rem) and (max-width: 47.9375rem) {
-  .mq-sm-only { display: block; }
+  .block-sm-only { display: block; }
 }
 
 /* md breakpoint (48rem - 63.9375rem / 768px - 1023px) */
 @media (min-width: 48rem) {
-  .mq-md-up { display: block; }
+  .block-md-up { display: block; }
 }
 @media (max-width: 63.9375rem) {
-  .mq-md-down { display: block; }
+  .block-md-down { display: block; }
 }
 @media (min-width: 48rem) and (max-width: 63.9375rem) {
-  .mq-md-only { display: block; }
+  .block-md-only { display: block; }
 }
 
 /* lg breakpoint (64rem - 79.9375rem / 1024px - 1279px) */
 @media (min-width: 64rem) {
-  .mq-lg-up { display: block; }
+  .block-lg-up { display: block; }
 }
 @media (max-width: 79.9375rem) {
-  .mq-lg-down { display: block; }
+  .block-lg-down { display: block; }
 }
 @media (min-width: 64rem) and (max-width: 79.9375rem) {
-  .mq-lg-only { display: block; }
+  .block-lg-only { display: block; }
 }
 
 /* xl breakpoint (80rem - 95.9375rem / 1280px - 1535px) */
 @media (min-width: 80rem) {
-  .mq-xl-up { display: block; }
+  .block-xl-up { display: block; }
 }
 @media (max-width: 95.9375rem) {
-  .mq-xl-down { display: block; }
+  .block-xl-down { display: block; }
 }
 @media (min-width: 80rem) and (max-width: 95.9375rem) {
-  .mq-xl-only { display: block; }
+  .block-xl-only { display: block; }
 }
 
 /* xxl breakpoint (96rem - 111.9375rem / 1536px - 1791px) */
 @media (min-width: 96rem) {
-  .mq-xxl-up { display: block; }
+  .block-xxl-up { display: block; }
 }
 @media (max-width: 111.9375rem) {
-  .mq-xxl-down { display: block; }
+  .block-xxl-down { display: block; }
 }
 @media (min-width: 96rem) and (max-width: 111.9375rem) {
-  .mq-xxl-only { display: block; }
+  .block-xxl-only { display: block; }
 }
 
 /* xxxl breakpoint (112rem - 127.9375rem / 1792px - 2047px) */
 @media (min-width: 112rem) {
-  .mq-xxxl-up { display: block; }
+  .block-xxxl-up { display: block; }
 }
 @media (max-width: 127.9375rem) {
-  .mq-xxxl-down { display: block; }
+  .block-xxxl-down { display: block; }
 }
 @media (min-width: 112rem) and (max-width: 127.9375rem) {
-  .mq-xxxl-only { display: block; }
+  .block-xxxl-only { display: block; }
 }
 
 /* Hide classes for different breakpoints */
