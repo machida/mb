@@ -12,7 +12,9 @@ class Admin::SiteSettingsController < Admin::BaseController
     settings_params.each do |key, value|
       if key == "copyright"
         # 著作権者名は空白も含めて常に更新を許可（trimも実行）
-        SiteSetting.set(key, value.to_s.strip)
+        # また、フル著作権テキスト（© 年 名前. All rights reserved.）から名前部分だけを抽出
+        cleaned_value = extract_copyright_name(value.to_s.strip)
+        SiteSetting.set(key, cleaned_value)
       elsif value.present?
         SiteSetting.set(key, value)
       elsif key == "default_og_image" && value.blank?
@@ -46,5 +48,20 @@ class Admin::SiteSettingsController < Admin::BaseController
 
   def settings_params
     params.require(:site_settings).permit(:site_title, :default_og_image, :top_page_description, :copyright)
+  end
+
+  # フル著作権テキストから著作権者名だけを抽出
+  # 例: "© 2025 会社名. All rights reserved." → "会社名"
+  def extract_copyright_name(value)
+    return value if value.blank?
+    
+    # © 年 名前. All rights reserved. の形式をチェック
+    if value.match(/^©\s*\d{4}\s+(.+?)\.\s*All rights reserved\.?$/i)
+      # マッチした場合は名前部分を抽出
+      $1.strip
+    else
+      # マッチしない場合はそのまま返す（通常の名前入力）
+      value
+    end
   end
 end

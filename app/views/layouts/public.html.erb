@@ -93,7 +93,7 @@
             <% if current_user_signed_in? %>
               <%= link_to "記事管理", admin_articles_path, class: "text-primary hover:text-white text-sm spec--admin-link" %>
               <span class="text-gray-500">|</span>
-              <%= link_to "ログアウト", admin_logout_path, method: :delete, class: "text-primary hover:text-white text-sm spec--logout-link" %>
+              <%= link_to "ログアウト", admin_logout_path, data: { method: :delete }, class: "text-primary hover:text-white text-sm spec--logout-link" %>
             <% else %>
               <%= link_to "ログイン", admin_login_path, class: "text-primary hover:text-white text-sm spec--login-link" %>
             <% end %>
