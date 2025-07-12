@@ -24,6 +24,7 @@
 - テストセレクターは`test/support/selectors.rb`に定数として定義済み
 - `_untrack/`ディレクトリ内のファイルは変更しない
 - **Git pushの前に必ず`bundle exec rails test:all`を実行してテストが通ることを確認**
+- **CSSファイル内の2行以上の空行は1行にまとめる（フォーマットルール）**
 
 ## ファイル構成
 - `app/views/` - ERBテンプレート
