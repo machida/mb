@@ -8,13 +8,13 @@
     remote:        data-remote
 -%>
 <% if page.current? %>
-  <span class="px-3 py-2 bg-blue-500 text-white rounded-md font-medium spec--current-page">
+  <span class="a--pager__item is-current border border-gray-500 bg-white text-primary rounded-md font-medium spec--current-page">
     <%= page %>
   </span>
 <% else %>
   <%= link_to page, url, {
-    remote: remote, 
+    remote: remote,
     rel: page.rel,
-    class: "px-3 py-2 bg-white rounded-md border border-gray-300 hover:bg-gray-50 transition-colors spec--page-link"
+    class: "a--pager__item is-link bg-white rounded-md  hover:bg-gray-50 transition-colors spec--page-link"
   } %>
 <% end %>
