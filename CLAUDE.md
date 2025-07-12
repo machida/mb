@@ -11,6 +11,7 @@
 - `bundle exec rails test:all` - 全テスト実行
 - テストファイルは`test/`ディレクトリ内
 - システムテストとコントローラーテストを含む
+- **テストフレームワーク: mini-test（RSpecではない）**
 
 ## 開発コマンド
 - `bin/dev` - 開発サーバー起動（Procfile.devを使用）

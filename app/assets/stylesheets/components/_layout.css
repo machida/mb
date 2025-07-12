@@ -53,7 +53,7 @@
 
 /* Main Visual (Hero) Component */
 .main-visual {
-  background: linear-gradient(to right, #2563eb, #7c3aed);
-  color: #ffffff;
+  background: linear-gradient(to right, var(--color-gradient-primary), var(--color-gradient-secondary));
+  color: var(--color-bg-primary);
 }
 
