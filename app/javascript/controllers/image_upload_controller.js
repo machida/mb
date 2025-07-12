@@ -6,6 +6,7 @@ export default class extends Controller {
 
   connect() {
     this.dragCounter = 0
+    this.setupPasteHandler()
   }
 
   dragover(event) {
@@ -168,5 +169,35 @@ export default class extends Controller {
     setTimeout(() => {
       toast.remove()
     }, 300)
+  }
+
+  setupPasteHandler() {
+    this.textareaTarget.addEventListener('paste', (event) => {
+      this.handlePaste(event)
+    })
+  }
+
+  handlePaste(event) {
+    const clipboardData = event.clipboardData || window.clipboardData
+    if (!clipboardData) return
+
+    const items = clipboardData.items
+    if (!items) return
+
+    // クリップボードのアイテムをチェック
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i]
+      
+      // 画像タイプをチェック
+      if (item.type.startsWith('image/')) {
+        event.preventDefault()
+        
+        const file = item.getAsFile()
+        if (file) {
+          this.uploadImage(file)
+        }
+        break
+      }
+    }
   }
 }
