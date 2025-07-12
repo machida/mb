@@ -16,7 +16,7 @@
 <% end %>
 
 <article class="prose prose-lg max-w-none">
-  <header class="mb-8">
+  <header class="py-20">
     <h1 class="text-4xl font-bold mb-4 spec--article-title"><%= @article.title %></h1>
     <div class="flex items-center gap-4 text-sm text-gray-500 mb-4">
       <% if show_author_info? %>
@@ -26,13 +26,13 @@
     </div>
   </header>
 
-  <div class="a--markdown-body spec--article-content">
+  <div class="a--markdown-body spec--article-content py-12">
     <%= markdown(@article.body) %>
   </div>
 </article>
 
-<div class="mt-8 pt-4 border-t flex gap-2">
-  <%= link_to "記事一覧に戻る", root_path, class: "a--button is-lg is-secondary" %>
+<div class="mt-8 pt-4 flex gap-2">
+  <%= link_to "記事一覧に戻る", root_path, class: "a--button is-md is-border-secondary" %>
   <% if current_user_signed_in? %>
     <%= link_to "編集", edit_admin_article_path(@article), class: "a--button is-lg is-border-secondary" %>
   <% end %>

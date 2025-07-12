@@ -1,6 +1,6 @@
 /* Hero Component Styles */
 
 .a--hero {
-  background: linear-gradient(to right, var(--color-gradient-primary), var(--color-gradient-secondary));
+  background: var(--color-text-primary);
   color: var(--color-bg-primary);
 }

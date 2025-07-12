@@ -42,21 +42,23 @@
   <body class="bg-white min-h-screen flex flex-col layout-public">
     <% if controller_name == 'articles' && action_name == 'index' %>
       <!-- Main Visual Header for Top Page -->
-      <header class="a--hero py-16">
+      <header class="a--hero">
         <div class="l--container is-lg text-center">
-          <h1 class="text-4xl font-bold mb-4 spec--main-title">
-            <%= SiteSetting.site_title %>
-          </h1>
-          <% if SiteSetting.top_page_description.present? %>
-            <p class="text-lg text-secondary max-w-2xl mx-auto">
-              <%= SiteSetting.top_page_description %>
-            </p>
-          <% end %>
+          <div class="flex flex-col items-center justify-center h-100 gap-8">
+            <h1 class="text-5xl font-bold spec--main-title">
+              <%= SiteSetting.site_title %>
+            </h1>
+            <% if SiteSetting.top_page_description.present? %>
+              <p class="text-white max-w-2xl mx-auto">
+                <%= SiteSetting.top_page_description %>
+              </p>
+            <% end %>
+          </div>
         </div>
       </header>
 
       <!-- Public Main Content for Top Page -->
-      <main class="flex-1 l--container is-lg mt-8">
+      <main class="flex-1 l--container is-md my-12">
         <%= yield %>
       </main>
     <% else %>
@@ -65,7 +67,7 @@
         <div class="l--container is-lg">
           <div class="flex justify-between items-center h-16">
             <div>
-              <h1 class="text-2xl font-bold">
+              <h1 class="text-xl font-bold">
                 <%= link_to SiteSetting.site_title, root_path, class: "hover:text-gray-600" %>
               </h1>
             </div>
@@ -74,13 +76,13 @@
       </header>
 
       <!-- Public Main Content for Other Pages -->
-      <main class="flex-1 l--container is-lg mt-8">
+      <main class="flex-1 l--container is-lg my-12">
         <%= yield %>
       </main>
     <% end %>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-6 mt-8">
+    <footer class="bg-gray-800 text-white py-6">
       <div class="l--container is-lg">
         <div class="flex flex-col md:flex-row justify-between items-center gap-4">
           <p class="text-sm text-gray-300">© <%= Date.current.year %><%= SiteSetting.copyright %>. All rights reserved.</p>
