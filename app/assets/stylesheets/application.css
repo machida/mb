@@ -9,7 +9,6 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
-/*= require github-markdown */
 /*= require breakpoints */
 /*= require container */
 /*= require_tree ./components */
