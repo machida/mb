@@ -1,6 +1,6 @@
 class SiteSetting < ApplicationRecord
   validates :name, presence: true, uniqueness: true
-  validates :value, presence: true, unless: :copyright_setting?
+  validates :value, presence: true, unless: :allows_blank_value?
 
   # キャッシュを使って設定値を取得するクラスメソッド
   def self.get(name, default_value = nil)
@@ -47,7 +47,7 @@ class SiteSetting < ApplicationRecord
 
   private
 
-  def copyright_setting?
-    name == "copyright"
+  def allows_blank_value?
+    name.in?(%w[copyright default_og_image])
   end
 end

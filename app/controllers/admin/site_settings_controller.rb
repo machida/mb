@@ -9,20 +9,36 @@ class Admin::SiteSettingsController < Admin::BaseController
   end
 
   def update
+    Rails.logger.info "=== Site Settings Update Debug ==="
+    Rails.logger.info "Received params: #{params.inspect}"
+    Rails.logger.info "Settings params: #{settings_params.inspect}"
+    
     settings_params.each do |key, value|
+      Rails.logger.info "Processing: #{key} = #{value.inspect}"
+      
       if key == "copyright"
         # 著作権者名は空白も含めて常に更新を許可（trimも実行）
         # また、フル著作権テキスト（© 年 名前. All rights reserved.）から名前部分だけを抽出
+        Rails.logger.info "Before extract_copyright_name: #{value.inspect}"
         cleaned_value = extract_copyright_name(value.to_s.strip)
-        SiteSetting.set(key, cleaned_value)
+        Rails.logger.info "After extract_copyright_name: #{cleaned_value.inspect}"
+        Rails.logger.info "Setting copyright to: #{cleaned_value.inspect}"
+        result = SiteSetting.set(key, cleaned_value)
+        Rails.logger.info "SiteSetting.set result: #{result.inspect}"
+        Rails.logger.info "SiteSetting.copyright after set: #{SiteSetting.copyright.inspect}"
       elsif value.present?
+        Rails.logger.info "Setting #{key} to: #{value.inspect}"
         SiteSetting.set(key, value)
       elsif key == "default_og_image" && value.blank?
         # デフォルトOG画像が削除された場合は空文字を設定
+        Rails.logger.info "Setting #{key} to empty string"
         SiteSetting.set(key, "")
+      else
+        Rails.logger.info "Skipping #{key} (value not present: #{value.inspect})"
       end
     end
 
+    Rails.logger.info "=== End Site Settings Update Debug ==="
     redirect_to admin_site_settings_path, notice: "サイト設定を更新しました"
   end
 
