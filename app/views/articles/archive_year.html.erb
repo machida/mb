@@ -31,18 +31,18 @@
       <article class="a--card is-hover">
         <div class="flex justify-between items-start mb-2">
           <h2 class="text-xl font-semibold">
-            <%= link_to article.title, article_path(article), 
+            <%= link_to article.title, article_path(article),
                         class: "text-link" %>
           </h2>
           <time class="text-gray-500 text-sm">
             <%= format_date_with_weekday(article.created_at) %>
           </time>
         </div>
-        
+
         <% if article.summary.present? %>
           <p class="mb-3"><%= article.summary %></p>
         <% end %>
-        
+
         <% if show_author_info? %>
           <div class="flex justify-between items-center">
             <span class="text-sm text-gray-500">著者: <%= article.author %></span>

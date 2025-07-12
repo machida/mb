@@ -1,4 +1,4 @@
-<div>
+<div class="l--container is-lg">
   <div class="mb-6">
     <div class="flex justify-between items-start mb-4">
       <div>
@@ -13,7 +13,7 @@
       </div>
       <div class="flex gap-2">
         <%= link_to "編集", edit_admin_article_path(@article), class: "a--button is-md is-border-secondary" %>
-        <%= link_to "削除", admin_article_path(@article), method: :delete, 
+        <%= link_to "削除", admin_article_path(@article), method: :delete,
                     data: { confirm: "本当に削除しますか？" }, class: "a--button is-md is-danger" %>
       </div>
     </div>

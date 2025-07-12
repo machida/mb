@@ -10,6 +10,7 @@
   font-size: 0.875rem;
   line-height: 1.25rem;
   color: var(--color-form-text);
+  background-color: var(--color-form-bg);
 }
 
 .a--text-input:focus {

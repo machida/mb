@@ -22,7 +22,7 @@
       <% if show_author_info? %>
         <span>著者: <%= @article.author %></span>
       <% end %>
-      <span>投稿日: <%= format_date_with_weekday(@article.created_at) %></span>
+      <span><%= format_date_with_weekday(@article.created_at) %></span>
     </div>
   </header>
 
@@ -34,6 +34,6 @@
 <div class="mt-8 pt-4 flex gap-2">
   <%= link_to "記事一覧に戻る", root_path, class: "a--button is-md is-border-secondary" %>
   <% if current_user_signed_in? %>
-    <%= link_to "編集", edit_admin_article_path(@article), class: "a--button is-lg is-border-secondary" %>
+    <%= link_to "編集", edit_admin_article_path(@article), class: "a--button is-md is-border-secondary" %>
   <% end %>
 </div>

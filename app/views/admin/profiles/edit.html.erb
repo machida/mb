@@ -1,4 +1,4 @@
-<div class="spec--profile-edit-container max-w-2xl mx-auto">
+<div class="spec--profile-edit-container l--container is-lg">
   <div class="mb-8">
     <h1 class="text-3xl font-bold spec--profile-edit-title">プロフィール編集</h1>
   </div>
@@ -16,18 +16,18 @@
 
     <div class="a--card">
       <h2 class="text-xl font-semibold mb-4 spec--account-info-title">アカウント情報</h2>
-      
+
       <div class="space-y-4">
         <div>
           <%= f.label :email, "メールアドレス", class: "block text-sm font-medium mb-1" %>
-          <%= f.email_field :email, required: true, 
+          <%= f.email_field :email, required: true,
                             class: "a--text-input spec--email-input" %>
           <p class="text-xs text-gray-500 mt-1">ログイン時に使用するメールアドレスです</p>
         </div>
 
         <div>
           <%= f.label :user_id, "ユーザーID", class: "block text-sm font-medium mb-1" %>
-          <%= f.text_field :user_id, required: true, 
+          <%= f.text_field :user_id, required: true,
                            class: "a--text-input spec--user-id-input" %>
           <p class="text-xs text-gray-500 mt-1">記事の著者として表示されるIDです</p>
         </div>

@@ -1,4 +1,4 @@
-<div>
+<div class="l--container is-lg">
   <div class="flex justify-between items-center mb-8">
     <div class="flex items-center gap-4">
       <h1 class="text-3xl font-bold spec--article-index-title spec--draft-section-title">全ての記事</h1>
@@ -18,7 +18,7 @@
           <div class="flex justify-between items-start mb-2">
             <div class="flex items-center gap-3">
               <h2 class="text-xl font-semibold">
-                <%= link_to article.title, article_path(article), 
+                <%= link_to article.title, article_path(article),
                             class: "text-link" %>
               </h2>
               <span class="<%= article.draft? ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800' %> px-2 py-1 rounded-full text-xs">
@@ -29,11 +29,11 @@
               <%= format_date_with_weekday(article.created_at) %>
             </time>
           </div>
-          
+
           <% if article.summary.present? %>
             <p class="mb-3"><%= truncate(article.summary, length: 150) %></p>
           <% end %>
-          
+
           <div class="flex justify-between items-center">
             <div class="flex items-center gap-4 text-sm text-gray-500">
               <span>著者: <%= article.author %></span>
@@ -43,7 +43,7 @@
             </div>
             <div class="flex gap-2">
               <%= link_to "編集", edit_admin_article_path(article), class: "a--button is-sm is-border-secondary" %>
-              <%= link_to "削除", admin_article_path(article), method: :delete, 
+              <%= link_to "削除", admin_article_path(article), method: :delete,
                           data: { confirm: "本当に削除しますか？" }, class: "a--button is-sm is-danger spec--delete-button" %>
             </div>
           </div>
