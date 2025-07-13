@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "./_syntax_highlighting.css";
 
 /* Import Custom Variables */
 @import "./0_variables/_colors.css";
@@ -18,3 +17,4 @@
 @import "./components/_pager.css";
 @import "./components/_toast.css";
 @import "./components/_spec_classes.css";
+@import "./components/_syntax_highlighting.css";

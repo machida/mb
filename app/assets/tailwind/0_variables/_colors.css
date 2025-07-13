@@ -61,29 +61,29 @@
   --color-gradient-primary: var(--color-blue-600);
   --color-gradient-secondary: var(--color-violet-600);
 
-  /* Syntax highlighting colors (GitHub style - keeping rgb values for now) */
-  --color-syntax-comment: rgb(110 118 129);     /* GitHub comment */
-  --color-syntax-error: rgb(248 81 73);       /* GitHub error */
-  --color-syntax-generic: rgb(255 166 87);     /* GitHub generic */
-  --color-syntax-keyword: rgb(255 123 114);     /* GitHub keyword */
-  --color-syntax-literal: rgb(165 214 255);     /* GitHub literal */
-  --color-syntax-name: rgb(255 166 87);        /* GitHub name */
-  --color-syntax-operator: rgb(255 123 114);    /* GitHub operator */
-  --color-syntax-punctuation: rgb(240 246 252); /* GitHub punctuation */
-  --color-syntax-deleted: rgb(248 81 73);     /* GitHub deleted */
-  --color-syntax-heading: rgb(165 214 255);     /* GitHub heading */
-  --color-syntax-inserted: rgb(86 211 100);    /* GitHub inserted */
-  --color-syntax-prompt: rgb(110 118 129);      /* GitHub prompt */
-  --color-syntax-constant: rgb(121 192 255);    /* GitHub constant */
-  --color-syntax-string: rgb(165 214 255);      /* GitHub string */
-  --color-syntax-attribute: rgb(121 192 255);   /* GitHub attribute */
-  --color-syntax-builtin: rgb(255 166 87);     /* GitHub builtin */
-  --color-syntax-class: rgb(255 166 87);       /* GitHub class */
-  --color-syntax-decorator: rgb(210 168 255);   /* GitHub decorator */
-  --color-syntax-function: rgb(210 168 255);    /* GitHub function */
-  --color-syntax-tag: rgb(126 231 135);         /* GitHub tag */
-  --color-syntax-regex: rgb(126 231 135);       /* GitHub regex */
-  --color-syntax-whitespace: rgb(240 246 252);  /* GitHub whitespace */
+  /* Syntax highlighting colors (GitHub style - using Tailwind variables) */
+  --color-syntax-comment: var(--color-gray-500);     /* GitHub comment - closest to gray-500 */
+  --color-syntax-error: var(--color-red-500);       /* GitHub error - closest to red-500 */
+  --color-syntax-generic: var(--color-orange-400);     /* GitHub generic - closest to orange-400 */
+  --color-syntax-keyword: var(--color-red-400);     /* GitHub keyword - closest to red-400 */
+  --color-syntax-literal: var(--color-sky-300);     /* GitHub literal - closest to sky-300 */
+  --color-syntax-name: var(--color-orange-400);        /* GitHub name - closest to orange-400 */
+  --color-syntax-operator: var(--color-red-400);    /* GitHub operator - closest to red-400 */
+  --color-syntax-punctuation: var(--color-gray-100); /* GitHub punctuation - closest to gray-100 */
+  --color-syntax-deleted: var(--color-red-500);     /* GitHub deleted - closest to red-500 */
+  --color-syntax-heading: var(--color-sky-300);     /* GitHub heading - closest to sky-300 */
+  --color-syntax-inserted: var(--color-green-400);    /* GitHub inserted - closest to green-400 */
+  --color-syntax-prompt: var(--color-gray-500);      /* GitHub prompt - closest to gray-500 */
+  --color-syntax-constant: var(--color-blue-400);    /* GitHub constant - closest to blue-400 */
+  --color-syntax-string: var(--color-sky-300);      /* GitHub string - closest to sky-300 */
+  --color-syntax-attribute: var(--color-blue-400);   /* GitHub attribute - closest to blue-400 */
+  --color-syntax-builtin: var(--color-orange-400);     /* GitHub builtin - closest to orange-400 */
+  --color-syntax-class: var(--color-orange-400);       /* GitHub class - closest to orange-400 */
+  --color-syntax-decorator: var(--color-purple-300);   /* GitHub decorator - closest to purple-300 */
+  --color-syntax-function: var(--color-purple-300);    /* GitHub function - closest to purple-300 */
+  --color-syntax-tag: var(--color-green-300);         /* GitHub tag - closest to green-300 */
+  --color-syntax-regex: var(--color-green-300);       /* GitHub regex - closest to green-300 */
+  --color-syntax-whitespace: var(--color-gray-100);  /* GitHub whitespace - closest to gray-100 */
 
   /* Markdown colors */
   --color-markdown-heading: var(--color-gray-900);
@@ -98,6 +98,6 @@
   --color-markdown-quote-border: var(--color-gray-300);
   
   /* Syntax dark theme colors for markdown */
-  --color-syntax-dark-bg: rgb(13 17 23);     /* GitHub dark background */
-  --color-syntax-dark-text: rgb(201 209 217);   /* GitHub dark text */
+  --color-syntax-dark-bg: var(--color-gray-900);     /* GitHub dark background - closest to gray-900 */
+  --color-syntax-dark-text: var(--color-gray-200);   /* GitHub dark text - closest to gray-200 */
 }
