@@ -67,10 +67,16 @@
 
 /* Inline code */
 code {
-  @apply bg-gray-100 text-gray-800 px-1 py-0.5 rounded text-sm;
+  background-color: #f3f4f6;
+  color: #1f2937;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
 }
 
 /* Override for highlighted code blocks */
 .highlight code {
-  @apply bg-transparent text-inherit p-0;
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
 }
