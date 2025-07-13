@@ -1,2 +1,20 @@
 @import "tailwindcss";
 @import "./_syntax_highlighting.css";
+
+/* Import Custom Variables */
+@import "./0_variables/_colors.css";
+@import "./0_variables/_typography.css";
+@import "./0_variables/_helpers.css";
+
+/* Import Custom Components */
+@import "./components/_breakpoints.css";
+@import "./components/_layout.css";
+@import "./components/_buttons.css";
+@import "./components/_card.css";
+@import "./components/_forms.css";
+@import "./components/_dropdown.css";
+@import "./components/_hero.css";
+@import "./components/_markdown.css";
+@import "./components/_pager.css";
+@import "./components/_toast.css";
+@import "./components/_spec_classes.css";
