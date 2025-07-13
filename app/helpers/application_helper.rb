@@ -47,4 +47,29 @@ module ApplicationHelper
   def show_author_info?
     @_show_author_info ||= Article.published.select(:author).distinct.count >= 2
   end
+
+  # Article list helpers
+  def link_path_for_article(article)
+    if current_page?(drafts_admin_articles_path)
+      admin_article_path(article)
+    else
+      article_path(article)
+    end
+  end
+
+  def status_badge_class(article)
+    if current_page?(drafts_admin_articles_path)
+      "bg-yellow-100 text-yellow-800"
+    else
+      article.draft? ? "bg-yellow-100 text-yellow-800" : "bg-green-100 text-green-800"
+    end
+  end
+
+  def status_text(article)
+    if current_page?(drafts_admin_articles_path)
+      "下書き"
+    else
+      article.draft? ? "下書き" : "公開中"
+    end
+  end
 end

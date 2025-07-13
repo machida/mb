@@ -51,3 +51,18 @@
   font-size: 0.75rem;
   color: var(--color-error);
 }
+
+/* Markdown Editor Textarea */
+.a--markdown-textarea {
+  field-sizing: content;
+  min-height: 6rem;
+  resize: vertical;
+}
+
+/* フォールバック用（field-sizingをサポートしていないブラウザ向け） */
+@supports not (field-sizing: content) {
+  .a--markdown-textarea {
+    height: auto;
+    min-height: 15rem;
+  }
+}

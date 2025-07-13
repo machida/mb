@@ -20,7 +20,7 @@
     <h1 class="text-5xl font-bold spec--article-title"><%= @article.title %></h1>
     <div class="flex items-center gap-4 text-sm text-gray-500 mb-4">
       <% if show_author_info? %>
-        <span>著者: <%= @article.author %></span>
+        <span><%= @article.author %></span>
       <% end %>
       <span><%= format_date_with_weekday(@article.created_at) %></span>
     </div>
