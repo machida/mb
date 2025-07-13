@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
 # Configuration for CodeRabbit AI Code Reviews
 # https://docs.coderabbit.ai/
 
@@ -7,7 +8,8 @@ language: en-US
 # Review settings
 reviews:
   # Enable automatic reviews for pull requests
-  auto_review: true
+  auto_review:
+    enabled: true
   
   # Include draft pull requests in reviews
   include_drafts: false
@@ -52,20 +54,14 @@ path_filters:
 # Knowledge base settings
 knowledge_base:
   # Opt in to learnings from your codebase
-  learnings: true
+  learnings:
+    enabled: true
   
   # Enable insights from your repository
   insights: true
 
-# Tone and style
-tone_instructions: |
-  - Focus on Rails 8 best practices and conventions
-  - Pay attention to security considerations
-  - Suggest improvements for maintainability and performance
-  - Consider Propshaft asset pipeline patterns
-  - Review CSS architecture and naming conventions
-  - Check for proper error handling and logging
-  - Ensure consistent code style across the project
+# Tone and style (shortened to under 250 characters)
+tone_instructions: "Focus on Rails 8 best practices, security, maintainability, performance, CSS architecture, error handling, and consistent code style."
 
 # Early access features
 early_access: false
