@@ -3,7 +3,7 @@
 # https://docs.coderabbit.ai/
 
 # Language settings
-language: en-US
+language: ja-JP
 
 # Review settings
 reviews:
@@ -61,7 +61,34 @@ knowledge_base:
   insights: true
 
 # Tone and style (shortened to under 250 characters)
-tone_instructions: "Focus on Rails 8 best practices, security, maintainability, performance, CSS architecture, error handling, and consistent code style."
+tone_instructions: "Rails 8のベストプラクティス、セキュリティ、保守性、パフォーマンス、CSSアーキテクチャ、エラーハンドリング、一貫したコードスタイルに重点を置いてレビューしてください。"
+
+# Path-specific review instructions in Japanese
+path_instructions:
+  - path: "**/*.rb"
+    instructions: |
+      - Railsの規約に従ったコードか確認
+      - セキュリティの脆弱性がないか注意
+      - パフォーマンスに問題がないか確認
+      - テストカバレッジが適切か確認
+  
+  - path: "**/*.erb"
+    instructions: |
+      - XSS脆弱性がないかチェック
+      - CSSクラス名が命名規則（.a--、.spec--）に従っているか確認
+      - アクセシビリティが考慮されているか確認
+  
+  - path: "**/*.css"
+    instructions: |
+      - Tailwind CSS v4の機能を適切に使用しているか確認
+      - カスタムCSSが本当に必要か検討
+      - 命名規則（.a--、.spec--）に従っているか確認
+  
+  - path: "test/**/*.rb"
+    instructions: |
+      - テストが適切にカバーしているか確認
+      - システムテストでは.spec--クラスを使用しているか確認
+      - テストが安定して実行できるか確認
 
 # Early access features
 early_access: false
