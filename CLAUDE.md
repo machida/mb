@@ -33,3 +33,13 @@
 - `test/system/` - システムテスト
 - `test/controllers/` - コントローラーテスト
 - `test/support/selectors.rb` - テスト用セレクター定数
+
+## Partialファイルの配置ルール
+- `app/views/public/` - Publicレイアウトでのみ使用するpartial
+- `app/views/admin/` - Adminレイアウトでのみ使用するpartial  
+- `app/views/shared/` - 両方のレイアウトで共通使用するpartial
+
+**例:**
+- `app/views/public/_header.html.erb` - Public用ヘッダー
+- `app/views/admin/_header.html.erb` - Admin用ヘッダー
+- `app/views/shared/_toasts.html.erb` - 共通のトースト通知

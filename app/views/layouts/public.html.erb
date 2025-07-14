@@ -41,39 +41,14 @@
 
   <body class="bg-white min-h-screen flex flex-col layout-public">
     <% if controller_name == 'articles' && action_name == 'index' %>
-      <!-- Main Visual Header for Top Page -->
-      <header class="a--hero">
-        <div class="l--container is-lg text-center">
-          <div class="flex flex-col items-center justify-center h-100 gap-8">
-            <h1 class="text-5xl font-bold spec--main-title">
-              <%= SiteSetting.site_title %>
-            </h1>
-            <% if SiteSetting.top_page_description.present? %>
-              <p class="text-white max-w-2xl mx-auto">
-                <%= SiteSetting.top_page_description %>
-              </p>
-            <% end %>
-          </div>
-        </div>
-      </header>
+      <%= render 'public/hero' %>
 
       <!-- Public Main Content for Top Page -->
       <main class="flex-1 l--container is-md my-12">
         <%= yield %>
       </main>
     <% else %>
-      <!-- Regular Header for Other Pages -->
-      <header class="bg-white">
-        <div class="l--container is-lg">
-          <div class="flex justify-between items-center h-16">
-            <div>
-              <h1 class="text-xl font-bold">
-                <%= link_to SiteSetting.site_title, root_path, class: "hover:text-gray-600" %>
-              </h1>
-            </div>
-          </div>
-        </div>
-      </header>
+      <%= render 'public/header' %>
 
       <!-- Public Main Content for Other Pages -->
       <main class="flex-1 l--container is-lg my-12">
@@ -81,27 +56,7 @@
       </main>
     <% end %>
 
-    <!-- Footer -->
-    <footer class="py-8">
-      <div class="l--container is-lg">
-        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-          <% if SiteSetting.copyright.present? %>
-            <small class="text-sm text-primary">© <%= Date.current.year %> <%= SiteSetting.copyright %>. All rights reserved.</small>
-          <% end %>
-
-          <nav class="flex items-center gap-4">
-            <% if current_user_signed_in? %>
-              <%= link_to "記事管理", admin_articles_path, class: "text-primary hover:text-white text-sm spec--admin-link" %>
-              <span class="text-gray-500">|</span>
-              <%= button_to "ログアウト", admin_logout_path, method: :delete, 
-                          class: "text-primary hover:text-white text-sm spec--logout-link bg-transparent border-0 p-0 cursor-pointer" %>
-            <% else %>
-              <%= link_to "ログイン", admin_login_path, class: "text-primary hover:text-white text-sm spec--login-link" %>
-            <% end %>
-          </nav>
-        </div>
-      </div>
-    </footer>
+    <%= render 'public/footer' %>
 
     <!-- Toast Container -->
     <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2 js-toast-container">

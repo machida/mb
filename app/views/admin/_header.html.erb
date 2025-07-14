@@ -1,0 +1,15 @@
+<!-- Admin Header -->
+<header class="bg-white border-b border-gray-200 spec--admin-header">
+  <div class="l--container is-lg">
+    <div class="flex justify-between items-center h-16">
+      <div class="flex items-center">
+        <h1 class="text-xl font-semibold">
+          <%= link_to "管理画面", admin_articles_path, class: "hover:text-gray-600" %>
+        </h1>
+      </div>
+
+      <%= render 'shared/admin_navigation' %>
+
+    </div>
+  </div>
+</header>
