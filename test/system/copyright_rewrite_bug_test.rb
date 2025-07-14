@@ -34,16 +34,29 @@ class CopyrightRewriteBugTest < ApplicationSystemTestCase
     click_button "設定を保存"
     
     # Check if we're redirected properly
-    puts "Current path after submit: #{current_path}"
+    assert_current_path admin_site_settings_path
     
-    # Check database value after save
-    updated_db_value = SiteSetting.copyright
-    puts "DB value after save: #{updated_db_value.inspect}"
+    # Wait a bit for any async operations to complete
+    sleep 0.5
+    
+    # Force a new database connection and bypass all caching
+    ActiveRecord::Base.connection.clear_query_cache
+    Rails.cache.clear
+    
+    # Direct database query without any caching
+    updated_db_value = ActiveRecord::Base.connection.exec_query(
+      "SELECT value FROM site_settings WHERE name = 'copyright'"
+    ).first&.fetch("value")
+    
+    puts "Direct SQL query result: #{updated_db_value.inspect}"
+    
+    # Also check through the model
+    model_value = SiteSetting.copyright
+    puts "Model value: #{model_value.inspect}"
     
     # Check form field value after save
     copyright_field_after = find(COPYRIGHT_INPUT)
     form_value_after = copyright_field_after.value
-    puts "Form value after save: #{form_value_after.inspect}"
     
     # Assertions
     assert_equal new_value, updated_db_value, "Database should be updated"
@@ -77,8 +90,8 @@ class CopyrightRewriteBugTest < ApplicationSystemTestCase
     # Give some time for any async operations
     sleep 1
     
-    # Check final result
-    final_value = SiteSetting.copyright
+    # Check final result using direct database access
+    final_value = get_current_copyright
     puts "Final copyright value: #{final_value.inspect}"
     
     assert_equal "デバッグテスト", final_value
@@ -88,7 +101,7 @@ class CopyrightRewriteBugTest < ApplicationSystemTestCase
     login_as_admin(@admin)
     
     # Step 1: Record initial state
-    initial_value = SiteSetting.copyright
+    initial_value = get_current_copyright
     puts "Step 1 - Initial copyright: #{initial_value.inspect}"
     
     # Step 2: Visit settings page
@@ -120,8 +133,21 @@ class CopyrightRewriteBugTest < ApplicationSystemTestCase
     assert_current_path admin_site_settings_path
     puts "Step 7 - Confirmed redirect"
     
-    # Step 8: Check database value
-    db_value_after = SiteSetting.copyright
+    # Check for any success or error messages
+    if page.has_css?('.alert')
+      puts "Alert message: #{find('.alert').text}"
+    end
+    if page.has_css?('.notice') 
+      puts "Notice message: #{find('.notice').text}"
+    end
+    
+    # Add extra wait and force cache clearing
+    sleep 1
+    ActiveRecord::Base.connection.clear_query_cache
+    Rails.cache.clear
+    
+    # Step 8: Check database value using direct database access
+    db_value_after = get_current_copyright
     puts "Step 8 - DB value after submit: #{db_value_after.inspect}"
     
     # Step 9: Check form field value after redirect

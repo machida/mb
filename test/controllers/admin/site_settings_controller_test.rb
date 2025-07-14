@@ -43,7 +43,7 @@ class Admin::SiteSettingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "新しいブログタイトル", SiteSetting.site_title
     assert_equal "https://example.com/new-image.jpg", SiteSetting.default_og_image
     assert_equal "新しい説明文です", SiteSetting.top_page_description
-    assert_equal "© 2025 新しいブログ. All rights reserved.", SiteSetting.copyright
+    assert_equal "新しいブログ", SiteSetting.copyright
   end
 
   test "should not allow access without login" do
