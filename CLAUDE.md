@@ -71,6 +71,13 @@
 - Ruby APIの一部メソッドが期待通りに動作しない
 - セットアップの複雑さにより初期実装が困難
 
+### エラーハンドリング改善
+- ✅ ApplicationPlaywrightTestCaseにタイムアウト対応実装済み
+- 3回のリトライとエクスポネンシャルバックオフ
+- 部分的な初期化失敗時の安全なクリーンアップ
+- PlaywrightSetupError例外による詳細なエラー情報
+- Rails.loggerによる詳細なデバッグログ
+
 ### 代替アプローチ（検討中）
 1. **Node.js Playwright**: JavaScript版Playwrightを別プロセスで実行
 2. **Capybara改善**: 現在のCapybaraテストのflaky部分を修正

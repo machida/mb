@@ -3,6 +3,9 @@ require "playwright"
 require "socket"
 require_relative "support/selectors"
 
+# Custom exception for Playwright setup failures
+class PlaywrightSetupError < StandardError; end
+
 class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
   # Disable transactional fixtures for system tests to avoid transaction isolation issues
   self.use_transactional_tests = false
@@ -37,20 +40,87 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
 
   # Playwright setup and teardown
   def setup_playwright
-    @playwright = Playwright.create(
-      playwright_cli_executable_path: find_playwright_executable
-    )
-    # Launch browser without arguments first
-    @browser = @playwright.playwright.chromium.launch
-    @context = @browser.new_context
-    @page = @context.new_page
+    max_retries = 3
+    retry_count = 0
+    
+    begin
+      Rails.logger.info "Setting up Playwright (attempt #{retry_count + 1}/#{max_retries})"
+      
+      # Step 1: Create Playwright instance with timeout protection
+      @playwright = Playwright.create(
+        playwright_cli_executable_path: find_playwright_executable
+      )
+      
+      # Step 2: Launch browser with timeout protection
+      @browser = @playwright.playwright.chromium.launch(headless: true)
+      
+      # Step 3: Create context and page
+      @context = @browser.new_context
+      @page = @context.new_page
+      
+      Rails.logger.info "Playwright setup completed successfully"
+      
+    rescue => e
+      retry_count += 1
+      
+      # Log the specific error for debugging
+      Rails.logger.error "Playwright setup failed (attempt #{retry_count}/#{max_retries}): #{e.class.name} - #{e.message}"
+      
+      # Clean up any partial initialization
+      cleanup_partial_playwright_setup
+      
+      if retry_count < max_retries
+        # Wait before retrying, with exponential backoff
+        sleep_time = retry_count * 2
+        Rails.logger.info "Retrying Playwright setup in #{sleep_time} seconds..."
+        sleep(sleep_time)
+        retry
+      else
+        # After max retries, raise a more descriptive error
+        raise PlaywrightSetupError, 
+              "Failed to initialize Playwright after #{max_retries} attempts. " \
+              "Last error: #{e.class.name} - #{e.message}. " \
+              "This is a known issue with playwright-ruby-client. " \
+              "Consider using Capybara tests instead."
+      end
+    end
   end
   
   def teardown_playwright
-    @page&.close
-    @context&.close
-    @browser&.close
-    @playwright&.stop
+    cleanup_partial_playwright_setup
+  end
+  
+  # Helper method to safely clean up partial Playwright initialization
+  def cleanup_partial_playwright_setup
+    begin
+      @page&.close
+    rescue => e
+      Rails.logger.debug "Error closing Playwright page: #{e.message}"
+    end
+    
+    begin
+      @context&.close  
+    rescue => e
+      Rails.logger.debug "Error closing Playwright context: #{e.message}"
+    end
+    
+    begin
+      @browser&.close
+    rescue => e
+      Rails.logger.debug "Error closing Playwright browser: #{e.message}"
+    end
+    
+    begin
+      @playwright&.stop
+    rescue => e
+      Rails.logger.debug "Error stopping Playwright: #{e.message}"
+    end
+    
+    # Clear instance variables
+    @page = nil
+    @context = nil
+    @browser = nil
+    @playwright = nil
   end
 
   # Rails server management
@@ -153,13 +223,33 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
   end
   
   def find_playwright_executable
-    # Try npx first
-    return "npx playwright" if system("which npx > /dev/null 2>&1")
+    Rails.logger.debug "Searching for Playwright executable..."
     
-    # Try direct executable
-    return "playwright" if system("which playwright > /dev/null 2>&1")
+    # Try npx first (most common in Node.js projects)
+    if system("which npx > /dev/null 2>&1")
+      Rails.logger.debug "Found npx, using 'npx playwright'"
+      return "npx playwright"
+    end
     
-    # Fallback
-    raise "Playwright executable not found. Please install with 'npm install -g @playwright/test'"
+    # Try direct executable (global installation)
+    if system("which playwright > /dev/null 2>&1")
+      Rails.logger.debug "Found direct playwright executable"
+      return "playwright"
+    end
+    
+    # Check if playwright is installed via npm in project
+    if File.exist?("node_modules/.bin/playwright")
+      Rails.logger.debug "Found playwright in node_modules/.bin/"
+      return "./node_modules/.bin/playwright"
+    end
+    
+    # Fallback error with helpful message
+    error_msg = "Playwright executable not found. Please install Playwright:\n" \
+                "  npm install -g @playwright/test\n" \
+                "  npx playwright install\n" \
+                "Or install locally: npm install @playwright/test"
+    
+    Rails.logger.error error_msg
+    raise PlaywrightSetupError, error_msg
   end
 end
