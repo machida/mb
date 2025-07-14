@@ -84,12 +84,34 @@
 3. **他のE2Eツール**: Cypress、Puppeteer等の検討
 4. **playwright-ruby-client更新待ち**: gem更新での改善を待つ
 
-### 移行手順（将来実装）
-1. **技術調査**: より安定したPlaywright Ruby統合方法の調査
-2. **段階的移行**: 最も不安定なテストから優先的に移行
-3. **並行運用**: 移行期間中はCapybaraとPlaywrightを併用
-4. **セレクター統一**: 既存の`.spec--`クラスをPlaywrightでも使用
-5. **CI/CD対応**: GitHub Actionsでのplaywright実行環境整備
+### 移行手順（実装中）
+1. **技術調査**: ✅ より安定したPlaywright Ruby統合方法の調査完了
+2. **段階的移行**: 🚧 最も不安定なテストから優先的に移行開始
+   - ✅ `admin_dropdown_test.rb` のPlaywright版作成完了
+   - ⏳ `simple_dropdown_test.rb` の移行準備中
+   - ⏳ `dropdown_turbo_navigation_test.rb` の移行準備中
+3. **並行運用**: 🚧 移行期間中はCapybaraとPlaywrightを併用中
+4. **セレクター統一**: ✅ 既存の`.spec--`クラスをPlaywrightでも使用
+5. **CI/CD対応**: ⏳ GitHub Actionsでのplaywright実行環境整備予定
+
+### 移行済みテスト
+
+#### ドロップダウン関連テスト（最優先移行完了）
+- ✅ `test/system/admin_dropdown_playwright_test.rb` (新規作成)
+  - 元: `admin_dropdown_test.rb` (4テストケース、sleep 0.2-0.3秒、execute_script使用)
+  - 改善: sleep不要、wait_for_function使用、execute_script不要
+- ✅ `test/system/simple_dropdown_playwright_test.rb` (新規作成)
+  - 元: `simple_dropdown_test.rb` (2テストケース、sleep 0.1秒)
+  - 改善: wait_for_function使用で確実な状態確認
+- ✅ `test/system/dropdown_turbo_navigation_playwright_test.rb` (新規作成)
+  - 元: `dropdown_turbo_navigation_test.rb` (3テストケース、sleep 0.2-0.5秒)
+  - 改善: Turboナビゲーション対応、data-dropdown-initialized属性確認
+
+#### 移行による改善点
+- **安定性向上**: sleep代わりにwait_for_function使用
+- **実行時間短縮**: 固定待機時間なし、条件満足次第即座に継続
+- **保守性向上**: より明示的な状態確認とエラーメッセージ
+- **Turbo対応**: JavaScript再初期化の適切な検出
 
 ### Playwrightの利点
 - より安定したE2Eテスト（sleep不要）
