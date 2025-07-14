@@ -8,10 +8,13 @@
     "lint:erb": "bundle exec erblint --lint-all",
     "lint:fix": "npm run lint:js -- --fix && npm run lint:erb -- --autocorrect",
     "format": "prettier --write app/javascript/**/*.js",
-    "build": "rails assets:precompile"
+    "build": "rails assets:precompile",
+    "playwright:install": "playwright install",
+    "test:playwright": "bundle exec rails test test/playwright/"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
-    "prettier": "^3.2.5"
+    "prettier": "^3.2.5",
+    "@playwright/test": "^1.46.0"
   }
 }
