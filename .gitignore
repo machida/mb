@@ -41,3 +41,4 @@
 
 # Uploaded images
 /public/uploads
+node_modules/

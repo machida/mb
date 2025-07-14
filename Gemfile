@@ -68,6 +68,9 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  
+  # Playwright for E2E testing - more stable than Selenium
+  gem "playwright-ruby-client", "~> 1.46"
 end
 
 gem "tailwindcss-rails", "~> 4.3"
