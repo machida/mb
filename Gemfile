@@ -70,7 +70,8 @@ group :test do
   gem "selenium-webdriver"
   
   # Playwright for E2E testing - more stable than Selenium
-  gem "playwright-ruby-client", "~> 1.46"
+  # Note: 1.52.0 has reported timeout issues, using stable 1.51.0
+  gem "playwright-ruby-client", "~> 1.51.0"
 end
 
 gem "tailwindcss-rails", "~> 4.3"
