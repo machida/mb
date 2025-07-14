@@ -75,9 +75,11 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     ActiveRecord::Base.connection.clear_query_cache
     Rails.cache.clear
     
-    # Direct database query without any caching
+    # Direct database query without any caching - using parameterized query for security
     ActiveRecord::Base.connection.exec_query(
-      "SELECT value FROM site_settings WHERE name = 'copyright'"
+      "SELECT value FROM site_settings WHERE name = ?",
+      "SQL",
+      ["copyright"]
     ).first&.fetch("value") || "マチダのブログ"
   end
 end
