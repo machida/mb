@@ -19,6 +19,7 @@ Rails 8.0.2で作成されたブログアプリケーション
 
 ```bash
 bundle install
+npm install
 ```
 
 ### 2. データベースの設定
@@ -59,7 +60,19 @@ gcp:
     }
 ```
 
-### 4. 開発サーバーの起動
+### 4. E2Eテスト環境の設定（Playwright）
+
+```bash
+# Playwrightブラウザのインストール
+npx playwright install
+
+# 環境変数でテスト設定をカスタマイズ（オプション）
+export TEST_ADMIN_PASSWORD="your_test_password"
+export TEST_ADMIN_EMAIL="test@example.com"
+export TEST_ADMIN_USER_ID="test_admin"
+```
+
+### 5. 開発サーバーの起動
 
 ```bash
 bin/dev
@@ -80,11 +93,16 @@ bin/dev
 - Ruby 3.4.2
 - Rails 8.0.2
 - SQLite3 (開発環境)
-- Tailwind CSS
+- Tailwind CSS v4.x
 - Stimulus (Hotwire)
 - Turbo (Hotwire)
 - Redcarpet (Markdown)
 - Google Cloud Storage
+
+### テスト
+- Mini-test (システムテスト、コントローラーテスト)
+- Capybara + Selenium WebDriver (現在のE2E)
+- Playwright (将来のE2E、実験的)
 
 ## 機能詳細
 
@@ -106,3 +124,36 @@ bin/dev
 ### 認証機能
 - 管理者用のシンプルな認証システム
 - セッション管理
+
+## テスト実行
+
+### 全テスト実行
+```bash
+bundle exec rails test:all
+```
+
+### システムテストのみ実行
+```bash
+bundle exec rails test:system
+```
+
+### テスト設定
+- テスト用パスワードは環境変数で変更可能
+- デフォルト値: `test_secure_password_test`
+- 詳細は `test/test_helper.rb` の `TestConfig` を参照
+
+## トラブルシューティング
+
+### Playwrightエラー
+Playwrightでタイムアウトエラーが発生する場合：
+
+```bash
+# ブラウザの再インストール
+npx playwright install --force
+
+# 環境のクリーンアップ
+rm -rf node_modules/.cache
+npm install
+```
+
+詳細なエラー情報は `CLAUDE.md` の「Playwright移行計画」を参照してください。
