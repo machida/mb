@@ -9,6 +9,18 @@ class CopyrightEdgeCasesTest < ApplicationSystemTestCase
     @admin = create_admin
   end
 
+  private
+  
+  def submit_settings_and_wait
+    click_button "設定を保存"
+    assert_current_path admin_site_settings_path
+    
+    # Add wait and force cache clearing for transaction isolation
+    sleep 1
+    ActiveRecord::Base.connection.clear_query_cache
+    Rails.cache.clear
+  end
+
   test "changing copyright when starting with default value from seeds" do
     # Reset to exact seeds value
     SiteSetting.set('copyright', 'マチダのブログ')
@@ -18,10 +30,9 @@ class CopyrightEdgeCasesTest < ApplicationSystemTestCase
     
     # Try to change to a user-provided value (simulating real usage)
     fill_in "site_settings[copyright]", with: "ユーザー提供の著作権者名"
-    click_button "設定を保存"
+    submit_settings_and_wait
     
-    assert_current_path admin_site_settings_path
-    assert_equal "ユーザー提供の著作権者名", SiteSetting.copyright
+    assert_equal "ユーザー提供の著作権者名", get_current_copyright
     assert_equal "ユーザー提供の著作権者名", find(COPYRIGHT_INPUT).value
   end
 
@@ -38,9 +49,9 @@ class CopyrightEdgeCasesTest < ApplicationSystemTestCase
     
     # Change to new value
     fill_in "site_settings[copyright]", with: "新しい会社名"
-    click_button "設定を保存"
+    submit_settings_and_wait
     
-    assert_equal "新しい会社名", SiteSetting.copyright
+    assert_equal "新しい会社名", get_current_copyright
     assert_equal "新しい会社名", find(COPYRIGHT_INPUT).value
   end
 
@@ -52,18 +63,18 @@ class CopyrightEdgeCasesTest < ApplicationSystemTestCase
     
     # First change
     fill_in "site_settings[copyright]", with: "2番目の値"
-    click_button "設定を保存"
-    assert_equal "2番目の値", SiteSetting.copyright
+    submit_settings_and_wait
+    assert_equal "2番目の値", get_current_copyright
     
     # Second change immediately after
     fill_in "site_settings[copyright]", with: "3番目の値" 
-    click_button "設定を保存"
-    assert_equal "3番目の値", SiteSetting.copyright
+    submit_settings_and_wait
+    assert_equal "3番目の値", get_current_copyright
     
     # Third change
     fill_in "site_settings[copyright]", with: "最終的な値"
-    click_button "設定を保存"
-    assert_equal "最終的な値", SiteSetting.copyright
+    submit_settings_and_wait
+    assert_equal "最終的な値", get_current_copyright
     assert_equal "最終的な値", find(COPYRIGHT_INPUT).value
   end
 
@@ -75,7 +86,7 @@ class CopyrightEdgeCasesTest < ApplicationSystemTestCase
     # Go to settings
     visit admin_site_settings_path
     fill_in "site_settings[copyright]", with: "中間値"
-    click_button "設定を保存"
+    submit_settings_and_wait
     
     # Navigate away and back
     visit admin_articles_path
@@ -86,9 +97,9 @@ class CopyrightEdgeCasesTest < ApplicationSystemTestCase
     
     # Change again
     fill_in "site_settings[copyright]", with: "最終値"
-    click_button "設定を保存"
+    submit_settings_and_wait
     
-    assert_equal "最終値", SiteSetting.copyright
+    assert_equal "最終値", get_current_copyright
     assert_equal "最終値", find(COPYRIGHT_INPUT).value
   end
 
@@ -101,20 +112,20 @@ class CopyrightEdgeCasesTest < ApplicationSystemTestCase
     # Test with Japanese characters
     japanese_text = "株式会社テスト"
     fill_in "site_settings[copyright]", with: japanese_text
-    click_button "設定を保存"
-    assert_equal japanese_text, SiteSetting.copyright
+    submit_settings_and_wait
+    assert_equal japanese_text, get_current_copyright
     
     # Test with symbols and numbers
     mixed_text = "Company™ 2025"
     fill_in "site_settings[copyright]", with: mixed_text
-    click_button "設定を保存"
-    assert_equal mixed_text, SiteSetting.copyright
+    submit_settings_and_wait
+    assert_equal mixed_text, get_current_copyright
     
     # Test with emojis
     emoji_text = "会社名 🏢"
     fill_in "site_settings[copyright]", with: emoji_text
-    click_button "設定を保存"
-    assert_equal emoji_text, SiteSetting.copyright
+    submit_settings_and_wait
+    assert_equal emoji_text, get_current_copyright
   end
 
   test "verify footer display updates immediately after copyright change" do
@@ -126,7 +137,7 @@ class CopyrightEdgeCasesTest < ApplicationSystemTestCase
     # Change copyright
     new_name = "新しいフッター名"
     fill_in "site_settings[copyright]", with: new_name
-    click_button "設定を保存"
+    submit_settings_and_wait
     
     # Go to public page and check footer
     visit root_path

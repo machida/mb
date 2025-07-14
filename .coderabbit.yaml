@@ -1,13 +1,15 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
 # Configuration for CodeRabbit AI Code Reviews
 # https://docs.coderabbit.ai/
 
 # Language settings
-language: en-US
+language: ja-JP
 
 # Review settings
 reviews:
   # Enable automatic reviews for pull requests
-  auto_review: true
+  auto_review:
+    enabled: true
   
   # Include draft pull requests in reviews
   include_drafts: false
@@ -52,20 +54,41 @@ path_filters:
 # Knowledge base settings
 knowledge_base:
   # Opt in to learnings from your codebase
-  learnings: true
+  learnings:
+    enabled: true
   
   # Enable insights from your repository
   insights: true
 
-# Tone and style
-tone_instructions: |
-  - Focus on Rails 8 best practices and conventions
-  - Pay attention to security considerations
-  - Suggest improvements for maintainability and performance
-  - Consider Propshaft asset pipeline patterns
-  - Review CSS architecture and naming conventions
-  - Check for proper error handling and logging
-  - Ensure consistent code style across the project
+# Tone and style (shortened to under 250 characters)
+tone_instructions: "Rails 8のベストプラクティス、セキュリティ、保守性、パフォーマンス、CSSアーキテクチャ、エラーハンドリング、一貫したコードスタイルに重点を置いてレビューしてください。"
+
+# Path-specific review instructions in Japanese
+path_instructions:
+  - path: "**/*.rb"
+    instructions: |
+      - Railsの規約に従ったコードか確認
+      - セキュリティの脆弱性がないか注意
+      - パフォーマンスに問題がないか確認
+      - テストカバレッジが適切か確認
+  
+  - path: "**/*.erb"
+    instructions: |
+      - XSS脆弱性がないかチェック
+      - CSSクラス名が命名規則（.a--、.spec--）に従っているか確認
+      - アクセシビリティが考慮されているか確認
+  
+  - path: "**/*.css"
+    instructions: |
+      - Tailwind CSS v4の機能を適切に使用しているか確認
+      - カスタムCSSが本当に必要か検討
+      - 命名規則（.a--、.spec--）に従っているか確認
+  
+  - path: "test/**/*.rb"
+    instructions: |
+      - テストが適切にカバーしているか確認
+      - システムテストでは.spec--クラスを使用しているか確認
+      - テストが安定して実行できるか確認
 
 # Early access features
 early_access: false

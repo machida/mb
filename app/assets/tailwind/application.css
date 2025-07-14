@@ -1,2 +1,211 @@
 @import "tailwindcss";
-@import "./_syntax_highlighting.css";
+
+@theme {
+  /* Font families */
+  --font-family-base: YakuHanJPs, "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  --font-family-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+
+  /* Primary colors */
+  --color-text-primary: var(--color-slate-800);
+  --color-text-secondary: var(--color-gray-500);
+  --color-text-muted: var(--color-gray-400);
+  --color-text-light: var(--color-gray-300);
+
+  /* Link colors */
+  --color-link: var(--color-blue-800);
+  --color-link-hover: var(--color-blue-900);
+
+  /* Status colors */
+  --color-error: var(--color-red-600);
+  --color-warning: var(--color-amber-600);
+  --color-success: var(--color-emerald-600);
+
+  /* Background colors */
+  --color-bg-primary: var(--color-white);
+  --color-bg-secondary: var(--color-gray-50);
+  --color-bg-muted: var(--color-gray-100);
+
+  /* Border colors */
+  --color-border-light: var(--color-gray-200);
+  --color-border-default: var(--color-gray-300);
+  --color-border-dark: var(--color-gray-400);
+
+  /* Form colors */
+  --color-form-border: var(--color-gray-300);
+  --color-form-border-focus: var(--color-blue-500);
+  --color-form-border-invalid: var(--color-red-300);
+  --color-form-border-invalid-focus: var(--color-red-500);
+  --color-form-text: var(--color-gray-900);
+  --color-form-text-disabled: var(--color-gray-500);
+  --color-form-bg-disabled: var(--color-gray-50);
+  --color-form-placeholder: var(--color-gray-400);
+  --color-form-label: var(--color-gray-700);
+  --color-form-help: var(--color-gray-500);
+
+  /* Interactive colors */
+  --color-interactive: var(--color-gray-500);
+  --color-interactive-hover: var(--color-gray-700);
+  --color-interactive-bg-hover: var(--color-gray-100);
+
+  /* Button colors */
+  --color-button-primary: var(--color-blue-600);
+  --color-button-primary-hover: var(--color-blue-700);
+  --color-button-secondary: var(--color-gray-600);
+  --color-button-secondary-hover: var(--color-gray-700);
+  --color-button-focus: var(--color-blue-500);
+  --color-button-focus-ring: var(--color-white);
+  --color-button-danger-hover: var(--color-red-700);
+  --color-button-warning-hover: var(--color-amber-700);
+  --color-button-warning-focus: var(--color-amber-500);
+  --color-button-danger-focus: var(--color-red-500);
+  --color-button-primary-bg-light: var(--color-blue-50);
+  --color-button-secondary-bg-light: var(--color-gray-50);
+  --color-button-warning-bg-light: var(--color-amber-50);
+  --color-button-danger-bg-light: var(--color-red-50);
+  --color-gradient-primary: var(--color-blue-600);
+  --color-gradient-secondary: var(--color-violet-600);
+
+  /* Syntax highlighting colors (GitHub style - using Tailwind variables) */
+  --color-syntax-comment: var(--color-gray-500);
+  --color-syntax-error: var(--color-red-500);
+  --color-syntax-generic: var(--color-orange-400);
+  --color-syntax-keyword: var(--color-red-400);
+  --color-syntax-literal: var(--color-sky-300);
+  --color-syntax-name: var(--color-orange-400);
+  --color-syntax-operator: var(--color-red-400);
+  --color-syntax-punctuation: var(--color-gray-100);
+  --color-syntax-deleted: var(--color-red-500);
+  --color-syntax-heading: var(--color-sky-300);
+  --color-syntax-inserted: var(--color-green-400);
+  --color-syntax-prompt: var(--color-gray-500);
+  --color-syntax-constant: var(--color-blue-400);
+  --color-syntax-string: var(--color-sky-300);
+  --color-syntax-attribute: var(--color-blue-400);
+  --color-syntax-builtin: var(--color-orange-400);
+  --color-syntax-class: var(--color-orange-400);
+  --color-syntax-decorator: var(--color-purple-300);
+  --color-syntax-function: var(--color-purple-300);
+  --color-syntax-tag: var(--color-green-300);
+  --color-syntax-regex: var(--color-green-300);
+  --color-syntax-whitespace: var(--color-gray-100);
+
+  /* Markdown colors */
+  --color-markdown-heading: var(--color-gray-900);
+  --color-markdown-text: var(--color-gray-700);
+  --color-markdown-muted: var(--color-gray-500);
+  --color-markdown-border: var(--color-gray-200);
+  --color-markdown-bg-code: var(--color-gray-50);
+  --color-markdown-link: var(--color-blue-600);
+  --color-markdown-link-hover: var(--color-blue-700);
+  --color-markdown-code-text: var(--color-red-500);
+  --color-markdown-table-text: var(--color-gray-600);
+  --color-markdown-quote-border: var(--color-gray-300);
+  
+  /* Syntax dark theme colors for markdown */
+  --color-syntax-dark-bg: var(--color-gray-900);
+  --color-syntax-dark-text: var(--color-gray-200);
+}
+
+/* Base styles */
+@layer base {
+  body {
+    color: var(--color-text-primary);
+    font-family: var(--font-family-base);
+  }
+}
+
+/* Custom utility and component styles */
+@layer components {
+  /* Typography utility classes */
+  .font-base {
+    font-family: var(--font-family-base);
+  }
+
+  .font-mono {
+    font-family: var(--font-family-mono);
+  }
+
+  /* Text color utility classes */
+  .text-primary {
+    color: var(--color-text-primary);
+  }
+
+  .text-secondary {
+    color: var(--color-text-secondary);
+  }
+
+  .text-muted {
+    color: var(--color-text-muted);
+  }
+
+  .text-light {
+    color: var(--color-text-light);
+  }
+
+  .text-link {
+    color: var(--color-link);
+  }
+
+  .text-link:hover {
+    color: var(--color-link-hover);
+  }
+
+  .hover-text-link {
+    text-decoration: none;
+  }
+
+  .hover-text-link:hover {
+    text-decoration: underline;
+  }
+
+  .text-error {
+    color: var(--color-error);
+  }
+
+  .text-warning {
+    color: var(--color-warning);
+  }
+
+  .text-success {
+    color: var(--color-success);
+  }
+
+  /* Background utility classes */
+  .bg-primary {
+    background-color: var(--color-bg-primary);
+  }
+
+  .bg-secondary {
+    background-color: var(--color-bg-secondary);
+  }
+
+  .bg-muted {
+    background-color: var(--color-bg-muted);
+  }
+
+  /* Border utility classes */
+  .border-light {
+    border-color: var(--color-border-light);
+  }
+
+  .border-default {
+    border-color: var(--color-border-default);
+  }
+
+  .border-dark {
+    border-color: var(--color-border-dark);
+  }
+}
+
+/* Import Custom Components */
+@import "./components/_layout.css";
+@import "./components/_buttons.css";
+@import "./components/_card.css";
+@import "./components/_forms.css";
+@import "./components/_dropdown.css";
+@import "./components/_hero.css";
+@import "./components/_markdown.css";
+@import "./components/_pager.css";
+@import "./components/_toast.css";
+@import "./components/_spec_classes.css";
+@import "./components/_syntax_highlighting.css";

@@ -87,6 +87,6 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     get root_path
     assert_response :success
     assert_select "a[href=?]", admin_articles_path, text: "記事管理"
-    assert_select "a[href=?]", admin_logout_path, text: "ログアウト"
+    assert_select "form[action=?]", admin_logout_path
   end
 end

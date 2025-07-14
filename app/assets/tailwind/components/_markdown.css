@@ -1,0 +1,292 @@
+/* Markdown Content Styles - Simplified and Refactored */
+
+.a--markdown-body {
+  /* Base settings */
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  color: var(--color-markdown-text);
+  background-color: transparent;
+  font-size: 16px;
+  line-height: 1.6;
+  word-wrap: break-word;
+  font-family: var(--font-family-base);
+}
+
+/* =================================================================
+   Typography
+   ================================================================= */
+
+.a--markdown-body h1,
+.a--markdown-body h2,
+.a--markdown-body h3,
+.a--markdown-body h4,
+.a--markdown-body h5,
+.a--markdown-body h6 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-markdown-heading);
+}
+
+.a--markdown-body h1 {
+  font-size: 2em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--color-markdown-border);
+}
+
+.a--markdown-body h2 {
+  font-size: 1.5em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--color-markdown-border);
+}
+
+.a--markdown-body h3 {
+  font-size: 1.25em;
+}
+
+.a--markdown-body h4 {
+  font-size: 1em;
+}
+
+.a--markdown-body h5 {
+  font-size: 0.875em;
+}
+
+.a--markdown-body h6 {
+  font-size: 0.85em;
+  color: var(--color-markdown-muted);
+}
+
+.a--markdown-body p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+/* =================================================================
+   Links
+   ================================================================= */
+
+.a--markdown-body a {
+  color: var(--color-markdown-link);
+  text-decoration: none;
+}
+
+.a--markdown-body a:hover {
+  color: var(--color-markdown-link-hover);
+  text-decoration: underline;
+}
+
+/* =================================================================
+   Lists
+   ================================================================= */
+
+.a--markdown-body ul,
+.a--markdown-body ol {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  padding-left: 2em;
+}
+
+.a--markdown-body ul {
+  list-style-type: disc;
+}
+
+.a--markdown-body ol {
+  list-style-type: decimal;
+}
+
+.a--markdown-body li {
+  margin: 0.25rem 0;
+  line-height: 1.6;
+}
+
+.a--markdown-body ul ul {
+  list-style-type: circle;
+}
+
+.a--markdown-body ul ul ul {
+  list-style-type: square;
+}
+
+.a--markdown-body ol ol {
+  list-style-type: lower-alpha;
+}
+
+.a--markdown-body ol ol ol {
+  list-style-type: lower-roman;
+}
+
+/* =================================================================
+   Code
+   ================================================================= */
+
+.a--markdown-body code {
+  background-color: var(--color-markdown-bg-code);
+  color: var(--color-markdown-code-text);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+  font-family: var(--font-family-mono);
+}
+
+.a--markdown-body pre {
+  background-color: var(--color-bg-muted);
+  color: var(--color-text-primary);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+  font-family: var(--font-family-mono);
+  font-size: 0.875em;
+  line-height: 1.45;
+}
+
+.a--markdown-body pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+}
+
+/* Syntax highlighting blocks */
+.a--markdown-body .highlight {
+  background-color: var(--color-syntax-dark-bg);
+  color: var(--color-syntax-dark-text);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.a--markdown-body .highlight pre {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+.a--markdown-body .highlight code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+/* =================================================================
+   Blockquotes
+   ================================================================= */
+
+.a--markdown-body blockquote {
+  margin: 1rem 0;
+  padding: 0 1em;
+  color: var(--color-markdown-muted);
+  border-left: 4px solid var(--color-markdown-quote-border);
+  font-style: italic;
+}
+
+.a--markdown-body blockquote > :first-child {
+  margin-top: 0;
+}
+
+.a--markdown-body blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+/* =================================================================
+   Tables
+   ================================================================= */
+
+.a--markdown-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.a--markdown-body table th,
+.a--markdown-body table td {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-markdown-border);
+  text-align: left;
+}
+
+.a--markdown-body table th {
+  background-color: var(--color-markdown-bg-code);
+  font-weight: 600;
+}
+
+.a--markdown-body table tr:nth-child(even) {
+  background-color: var(--color-bg-secondary);
+}
+
+/* =================================================================
+   Images
+   ================================================================= */
+
+.a--markdown-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.375rem;
+  margin: 0.5rem 0;
+}
+
+/* =================================================================
+   Horizontal Rules
+   ================================================================= */
+
+.a--markdown-body hr {
+  height: 1px;
+  border: none;
+  background-color: var(--color-markdown-border);
+  margin: 2rem 0;
+}
+
+/* =================================================================
+   Emphasis
+   ================================================================= */
+
+.a--markdown-body strong,
+.a--markdown-body b {
+  font-weight: 600;
+}
+
+.a--markdown-body em,
+.a--markdown-body i {
+  font-style: italic;
+}
+
+/* =================================================================
+   Spacing adjustments
+   ================================================================= */
+
+.a--markdown-body > *:first-child {
+  margin-top: 0;
+}
+
+.a--markdown-body > *:last-child {
+  margin-bottom: 0;
+}
+
+/* =================================================================
+   Focus states
+   ================================================================= */
+
+.a--markdown-body a:focus {
+  outline: 2px solid var(--color-link);
+  outline-offset: 2px;
+  border-radius: 0.125rem;
+}
+
+/* =================================================================
+   Task lists (GitHub-style checkboxes)
+   ================================================================= */
+
+.a--markdown-body .task-list-item {
+  list-style-type: none;
+}
+
+.a--markdown-body .task-list-item-checkbox {
+  margin: 0 0.2em 0.25em -1.4em;
+  vertical-align: middle;
+}

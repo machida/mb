@@ -12,6 +12,18 @@ class CopyrightUpdateTest < ApplicationSystemTestCase
     SiteSetting.set('copyright', 'テスト著作権者')
   end
 
+  private
+  
+  def submit_settings_and_wait
+    click_button "設定を保存"
+    assert_current_path admin_site_settings_path
+    
+    # Add wait and force cache clearing for transaction isolation
+    sleep 1
+    ActiveRecord::Base.connection.clear_query_cache
+    Rails.cache.clear
+  end
+
   test "admin can update copyright holder name" do
     login_as_admin(@admin)
     
@@ -26,10 +38,7 @@ class CopyrightUpdateTest < ApplicationSystemTestCase
     fill_in "site_settings[copyright]", with: "新しい著作権者名"
     
     # Save changes
-    click_button "設定を保存"
-    
-    # Should be redirected back to settings page with success message
-    assert_current_path admin_site_settings_path
+    submit_settings_and_wait
     # Note: Toast notification testing is handled in other system tests
     
     # Verify the field shows updated value
@@ -37,7 +46,7 @@ class CopyrightUpdateTest < ApplicationSystemTestCase
     assert_equal "新しい著作権者名", copyright_input.value
     
     # Verify the setting was actually saved in the database
-    assert_equal "新しい著作権者名", SiteSetting.copyright
+    assert_equal "新しい著作権者名", get_current_copyright
   end
 
   test "admin can clear copyright holder name" do
@@ -50,17 +59,14 @@ class CopyrightUpdateTest < ApplicationSystemTestCase
     fill_in "site_settings[copyright]", with: ""
     
     # Save changes
-    click_button "設定を保存"
-    
-    # Should be redirected back to settings page
-    assert_current_path admin_site_settings_path
+    submit_settings_and_wait
     
     # Verify the field is empty
     copyright_input = find(COPYRIGHT_INPUT)
     assert_equal "", copyright_input.value
     
     # Verify the setting was actually cleared in the database
-    assert_equal "", SiteSetting.copyright
+    assert_equal "", get_current_copyright
   end
 
   test "admin can update copyright with whitespace that gets trimmed" do
@@ -73,13 +79,10 @@ class CopyrightUpdateTest < ApplicationSystemTestCase
     fill_in "site_settings[copyright]", with: "  スペース付き著作権者  "
     
     # Save changes
-    click_button "設定を保存"
-    
-    # Should be redirected back to settings page
-    assert_current_path admin_site_settings_path
+    submit_settings_and_wait
     
     # Verify whitespace was trimmed in database
-    assert_equal "スペース付き著作権者", SiteSetting.copyright
+    assert_equal "スペース付き著作権者", get_current_copyright
     
     # Note: Form field may still show spaces until page refresh
     # The important part is that database value is trimmed
@@ -91,7 +94,7 @@ class CopyrightUpdateTest < ApplicationSystemTestCase
     # Update copyright through admin interface
     visit admin_site_settings_path
     fill_in "site_settings[copyright]", with: "新しいブログ名"
-    click_button "設定を保存"
+    submit_settings_and_wait
     
     # Visit public page to verify copyright display
     visit root_path
@@ -107,7 +110,7 @@ class CopyrightUpdateTest < ApplicationSystemTestCase
     # Clear copyright through admin interface
     visit admin_site_settings_path
     fill_in "site_settings[copyright]", with: ""
-    click_button "設定を保存"
+    submit_settings_and_wait
     
     # Visit public page to verify no copyright display
     visit root_path
