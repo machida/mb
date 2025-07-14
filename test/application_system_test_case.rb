@@ -32,7 +32,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     admin ||= create_admin
     visit admin_login_path
     find(LOGIN_EMAIL_INPUT).fill_in with: admin.email
-    find(LOGIN_PASSWORD_INPUT).fill_in with: "password123"
+    find(LOGIN_PASSWORD_INPUT).fill_in with: TEST_ADMIN_PASSWORD
     find(LOGIN_BUTTON).click
     
     # Wait for successful login and redirect
@@ -43,10 +43,10 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
   def create_admin(attributes = {})
     default_attributes = {
-      email: "admin@example.com",
-      user_id: "admin123",
-      password: "password123",
-      password_confirmation: "password123"
+      email: TEST_ADMIN_EMAIL,
+      user_id: TEST_ADMIN_USER_ID,
+      password: TEST_ADMIN_PASSWORD,
+      password_confirmation: TEST_ADMIN_PASSWORD
     }
     Admin.create!(default_attributes.merge(attributes))
   end

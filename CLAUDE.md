@@ -28,6 +28,13 @@
 - **CSSファイル内の2行以上の空行は1行にまとめる（フォーマットルール）**
 - **バグ修正時は必ずテストも追加する（再発防止のため）**
 
+## テスト設定
+- **テスト用パスワードは環境変数で設定可能（セキュリティ向上）**
+  - `TEST_ADMIN_PASSWORD` - テスト用管理者パスワード（デフォルト: test_secure_password_test）
+  - `TEST_ADMIN_EMAIL` - テスト用管理者メール（デフォルト: admin@example.com）
+  - `TEST_ADMIN_USER_ID` - テスト用管理者ID（デフォルト: admin123）
+- 設定は`test/test_helper.rb`の`TestConfig`モジュールで管理
+
 ## ファイル構成
 - `app/views/` - ERBテンプレート
 - `app/assets/stylesheets/` - CSSファイル

@@ -74,7 +74,7 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
     @page.goto("http://localhost:#{@server_port}/admin/login")
     
     @page.fill(LOGIN_EMAIL_INPUT, admin.email)
-    @page.fill(LOGIN_PASSWORD_INPUT, "password123")
+    @page.fill(LOGIN_PASSWORD_INPUT, TEST_ADMIN_PASSWORD)
     @page.click(LOGIN_BUTTON)
     
     # Wait for successful login and redirect
@@ -85,10 +85,10 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
 
   def create_admin(attributes = {})
     default_attributes = {
-      email: "admin@example.com",
-      user_id: "admin123",
-      password: "password123",
-      password_confirmation: "password123"
+      email: TEST_ADMIN_EMAIL,
+      user_id: TEST_ADMIN_USER_ID,
+      password: TEST_ADMIN_PASSWORD,
+      password_confirmation: TEST_ADMIN_PASSWORD
     }
     Admin.create!(default_attributes.merge(attributes))
   end
