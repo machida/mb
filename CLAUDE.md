@@ -84,16 +84,20 @@
 3. **他のE2Eツール**: Cypress、Puppeteer等の検討
 4. **playwright-ruby-client更新待ち**: gem更新での改善を待つ
 
-### 移行手順（実装中）
+### 移行手順（完了）
 1. **技術調査**: ✅ より安定したPlaywright Ruby統合方法の調査完了
-2. **段階的移行**: ✅ 最も不安定なテストから優先的に移行完了
+2. **段階的移行**: ✅ 全システムテストのPlaywright移行完了
    - ✅ `admin_dropdown_test.rb` のPlaywright版作成完了
    - ✅ `simple_dropdown_test.rb` の移行完了
    - ✅ `dropdown_turbo_navigation_test.rb` の移行完了
    - ✅ `copyright_rewrite_bug_test.rb` の移行完了
    - ✅ `copyright_edge_cases_test.rb` の移行完了
    - ✅ `copyright_update_test.rb` の移行完了
-3. **並行運用**: 🚧 移行期間中はCapybaraとPlaywrightを併用中
+   - ✅ `admin_site_settings_test.rb` の移行完了
+   - ✅ `admin_profile_test.rb` の移行完了
+   - ✅ `articles_test.rb` の移行完了
+   - ✅ `admin_passwords_test.rb` の移行完了
+3. **並行運用**: ✅ 移行完了により単一テストフレームワークに統一
 4. **セレクター統一**: ✅ 既存の`.spec--`クラスをPlaywrightでも使用
 5. **CI/CD対応**: ⏳ GitHub Actionsでのplaywright実行環境整備予定
 
@@ -121,6 +125,22 @@
   - 元: `copyright_update_test.rb` (6テストケース、sleep 1秒)
   - 改善: wait_for_load_state('networkidle')使用、フッター表示確認改善
 
+#### 管理画面テスト（移行完了）
+- ✅ `test/system/admin_site_settings_playwright_test.rb` (新規作成)
+  - 元: `admin_site_settings_test.rb` (4テストケース、visible: false使用)
+  - 改善: visible?メソッドによる正確な可視性確認
+- ✅ `test/system/admin_profile_playwright_test.rb` (新規作成)
+  - 元: `admin_profile_test.rb` (5テストケース、visible: false使用)
+  - 改善: HTML5バリデーション状態の正確な確認
+- ✅ `test/system/admin_passwords_playwright_test.rb` (新規作成)
+  - 元: `admin_passwords_test.rb` (7テストケース)
+  - 改善: 統一されたテストフレームワークによる保守性向上
+
+#### コンテンツ管理テスト（移行完了）
+- ✅ `test/system/articles_playwright_test.rb` (新規作成)
+  - 元: `articles_test.rb` (9テストケース)
+  - 改善: より安定したページ遷移、要素確認の改善
+
 #### 移行による改善点
 - **安定性向上**: sleep代わりにwait_for_function、wait_for_load_state使用
 - **実行時間短縮**: 固定待機時間なし、条件満足次第即座に継続
@@ -130,9 +150,14 @@
 - **デバッグ改善**: Rails.logger使用、puts代わりの構造化ログ
 
 #### 移行状況
-- **完了**: 6ファイル（18テストケース）の移行完了
-- **残り**: admin_site_settings、admin_profile、admin_passwords、articlesテストは安定（sleep使用なし）
-- **効果**: 最も不安定なテストの移行により、テストの安定性が大幅に向上
+- **完了**: 10ファイル（39テストケース）の完全移行完了 🎉
+- **統一**: 単一テストフレームワーク（Playwright）による保守性向上
+- **効果**: 全システムテストの安定性向上と開発効率の改善
+
+#### 移行の意義
+- **保守性**: 複数テストフレームワーク併用の複雑さを解消
+- **一貫性**: 統一された待機戦略とエラーハンドリング
+- **将来性**: Playwrightの継続的な改善によるメリット享受
 
 ### Playwrightの利点
 - より安定したE2Eテスト（sleep不要）
