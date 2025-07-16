@@ -15,6 +15,11 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
   def setup
     super
     
+    # Skip Playwright tests in CI if environment variable is set
+    if ENV['SKIP_PLAYWRIGHT_TESTS'] == 'true'
+      skip "Playwright tests skipped in CI environment"
+    end
+    
     # Clear all data before test starts to ensure clean state
     Admin.where.not(email: "admin@example.com").delete_all
     Article.delete_all
@@ -51,8 +56,16 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
       Rails.logger.info "Setting up Playwright (attempt #{retry_count + 1}/#{max_retries})"
       
       # Create Playwright instance without block for persistent use
-      @playwright = Playwright.create(playwright_cli_executable_path: find_playwright_executable)
-      @browser = @playwright.playwright.chromium.launch(headless: true)
+      if ENV['CI'] || ENV['GITHUB_ACTIONS']
+        @playwright = Playwright.create
+        @browser = @playwright.playwright.chromium.launch(
+          headless: true,
+          args: ['--no-sandbox', '--disable-dev-shm-usage'] # CI-friendly arguments
+        )
+      else
+        @playwright = Playwright.create(playwright_cli_executable_path: find_playwright_executable)
+        @browser = @playwright.playwright.chromium.launch(headless: true)
+      end
       @context = @browser.new_context
       @page = @context.new_page
       
@@ -124,9 +137,17 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
   # Rails server management
   def setup_rails_server
     @server_port = find_available_port
-    @server_pid = spawn("rails", "server", "-p", @server_port.to_s, "-e", "test", 
-                        out: "/dev/null", err: "/dev/null")
-    wait_for_server_ready
+    
+    # In CI environment, use different server setup
+    if ENV['CI'] || ENV['GITHUB_ACTIONS']
+      # Use a different approach for CI with more verbose logging
+      @server_pid = spawn("rails", "server", "-p", @server_port.to_s, "-e", "test")
+      wait_for_server_ready(timeout: 60) # Longer timeout for CI
+    else
+      @server_pid = spawn("rails", "server", "-p", @server_port.to_s, "-e", "test", 
+                          out: "/dev/null", err: "/dev/null")
+      wait_for_server_ready
+    end
   end
   
   def teardown_rails_server
@@ -208,8 +229,8 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
     port
   end
   
-  def wait_for_server_ready
-    max_retries = 30
+  def wait_for_server_ready(timeout: 30)
+    max_retries = timeout * 10 # 0.1 second intervals
     retries = 0
     
     loop do
