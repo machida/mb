@@ -65,12 +65,9 @@ group :development do
 end
 
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
-  
-  # Playwright for E2E testing - more stable than Selenium
-  # Note: 1.52.0 has reported timeout issues, using stable 1.51.0
+  # Playwright for E2E testing - unified system testing framework
+  # Fixed at 1.51.0: versions 1.52.0+ have known timeout initialization issues
+  # See: https://github.com/YusukeIwaki/playwright-ruby-client/issues/335
   gem "playwright-ruby-client", "~> 1.51.0"
 end
 

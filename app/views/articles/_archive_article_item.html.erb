@@ -1,0 +1,21 @@
+<article class="a--card is-hover">
+  <div class="flex justify-between items-start mb-2">
+    <h2 class="text-xl font-semibold">
+      <%= link_to archive_article_item.title, article_path(archive_article_item),
+                  class: "text-link" %>
+    </h2>
+    <time class="text-gray-500 text-sm">
+      <%= format_date_with_weekday(archive_article_item.created_at) %>
+    </time>
+  </div>
+
+  <% if archive_article_item.summary.present? %>
+    <p class="mb-3"><%= archive_article_item.summary %></p>
+  <% end %>
+
+  <% if show_author_info? %>
+    <div class="flex justify-between items-center">
+      <span class="text-sm text-gray-500">著者: <%= archive_article_item.author %></span>
+    </div>
+  <% end %>
+</article>
