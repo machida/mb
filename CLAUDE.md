@@ -86,10 +86,13 @@
 
 ### 移行手順（実装中）
 1. **技術調査**: ✅ より安定したPlaywright Ruby統合方法の調査完了
-2. **段階的移行**: 🚧 最も不安定なテストから優先的に移行開始
+2. **段階的移行**: ✅ 最も不安定なテストから優先的に移行完了
    - ✅ `admin_dropdown_test.rb` のPlaywright版作成完了
-   - ⏳ `simple_dropdown_test.rb` の移行準備中
-   - ⏳ `dropdown_turbo_navigation_test.rb` の移行準備中
+   - ✅ `simple_dropdown_test.rb` の移行完了
+   - ✅ `dropdown_turbo_navigation_test.rb` の移行完了
+   - ✅ `copyright_rewrite_bug_test.rb` の移行完了
+   - ✅ `copyright_edge_cases_test.rb` の移行完了
+   - ✅ `copyright_update_test.rb` の移行完了
 3. **並行運用**: 🚧 移行期間中はCapybaraとPlaywrightを併用中
 4. **セレクター統一**: ✅ 既存の`.spec--`クラスをPlaywrightでも使用
 5. **CI/CD対応**: ⏳ GitHub Actionsでのplaywright実行環境整備予定
@@ -107,11 +110,29 @@
   - 元: `dropdown_turbo_navigation_test.rb` (3テストケース、sleep 0.2-0.5秒)
   - 改善: Turboナビゲーション対応、data-dropdown-initialized属性確認
 
+#### 著作権関連テスト（移行完了）
+- ✅ `test/system/copyright_rewrite_bug_playwright_test.rb` (新規作成)
+  - 元: `copyright_rewrite_bug_test.rb` (3テストケース、sleep 0.5-1秒、execute_script使用)
+  - 改善: ネットワークイベント監視、wait_for_load_state使用
+- ✅ `test/system/copyright_edge_cases_playwright_test.rb` (新規作成)
+  - 元: `copyright_edge_cases_test.rb` (6テストケース、sleep 1秒)
+  - 改善: wait_for_load_state('networkidle')使用で確実な状態確認
+- ✅ `test/system/copyright_update_playwright_test.rb` (新規作成)
+  - 元: `copyright_update_test.rb` (6テストケース、sleep 1秒)
+  - 改善: wait_for_load_state('networkidle')使用、フッター表示確認改善
+
 #### 移行による改善点
-- **安定性向上**: sleep代わりにwait_for_function使用
+- **安定性向上**: sleep代わりにwait_for_function、wait_for_load_state使用
 - **実行時間短縮**: 固定待機時間なし、条件満足次第即座に継続
 - **保守性向上**: より明示的な状態確認とエラーメッセージ
 - **Turbo対応**: JavaScript再初期化の適切な検出
+- **ネットワーク監視**: execute_script代わりにネットワークイベント監視
+- **デバッグ改善**: Rails.logger使用、puts代わりの構造化ログ
+
+#### 移行状況
+- **完了**: 6ファイル（18テストケース）の移行完了
+- **残り**: admin_site_settings、admin_profile、admin_passwords、articlesテストは安定（sleep使用なし）
+- **効果**: 最も不安定なテストの移行により、テストの安定性が大幅に向上
 
 ### Playwrightの利点
 - より安定したE2Eテスト（sleep不要）
