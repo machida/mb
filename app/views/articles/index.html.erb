@@ -1,29 +1,7 @@
 <div class="spec--articles-container max-w-4xl mx-auto">
 
   <div class="flex flex-col gap-10">
-    <% @articles.each do |article| %>
-      <article class="spec--article-item">
-        <div class="flex flex-col justify-between items-start gap-2 mb-2">
-          <h2 class="text-2xl font-bold spec--article-title">
-            <%= link_to article.title, article_path(article),
-                        class: "hover-text-link text-primary" %>
-          </h2>
-          <time class="text-gray-500 text-sm whitespace-nowrap spec--article-date">
-            <%= format_date_with_weekday(article.created_at) %>
-          </time>
-        </div>
-
-        <% if article.summary.present? %>
-          <p class="text-muted text-sm  spec--article-summary"><%= article.summary %></p>
-        <% end %>
-
-        <% if show_author_info? %>
-          <div class="flex justify-between items-center">
-            <span class="text-sm text-gray-500 spec--article-author">著者: <%= article.author %></span>
-          </div>
-        <% end %>
-      </article>
-    <% end %>
+    <%= render partial: 'article_item', collection: @articles %>
   </div>
 
   <% if @articles.empty? %>

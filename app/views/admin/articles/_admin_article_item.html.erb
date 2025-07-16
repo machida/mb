@@ -1,0 +1,34 @@
+<article class="a--card is-hover">
+  <div class="flex justify-between items-start mb-2">
+    <div class="flex items-center gap-3">
+      <h2 class="text-xl font-semibold">
+        <%= link_to admin_article_item.title, link_path_for_article(admin_article_item),
+                    class: "text-link" %>
+      </h2>
+      <span class="<%= status_badge_class(admin_article_item) %> px-2 py-1 rounded-full text-xs">
+        <%= status_text(admin_article_item) %>
+      </span>
+    </div>
+    <time class="text-gray-500 text-sm">
+      <%= format_date_with_weekday(admin_article_item.created_at) %>
+    </time>
+  </div>
+
+  <% if admin_article_item.summary.present? %>
+    <p class="mb-3"><%= truncate(admin_article_item.summary, length: 150) %></p>
+  <% end %>
+
+  <div class="flex justify-between items-center">
+    <div class="flex items-center gap-4 text-sm text-gray-500">
+      <span>著者: <%= admin_article_item.author %></span>
+      <% if admin_article_item.updated_at != admin_article_item.created_at %>
+        <span>更新日: <%= format_date_with_weekday(admin_article_item.updated_at) %></span>
+      <% end %>
+    </div>
+    <div class="flex gap-2">
+      <%= link_to "編集", edit_admin_article_path(admin_article_item), class: "a--button is-sm is-border-secondary" %>
+      <%= link_to "削除", admin_article_path(admin_article_item), method: :delete,
+                  data: { confirm: "本当に削除しますか？" }, class: "a--button is-sm is-danger #{local_assigns[:delete_button_class]}" %>
+    </div>
+  </div>
+</article>
