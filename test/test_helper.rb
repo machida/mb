@@ -10,6 +10,9 @@ module TestConfig
   TEST_ADMIN_USER_ID = ENV.fetch("TEST_ADMIN_USER_ID", "admin123")
 end
 
+# Auto-require test support files first
+Dir[Rails.root.join('test/support/*.rb')].each { |f| require f }
+
 module ActiveSupport
   class TestCase
     # Run tests in parallel with specified workers
@@ -21,4 +24,11 @@ module ActiveSupport
     # Add more helper methods to be used by all tests here...
     include TestConfig
   end
+end
+
+# Include test helpers for integration tests
+class ActionDispatch::IntegrationTest
+  include AdminTestHelper
+  include TestDataFactory
+  include CustomAssertions
 end

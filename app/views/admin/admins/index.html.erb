@@ -1,0 +1,46 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="flex justify-between items-center mb-8">
+    <h1 class="text-3xl font-bold text-gray-900">管理者管理</h1>
+    <%= link_to "新しい管理者を追加", new_admin_admin_path, 
+        class: "a-- bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded spec--add-admin-btn" %>
+  </div>
+
+  <div class="bg-white shadow overflow-hidden sm:rounded-md">
+    <ul class="divide-y divide-gray-200">
+      <% @admins.each do |admin| %>
+        <li class="spec--admin-item">
+          <div class="px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center">
+              <div class="ml-4">
+                <div class="text-sm font-medium text-gray-900 spec--admin-user-id">
+                  <%= admin.user_id %>
+                </div>
+                <div class="text-sm text-gray-500 spec--admin-email">
+                  <%= admin.email %>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center space-x-2">
+              <%= link_to "詳細", admin_admin_path(admin), 
+                  class: "a-- text-blue-600 hover:text-blue-900 spec--view-admin-btn" %>
+              <%= link_to "編集", edit_admin_admin_path(admin), 
+                  class: "a-- text-green-600 hover:text-green-900 spec--edit-admin-btn" %>
+              <% unless admin == current_admin %>
+                <%= link_to "削除", admin_admin_path(admin), 
+                    method: :delete,
+                    data: { confirm: "管理者「#{admin.user_id}」を削除しますか？" },
+                    class: "a-- text-red-600 hover:text-red-900 spec--delete-admin-btn" %>
+              <% end %>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <% if @admins.empty? %>
+    <div class="text-center py-8">
+      <p class="text-gray-500 spec--no-admins-message">管理者が登録されていません。</p>
+    </div>
+  <% end %>
+</div>
