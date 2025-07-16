@@ -45,7 +45,7 @@ module ApplicationHelper
   end
 
   def show_author_info?
-    @_show_author_info ||= Article.published.select(:author).distinct.count >= 2
+    @_show_author_info ||= SiteSetting.author_display_enabled && Article.published.select(:author).distinct.count >= 2
   end
 
   # Article list helpers

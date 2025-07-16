@@ -6,6 +6,7 @@ class ArticlesHelperTest < ActionView::TestCase
   def setup
     Article.destroy_all
     Admin.destroy_all
+    SiteSetting.destroy_all
     
     @admin1 = Admin.create!(
       email: "admin1@example.com",
@@ -20,6 +21,9 @@ class ArticlesHelperTest < ActionView::TestCase
       password: "password123",
       password_confirmation: "password123"
     )
+    
+    # Default: author display enabled
+    SiteSetting.set("author_display_enabled", "true")
   end
 
   test "show_author_info? should return false when no published articles" do
@@ -116,5 +120,51 @@ class ArticlesHelperTest < ActionView::TestCase
     # We can't directly test memoization, but we can verify consistent behavior
     result2 = show_author_info?
     assert_equal result1, result2
+  end
+
+  test "show_author_info? should return false when author display is disabled" do
+    # Set author display to disabled
+    SiteSetting.set("author_display_enabled", "false")
+    
+    # Create multiple authors with published articles
+    Article.create!(
+      title: "Article by Author 1",
+      body: "Content",
+      author: @admin1.user_id,
+      draft: false
+    )
+    
+    Article.create!(
+      title: "Article by Author 2",
+      body: "Content",
+      author: @admin2.user_id,
+      draft: false
+    )
+    
+    # Should return false despite multiple authors because setting is disabled
+    assert_not show_author_info?
+  end
+
+  test "show_author_info? should return true when author display is enabled and multiple authors exist" do
+    # Set author display to enabled (should be default, but explicit for clarity)
+    SiteSetting.set("author_display_enabled", "true")
+    
+    # Create multiple authors with published articles
+    Article.create!(
+      title: "Article by Author 1",
+      body: "Content",
+      author: @admin1.user_id,
+      draft: false
+    )
+    
+    Article.create!(
+      title: "Article by Author 2",
+      body: "Content",
+      author: @admin2.user_id,
+      draft: false
+    )
+    
+    # Should return true because setting is enabled and multiple authors exist
+    assert show_author_info?
   end
 end

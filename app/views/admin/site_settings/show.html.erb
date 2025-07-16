@@ -85,6 +85,27 @@
       </div>
     </div>
 
+    <div>
+      <%= label_tag "site_settings[author_display_enabled]", "記事の著者表示", class: "block text-sm font-medium mb-1" %>
+      <div class="flex items-center space-x-4">
+        <label class="flex items-center">
+          <%= radio_button_tag "site_settings[author_display_enabled]", "true", 
+                               @settings[:author_display_enabled] == "true", 
+                               class: "mr-2 spec--author-display-enabled-true" %>
+          <span class="text-sm">表示する</span>
+        </label>
+        <label class="flex items-center">
+          <%= radio_button_tag "site_settings[author_display_enabled]", "false", 
+                               @settings[:author_display_enabled] == "false", 
+                               class: "mr-2 spec--author-display-enabled-false" %>
+          <span class="text-sm">表示しない</span>
+        </label>
+      </div>
+      <div class="text-xs text-gray-500 mt-1">
+        記事一覧や記事詳細ページで著者名を表示するかどうかを設定できます
+      </div>
+    </div>
+
     <div class="flex gap-4">
       <%= submit_tag "設定を保存", class: "a--button is-lg is-primary spec--save-button" %>
       <%= link_to "キャンセル", admin_articles_path, class: "a--button is-lg is-border-secondary spec--cancel-button" %>

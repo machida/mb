@@ -45,6 +45,10 @@ class SiteSetting < ApplicationRecord
     "© #{Date.current.year} #{copyright}. All rights reserved."
   end
 
+  def self.author_display_enabled
+    get("author_display_enabled", "true") == "true"
+  end
+
   private
 
   def allows_blank_value?

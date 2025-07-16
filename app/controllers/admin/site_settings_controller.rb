@@ -4,7 +4,8 @@ class Admin::SiteSettingsController < Admin::BaseController
       site_title: SiteSetting.site_title,
       default_og_image: SiteSetting.default_og_image,
       top_page_description: SiteSetting.top_page_description,
-      copyright: SiteSetting.copyright
+      copyright: SiteSetting.copyright,
+      author_display_enabled: SiteSetting.get("author_display_enabled", "true")
     }
   end
 
@@ -52,7 +53,7 @@ class Admin::SiteSettingsController < Admin::BaseController
   private
 
   def settings_params
-    params.require(:site_settings).permit(:site_title, :default_og_image, :top_page_description, :copyright)
+    params.require(:site_settings).permit(:site_title, :default_og_image, :top_page_description, :copyright, :author_display_enabled)
   end
 
   # フル著作権テキストから著作権者名だけを抽出
