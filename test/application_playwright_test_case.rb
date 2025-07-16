@@ -14,16 +14,8 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
 
   def setup
     super
-    setup_rails_server
-    setup_playwright
-  end
-
-  def teardown
-    teardown_playwright
-    teardown_rails_server
-    super
     
-    # Clear all data except fixtures/seeds that should persist
+    # Clear all data before test starts to ensure clean state
     Admin.where.not(email: "admin@example.com").delete_all
     Article.delete_all
     SiteSetting.delete_all
@@ -36,6 +28,18 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
     
     # Clear cache
     Rails.cache.clear
+    
+    setup_rails_server
+    setup_playwright
+  end
+
+  def teardown
+    teardown_playwright
+    teardown_rails_server
+    super
+    
+    # Minimal cleanup in teardown - just clear cache to avoid interference
+    Rails.cache.clear
   end
 
   # Playwright setup and teardown
@@ -46,15 +50,9 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
     begin
       Rails.logger.info "Setting up Playwright (attempt #{retry_count + 1}/#{max_retries})"
       
-      # Step 1: Create Playwright instance with timeout protection
-      @playwright = Playwright.create(
-        playwright_cli_executable_path: find_playwright_executable
-      )
-      
-      # Step 2: Launch browser with timeout protection
+      # Create Playwright instance without block for persistent use
+      @playwright = Playwright.create(playwright_cli_executable_path: find_playwright_executable)
       @browser = @playwright.playwright.chromium.launch(headless: true)
-      
-      # Step 3: Create context and page
       @context = @browser.new_context
       @page = @context.new_page
       
@@ -132,10 +130,16 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
   end
   
   def teardown_rails_server
-    Process.kill("TERM", @server_pid) if @server_pid
-    Process.wait(@server_pid) if @server_pid
-  rescue
-    # Ignore errors if process is already dead
+    if @server_pid
+      begin
+        Process.kill("TERM", @server_pid)
+        Process.wait(@server_pid)
+      rescue Errno::ESRCH
+        # Process already dead
+      rescue => e
+        Rails.logger.debug "Error terminating Rails server: #{e.message}"
+      end
+    end
   end
 
   # Helper methods for common test actions

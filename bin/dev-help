@@ -1,0 +1,58 @@
+#!/usr/bin/env ruby
+
+puts "📚 マチダのブログ - 開発者向けヘルプ"
+puts "=" * 50
+
+puts "\n🚀 セットアップ・起動コマンド:"
+puts "   bin/setup           - 完全セットアップ（推奨）"
+puts "   bin/quick-setup     - 最小限セットアップ"
+puts "   bin/dev             - 開発サーバー起動"
+puts "   bin/setup --skip-server - サーバー起動をスキップ"
+
+puts "\n🧪 テスト実行コマンド:"
+puts "   bin/rails test:all                        - 全テスト実行"
+puts "   bin/rails test:system                     - システムテスト実行"
+puts "   bin/rails test:models                     - モデルテスト実行"
+puts "   bin/rails test:controllers                - コントローラーテスト実行"
+puts "   bundle exec rails test test/system/       - Playwright E2E テスト"
+
+puts "\n📊 データベース操作:"
+puts "   bin/rails db:create                       - データベース作成"
+puts "   bin/rails db:migrate                      - マイグレーション実行"
+puts "   bin/rails db:seed                         - シードデータ挿入"
+puts "   bin/rails db:reset                        - DB リセット"
+puts "   bin/rails db:drop                         - データベース削除"
+
+puts "\n🔧 メンテナンス:"
+puts "   bin/rails log:clear                       - ログクリア"
+puts "   bin/rails tmp:clear                       - 一時ファイルクリア"
+puts "   bin/rails assets:precompile               - アセット事前コンパイル"
+puts "   bin/rails assets:clean                    - アセットクリーンアップ"
+
+puts "\n🎯 Playwright 専用:"
+puts "   npx playwright install                    - ブラウザインストール"
+puts "   npx playwright install --force            - ブラウザ強制再インストール"
+puts "   npm run playwright:install                - package.json経由"
+
+puts "\n📱 開発環境情報:"
+puts "   - 開発サーバー: http://localhost:3000"
+puts "   - 管理者ログイン: admin@example.com / admin123"
+puts "   - 画像保存先: public/uploads/images/"
+puts "   - データベース: storage/development.sqlite3"
+
+puts "\n🔍 トラブルシューティング:"
+puts "   - Playwrightエラー: npx playwright install --force"
+puts "   - キャッシュクリア: rm -rf node_modules/.cache && npm install"
+puts "   - 完全リセット: bin/rails db:drop db:create db:migrate db:seed"
+puts "   - 詳細ログ: CLAUDE.md の Playwright移行計画を参照"
+
+puts "\n📝 設定ファイル:"
+puts "   - CLAUDE.md                               - 開発ガイド・ルール"
+puts "   - config/database.yml                     - データベース設定"
+puts "   - package.json                            - Node.js 依存関係"
+puts "   - Gemfile                                 - Ruby 依存関係"
+puts "   - .ruby-version                           - Ruby バージョン"
+puts "   - .node-version                           - Node.js バージョン"
+
+puts "\n" + "=" * 50
+puts "詳細なドキュメントは README.md と CLAUDE.md を参照してください。"

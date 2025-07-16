@@ -10,11 +10,19 @@
     "format": "prettier --write app/javascript/**/*.js",
     "build": "rails assets:precompile",
     "playwright:install": "playwright install",
-    "test:playwright": "bundle exec rails test test/playwright/"
+    "playwright:install-force": "playwright install --force",
+    "test:playwright": "bundle exec rails test test/system/",
+    "setup": "npm install && npm run playwright:install",
+    "postinstall": "echo '✅ Node.js dependencies installed. Run bin/setup for complete setup.'",
+    "dev": "bundle exec bin/dev",
+    "help": "bundle exec bin/dev-help"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
-    "@playwright/test": "^1.46.0"
+    "@playwright/test": "1.46.0"
+  },
+  "comments": {
+    "@playwright/test": "Fixed at 1.46.0 due to compatibility issues with playwright-ruby-client. Versions 1.52.0+ cause 'timeout: expected number, got undefined' errors."
   }
 }

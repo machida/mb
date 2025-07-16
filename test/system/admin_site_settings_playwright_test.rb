@@ -14,8 +14,8 @@ class AdminSiteSettingsPlaywrightTest < ApplicationPlaywrightTestCase
     @page.goto("http://localhost:#{@server_port}/admin/articles")
     @page.wait_for_url(/.*\/admin\/articles/)
     
-    @page.goto("http://localhost:#{@server_port}/admin/site_settings")
-    @page.wait_for_url(/.*\/admin\/site_settings/)
+    @page.goto("http://localhost:#{@server_port}/admin/site-settings")
+    @page.wait_for_url(/.*\/admin\/site-settings/)
     
     # Check page elements
     title_element = @page.query_selector(".spec--site-settings-title")
@@ -37,7 +37,7 @@ class AdminSiteSettingsPlaywrightTest < ApplicationPlaywrightTestCase
     login_as_admin(@admin)
     
     @page.goto("http://localhost:#{@server_port}/admin/articles")
-    @page.goto("http://localhost:#{@server_port}/admin/site_settings")
+    @page.goto("http://localhost:#{@server_port}/admin/site-settings")
     
     # Fill in form fields
     @page.fill(".spec--site-title-input", "新しいブログタイトル")
@@ -48,7 +48,7 @@ class AdminSiteSettingsPlaywrightTest < ApplicationPlaywrightTestCase
     @page.click(".spec--save-button")
     
     # Wait for redirect and success message
-    @page.wait_for_url(/.*\/admin\/site_settings/)
+    @page.wait_for_url(/.*\/admin\/site-settings/)
     
     # Wait for toast notification to appear
     toast_selector = ".spec--toast-notification"
@@ -59,7 +59,7 @@ class AdminSiteSettingsPlaywrightTest < ApplicationPlaywrightTestCase
     assert_equal "サイト設定を更新しました", toast_element.inner_text
     
     # Wait for any async operations to complete
-    @page.wait_for_load_state('networkidle')
+    @page.wait_for_load_state(state: 'networkidle')
     
     # Force cache clearing
     ActiveRecord::Base.connection.clear_query_cache
@@ -80,21 +80,21 @@ class AdminSiteSettingsPlaywrightTest < ApplicationPlaywrightTestCase
     login_as_admin(@admin)
     
     @page.goto("http://localhost:#{@server_port}/admin/articles")
-    @page.goto("http://localhost:#{@server_port}/admin/site_settings")
+    @page.goto("http://localhost:#{@server_port}/admin/site-settings")
     
     # Check form field values
-    site_title_input = @page.query_selector("input[name='site_settings[site_title]']")
+    site_title_input = @page.locator("input[name='site_settings[site_title]']")
     assert_equal "テストタイトル", site_title_input.input_value
     
-    description_input = @page.query_selector("textarea[name='site_settings[top_page_description]']")
+    description_input = @page.locator("textarea[name='site_settings[top_page_description]']")
     assert_equal "テスト説明", description_input.input_value
     
-    copyright_input = @page.query_selector("input[name='site_settings[copyright]']")
+    copyright_input = @page.locator("input[name='site_settings[copyright]']")
     assert_equal "テスト著作者", copyright_input.input_value
   end
 
   test "should redirect to login when not authenticated" do
-    @page.goto("http://localhost:#{@server_port}/admin/site_settings")
+    @page.goto("http://localhost:#{@server_port}/admin/site-settings")
     @page.wait_for_url(/.*\/admin\/login/)
     
     # Verify we're on the login page

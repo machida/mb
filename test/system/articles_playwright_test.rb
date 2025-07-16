@@ -52,7 +52,7 @@ class ArticlesPlaywrightTest < ApplicationPlaywrightTestCase
     @page.goto("http://localhost:#{@server_port}/")
     @page.click("a:has-text('#{@published_article.title}')")
     
-    @page.wait_for_load_state('networkidle')
+    @page.wait_for_load_state(state: 'networkidle')
     
     # Check article title
     article_title = @page.query_selector(".spec--article-title")
@@ -92,7 +92,7 @@ class ArticlesPlaywrightTest < ApplicationPlaywrightTestCase
     assert new_article_link, "New article link should exist"
     @page.click(".spec--new-article-link")
     
-    @page.wait_for_load_state('networkidle')
+    @page.wait_for_load_state(state: 'networkidle')
     
     # Fill in article form
     @page.fill(".spec--title-input", "New Test Article")
@@ -109,7 +109,7 @@ class ArticlesPlaywrightTest < ApplicationPlaywrightTestCase
     
     toast_element = @page.query_selector(".spec--toast-notification")
     assert toast_element, "Toast notification should appear"
-    assert_equal "記事を公開しました", toast_element.inner_text
+    assert_equal "記事を公開しました。", toast_element.inner_text
     
     # Check the article was created
     article = Article.last
@@ -134,7 +134,7 @@ class ArticlesPlaywrightTest < ApplicationPlaywrightTestCase
     
     toast_element = @page.query_selector(".spec--toast-notification")
     assert toast_element, "Toast notification should appear"
-    assert_equal "下書きを保存しました", toast_element.inner_text
+    assert_equal "下書きを保存しました。", toast_element.inner_text
     
     # Check the article was created as draft
     article = Article.last
@@ -155,7 +155,7 @@ class ArticlesPlaywrightTest < ApplicationPlaywrightTestCase
     assert edit_link, "Edit link should exist"
     edit_link.click()
     
-    @page.wait_for_load_state('networkidle')
+    @page.wait_for_load_state(state: 'networkidle')
     
     # Verify we're on an edit page
     edit_title = @page.query_selector(".spec--edit-article-title")
@@ -173,7 +173,7 @@ class ArticlesPlaywrightTest < ApplicationPlaywrightTestCase
     
     toast_element = @page.query_selector(".spec--toast-notification")
     assert toast_element, "Toast notification should appear"
-    assert_equal "記事を公開しました", toast_element.inner_text
+    assert_equal "記事を公開しました。", toast_element.inner_text
     
     # Verify we can navigate back to the articles list
     @page.goto("http://localhost:#{@server_port}/admin/articles")
@@ -217,7 +217,7 @@ class ArticlesPlaywrightTest < ApplicationPlaywrightTestCase
     # Click on month archive
     @page.click("a:has-text('#{month}月')")
     
-    @page.wait_for_load_state('networkidle')
+    @page.wait_for_load_state(state: 'networkidle')
     
     # Check month archive page
     month_title = @page.query_selector(".spec--archive-month-title")

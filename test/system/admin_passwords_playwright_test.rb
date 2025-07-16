@@ -58,7 +58,7 @@ class AdminPasswordsPlaywrightTest < ApplicationPlaywrightTestCase
     
     @page.click(".spec--password-change-button")
     
-    @page.wait_for_load_state('networkidle')
+    @page.wait_for_load_state(state: 'networkidle')
     
     # Check if we stayed on the same page due to validation errors
     assert_match /\/admin\/password\/edit/, @page.url
@@ -80,7 +80,7 @@ class AdminPasswordsPlaywrightTest < ApplicationPlaywrightTestCase
     
     @page.click(".spec--password-change-button")
     
-    @page.wait_for_load_state('networkidle')
+    @page.wait_for_load_state(state: 'networkidle')
     
     # Check if we stayed on the same page due to validation errors
     assert_match /\/admin\/password\/edit/, @page.url

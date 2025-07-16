@@ -47,10 +47,10 @@ class AdminProfilePlaywrightTest < ApplicationPlaywrightTestCase
     
     toast_element = @page.query_selector(toast_selector)
     assert toast_element, "Toast notification should appear"
-    assert_equal "プロフィールを更新しました", toast_element.inner_text
+    assert_equal "プロフィールを更新しました。", toast_element.inner_text
     
     # Wait for any async operations to complete
-    @page.wait_for_load_state('networkidle')
+    @page.wait_for_load_state(state: 'networkidle')
     
     # Check if values are updated
     @admin.reload
@@ -82,7 +82,7 @@ class AdminProfilePlaywrightTest < ApplicationPlaywrightTestCase
     @page.click(".spec--update-button")
     
     # Check if we stayed on the same page due to validation errors
-    @page.wait_for_load_state('networkidle')
+    @page.wait_for_load_state(state: 'networkidle')
     assert_match /\/admin\/profile\/edit/, @page.url, "Should stay on profile edit page"
     
     # Check for HTML5 validation - the field should be invalid
@@ -90,7 +90,7 @@ class AdminProfilePlaywrightTest < ApplicationPlaywrightTestCase
     assert email_input, "Email input should exist"
     
     # Check if the input has invalid state (HTML5 validation)
-    validity_state = @page.evaluate("document.querySelector('.spec--email-input').validity.valid")
+    validity_state = @page.evaluate("() => document.querySelector('.spec--email-input').validity.valid")
     assert_equal false, validity_state, "Email input should be invalid"
   end
 

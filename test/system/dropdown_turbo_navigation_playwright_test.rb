@@ -37,7 +37,7 @@ class DropdownTurboNavigationPlaywrightTest < ApplicationPlaywrightTestCase
     @page.click('a[title="サイト設定"]')
     
     # Wait for Turbo navigation to complete
-    @page.wait_for_url(/.*\/admin\/site_settings/)
+    @page.wait_for_url(/.*\/admin\/site-settings/)
     
     # Wait for any JavaScript re-initialization to complete
     @page.wait_for_function("
@@ -70,7 +70,7 @@ class DropdownTurboNavigationPlaywrightTest < ApplicationPlaywrightTestCase
     
     # Visit page multiple times to trigger multiple initializations
     @page.goto("http://localhost:#{@server_port}/admin/articles")
-    @page.goto("http://localhost:#{@server_port}/admin/site_settings")
+    @page.goto("http://localhost:#{@server_port}/admin/site-settings")
     @page.goto("http://localhost:#{@server_port}/admin/articles")
     
     # Dropdown should still work normally (no JS errors from duplicate listeners)

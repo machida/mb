@@ -17,11 +17,13 @@ class CopyrightUpdatePlaywrightTest < ApplicationPlaywrightTestCase
   private
   
   def submit_settings_and_wait
-    @page.click("button:has-text('設定を保存')")
-    @page.wait_for_url(/.*\/admin\/site_settings/)
+    # Wait for save button to be available
+    @page.wait_for_selector("input[type='submit'][value='設定を保存']", timeout: 5000)
+    @page.click("input[type='submit'][value='設定を保存']")
+    @page.wait_for_url(/.*\/admin\/site-settings/)
     
     # Wait for any async operations to complete and force cache clearing
-    @page.wait_for_load_state('networkidle')
+    @page.wait_for_load_state(state: 'networkidle')
     ActiveRecord::Base.connection.clear_query_cache
     Rails.cache.clear
   end
@@ -30,10 +32,24 @@ class CopyrightUpdatePlaywrightTest < ApplicationPlaywrightTestCase
     login_as_admin(@admin)
     
     # Visit site settings page
-    @page.goto("http://localhost:#{@server_port}/admin/site_settings")
+    @page.goto("http://localhost:#{@server_port}/admin/site-settings")
+    @page.wait_for_load_state(state: 'networkidle')
+    
+    # Wait for the admin page title to be visible first to ensure we're on the right page
+    @page.wait_for_selector("h1:has-text('サイト設定')", timeout: 10000)
+    
+    # Wait for copyright input to be available (try both selectors)
+    copyright_selector = nil
+    begin
+      @page.wait_for_selector(COPYRIGHT_INPUT, timeout: 5000)
+      copyright_selector = COPYRIGHT_INPUT
+    rescue Playwright::TimeoutError
+      @page.wait_for_selector("input[name='site_settings[copyright]']", timeout: 5000)
+      copyright_selector = "input[name='site_settings[copyright]']"
+    end
     
     # Verify current copyright value is displayed
-    copyright_input = @page.query_selector(COPYRIGHT_INPUT)
+    copyright_input = @page.locator(copyright_selector)
     assert_equal "テスト著作権者", copyright_input.input_value
     
     # Update copyright holder name
@@ -43,11 +59,18 @@ class CopyrightUpdatePlaywrightTest < ApplicationPlaywrightTestCase
     submit_settings_and_wait
     # Note: Toast notification testing is handled in other system tests
     
+    # Wait for the admin page title to be visible to ensure page is fully loaded
+    @page.wait_for_selector("h1:has-text('サイト設定')", timeout: 10000)
+    
     # Verify the field shows updated value
-    copyright_input = @page.query_selector(COPYRIGHT_INPUT)
+    copyright_input = @page.locator(copyright_selector)
     assert_equal "新しい著作権者名", copyright_input.input_value
     
-    # Verify the setting was actually saved in the database
+    # Wait for database sync and verify the setting was actually saved
+    sleep 0.1
+    ActiveRecord::Base.connection.clear_query_cache
+    Rails.cache.clear
+    
     assert_equal "新しい著作権者名", get_current_copyright
   end
 
@@ -55,7 +78,21 @@ class CopyrightUpdatePlaywrightTest < ApplicationPlaywrightTestCase
     login_as_admin(@admin)
     
     # Visit site settings page
-    @page.goto("http://localhost:#{@server_port}/admin/site_settings")
+    @page.goto("http://localhost:#{@server_port}/admin/site-settings")
+    @page.wait_for_load_state(state: 'networkidle')
+    
+    # Wait for the admin page title to be visible first to ensure we're on the right page
+    @page.wait_for_selector("h1:has-text('サイト設定')", timeout: 10000)
+    
+    # Wait for copyright input to be available (try both selectors)
+    copyright_selector = nil
+    begin
+      @page.wait_for_selector(COPYRIGHT_INPUT, timeout: 5000)
+      copyright_selector = COPYRIGHT_INPUT
+    rescue Playwright::TimeoutError
+      @page.wait_for_selector("input[name='site_settings[copyright]']", timeout: 5000)
+      copyright_selector = "input[name='site_settings[copyright]']"
+    end
     
     # Clear copyright field (empty string)
     @page.fill("input[name='site_settings[copyright]']", "")
@@ -63,11 +100,18 @@ class CopyrightUpdatePlaywrightTest < ApplicationPlaywrightTestCase
     # Save changes
     submit_settings_and_wait
     
+    # Wait for the admin page title to be visible to ensure page is fully loaded
+    @page.wait_for_selector("h1:has-text('サイト設定')", timeout: 10000)
+    
     # Verify the field is empty
-    copyright_input = @page.query_selector(COPYRIGHT_INPUT)
+    copyright_input = @page.locator(copyright_selector)
     assert_equal "", copyright_input.input_value
     
-    # Verify the setting was actually cleared in the database
+    # Wait for database sync and verify the setting was actually cleared
+    sleep 0.1
+    ActiveRecord::Base.connection.clear_query_cache
+    Rails.cache.clear
+    
     assert_equal "", get_current_copyright
   end
 
@@ -75,7 +119,21 @@ class CopyrightUpdatePlaywrightTest < ApplicationPlaywrightTestCase
     login_as_admin(@admin)
     
     # Visit site settings page
-    @page.goto("http://localhost:#{@server_port}/admin/site_settings")
+    @page.goto("http://localhost:#{@server_port}/admin/site-settings")
+    @page.wait_for_load_state(state: 'networkidle')
+    
+    # Wait for the admin page title to be visible first to ensure we're on the right page
+    @page.wait_for_selector("h1:has-text('サイト設定')", timeout: 10000)
+    
+    # Wait for copyright input to be available (try both selectors)
+    copyright_selector = nil
+    begin
+      @page.wait_for_selector(COPYRIGHT_INPUT, timeout: 5000)
+      copyright_selector = COPYRIGHT_INPUT
+    rescue Playwright::TimeoutError
+      @page.wait_for_selector("input[name='site_settings[copyright]']", timeout: 5000)
+      copyright_selector = "input[name='site_settings[copyright]']"
+    end
     
     # Update copyright with leading/trailing spaces
     @page.fill("input[name='site_settings[copyright]']", "  スペース付き著作権者  ")
@@ -83,7 +141,14 @@ class CopyrightUpdatePlaywrightTest < ApplicationPlaywrightTestCase
     # Save changes
     submit_settings_and_wait
     
-    # Verify whitespace was trimmed in database
+    # Wait for the admin page title to be visible to ensure page is fully loaded
+    @page.wait_for_selector("h1:has-text('サイト設定')", timeout: 10000)
+    
+    # Wait for database sync and verify whitespace was trimmed
+    sleep 0.1
+    ActiveRecord::Base.connection.clear_query_cache
+    Rails.cache.clear
+    
     assert_equal "スペース付き著作権者", get_current_copyright
     
     # Note: Form field may still show spaces until page refresh
@@ -94,7 +159,22 @@ class CopyrightUpdatePlaywrightTest < ApplicationPlaywrightTestCase
     login_as_admin(@admin)
     
     # Update copyright through admin interface
-    @page.goto("http://localhost:#{@server_port}/admin/site_settings")
+    @page.goto("http://localhost:#{@server_port}/admin/site-settings")
+    @page.wait_for_load_state(state: 'networkidle')
+    
+    # Wait for the admin page title to be visible first to ensure we're on the right page
+    @page.wait_for_selector("h1:has-text('サイト設定')", timeout: 10000)
+    
+    # Wait for copyright input to be available (try both selectors)
+    copyright_selector = nil
+    begin
+      @page.wait_for_selector(COPYRIGHT_INPUT, timeout: 5000)
+      copyright_selector = COPYRIGHT_INPUT
+    rescue Playwright::TimeoutError
+      @page.wait_for_selector("input[name='site_settings[copyright]']", timeout: 5000)
+      copyright_selector = "input[name='site_settings[copyright]']"
+    end
+    
     @page.fill("input[name='site_settings[copyright]']", "新しいブログ名")
     submit_settings_and_wait
     
@@ -112,7 +192,22 @@ class CopyrightUpdatePlaywrightTest < ApplicationPlaywrightTestCase
     login_as_admin(@admin)
     
     # Clear copyright through admin interface
-    @page.goto("http://localhost:#{@server_port}/admin/site_settings")
+    @page.goto("http://localhost:#{@server_port}/admin/site-settings")
+    @page.wait_for_load_state(state: 'networkidle')
+    
+    # Wait for the admin page title to be visible first to ensure we're on the right page
+    @page.wait_for_selector("h1:has-text('サイト設定')", timeout: 10000)
+    
+    # Wait for copyright input to be available (try both selectors)
+    copyright_selector = nil
+    begin
+      @page.wait_for_selector(COPYRIGHT_INPUT, timeout: 5000)
+      copyright_selector = COPYRIGHT_INPUT
+    rescue Playwright::TimeoutError
+      @page.wait_for_selector("input[name='site_settings[copyright]']", timeout: 5000)
+      copyright_selector = "input[name='site_settings[copyright]']"
+    end
+    
     @page.fill("input[name='site_settings[copyright]']", "")
     submit_settings_and_wait
     
