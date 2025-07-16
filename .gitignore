@@ -42,3 +42,6 @@
 # Uploaded images
 /public/uploads
 node_modules/
+
+# Phantom worktrees
+/.git/phantom/

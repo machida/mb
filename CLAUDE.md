@@ -48,6 +48,58 @@
 - **pushする前に必ず`bundle exec rails test:all`を実行してテストが通ることを確認する**
 - **作業完了後はpushしてプルリクエストを作成する**
 
+## Phantomを使った複数ブランチ同時開発
+
+このプロジェクトでは[Phantom](https://github.com/aku11i/phantom)を使用して複数のブランチで同時に開発できます。
+
+### 基本コマンド
+```bash
+# 新しいブランチのワークツリーを作成
+phantom create feature/new-feature
+
+# 既存のブランチにアタッチ
+phantom attach existing-branch
+
+# ワークツリー一覧表示
+phantom list
+
+# 特定のワークツリーでコマンド実行
+phantom exec feature/new-feature bundle exec rails test
+
+# ワークツリーでシェルを開く
+phantom shell feature/new-feature
+
+# ワークツリーを削除
+phantom delete feature/new-feature
+```
+
+### 開発フロー例
+```bash
+# 1. メイン機能開発用ワークツリー作成
+phantom create feature/user-management
+
+# 2. 別のバグ修正用ワークツリー作成
+phantom create fix/login-bug
+
+# 3. 各ワークツリーで独立して作業
+phantom shell feature/user-management  # 新機能開発
+phantom shell fix/login-bug           # バグ修正
+
+# 4. 各ワークツリーでテスト実行
+phantom exec feature/user-management bundle exec rails test:all
+phantom exec fix/login-bug bundle exec rails test:all
+
+# 5. 完了後は削除
+phantom delete feature/user-management
+phantom delete fix/login-bug
+```
+
+### 注意点
+- **各ワークツリーは`.git/phantom/worktrees/`に作成される**
+- **データベースは共有されるため、マイグレーションに注意**
+- **開発サーバーは通常メインディレクトリで起動**
+- **テストは各ワークツリーで独立して実行可能**
+
 ## テスト設定
 - **テスト用パスワードは環境変数で設定可能（セキュリティ向上）**
   - `TEST_ADMIN_PASSWORD` - テスト用管理者パスワード（デフォルト: test_secure_password_test）
