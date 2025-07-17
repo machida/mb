@@ -33,8 +33,15 @@ module PerformanceHelpers
     private
     
     def truncate_tables
-      %w[articles admins site_settings].each do |table|
-        execute_sql("TRUNCATE TABLE #{table}")
+      # SQLiteの場合はDELETEを使用
+      if sqlite_adapter?
+        %w[articles admins site_settings].each do |table|
+          execute_sql("DELETE FROM #{table}")
+        end
+      else
+        %w[articles admins site_settings].each do |table|
+          execute_sql("TRUNCATE TABLE #{table}")
+        end
       end
     end
     
@@ -44,6 +51,10 @@ module PerformanceHelpers
     
     def mysql_adapter?
       ActiveRecord::Base.connection.adapter_name.downcase.include?('mysql')
+    end
+    
+    def sqlite_adapter?
+      ActiveRecord::Base.connection.adapter_name.downcase.include?('sqlite')
     end
   end
   
