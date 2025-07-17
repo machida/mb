@@ -8,10 +8,14 @@
   <div class="mb-8 bg-gray-50 p-6 rounded-lg">
     <h2 class="text-xl font-semibold mb-4">月別アーカイブ</h2>
     <div class="grid grid-cols-3 md:grid-cols-6 gap-3">
-      <% (1..12).each do |month| %>
+      <% (1..12).each
+
+ do |month| %>
         <% count = @monthly_counts[sprintf("%02d", month)] || 0 %>
         <% if count > 0 %>
-          <%= link_to archive_month_path(@year, month), class: "a--button is-sm is-primary text-center" do %>
+          <%= link_to archive_month_path(@year, month), class: "a--button is-sm is-primary text-center"
+
+ do %>
             <%= month %>月<br>
             <span class="text-sm">(<%= count %>)</span>
           <% end %>
@@ -27,7 +31,7 @@
 
   <!-- 記事一覧 -->
   <div class="space-y-6">
-    <%= render partial: 'archive_article_item', collection: @articles %>
+    <%= render partial: "archive_article_item", collection: @articles %>
   </div>
 
   <% if @articles.empty? %>

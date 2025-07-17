@@ -17,7 +17,7 @@ class ArticleService
 
   def formatted_body
     return "" if article.body.blank?
-    
+
     # マークダウン処理をここで実行
     # 今後マークダウンライブラリを使用する場合はここで処理
     article.body
@@ -25,7 +25,7 @@ class ArticleService
 
   def summary_for_display
     return article.summary if article.summary.present?
-    
+
     # 本文から自動生成する場合のロジック
     truncated_body = article.body&.gsub(/^#+ /, "")&.strip
     truncated_body&.truncate(150)

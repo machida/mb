@@ -3,13 +3,13 @@ Rails.application.routes.draw do
     get "login", to: "sessions#new"
     post "login", to: "sessions#create"
     delete "logout", to: "sessions#destroy"
-    
-    resource :profile, only: [:edit, :update]
-    resource :password, only: [:edit, :update]
-    resource :site_settings, only: [:show, :update], path: "site-settings"
+
+    resource :profile, only: [ :edit, :update ]
+    resource :password, only: [ :edit, :update ]
+    resource :site_settings, only: [ :show, :update ], path: "site-settings"
     post "site_settings/upload_image", to: "site_settings#upload_image"
-    
-    resources :articles, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+
+    resources :articles, only: [ :index, :show, :new, :create, :edit, :update, :destroy ] do
       collection do
         get :drafts
       end
@@ -18,9 +18,9 @@ Rails.application.routes.draw do
     post "articles/upload_image", to: "articles#upload_image"
   end
   root "articles#index"
-  resources :articles, path: "article", only: [:index, :show]
-  
-  get "feed", to: "articles#feed", defaults: { format: 'rss' }
+  resources :articles, path: "article", only: [ :index, :show ]
+
+  get "feed", to: "articles#feed", defaults: { format: "rss" }
   get "archive/:year", to: "articles#archive_year", as: :archive_year
   get "archive/:year/:month", to: "articles#archive_month", as: :archive_month
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

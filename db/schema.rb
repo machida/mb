@@ -35,6 +35,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_09_125452) do
     t.text "value", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_site_settings_on_name", unique: true
+    t.index [ "name" ], name: "index_site_settings_on_name", unique: true
   end
 end

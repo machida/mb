@@ -6,7 +6,7 @@
         <div class="flex items-center gap-4 text-sm text-gray-500">
           <span>著者: <%= @article.author %></span>
           <span>作成日: <%= format_date_with_weekday(@article.created_at) %></span>
-          <span class="<%= @article.draft? ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800' %> px-2 py-1 rounded-full">
+          <span class="<%= @article.draft? ? "bg-yellow-100 text-yellow-800" : "bg-green-100 text-green-800" %> px-2 py-1 rounded-full">
             <%= @article.draft? ? "下書き" : "公開中" %>
           </span>
         </div>

@@ -1,7 +1,9 @@
 <div class="l--container is-lg">
   <h1 class="text-3xl font-bold mb-6 spec--site-settings-title">サイト設定</h1>
 
-  <%= form_with url: admin_site_settings_path, method: :patch, local: true, class: "space-y-6" do |f| %>
+  <%= form_with url: admin_site_settings_path, method: :patch, local: true, class: "space-y-6"
+
+ do |f| %>
     <div>
       <%= label_tag "site_settings[site_title]", "サイトタイトル", class: "block text-sm font-medium mb-1" %>
       <%= text_field_tag "site_settings[site_title]",
@@ -89,14 +91,14 @@
       <%= label_tag "site_settings[author_display_enabled]", "記事の著者表示", class: "block text-sm font-medium mb-1" %>
       <div class="flex items-center space-x-4">
         <label class="flex items-center">
-          <%= radio_button_tag "site_settings[author_display_enabled]", "true", 
-                               @settings[:author_display_enabled] == "true", 
+          <%= radio_button_tag "site_settings[author_display_enabled]", "true",
+                               @settings[:author_display_enabled] == "true",
                                class: "mr-2 spec--author-display-enabled-true" %>
           <span class="text-sm">表示する</span>
         </label>
         <label class="flex items-center">
-          <%= radio_button_tag "site_settings[author_display_enabled]", "false", 
-                               @settings[:author_display_enabled] == "false", 
+          <%= radio_button_tag "site_settings[author_display_enabled]", "false",
+                               @settings[:author_display_enabled] == "false",
                                class: "mr-2 spec--author-display-enabled-false" %>
           <span class="text-sm">表示しない</span>
         </label>

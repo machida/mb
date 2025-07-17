@@ -29,13 +29,13 @@ FileUtils.chdir APP_ROOT do
   puts "\n" + "=" * 50
   puts "⚡ Quick setup completed!"
   puts "=" * 50
-  
+
   puts "\n📋 To complete full setup (including Playwright):"
   puts "   Run: bin/setup"
-  
+
   puts "\n🚀 To start development:"
   puts "   Run: bin/dev"
-  
+
   puts "\n🧪 To run tests:"
   puts "   Run: bin/rails test:all"
 end

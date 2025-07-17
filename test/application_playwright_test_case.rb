@@ -6,133 +6,17 @@ require_relative "support/selectors"
 # Custom exception for Playwright setup failures
 class PlaywrightSetupError < StandardError; end
 
-class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
-  # Disable transactional fixtures for system tests to avoid transaction isolation issues
-  self.use_transactional_tests = false
-  
-  include TestSelectors
-
+class ApplicationPlaywrightTestCase < SystemTestCase
   def setup
     super
-    
-    # Skip Playwright tests in CI if environment variable is set
-    if ENV['SKIP_PLAYWRIGHT_TESTS'] == 'true'
-      skip "Playwright tests skipped in CI environment"
-    end
-    
-    # Clear all data before test starts to ensure clean state
-    Admin.where.not(email: "admin@example.com").delete_all
-    Article.delete_all
-    SiteSetting.delete_all
-    
-    # Reset default settings
-    SiteSetting.create!(name: "site_title", value: "マチダのブログ")
-    SiteSetting.create!(name: "copyright", value: "マチダのブログ")
-    SiteSetting.create!(name: "top_page_description", value: "マチダのブログへようこそ")
-    SiteSetting.create!(name: "default_og_image", value: "https://example.com/default-og-image.jpg")
-    
-    # Clear cache
-    Rails.cache.clear
-    
     setup_rails_server
-    setup_playwright
   end
 
   def teardown
-    teardown_playwright
     teardown_rails_server
     super
-    
-    # Minimal cleanup in teardown - just clear cache to avoid interference
-    Rails.cache.clear
   end
 
-  # Playwright setup and teardown
-  def setup_playwright
-    max_retries = 3
-    retry_count = 0
-    
-    begin
-      Rails.logger.info "Setting up Playwright (attempt #{retry_count + 1}/#{max_retries})"
-      
-      # Create Playwright instance without block for persistent use
-      if ENV['CI'] || ENV['GITHUB_ACTIONS']
-        @playwright = Playwright.create
-        @browser = @playwright.playwright.chromium.launch(
-          headless: true,
-          args: ['--no-sandbox', '--disable-dev-shm-usage'] # CI-friendly arguments
-        )
-      else
-        @playwright = Playwright.create(playwright_cli_executable_path: find_playwright_executable)
-        @browser = @playwright.playwright.chromium.launch(headless: true)
-      end
-      @context = @browser.new_context
-      @page = @context.new_page
-      
-      Rails.logger.info "Playwright setup completed successfully"
-      
-    rescue => e
-      retry_count += 1
-      
-      # Log the specific error for debugging
-      Rails.logger.error "Playwright setup failed (attempt #{retry_count}/#{max_retries}): #{e.class.name} - #{e.message}"
-      
-      # Clean up any partial initialization
-      cleanup_partial_playwright_setup
-      
-      if retry_count < max_retries
-        # Wait before retrying, with exponential backoff
-        sleep_time = retry_count * 2
-        Rails.logger.info "Retrying Playwright setup in #{sleep_time} seconds..."
-        sleep(sleep_time)
-        retry
-      else
-        # After max retries, raise a more descriptive error
-        raise PlaywrightSetupError, 
-              "Failed to initialize Playwright after #{max_retries} attempts. " \
-              "Last error: #{e.class.name} - #{e.message}. " \
-              "This is a known issue with playwright-ruby-client. " \
-              "Consider using Capybara tests instead."
-      end
-    end
-  end
-  
-  def teardown_playwright
-    cleanup_partial_playwright_setup
-  end
-  
-  # Helper method to safely clean up partial Playwright initialization
-  def cleanup_partial_playwright_setup
-    begin
-      @page&.close
-    rescue => e
-      Rails.logger.debug "Error closing Playwright page: #{e.message}"
-    end
-    
-    begin
-      @context&.close  
-    rescue => e
-      Rails.logger.debug "Error closing Playwright context: #{e.message}"
-    end
-    
-    begin
-      @browser&.close
-    rescue => e
-      Rails.logger.debug "Error closing Playwright browser: #{e.message}"
-    end
-    
-    begin
-      @playwright&.stop
-    rescue => e
-      Rails.logger.debug "Error stopping Playwright: #{e.message}"
-    end
-    
-    # Clear instance variables
-    @page = nil
-    @context = nil
-    @browser = nil
-    @playwright = nil
-  end
 
   # Rails server management
   def setup_rails_server
@@ -163,47 +47,19 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
     end
   end
 
-  # Helper methods for common test actions
-  def login_as_admin(admin = nil)
+  # Helper method for Playwright-specific admin login
+  def login_as_admin_playwright(admin = nil)
     admin ||= create_admin
     @page.goto("http://localhost:#{@server_port}/admin/login")
     
     @page.fill(LOGIN_EMAIL_INPUT, admin.email)
-    @page.fill(LOGIN_PASSWORD_INPUT, TEST_ADMIN_PASSWORD)
+    @page.fill(LOGIN_PASSWORD_INPUT, TestConfig::TEST_ADMIN_PASSWORD)
     @page.click(LOGIN_BUTTON)
     
     # Wait for successful login and redirect
     @page.wait_for_url("http://localhost:#{@server_port}/")
     assert @page.text_content("body").include?("ログインしました")
     admin
-  end
-
-  def create_admin(attributes = {})
-    default_attributes = {
-      email: TEST_ADMIN_EMAIL,
-      user_id: TEST_ADMIN_USER_ID,
-      password: TEST_ADMIN_PASSWORD,
-      password_confirmation: TEST_ADMIN_PASSWORD
-    }
-    Admin.create!(default_attributes.merge(attributes))
-  end
-
-  def create_article(attributes = {})
-    default_attributes = {
-      title: "Test Article",
-      body: "# Test Content\n\nThis is test content.",
-      summary: "Test summary",
-      draft: false
-    }
-    Article.create!(default_attributes.merge(attributes))
-  end
-
-  def create_draft_article(attributes = {})
-    create_article(attributes.merge(draft: true))
-  end
-
-  def create_published_article(attributes = {})
-    create_article(attributes.merge(draft: false))
   end
 
   # Helper method to get current copyright value with proper cache clearing

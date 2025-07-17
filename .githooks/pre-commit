@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -e
+
+echo "🔍 Running pre-commit checks..."
+
+# Check for final newlines in all text files
+echo "Checking final newlines..."
+for file in $(git diff --cached --name-only --diff-filter=ACM); do
+  # Skip binary files and specific file types
+  if file --mime-type "$file" | grep -q "text/" && ! echo "$file" | grep -E "\.(jpg|jpeg|png|gif|ico|svg|woff|woff2|ttf|eot)$"; then
+    if [ -s "$file" ] && [ "$(tail -c1 "$file" | wc -l)" -eq 0 ]; then
+      echo "❌ Missing final newline in: $file"
+      echo "Adding final newline..."
+      echo "" >> "$file"
+      git add "$file"
+    fi
+  fi
+done
+
+# Run existing lints
+echo "Running RuboCop..."
+bundle exec rubocop --autocorrect
+
+echo "Running ERB Lint..."
+bundle exec erblint --lint-all --autocorrect
+
+echo "Running ESLint..."
+npm run lint:js -- --fix
+
+echo "✅ Pre-commit checks completed!"

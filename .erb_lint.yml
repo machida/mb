@@ -1,0 +1,16 @@
+---
+linters:
+  ErbSafety:
+    enabled: true
+  Rubocop:
+    enabled: true
+    rubocop_config:
+      inherit_from: .rubocop.yml
+      Layout/LineLength:
+        Max: 120
+      Style/StringLiterals:
+        EnforcedStyle: double_quotes
+      Layout/TrailingEmptyLines:
+        Enabled: false
+  TrailingWhitespace:
+    enabled: true

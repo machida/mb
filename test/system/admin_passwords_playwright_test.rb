@@ -3,44 +3,36 @@ require "application_playwright_test_case"
 class AdminPasswordsPlaywrightTest < ApplicationPlaywrightTestCase
   def setup
     super
-    Admin.destroy_all
     @admin = create_admin
   end
 
   test "should show password change page" do
-    login_as_admin(@admin)
+    login_as_admin(@admin, page: @page, server_port: @server_port)
     
-    # Navigate directly to profile edit page
-    @page.goto("http://localhost:#{@server_port}/admin/profile/edit")
+    visit_admin_profile_edit
     @page.click(".spec--password-change-link")
     
-    @page.wait_for_url(/.*\/admin\/password\/edit/)
+    assert_on_page(
+      url_pattern: /.*\/admin\/password\/edit/,
+      title_selector: ".spec--password-edit-title",
+      expected_title: "パスワード変更"
+    )
     
-    # Check page elements
-    title_element = @page.query_selector(".spec--password-edit-title")
-    assert title_element, "Password edit title should exist"
-    assert_equal "パスワード変更", title_element.inner_text
-    
-    assert @page.query_selector(".spec--password-input"), "Password input should exist"
-    assert @page.query_selector(".spec--password-confirmation-input"), "Password confirmation input should exist"
+    assert_element_exists(selector: ".spec--password-input", message: "Password input should exist")
+    assert_element_exists(selector: ".spec--password-confirmation-input", message: "Password confirmation input should exist")
   end
 
   test "should change password successfully" do
-    login_as_admin(@admin)
+    login_as_admin(@admin, page: @page, server_port: @server_port)
     
-    @page.goto("http://localhost:#{@server_port}/admin/profile/edit")
+    visit_admin_profile_edit
     @page.click(".spec--password-change-link")
     
-    @page.fill(".spec--password-input", "newpassword456")
-    @page.fill(".spec--password-confirmation-input", "newpassword456")
-    
+    fill_password_form(password: "newpassword456")
     @page.click(".spec--password-change-button")
     
-    @page.wait_for_url(/.*\/admin\/profile\/edit/)
-    
-    # Check for success message
-    page_text = @page.inner_text("body")
-    assert_includes page_text, "パスワードが正常に更新されました"
+    assert_on_page(url_pattern: /.*\/admin\/profile\/edit/)
+    assert_success_message(expected_text: "パスワードが正常に更新されました")
     
     # Verify password was changed by checking the admin was actually updated
     @admin.reload

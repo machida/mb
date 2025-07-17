@@ -6,7 +6,7 @@ class CreateSiteSettings < ActiveRecord::Migration[8.0]
 
       t.timestamps
     end
-    
+
     add_index :site_settings, :name, unique: true
   end
 end

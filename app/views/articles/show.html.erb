@@ -1,4 +1,6 @@
-<% content_for :head do %>
+<% content_for :head
+
+ do %>
   <% if @article.summary.present? %>
     <meta name="description" content="<%= @article.summary %>">
     <meta property="og:description" content="<%= @article.summary %>">

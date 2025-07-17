@@ -19,12 +19,12 @@ FileUtils.chdir APP_ROOT do
   puts "\n== Checking Ruby version =="
   ruby_version = `ruby --version`.strip
   puts "Current Ruby version: #{ruby_version}"
-  
+
   # Check if required Ruby version file exists
   if File.exist?(".ruby-version")
     required_version = File.read(".ruby-version").strip
     puts "Required Ruby version: #{required_version}"
-    
+
     unless ruby_version.include?(required_version)
       puts "⚠️  Warning: Ruby version mismatch!"
       puts "   Run: rbenv install #{required_version} && rbenv local #{required_version}"
@@ -38,7 +38,7 @@ FileUtils.chdir APP_ROOT do
   if system("which node > /dev/null 2>&1")
     puts "\n== Installing Node.js dependencies =="
     system("npm install") || system!("npm install")
-    
+
     puts "\n== Installing Playwright browsers =="
     system("npx playwright install") || system!("npx playwright install")
   else
@@ -77,13 +77,13 @@ FileUtils.chdir APP_ROOT do
   puts "\n" + "=" * 60
   puts "🎉 Setup completed successfully!"
   puts "=" * 60
-  
+
   puts "\n📋 Next steps:"
   puts "   • Run 'bin/dev' to start the development server"
   puts "   • Visit http://localhost:3000 to see your app"
   puts "   • Run 'bin/rails test:all' to run all tests"
   puts "   • Run 'bundle exec rails test test/system/' to run Playwright E2E tests"
-  
+
   puts "\n🔧 Available commands:"
   puts "   • bin/dev                    - Start development server"
   puts "   • bin/rails test:all         - Run all tests"

@@ -6,18 +6,24 @@
 
   <!-- ナビゲーション -->
   <div class="mb-6 flex gap-4">
-    <%= link_to archive_year_path(@year), class: "a--button is-md is-primary" do %>
+    <%= link_to archive_year_path(@year), class: "a--button is-md is-primary"
+
+ do %>
       ← <%= @year %>年の一覧
     <% end %>
 
     <% if @month > 1 %>
-      <%= link_to archive_month_path(@year, @month - 1), class: "a--button is-md is-secondary" do %>
+      <%= link_to archive_month_path(@year, @month - 1), class: "a--button is-md is-secondary"
+
+ do %>
         ← <%= @month - 1 %>月
       <% end %>
     <% end %>
 
     <% if @month < 12 %>
-      <%= link_to archive_month_path(@year, @month + 1), class: "a--button is-md is-secondary" do %>
+      <%= link_to archive_month_path(@year, @month + 1), class: "a--button is-md is-secondary"
+
+ do %>
         <%= @month + 1 %>月 →
       <% end %>
     <% end %>
@@ -25,7 +31,7 @@
 
   <!-- 記事一覧 -->
   <div class="space-y-6">
-    <%= render partial: 'archive_article_item', collection: @articles %>
+    <%= render partial: "archive_article_item", collection: @articles %>
   </div>
 
   <% if @articles.empty? %>

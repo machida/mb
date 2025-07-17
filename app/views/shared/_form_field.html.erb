@@ -1,4 +1,4 @@
-<%
+
   # パラメータのデフォルト値設定
   type = local_assigns.fetch(:type, "text")
   required = local_assigns.fetch(:required, false)
@@ -11,9 +11,9 @@
 
 <div class="space-y-1">
   <%= form.label field, label, class: "block text-sm font-medium text-gray-700" %>
-  
+
   <% if type == "textarea" %>
-    <%= form.text_area field, 
+    <%= form.text_area field,
                       rows: rows,
                       required: required,
                       placeholder: placeholder,
@@ -34,7 +34,7 @@
                        placeholder: placeholder,
                        class: css_class %>
   <% end %>
-  
+
   <% if help_text.present? %>
     <p class="text-xs text-gray-500 mt-1"><%= help_text %></p>
   <% end %>
