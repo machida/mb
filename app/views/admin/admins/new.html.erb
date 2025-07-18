@@ -1,0 +1,54 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="max-w-md mx-auto">
+    <h1 class="text-3xl font-bold text-gray-900 mb-8">新しい管理者を追加</h1>
+
+    <%= form_with(model: [@admin], url: admin_admins_path, local: true, class: "space-y-6 spec--admin-form") do |form| %>
+      <% if @admin.errors.any? %>
+        <div class="bg-red-50 border border-red-200 rounded-md p-4">
+          <div class="text-sm text-red-700">
+            <ul class="list-disc list-inside space-y-1">
+              <% @admin.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+
+      <div>
+        <%= form.label :user_id, "ユーザーID", class: "block text-sm font-medium text-gray-700" %>
+        <%= form.text_field :user_id, 
+            class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm spec--user-id-input",
+            placeholder: "ユーザーIDを入力してください" %>
+      </div>
+
+      <div>
+        <%= form.label :email, "メールアドレス", class: "block text-sm font-medium text-gray-700" %>
+        <%= form.email_field :email, 
+            class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm spec--email-input",
+            placeholder: "メールアドレスを入力してください" %>
+      </div>
+
+      <div>
+        <%= form.label :password, "パスワード", class: "block text-sm font-medium text-gray-700" %>
+        <%= form.password_field :password, 
+            class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm spec--password-input",
+            placeholder: "パスワードを入力してください" %>
+      </div>
+
+      <div>
+        <%= form.label :password_confirmation, "パスワード確認", class: "block text-sm font-medium text-gray-700" %>
+        <%= form.password_field :password_confirmation, 
+            class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm spec--password-confirmation-input",
+            placeholder: "パスワードを再入力してください" %>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <%= link_to "キャンセル", admin_admins_path, 
+            class: "a-- bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded spec--cancel-btn" %>
+        <%= form.submit "作成", 
+            class: "a-- bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded spec--create-admin-btn" %>
+      </div>
+    <% end %>
+  </div>
+</div>

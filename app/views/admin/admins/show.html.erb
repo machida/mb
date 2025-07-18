@@ -1,0 +1,46 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="max-w-md mx-auto">
+    <h1 class="text-3xl font-bold text-gray-900 mb-8">管理者詳細</h1>
+
+    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+      <div class="px-4 py-5 sm:px-6">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">管理者情報</h3>
+      </div>
+      <div class="border-t border-gray-200">
+        <dl>
+          <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">ユーザーID</dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 spec--admin-user-id">
+              <%= @admin.user_id %>
+            </dd>
+          </div>
+          <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">メールアドレス</dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 spec--admin-email">
+              <%= @admin.email %>
+            </dd>
+          </div>
+          <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">作成日時</dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 spec--admin-created-at">
+              <%= @admin.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+            </dd>
+          </div>
+          <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">更新日時</dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 spec--admin-updated-at">
+              <%= @admin.updated_at.strftime("%Y年%m月%d日 %H:%M") %>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="mt-6 flex items-center justify-between">
+      <%= link_to "管理者一覧に戻る", admin_admins_path, 
+          class: "a-- bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded spec--back-btn" %>
+      <%= link_to "編集", edit_admin_admin_path(@admin), 
+          class: "a-- bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded spec--edit-admin-btn" %>
+    </div>
+  </div>
+</div>

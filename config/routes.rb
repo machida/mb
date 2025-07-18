@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     resource :site_settings, only: [:show, :update], path: "site-settings"
     post "site_settings/upload_image", to: "site_settings#upload_image"
     
+    resources :admins, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+    
     resources :articles, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
       collection do
         get :drafts
