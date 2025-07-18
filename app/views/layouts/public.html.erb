@@ -41,14 +41,14 @@
 
   <body class="bg-white min-h-screen flex flex-col layout-public">
     <% if controller_name == 'articles' && action_name == 'index' %>
-      <%= render 'public/hero' %>
+      <%= render "public/hero" %>
 
       <!-- Public Main Content for Top Page -->
       <main class="flex-1 l--container is-md my-12">
         <%= yield %>
       </main>
     <% else %>
-      <%= render 'public/header' %>
+      <%= render "public/header" %>
 
       <!-- Public Main Content for Other Pages -->
       <main class="flex-1 l--container is-lg my-12">
@@ -56,11 +56,11 @@
       </main>
     <% end %>
 
-    <%= render 'public/footer' %>
+    <%= render "public/footer" %>
 
     <!-- Toast Container -->
     <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2 js-toast-container">
-      <%= render 'shared/toasts' %>
+      <%= render "shared/toasts" %>
     </div>
   </body>
 </html>

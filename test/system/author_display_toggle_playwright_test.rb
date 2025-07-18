@@ -55,7 +55,7 @@ class AuthorDisplayTogglePlaywrightTest < ApplicationPlaywrightTestCase
 
     # Save settings
     @page.click("input.spec--save-button")
-    @page.wait_for_selector("div.notice")
+    @page.wait_for_selector(".spec--toast-notification", timeout: 10000)
 
     # Verify setting was saved
     assert_equal "false", SiteSetting.get("author_display_enabled")
@@ -89,22 +89,32 @@ class AuthorDisplayTogglePlaywrightTest < ApplicationPlaywrightTestCase
     # Enable author display first
     SiteSetting.set("author_display_enabled", "true")
     
-    # Visit article detail page
+    # Visit article detail page - reload to get actual ID
+    @article1.reload
     @page.goto("http://localhost:#{@server_port}/articles/#{@article1.id}")
+    
+    # Wait for page to load
+    @page.wait_for_load_state(state: 'networkidle')
+    
+    # Debug: check if show_author_info? is working
+    Rails.logger.debug "Published articles count: #{Article.published.count}"
+    Rails.logger.debug "Distinct authors count: #{Article.published.select(:author).distinct.count}"
+    Rails.logger.debug "Author display enabled: #{SiteSetting.author_display_enabled}"
     
     # Author info should be displayed
     author_element = @page.locator(".spec--article-author")
-    assert author_element.count > 0
+    assert author_element.count > 0, "Author element should be visible when author display is enabled. Page content: #{@page.text_content('body')}"
     
     # Disable author display
     SiteSetting.set("author_display_enabled", "false")
     
     # Refresh page
     @page.reload
+    @page.wait_for_load_state(state: 'networkidle')
     
     # Author info should not be displayed
     author_element = @page.locator(".spec--article-author")
-    assert_equal 0, author_element.count
+    assert_equal 0, author_element.count, "Author element should not be visible when author display is disabled"
   end
 
   test "site settings form shows correct default value" do

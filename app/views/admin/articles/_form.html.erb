@@ -1,4 +1,4 @@
-<%= form_with model: [:admin, article], local: true, class: "space-y-6" do |f| %>
+<%= form_with model: [ :admin, article ], local: true, class: "space-y-6" do |f| %>
   <% if article.errors.any? %>
     <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
       <ul>
@@ -35,9 +35,7 @@
                         data: {
                           controller: "image-upload",
                           action: "input->markdown-preview#update keyup->markdown-preview#update dragover->image-upload#dragover dragleave->image-upload#dragleave drop->image-upload#drop",
-                          image_upload_target: "textarea",
-                          image_upload_upload_url_value: admin_articles_upload_image_path
-                        } %>
+                          image_upload_target: "textarea",                          image_upload_upload_url_value: admin_articles_upload_image_path                        } %>
       </div>
       <div>
         <label class="block text-sm font-medium mb-1">プレビュー</label>

@@ -28,6 +28,12 @@ class ArticlesPlaywrightTest < ApplicationPlaywrightTestCase
   test "visiting the index" do
     @page.goto("http://localhost:#{@server_port}/")
     
+    # Wait for the page to load completely including hero section
+    @page.wait_for_load_state(state: 'networkidle')
+    
+    # Wait for main title to be visible
+    @page.wait_for_selector(".spec--main-title", timeout: 10000)
+    
     # Check main title
     title_element = @page.query_selector(".spec--main-title")
     assert title_element, "Main title should exist"

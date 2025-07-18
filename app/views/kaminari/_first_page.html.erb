@@ -4,13 +4,10 @@
     current_page:  a page object for the currently displayed page
     total_pages:   total number of pages
     per_page:      number of items to fetch per page
-    remote:        data-remote
--%>
+    remote:        data-remote -%>
 <% unless current_page.first? %>
   <%= link_to url, {
-    remote: remote,
-    class: "a--pager__item is-link is-first bg-white rounded-md whitespace-nowrap hover:bg-gray-50 transition-colors spec--first-page"
-  } do %>
+    remote: remote, class: "a--pager__item is-link is-first bg-white rounded-md whitespace-nowrap hover:bg-gray-50 transition-colors spec--first-page"  } do %>
     <span class="flex items-center">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"></path>

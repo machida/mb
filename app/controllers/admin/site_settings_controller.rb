@@ -60,7 +60,7 @@ class Admin::SiteSettingsController < Admin::BaseController
   # 例: "© 2025 会社名. All rights reserved." → "会社名"
   def extract_copyright_name(value)
     return value if value.blank?
-    
+
     # © 年 名前. All rights reserved. の形式をチェック
     if value.match(/^©\s*\d{4}\s+(.+?)\.\s*All rights reserved\.?$/i)
       # マッチした場合は名前部分を抽出

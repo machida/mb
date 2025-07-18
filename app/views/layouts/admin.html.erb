@@ -26,18 +26,18 @@
   </head>
 
   <body class="bg-gray-100 min-h-screen flex flex-col layout-admin">
-    <%= render 'admin/header' %>
+    <%= render "admin/header" %>
 
     <!-- Admin Main Content -->
     <main class="py-12">
       <%= yield %>
     </main>
 
-    <%= render 'admin/footer' %>
+    <%= render "admin/footer" %>
 
     <!-- Toast Container -->
     <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2 js-toast-container">
-      <%= render 'shared/toasts' %>
+      <%= render "shared/toasts" %>
     </div>
   </body>
 </html>

@@ -1,0 +1,46 @@
+---
+linters:
+  # セキュリティ関連
+  ErbSafety:
+    enabled: true
+  
+  # 構文エラー検出
+  ParserErrors:
+    enabled: true
+  
+  # コードフォーマット
+  SpaceAroundErbTag:
+    enabled: true
+  SpaceInHtmlTag:
+    enabled: true
+  TrailingWhitespace:
+    enabled: true
+  FinalNewline:
+    enabled: true
+  
+  # インデント
+  SpaceIndentation:
+    enabled: true
+  ClosingErbTagIndent:
+    enabled: true
+  
+  # HTML品質
+  SelfClosingTag:
+    enabled: true
+  
+  # RuboCopルール（ERBファイル専用の設定）
+  Rubocop:
+    enabled: true
+    rubocop_config:
+      Layout/LineLength:
+        Max: 150  # ERBファイルでは少し長めに設定
+      Style/FrozenStringLiteralComment:
+        Enabled: false  # ERBファイルでは不要
+      Style/StringLiterals:
+        EnforcedStyle: double_quotes  # メインの.rubocop.ymlと統一
+      Layout/InitialIndentation:
+        Enabled: false  # ERBファイルでは無効化
+      Layout/TrailingEmptyLines:
+        Enabled: false  # FinalNewlineで管理
+      Layout/HashAlignment:
+        Enabled: false  # ERBファイルでは複雑になりがち
