@@ -4,19 +4,19 @@ class AuthorDisplayTogglePlaywrightTest < ApplicationPlaywrightTestCase
   def setup
     super
     
-    # Create test admins
+    # Create test admins (避重複する email を使用)
     @admin1 = Admin.create!(
-      email: "admin1@example.com",
-      user_id: "author1",
-      password: "password123",
-      password_confirmation: "password123"
+      email: "test_author1@example.com",
+      user_id: "test_author1",
+      password: TEST_ADMIN_PASSWORD,
+      password_confirmation: TEST_ADMIN_PASSWORD
     )
     
     @admin2 = Admin.create!(
-      email: "admin2@example.com", 
-      user_id: "author2",
-      password: "password123",
-      password_confirmation: "password123"
+      email: "test_author2@example.com", 
+      user_id: "test_author2",
+      password: TEST_ADMIN_PASSWORD,
+      password_confirmation: TEST_ADMIN_PASSWORD
     )
     
     # Create articles by different authors
@@ -89,9 +89,13 @@ class AuthorDisplayTogglePlaywrightTest < ApplicationPlaywrightTestCase
     # Enable author display first
     SiteSetting.set("author_display_enabled", "true")
     
-    # Visit article detail page - reload to get actual ID
+    # Ensure article exists and is published
     @article1.reload
-    @page.goto("http://localhost:#{@server_port}/articles/#{@article1.id}")
+    assert @article1.persisted?, "Article should be persisted"
+    assert_not @article1.draft, "Article should be published"
+    
+    # Visit article detail page using the correct path format
+    @page.goto("http://localhost:#{@server_port}/article/#{@article1.id}")
     
     # Wait for page to load
     @page.wait_for_load_state(state: 'networkidle')

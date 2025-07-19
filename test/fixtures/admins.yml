@@ -2,16 +2,16 @@ admin:
   email: admin@example.com
   user_id: admin
   password_digest: <%= BCrypt::Password.create("password123") %>
-  password_changed_at: <%= Time.current %>
+  password_changed_at: <%= 1.day.ago %>
 
 second_admin:
   email: second@example.com
   user_id: second
   password_digest: <%= BCrypt::Password.create("password123") %>
-  password_changed_at: <%= Time.current %>
+  password_changed_at: <%= 1.day.ago %>
 
 new_admin:
   email: newadmin@example.com
   user_id: newadmin
   password_digest: <%= BCrypt::Password.create("initial123") %>
-  password_changed_at: # nil - needs password change
+  password_changed_at:

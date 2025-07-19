@@ -3,8 +3,8 @@ require "test_helper"
 class AdminTest < ActiveSupport::TestCase
   def setup
     @admin = Admin.new(
-      email: "admin@example.com",
-      user_id: "admin123",
+      email: "test_admin@example.com",
+      user_id: "test_admin123",
       password: "password123"
     )
   end
@@ -35,7 +35,7 @@ class AdminTest < ActiveSupport::TestCase
     @admin.save!
     
     duplicate_admin = Admin.new(
-      email: "admin@example.com",
+      email: "test_admin@example.com",
       user_id: "different_user",
       password: "password123"
     )
@@ -49,7 +49,7 @@ class AdminTest < ActiveSupport::TestCase
     
     duplicate_admin = Admin.new(
       email: "different@example.com",
-      user_id: "admin123",
+      user_id: "test_admin123",
       password: "password123"
     )
     
@@ -174,8 +174,8 @@ class AdminTest < ActiveSupport::TestCase
   test "last_admin should return false when multiple admins exist" do
     @admin.save!
     Admin.create!(
-      email: "second@example.com",
-      user_id: "second",
+      email: "test_second@example.com",
+      user_id: "test_second",
       password: "password123",
       password_confirmation: "password123"
     )
@@ -185,8 +185,8 @@ class AdminTest < ActiveSupport::TestCase
   test "transfer_articles_to should transfer articles to target admin" do
     @admin.save!
     target_admin = Admin.create!(
-      email: "target@example.com",
-      user_id: "target",
+      email: "test_target@example.com",
+      user_id: "test_target",
       password: "password123",
       password_confirmation: "password123"
     )

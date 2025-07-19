@@ -219,6 +219,9 @@ class CopyrightUpdatePlaywrightTest < ApplicationPlaywrightTestCase
     if footer_element
       footer_text = footer_element.inner_text
       assert_no_match /© #{Date.current.year}/, footer_text
+    else
+      # Footer element should exist but may be empty
+      assert @page.query_selector("footer"), "Footer should exist"
     end
   end
 
