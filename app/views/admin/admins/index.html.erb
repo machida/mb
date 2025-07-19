@@ -1,0 +1,62 @@
+<%= render "shared/page_title", title: "管理者一覧" %>
+
+<div class="a--page-body py-6">
+  <div class="l--container is-lg">
+    <div class="flex justify-between items-center mb-6">
+      <p class="text-gray-600 spec--admins-count">
+        管理者数: <%= @admins.count %>人
+      </p>
+      <%= link_to "新規管理者追加", new_admin_admin_path, class: "a--button is-md is-primary spec--new-admin-link" %>
+    </div>
+
+    <div class="space-y-4 spec--admins-list">
+      <% @admins.each do |admin| %>
+        <div class="a--card">
+          <div class="flex justify-between items-start">
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-2">
+                <h3 class="text-lg font-semibold spec--admin-user-id">
+                  <%= admin.user_id %>
+                </h3>
+                <% if admin == current_admin %>
+                  <span class="a--badge is-primary is-xs spec--current-admin-badge">
+                    現在ログイン中
+                  </span>
+                <% end %>
+                <% if admin.needs_password_change? %>
+                  <span class="a--badge is-warning is-xs spec--needs-password-change-badge">
+                    パスワード変更要
+                  </span>
+                <% end %>
+              </div>
+              <p class="text-gray-600 text-sm spec--admin-email">
+                <%= admin.email %>
+              </p>
+              <div class="flex gap-4 text-sm text-gray-500 mt-2">
+                <span class="spec--admin-articles-count">
+                  記事: <%= admin.articles.count %>件
+                </span>
+                <span class="spec--admin-created-at">
+                  作成: <%= admin.created_at.strftime("%Y/%m/%d") %>
+                </span>
+                <% if admin.password_changed_at %>
+                  <span class="spec--admin-password-changed-at">
+                    パスワード変更: <%= admin.password_changed_at.strftime("%Y/%m/%d") %>
+                  </span>
+                <% end %>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <%= link_to "詳細", admin_admin_path(admin), class: "a--button is-sm is-border-secondary spec--admin-show-button" %>
+              <% unless admin.last_admin? %>
+                <%= link_to "削除", admin_admin_path(admin), method: :delete,
+                            data: { confirm: "本当に削除しますか？" },
+                            class: "a--button is-sm is-border-danger spec--admin-delete-button" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

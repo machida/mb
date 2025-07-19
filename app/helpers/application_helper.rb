@@ -59,9 +59,9 @@ module ApplicationHelper
 
   def status_badge_class(article)
     if current_page?(drafts_admin_articles_path)
-      "bg-yellow-100 text-yellow-800"
+      "a--badge is-warning is-xs"
     else
-      article.draft? ? "bg-yellow-100 text-yellow-800" : "bg-green-100 text-green-800"
+      article.draft? ? "a--badge is-warning is-xs" : "a--badge is-info is-xs"
     end
   end
 

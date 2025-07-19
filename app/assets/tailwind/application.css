@@ -100,7 +100,7 @@
   --color-markdown-code-text: var(--color-red-500);
   --color-markdown-table-text: var(--color-gray-600);
   --color-markdown-quote-border: var(--color-gray-300);
-  
+
   /* Syntax dark theme colors for markdown */
   --color-syntax-dark-bg: var(--color-gray-900);
   --color-syntax-dark-text: var(--color-gray-200);
@@ -209,3 +209,7 @@
 @import "./components/_toast.css";
 @import "./components/_spec_classes.css";
 @import "./components/_syntax_highlighting.css";
+@import "./components/_pill.css";
+@import "./components/_badge.css";
+
+/* Compiled at: 2025-01-18 20:05:30 */

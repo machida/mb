@@ -1,0 +1,78 @@
+/* Badge Component */
+.a--badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-weight: 500;
+  line-height: 1;
+  border-width: 1px;
+  white-space: nowrap;
+
+  /* Default (medium) size */
+  height: 1.75rem;
+  padding: 0 0.75rem;
+  font-size: 0.875rem;
+}
+
+/* Size variations */
+.a--badge.is-xs {
+  height: 1.25rem;
+  padding: 0 0.5rem;
+  font-size: 0.75rem;
+}
+
+.a--badge.is-sm {
+  height: 1.5rem;
+  padding: 0 0.625rem;
+  font-size: 0.75rem;
+}
+
+.a--badge.is-md {
+  height: 1.75rem;
+  padding: 0 0.75rem;
+  font-size: 0.875rem;
+}
+
+.a--badge.is-lg {
+  height: 2rem;
+  padding: 0 1rem;
+  font-size: 1rem;
+}
+
+.a--badge.is-xl {
+  height: 2.5rem;
+  padding: 0 1.25rem;
+  font-size: 1.125rem;
+}
+
+/* Color variations */
+.a--badge.is-primary {
+  background-color: var(--color-blue-100);
+  color: var(--color-blue-800);
+  border-color: var(--color-blue-200);
+}
+
+.a--badge.is-secondary {
+  background-color: var(--color-gray-100);
+  color: var(--color-gray-800);
+  border-color: var(--color-gray-200);
+}
+
+.a--badge.is-warning {
+  background-color: var(--color-amber-100);
+  color: var(--color-amber-800);
+  border-color: var(--color-amber-200);
+}
+
+.a--badge.is-danger {
+  background-color: var(--color-red-100);
+  color: var(--color-red-800);
+  border-color: var(--color-red-200);
+}
+
+.a--badge.is-info {
+  background-color: var(--color-sky-100);
+  color: var(--color-sky-800);
+  border-color: var(--color-sky-200);
+}

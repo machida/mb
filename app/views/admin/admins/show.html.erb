@@ -1,0 +1,131 @@
+<%= render "shared/page_title", title: "管理者詳細" %>
+<div class="a--page-body py-6">
+  <div class="l--container is-md">
+    <div class="a--card">
+      <div class="flex justify-between items-start mb-6">
+        <div>
+          <h2 class="text-2xl font-bold spec--admin-user-id">
+            <%= @admin.user_id %>
+          </h2>
+          <p class="text-gray-600 spec--admin-email">
+            <%= @admin.email %>
+          </p>
+        </div>
+        <div class="flex gap-2">
+          <% if @admin == current_admin %>
+            <span class="a--badge is-primary is-xs spec--current-admin-badge">
+              現在ログイン中
+            </span>
+          <% end %>
+          <% if @admin.needs_password_change? %>
+            <span class="a--badge is-warning is-xs spec--needs-password-change-badge">
+              パスワード変更要
+            </span>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <h3 class="text-sm font-medium text-gray-500 mb-1">作成日時</h3>
+          <p class="spec--admin-created-at">
+            <%= @admin.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+          </p>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-gray-500 mb-1">パスワード最終変更</h3>
+          <p class="spec--admin-password-changed-at">
+            <% if @admin.password_changed_at %>
+              <%= @admin.password_changed_at.strftime("%Y年%m月%d日 %H:%M") %>
+            <% else %>
+              <span class="text-yellow-600">未変更（初期パスワード）</span>
+            <% end %>
+          </p>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <h3 class="text-sm font-medium text-gray-500 mb-2">記事統計</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-gray-50 p-3 rounded">
+            <p class="text-lg font-semibold spec--total-articles-count">
+              <%= @admin.articles.count %>
+            </p>
+            <p class="text-sm text-gray-600">総記事数</p>
+          </div>
+          <div class="bg-gray-50 p-3 rounded">
+            <p class="text-lg font-semibold spec--published-articles-count">
+              <%= @admin.articles.published.count %>
+            </p>
+            <p class="text-sm text-gray-600">公開記事</p>
+          </div>
+          <div class="bg-gray-50 p-3 rounded">
+            <p class="text-lg font-semibold spec--draft-articles-count">
+              <%= @admin.articles.drafts.count %>
+            </p>
+            <p class="text-sm text-gray-600">下書き</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% if @admin.articles.exists? %>
+      <div class="a--card mt-6">
+        <h3 class="text-lg font-semibold mb-4">記事の処理</h3>
+        <p class="text-gray-600 mb-4">
+          この管理者を削除する前に、作成された記事の処理方法を選択してください。
+        </p>
+
+        <%= form_with url: process_delete_admin_admin_path(@admin), local: true, class: "space-y-4" do |f| %>
+          <div class="space-y-3">
+            <label class="flex items-start space-x-3">
+              <%= f.radio_button :action_type, "transfer", class: "mt-1 spec--transfer-radio" %>
+              <div>
+                <span class="font-medium">他の管理者に移譲</span>
+                <p class="text-sm text-gray-600">記事の著者を別の管理者に変更します</p>
+                <div class="mt-2">
+                  <%= f.select :target_admin_id,
+                              options_from_collection_for_select(Admin.where.not(id: @admin.id), :id, :user_id),
+                              { prompt: "移譲先の管理者を選択" },
+                              { class: "a--select spec--target-admin-select" } %>
+                </div>
+              </div>
+            </label>
+
+            <label class="flex items-start space-x-3">
+              <%= f.radio_button :action_type, "delete_articles", class: "mt-1 spec--delete-articles-radio" %>
+              <div>
+                <span class="font-medium text-red-600">記事も一緒に削除</span>
+                <p class="text-sm text-gray-600">この管理者の記事をすべて削除します（復元不可）</p>
+              </div>
+            </label>
+          </div>
+
+          <div class="flex gap-4 pt-4">
+            <% unless @admin.last_admin? %>
+              <%= f.submit "管理者を削除", class: "a--button is-lg is-danger spec--confirm-delete-button" %>
+            <% else %>
+              <button type="button" disabled class="a--button is-lg is-disabled spec--cannot-delete-button">
+                最後の管理者は削除できません
+              </button>
+            <% end %>
+            <%= link_to "キャンセル", admin_admins_path, class: "a--button is-lg is-border-secondary spec--cancel-button" %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="flex gap-4 mt-6">
+        <% unless @admin.last_admin? %>
+          <%= link_to "管理者を削除", admin_admin_path(@admin), method: :delete,
+                      data: { confirm: "この管理者を削除しますか？" },
+                      class: "a--button is-lg is-danger spec--simple-delete-button" %>
+        <% else %>
+          <button type="button" disabled class="a--button is-lg is-disabled spec--cannot-delete-button">
+            最後の管理者は削除できません
+          </button>
+        <% end %>
+        <%= link_to "管理者一覧に戻る", admin_admins_path, class: "a--button is-lg is-border-secondary spec--back-button" %>
+      </div>
+    <% end %>
+  </div>
+</div>

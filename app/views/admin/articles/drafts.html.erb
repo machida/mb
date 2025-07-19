@@ -1,26 +1,31 @@
-<div class="l--container is-lg">
-  <div class="flex justify-between items-center mb-8">
-    <div class="flex items-center gap-4">
-      <h1 class="text-3xl font-bold spec--draft-index-title">下書き記事</h1>
-      <span class="bg-yellow-500 text-white px-3 py-1 rounded-full text-sm">
-        <%= @articles.count %>件
-      </span>
+<%= render "shared/page_title", title: "記事一覧" %>
+<div class="a--page-body py-6">
+  <div class="l--container is-md">
+    <div class="flex justify-center items-center mb-8">
+      <nav class="flex a--pill">
+        <%= link_to "全ての記事", admin_articles_path, class: "a--button is-md is-border-secondary" %>
+        <%= link_to "下書き記事", drafts_admin_articles_path, class: "a--button is-md is-warning" %>
+      </nav>
     </div>
-    <div class="flex gap-4">
-      <%= link_to "全ての記事", admin_articles_path, class: "a--button is-md is-primary" %>
+    <div class="flex justify-between items-center mb-8">
+      <div class="flex items-center gap-4">
+        <h1 class="text-3xl font-bold spec--draft-index-title">下書き記事</h1>
+        <span class="a--badge is-warning is-md">
+          <%= @articles.count %>件
+        </span>
+      </div>
     </div>
-  </div>
+    <% if @articles.any? %>
+      <%= render "article_list",
+          articles: @articles,        list_class: "spec--draft-articles-list",        delete_button_class: "" %>
+    <% else %>
+      <%= render "empty_state",
+          message: "下書きの記事がありません",        submessage: "新しい記事を作成して下書き保存してみましょう",        show_icon: true %>
+    <% end %>
 
-  <% if @articles.any? %>
-    <%= render "article_list",
-        articles: @articles,        list_class: "spec--draft-articles-list",        delete_button_class: "" %>
-  <% else %>
-    <%= render "empty_state",
-        message: "下書きの記事がありません",        submessage: "新しい記事を作成して下書き保存してみましょう",        show_icon: true %>
-  <% end %>
-
-  <!-- Pagination -->
-  <div class="mt-8 flex justify-center spec--pagination">
-    <%= paginate @articles %>
+    <!-- Pagination -->
+    <div class="mt-8 flex justify-center spec--pagination">
+      <%= paginate @articles %>
+    </div>
   </div>
 </div>
