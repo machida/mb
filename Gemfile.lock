@@ -236,7 +236,7 @@ GEM
     mime-types (3.7.0)
       logger
       mime-types-data (~> 3.2025, >= 3.2025.0507)
-    mime-types-data (3.2025.0708)
+    mime-types-data (3.2025.0715)
     mini_magick (5.2.0)
       benchmark
       logger
@@ -284,7 +284,7 @@ GEM
     parser (3.3.8.0)
       ast (~> 2.4.1)
       racc
-    playwright-ruby-client (1.52.0)
+    playwright-ruby-client (1.53.0)
       concurrent-ruby (>= 1.1.6)
       mime-types (>= 3.0)
     pp (0.6.2)
@@ -498,7 +498,7 @@ DEPENDENCIES
   kaminari (~> 1.2)
   listen (~> 3.3)
   mocha (~> 2.1)
-  playwright-ruby-client (~> 1.52.0)
+  playwright-ruby-client (~> 1.53.0)
   propshaft
   puma (>= 5.0)
   rails (~> 8.0.2)
