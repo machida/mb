@@ -22,3 +22,16 @@ module ActiveSupport
     include TestConfig
   end
 end
+
+# Integration test helpers
+class ActionDispatch::IntegrationTest
+  # Login helper for admin authentication
+  def login_as(admin)
+    post admin_login_path, params: {
+      email: admin.email,
+      password: "password123"
+    }
+    assert_response :redirect
+    follow_redirect!
+  end
+end

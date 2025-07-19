@@ -57,7 +57,7 @@ sample_articles = [
       Rails 8.0は実用的なアップデートが多く、プロダクションでも安心して使えそうです。
       皆さんもぜひ試してみてください！
     MARKDOWN
-    author: "machida",
+    author: "admin",
     draft: false,
     created_at: 2.days.ago,
     updated_at: 2.days.ago
@@ -111,7 +111,7 @@ sample_articles = [
 
       Tailwind CSSを使うことで、効率的かつ美しいUIを構築できます。
     MARKDOWN
-    author: "machida",
+    author: "admin",
     draft: false,
     created_at: 5.days.ago,
     updated_at: 5.days.ago
@@ -164,7 +164,7 @@ sample_articles = [
 
       これらの新機能により、イミュータブルなデータ操作がより簡単になりました。
     MARKDOWN
-    author: "machida",
+    author: "admin",
     draft: false,
     created_at: 1.week.ago,
     updated_at: 1.week.ago
@@ -220,7 +220,7 @@ sample_articles = [
 
       これらの設定により、開発効率が大幅に向上します！
     MARKDOWN
-    author: "machida",
+    author: "admin",
     draft: false,
     created_at: 10.days.ago,
     updated_at: 10.days.ago
@@ -337,7 +337,7 @@ sample_articles = [
 
       これらのベストプラクティスを実践することで、保守性の高いRailsアプリケーションを構築できます。
     MARKDOWN
-    author: "machida",
+    author: "admin",
     draft: false,
     created_at: 2.weeks.ago,
     updated_at: 2.weeks.ago
@@ -387,7 +387,7 @@ sample_articles = [
 
       ※この記事は下書きです。リリース前に内容を確認してください。
     MARKDOWN
-    author: "machida",
+    author: "admin",
     draft: true,
     created_at: 1.day.ago,
     updated_at: 1.day.ago

@@ -27,19 +27,11 @@
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
-
-    <%# YakuHanJP font %>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/yakuhanjp@4.1.1/dist/css/yakuhanjp_s.css">
-
-    <%# Material Icons %>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= render "shared/style_sheets" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-white min-h-screen flex flex-col layout-public">
+  <body class="min-h-screen flex flex-col layout-public">
     <% if controller_name == 'articles' && action_name == 'index' %>
       <%= render "public/hero" %>
 
@@ -51,7 +43,7 @@
       <%= render "public/header" %>
 
       <!-- Public Main Content for Other Pages -->
-      <main class="flex-1 l--container is-lg my-12">
+      <main class="flex-1 l--container is-md my-12">
         <%= yield %>
       </main>
     <% end %>

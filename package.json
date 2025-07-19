@@ -20,7 +20,8 @@
   "devDependencies": {
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
-    "@playwright/test": "1.46.0"
+    "@playwright/test": "1.46.0",
+    "browser-sync": "^3.0.2"
   },
   "comments": {
     "@playwright/test": "Fixed at 1.46.0 due to compatibility issues with playwright-ruby-client. Versions 1.52.0+ cause 'timeout: expected number, got undefined' errors."

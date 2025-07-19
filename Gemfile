@@ -62,6 +62,9 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  
+  # Live reload for development
+  gem "listen", "~> 3.3"
 end
 
 group :test do

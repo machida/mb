@@ -2,12 +2,7 @@ require "test_helper"
 
 class Admin::SessionsControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @admin = Admin.create!(
-      email: "admin@example.com",
-      user_id: "admin123",
-      password: "password123",
-      password_confirmation: "password123"
-    )
+    @admin = admins(:admin)
   end
 
   test "should get login page" do

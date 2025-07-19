@@ -1,5 +1,6 @@
-<div class="l--container is-xl">
-  <h1 class="text-3xl font-bold mb-6 spec--edit-article-title">記事を編集</h1>
-
-  <%= render "form", article: @article %>
+<%= render "shared/page_title", title: "記事を編集" %>
+<div class="a--page-body py-6">
+  <div class="l--container is-xl">
+    <%= render "form", article: @article %>
+  </div>
 </div>

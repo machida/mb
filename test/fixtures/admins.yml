@@ -1,11 +1,17 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+admin:
+  email: admin@example.com
+  user_id: admin
+  password_digest: <%= BCrypt::Password.create("password123") %>
+  password_changed_at: <%= Time.current %>
 
-one:
-  email: MyString
-  user_id: MyString
-  password_digest: MyString
+second_admin:
+  email: second@example.com
+  user_id: second
+  password_digest: <%= BCrypt::Password.create("password123") %>
+  password_changed_at: <%= Time.current %>
 
-two:
-  email: MyString
-  user_id: MyString
-  password_digest: MyString
+new_admin:
+  email: newadmin@example.com
+  user_id: newadmin
+  password_digest: <%= BCrypt::Password.create("initial123") %>
+  password_changed_at: # nil - needs password change

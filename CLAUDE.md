@@ -1,7 +1,7 @@
 # mb/ プロジェクト Claude 指示
 
 ## プロジェクト概要
-マチダのブログシステム - Rails 7.2.2 + Ruby 3.4.2
+マチダのブログシステム - Rails 7.2.2 + Ruby 3.4.2 + Node.js v22.17.1
 
 ## CSS/HTMLクラス命名規則
 - `.a--` - アクション用クラス（ボタン、リンクなど）
@@ -12,7 +12,8 @@
 - テストファイルは`test/`ディレクトリ内
 - システムテストとコントローラーテストを含む
 - **テストフレームワーク: mini-test（RSpecではない）**
-- **E2Eテスト: 現在Capybara + Selenium、将来的にPlaywrightへ移行予定**
+- **E2Eテスト: Playwright（移行完了済み）**
+- **非Playwrightテスト**: `bundle exec rails test --exclude "playwright"` で実行
 
 ## 開発コマンド
 
@@ -33,6 +34,8 @@
 - `_untrack/`ディレクトリ内のファイルは変更しない
 - **CSSファイル内の2行以上の空行は1行にまとめる（フォーマットルール）**
 - **バグ修正時は必ずテストも追加する（再発防止のため）**
+- **ERBファイルのリンター設定は.erb_lint.ymlで管理（RuboCopとは独立）**
+- **行末の半角スペースは削除する（trailing whitespace削除）**
 
 ## 開発ルール
 - **うまくいかなかったら公式ドキュメントを確認してから行動する（勝手に予測して作業しない）**
@@ -41,6 +44,19 @@
 - **コミットログには Why**（なぜ変更するか）
 - **コードコメントには Why not**（なぜこの方法でないか）
 - **ファイルの最後に空行を入れる**
+
+## 設計・コード品質ルール
+
+### 4つの設計原則
+- **予測しやすい**: 名前を見て何をするクラスなのかが判断できるかどうか
+- **再利用しやすい**: さまざまな場所で利用できるかどうか
+- **保守しやすい**: 定義されたものがどこにあるかわかりやすいかどうか
+- **拡張しやすい**: 再利用する際に部分的に異なるカスタマイズが簡単かどうか
+
+### ファイルサイズルール
+- **1ファイル200行以下**: なるべく一つのファイルは200行以下にする
+- **分割優先**: 分割できるなら積極的に分割する
+- **責任の分離**: 単一責任の原則に従ってクラス・モジュールを設計する
 
 ## Git ワークフロー
 - **mainブランチに戻った際は必ず`git pull`を実行して最新の状態にする**
@@ -116,7 +132,7 @@ phantom delete fix/login-bug
 
 ## Partialファイルの配置ルール
 - `app/views/public/` - Publicレイアウトでのみ使用するpartial
-- `app/views/admin/` - Adminレイアウトでのみ使用するpartial  
+- `app/views/admin/` - Adminレイアウトでのみ使用するpartial
 - `app/views/shared/` - 両方のレイアウトで共通使用するpartial
 
 **例:**
@@ -131,17 +147,17 @@ phantom delete fix/login-bug
 - 184テスト中、システムテストは約20テスト
 - 一部のテストでflakyな動作（sleep使用、要素可視性問題）
 
-### Playwright導入準備
+### Playwright導入完了
 - ✅ playwright-ruby-client gem追加
 - ✅ @playwright/test npm package追加
-- ✅ Playwrightブラウザインストール済み
+- ✅ Playwrightブラウザインストール済み（Chromium, Firefox, Webkit）
 - ✅ ApplicationPlaywrightTestCase基底クラス作成
-- ❌ playwright-ruby-client初期化で技術的問題発生
+- ✅ playwright-ruby-client初期化問題解決済み
 
-### 技術的課題
-- `playwright-ruby-client` gem (v1.52.0) でブラウザ起動時にtimeoutエラー
-- Ruby APIの一部メソッドが期待通りに動作しない
-- セットアップの複雑さにより初期実装が困難
+### 技術的課題（解決済み）
+- ~~`playwright-ruby-client` gem (v1.52.0) でブラウザ起動時にtimeoutエラー~~（Node.js v22.17.1 + ブラウザ再インストールで解決）
+- ~~Ruby APIの一部メソッドが期待通りに動作しない~~（設定とバージョン統一で解決）
+- ~~セットアップの複雑さにより初期実装が困難~~（完了済み）
 
 ### エラーハンドリング改善
 - ✅ ApplicationPlaywrightTestCaseにタイムアウト対応実装済み
@@ -150,11 +166,11 @@ phantom delete fix/login-bug
 - PlaywrightSetupError例外による詳細なエラー情報
 - Rails.loggerによる詳細なデバッグログ
 
-### 代替アプローチ（検討中）
-1. **Node.js Playwright**: JavaScript版Playwrightを別プロセスで実行
-2. **Capybara改善**: 現在のCapybaraテストのflaky部分を修正
-3. **他のE2Eツール**: Cypress、Puppeteer等の検討
-4. **playwright-ruby-client更新待ち**: gem更新での改善を待つ
+### ~~代替アプローチ~~（不要 - 現行Playwright運用成功）
+1. ~~**Node.js Playwright**: JavaScript版Playwrightを別プロセスで実行~~
+2. ~~**Capybara改善**: 現在のCapybaraテストのflaky部分を修正~~
+3. ~~**他のE2Eツール**: Cypress、Puppeteer等の検討~~
+4. ~~**playwright-ruby-client更新待ち**: gem更新での改善を待つ~~
 
 ### 移行手順（完了）
 1. **技術調査**: ✅ より安定したPlaywright Ruby統合方法の調査完了
@@ -236,3 +252,30 @@ phantom delete fix/login-bug
 - 高速な実行速度
 - 詳細なデバッグ情報とスクリーンショット
 - 複数ブラウザでの並列実行
+
+## リンター設定
+
+### RuboCop設定（.rubocop.yml）
+- ERBファイルを除外 (`app/views/**/*.erb`)
+- 行長制限: 120文字
+- String literals: double_quotes統一
+- Rails omakase設定継承
+
+### ERB Lint設定（.erb_lint.yml）
+- **セキュリティ**: ErbSafety有効
+- **構文チェック**: ParserErrors有効
+- **フォーマット**: SpaceAroundErbTag、TrailingWhitespace等
+- **ERB専用RuboCop**: 行長制限150文字、InitialIndentation無効化
+- **設定分離**: RuboCopとERB lintを完全に分離管理
+
+### Node.js環境
+- **バージョン管理**: .nvmrcでv22.17.1を指定
+- **ESLint設定**: ES2024対応、modern JavaScript機能サポート
+- **開発環境**: nodebrew使用でバージョン切り替え
+
+## 現在の状態
+- **テスト**: 138テスト全て成功（0 failures, 0 errors, 0 skips）
+- **E2Eテスト**: Playwright完全移行済み
+- **リンター**: ERB構文エラー問題解決済み
+- **Node.js**: 最新安定版（v22.17.1）にアップグレード
+- **ブラウザー**: Playwright全ブラウザー（Chromium, Firefox, Webkit）インストール済み

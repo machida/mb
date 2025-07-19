@@ -154,4 +154,73 @@ class AdminTest < ActiveSupport::TestCase
     assert_includes @admin.errors[:user_id], "can't be blank"
     assert_includes @admin.errors[:password], "can't be blank"
   end
+
+  test "needs_password_change should return true when password_changed_at is nil" do
+    @admin.password_changed_at = nil
+    assert @admin.needs_password_change?
+  end
+
+  test "needs_password_change should return false when password_changed_at is set" do
+    @admin.password_changed_at = Time.current
+    assert_not @admin.needs_password_change?
+  end
+
+  test "last_admin should return true when only one admin exists" do
+    Admin.destroy_all
+    @admin.save!
+    assert @admin.last_admin?
+  end
+
+  test "last_admin should return false when multiple admins exist" do
+    @admin.save!
+    Admin.create!(
+      email: "second@example.com",
+      user_id: "second",
+      password: "password123",
+      password_confirmation: "password123"
+    )
+    assert_not @admin.last_admin?
+  end
+
+  test "transfer_articles_to should transfer articles to target admin" do
+    @admin.save!
+    target_admin = Admin.create!(
+      email: "target@example.com",
+      user_id: "target",
+      password: "password123",
+      password_confirmation: "password123"
+    )
+    
+    article = Article.create!(
+      title: "Test Article",
+      body: "Test content",
+      author: @admin.user_id,
+      draft: false
+    )
+    
+    result = @admin.transfer_articles_to(target_admin)
+    assert result
+    
+    article.reload
+    assert_equal target_admin.user_id, article.author
+  end
+
+  test "transfer_articles_to should return false when target_admin is blank" do
+    result = @admin.transfer_articles_to(nil)
+    assert_not result
+  end
+
+  test "delete_articles should delete all articles" do
+    @admin.save!
+    article = Article.create!(
+      title: "Test Article",
+      body: "Test content",
+      author: @admin.user_id,
+      draft: false
+    )
+    
+    assert_difference("Article.count", -1) do
+      @admin.delete_articles
+    end
+  end
 end

@@ -1,16 +1,23 @@
 <div class="flex items-center gap-4">
+  <%= link_to "サイトを表示", root_path, class: "text-primary text-sm" %>
+
   <% if current_user_signed_in? %>
     <%= link_to admin_articles_path, class: "text-gray-500 hover:text-gray-700 p-2", title: "記事管理" do %>
-      <span class="material-icons">table_chart</span>
+      <span class="material-symbols-outlined">table_chart</span>
     <% end %>
 
+
     <%= link_to admin_site_settings_path, class: "text-gray-500 hover:text-gray-700 p-2", title: "サイト設定" do %>
-      <span class="material-icons">settings</span>
+      <span class="material-symbols-outlined">settings</span>
+    <% end %>
+
+    <%= link_to admin_admins_path, class: "text-gray-500 hover:text-gray-700 p-2", title: "管理者管理" do %>
+      <span class="material-symbols-outlined">group</span>
     <% end %>
 
     <div class="a--dropdown">
       <button class="a--dropdown-button js-dropdown-button spec--dropdown-button" aria-expanded="false" title="ユーザーメニュー">
-        <span class="material-icons">person</span>
+        <span class="material-symbols-outlined">person</span>
       </button>
       <div class="a--dropdown-menu js-dropdown-menu">
         <%= link_to edit_admin_profile_path, class: "a--dropdown-menu-item spec--profile-edit-link" do %>

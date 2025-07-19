@@ -14,22 +14,32 @@
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
-
-    <%# YakuHanJP font %>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/yakuhanjp@4.1.1/dist/css/yakuhanjp_s.css">
-
-    <%# Material Icons %>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= render "shared/style_sheets" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-gray-100 min-h-screen flex flex-col layout-admin">
+  <body class="bg-white min-h-screen flex flex-col layout-admin">
     <%= render "admin/header" %>
 
+    <!-- Password Change Notice -->
+    <% if current_admin&.needs_password_change? %>
+      <div class="bg-yellow-50 p-4 spec--password-change-notice">
+        <div class="l--container is-md">
+          <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex gap-2 items-center">
+              <span class="material-symbols-outlined text-yellow-800">info</span>
+              <p class="text-yellow-800">
+                <strong>セキュリティ強化のため、初期パスワードから変更してください。</strong>
+              </p>
+            </div>
+            <%= link_to "パスワード変更", edit_admin_password_path, class: "a--button is-sm is-warning spec--change-password-link" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
     <!-- Admin Main Content -->
-    <main class="py-12">
+    <main>
       <%= yield %>
     </main>
 

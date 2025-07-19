@@ -1,0 +1,25 @@
+.a--pill {
+  display: flex;
+  align-items: center;
+  gap: -.5px
+}
+
+.a--pill .a--button {
+  border-radius: 0;
+  min-width: 10rem;
+}
+
+.a--pill .a--button:hover {
+  position: relative;
+  z-index: 1;
+}
+
+.a--pill .a--button:first-child {
+  border-top-left-radius: 10rem;
+  border-bottom-left-radius: 10rem;
+}
+
+.a--pill .a--button:last-child {
+  border-top-right-radius: 10rem;
+  border-bottom-right-radius: 10rem;
+}

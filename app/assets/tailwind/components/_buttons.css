@@ -22,31 +22,33 @@
 
 /* Button Sizes */
 .a--button.is-xs {
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0.75rem;
   font-size: 0.75rem;
   line-height: 1rem;
 }
 
 .a--button.is-sm {
-  padding: 0.375rem 0.75rem;
+  padding: 0.375rem 1rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
+  min-height: 2rem;
 }
 
 .a--button.is-md {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.25rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
+  min-height: 2.25rem;
 }
 
 .a--button.is-lg {
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem 1.75rem;
   font-size: 1rem;
   line-height: 1.5rem;
 }
 
 .a--button.is-xl {
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem 2rem;
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
@@ -55,6 +57,7 @@
 .a--button.is-primary {
   background-color: var(--color-button-primary);
   color: var(--color-bg-primary);
+  border: solid 1px transparent;
 }
 
 .a--button.is-primary:hover {
@@ -68,6 +71,7 @@
 .a--button.is-secondary {
   background-color: var(--color-button-secondary);
   color: var(--color-bg-primary);
+  border: solid 1px transparent;
 }
 
 .a--button.is-secondary:hover {
@@ -81,6 +85,7 @@
 .a--button.is-warning {
   background-color: var(--color-warning);
   color: var(--color-bg-primary);
+  border: solid 1px transparent;
 }
 
 .a--button.is-warning:hover {
@@ -94,6 +99,7 @@
 .a--button.is-danger {
   background-color: var(--color-error);
   color: var(--color-bg-primary);
+  border: solid 1px transparent;
 }
 
 .a--button.is-danger:hover {
