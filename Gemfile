@@ -71,7 +71,7 @@ group :test do
   # Playwright for E2E testing - unified system testing framework
   # Fixed at 1.51.0: versions 1.52.0+ have known timeout initialization issues
   # See: https://github.com/YusukeIwaki/playwright-ruby-client/issues/335
-  gem "playwright-ruby-client", "~> 1.52.0"
+  gem "playwright-ruby-client", "~> 1.53.0"
 end
 
 gem "tailwindcss-rails", "~> 4.3"
