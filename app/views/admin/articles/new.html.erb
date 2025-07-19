@@ -1,4 +1,4 @@
-<%= render "shared/page_title", title: "新しい記事を作成", title_class: "spec--new-article-title" %>
+<%= render PageTitleComponent.new(title: "新しい記事を作成", title_class: "spec--new-article-title") %>
 <div class="a--page-body py-6">
   <div class="l--container is-xl">
     <%= render "form", article: @article %>

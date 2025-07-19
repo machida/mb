@@ -16,6 +16,9 @@ module Mb
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
 
+    # Add app/components to autoload paths for View Components
+    config.eager_load_paths << Rails.root.join("app", "components")
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

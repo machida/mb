@@ -1,0 +1,5 @@
+<nav class="flex a--pill">
+  <% nav_items.each do |item| %>
+    <%= link_to item[:text], item[:path], class: nav_class_for(item) %>
+  <% end %>
+</nav>

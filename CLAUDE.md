@@ -12,8 +12,10 @@
 - テストファイルは`test/`ディレクトリ内
 - システムテストとコントローラーテストを含む
 - **テストフレームワーク: mini-test（RSpecではない）**
-- **E2Eテスト: Playwright（移行完了済み）**
+- **E2Eテスト: Playwright（移行完了済み、playwright-ruby-client使用）**
+- **Playwrightテスト**: `test/system/*_playwright_test.rb` でシステムテスト実装
 - **非Playwrightテスト**: `bundle exec rails test --exclude "playwright"` で実行
+- **新しいE2Eテストは必ずPlaywrightで作成する**
 
 ## 開発コマンド
 
@@ -34,6 +36,7 @@
 - `_untrack/`ディレクトリ内のファイルは変更しない
 - **CSSファイル内の2行以上の空行は1行にまとめる（フォーマットルール）**
 - **バグ修正時は必ずテストも追加する（再発防止のため）**
+- **システムテスト（E2E）はPlaywrightを使用する**
 - **ERBファイルのリンター設定は.erb_lint.ymlで管理（RuboCopとは独立）**
 - **行末の半角スペースは削除する（trailing whitespace削除）**
 

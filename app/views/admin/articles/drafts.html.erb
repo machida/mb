@@ -1,11 +1,8 @@
-<%= render "shared/page_title", title: "記事一覧" %>
+<%= render PageTitleComponent.new(title: "記事一覧") %>
 <div class="a--page-body py-6">
   <div class="l--container is-md">
     <div class="flex justify-center items-center mb-8">
-      <nav class="flex a--pill">
-        <%= link_to "全ての記事", admin_articles_path, class: "a--button is-md is-border-secondary" %>
-        <%= link_to "下書き記事", drafts_admin_articles_path, class: "a--button is-md is-warning" %>
-      </nav>
+      <%= render ArticleNavigationComponent.new %>
     </div>
     <div class="flex justify-between items-center mb-8">
       <div class="flex items-center gap-4">

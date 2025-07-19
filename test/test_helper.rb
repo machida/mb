@@ -3,6 +3,7 @@ require_relative "../config/environment"
 require "rails/test_help"
 require "mocha/minitest"
 
+
 module TestConfig
   # Centralized test configuration to avoid hardcoded values
   TEST_ADMIN_PASSWORD = ENV.fetch("TEST_ADMIN_PASSWORD", "test_secure_password_#{Rails.env}")

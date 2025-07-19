@@ -1,8 +1,8 @@
-<%= render "shared/page_title", title: "新規管理者追加" %>
+<%= render PageTitleComponent.new(title: "新規管理者追加") %>
 
 <div class="l--container is-lg">
   <%= form_with model: [:admin, @admin], local: true, class: "space-y-6" do |f| %>
-    <%= render "shared/form_errors", object: @admin %>
+    <%= render FormErrorsComponent.new(object: @admin) %>
 
     <div class="a--card">
       <h2 class="text-xl font-semibold mb-4 spec--admin-form-title">管理者情報</h2>

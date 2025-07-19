@@ -1,0 +1,8 @@
+<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded spec--error-messages">
+  <h3 class="font-medium mb-2">エラーが発生しました</h3>
+  <ul class="list-disc list-inside space-y-1">
+    <% object.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
