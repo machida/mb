@@ -13,13 +13,13 @@
 
   <div class="a--form-item">
     <%= f.label :body, "本文 (Markdown記法)", class: "a--form-label mb-1" %>
-    <div class="text-xs text-gray-500 mb-2">
+    <div class="a--form-help mb-2">
       Markdown記法が使用できます。**太字**、*斜体*、`コード`、[リンク](URL)、見出し(#)、リスト(-)など
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4" data-controller="markdown-preview">
       <div class="a--form-item">
         <label class="a--form-label mb-1">編集</label>
-        <div class="text-xs text-gray-500 mb-2">
+        <div class="a--form-help mb-2">
           画像をドラッグ&ドロップするか、貼り付けてアップロードできます
         </div>
         <%= f.text_area :body, rows: 15,
@@ -65,7 +65,7 @@
         <button type="button" class="a--button is-md is-primary" data-action="click->thumbnail-upload#selectFile">
           ファイルを選択
         </button>
-        <p class="text-xs text-gray-500 mt-2">JPG, PNG, GIF (最大5MB)</p>
+        <p class="a--form-help mt-2">JPG, PNG, GIF (最大5MB)</p>
       </div>
     </div>
 
@@ -88,7 +88,7 @@
       <% end %>
     </div>
 
-    <div class="text-xs text-gray-500 mt-1">
+    <div class="a--form-help mt-1">
       記事のOGP画像やカード表示で使用される画像です
     </div>
   </div>

@@ -11,13 +11,13 @@
           <div class="a--form-item">
             <%= f.label :email, "メールアドレス", class: "a--form-label mb-1" %>
             <%= f.email_field :email, required: true,                            class: "a--text-input spec--email-input" %>
-            <p class="text-xs text-gray-500 mt-1">ログイン時に使用するメールアドレスです</p>
+            <p class="a--form-help mt-1">ログイン時に使用するメールアドレスです</p>
           </div>
 
           <div class="a--form-item">
             <%= f.label :user_id, "ユーザーID", class: "a--form-label mb-1" %>
             <%= f.text_field :user_id, required: true,                           class: "a--text-input spec--user-id-input" %>
-            <p class="text-xs text-gray-500 mt-1">記事の著者として表示されるIDです</p>
+            <p class="a--form-help mt-1">記事の著者として表示されるIDです</p>
           </div>
         </div>
       </div>

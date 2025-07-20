@@ -6,7 +6,7 @@
       <div class="a--form-item">
         <%= label_tag "site_settings[site_title]", "サイトタイトル", class: "a--form-label mb-1" %>
         <%= text_field_tag "site_settings[site_title]",                         @settings[:site_title],                         class: "a--text-input spec--site-title-input" %>
-        <div class="text-xs text-gray-500 mt-1">
+        <div class="a--form-help mt-1">
           ブラウザのタブやOGPで使用されるサイトタイトルです
         </div>
       </div>
@@ -33,7 +33,7 @@
             <button type="button" class="a--button is-md is-primary" data-action="click->thumbnail-upload#selectFile">
               ファイルを選択
             </button>
-            <p class="text-xs text-gray-500 mt-2">JPG, PNG, GIF (最大5MB)</p>
+            <p class="a--form-help mt-2">JPG, PNG, GIF (最大5MB)</p>
           </div>
         </div>
 
@@ -56,7 +56,7 @@
           <% end %>
         </div>
 
-        <div class="text-xs text-gray-500 mt-1">
+        <div class="a--form-help mt-1">
           記事にサムネイル画像が設定されていない場合に使用される画像です
         </div>
       </div>
@@ -65,7 +65,7 @@
         <%= label_tag "site_settings[top_page_description]", "トップページの説明文", class: "a--form-label mb-1" %>
         <%= text_area_tag "site_settings[top_page_description]",
                           @settings[:top_page_description],                        rows: 3,                        class: "a--text-input spec--top-page-description-input" %>
-        <div class="text-xs text-gray-500 mt-1">
+        <div class="a--form-help mt-1">
           トップページのmeta descriptionとOGPで使用される説明文です
         </div>
       </div>
@@ -73,7 +73,7 @@
       <div class="a--form-item">
         <%= label_tag "site_settings[copyright]", "著作権者名", class: "a--form-label mb-1" %>
         <%= text_field_tag "site_settings[copyright]",                         @settings[:copyright],                         class: "a--text-input spec--copyright-input" %>
-        <div class="text-xs text-gray-500 mt-1">
+        <div class="a--form-help mt-1">
           「© <%= Date.current.year %> [ここに入力した名前]. All rights reserved.」の形式で表示されます
         </div>
       </div>
@@ -90,7 +90,7 @@
             <span class="text-sm">表示しない</span>
           </label>
         </div>
-        <div class="text-xs text-gray-500 mt-1">
+        <div class="a--form-help mt-1">
           記事一覧や記事詳細ページで著者名を表示するかどうかを設定できます
         </div>
       </div>
