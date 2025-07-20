@@ -1,6 +1,14 @@
 class Admin::BaseController < ApplicationController
   layout "admin"
   before_action :require_admin
+  before_action :set_robots_header
+
+  private
+
+  def set_robots_header
+    # 管理画面は検索エンジンにインデックスされないよう HTTP ヘッダーでも制御
+    response.headers["X-Robots-Tag"] = "noindex, nofollow, noarchive, nosnippet, nocache"
+  end
 
   protected
 

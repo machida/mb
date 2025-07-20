@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- 検索エンジン向けの管理画面ブロック設定 -->
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, nocache, notranslate, noimageindex">
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, nocache">
+    <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, nocache">
+    
     <%= csrf_meta_tags %>
     <meta name="csrf-token" content="<%= form_authenticity_token %>" class="js-csrf-token">
     <%= csp_meta_tag %>
