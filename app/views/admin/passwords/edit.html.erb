@@ -4,29 +4,21 @@
   </div>
 
   <%= form_with model: @admin, url: admin_password_path, local: true, class: "space-y-6" do |f| %>
-    <% if @admin.errors.any? %>
-      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded spec--error-messages">
-        <ul>
-          <% @admin.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+    <%= render AlertComponent.new(type: :danger, messages: @admin.errors.full_messages, spec_class: "spec--error-messages") if @admin.errors.any? %>
 
     <div class="a--card">
       <h2 class="text-xl font-semibold mb-4 spec--password-section-title">パスワード変更</h2>
       <p class="text-sm text-gray-500 mb-4">新しいパスワードを入力してください。</p>
 
       <div class="space-y-4">
-        <div>
-          <%= f.label :password, "新しいパスワード", class: "block text-sm font-medium mb-1" %>
+        <div class="a--form-item">
+          <%= f.label :password, "新しいパスワード", class: "a--form-label mb-1" %>
           <%= f.password_field :password, required: true,                              class: "a--text-input spec--password-input" %>
           <p class="text-xs text-gray-500 mt-1">8文字以上で設定してください</p>
         </div>
 
-        <div>
-          <%= f.label :password_confirmation, "パスワード確認", class: "block text-sm font-medium mb-1" %>
+        <div class="a--form-item">
+          <%= f.label :password_confirmation, "パスワード確認", class: "a--form-label mb-1" %>
           <%= f.password_field :password_confirmation, required: true,                              class: "a--text-input spec--password-confirmation-input" %>
           <p class="text-xs text-gray-500 mt-1">確認のため同じパスワードを入力してください</p>
         </div>

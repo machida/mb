@@ -47,19 +47,19 @@
       <div class="mb-6">
         <h3 class="text-sm font-medium text-gray-500 mb-2">記事統計</h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="bg-gray-50 p-3 rounded">
+          <div class="a--card is-secondary is-sm">
             <p class="text-lg font-semibold spec--total-articles-count">
               <%= @admin.articles.count %>
             </p>
             <p class="text-sm text-gray-600">総記事数</p>
           </div>
-          <div class="bg-gray-50 p-3 rounded">
+          <div class="a--card is-secondary is-sm">
             <p class="text-lg font-semibold spec--published-articles-count">
               <%= @admin.articles.published.count %>
             </p>
             <p class="text-sm text-gray-600">公開記事</p>
           </div>
-          <div class="bg-gray-50 p-3 rounded">
+          <div class="a--card is-secondary is-sm">
             <p class="text-lg font-semibold spec--draft-articles-count">
               <%= @admin.articles.drafts.count %>
             </p>

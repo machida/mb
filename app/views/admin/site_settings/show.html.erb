@@ -3,16 +3,16 @@
   <div class="l--container is-md">
 
     <%= form_with url: admin_site_settings_path, method: :patch, local: true, class: "space-y-6" do |f| %>
-      <div>
-        <%= label_tag "site_settings[site_title]", "サイトタイトル", class: "block text-sm font-medium mb-1" %>
+      <div class="a--form-item">
+        <%= label_tag "site_settings[site_title]", "サイトタイトル", class: "a--form-label mb-1" %>
         <%= text_field_tag "site_settings[site_title]",                         @settings[:site_title],                         class: "a--text-input spec--site-title-input" %>
         <div class="text-xs text-gray-500 mt-1">
           ブラウザのタブやOGPで使用されるサイトタイトルです
         </div>
       </div>
 
-      <div data-controller="thumbnail-upload" data-thumbnail-upload-upload-url-value="<%= admin_site_settings_upload_image_path %>">
-        <%= label_tag "site_settings[default_og_image]", "デフォルトOG画像", class: "block text-sm font-medium mb-1" %>
+      <div class="a--form-item" data-controller="thumbnail-upload" data-thumbnail-upload-upload-url-value="<%= admin_site_settings_upload_image_path %>">
+        <%= label_tag "site_settings[default_og_image]", "デフォルトOG画像", class: "a--form-label mb-1" %>
 
         <!-- Hidden file input -->
         <input type="file" accept="image/*" class="hidden" data-thumbnail-upload-target="input" data-action="change->thumbnail-upload#fileSelected">
@@ -61,8 +61,8 @@
         </div>
       </div>
 
-      <div>
-        <%= label_tag "site_settings[top_page_description]", "トップページの説明文", class: "block text-sm font-medium mb-1" %>
+      <div class="a--form-item">
+        <%= label_tag "site_settings[top_page_description]", "トップページの説明文", class: "a--form-label mb-1" %>
         <%= text_area_tag "site_settings[top_page_description]",
                           @settings[:top_page_description],                        rows: 3,                        class: "a--text-input spec--top-page-description-input" %>
         <div class="text-xs text-gray-500 mt-1">
@@ -70,16 +70,16 @@
         </div>
       </div>
 
-      <div>
-        <%= label_tag "site_settings[copyright]", "著作権者名", class: "block text-sm font-medium mb-1" %>
+      <div class="a--form-item">
+        <%= label_tag "site_settings[copyright]", "著作権者名", class: "a--form-label mb-1" %>
         <%= text_field_tag "site_settings[copyright]",                         @settings[:copyright],                         class: "a--text-input spec--copyright-input" %>
         <div class="text-xs text-gray-500 mt-1">
           「© <%= Date.current.year %> [ここに入力した名前]. All rights reserved.」の形式で表示されます
         </div>
       </div>
 
-      <div>
-        <%= label_tag "site_settings[author_display_enabled]", "記事の著者表示", class: "block text-sm font-medium mb-1" %>
+      <div class="a--form-item">
+        <%= label_tag "site_settings[author_display_enabled]", "記事の著者表示", class: "a--form-label mb-1" %>
         <div class="flex items-center space-x-4">
           <label class="flex items-center">
             <%= radio_button_tag "site_settings[author_display_enabled]", "true",                               @settings[:author_display_enabled] == "true",                               class: "mr-2 spec--author-display-enabled-true" %>

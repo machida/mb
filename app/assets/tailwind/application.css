@@ -104,6 +104,23 @@
   /* Syntax dark theme colors for markdown */
   --color-syntax-dark-bg: var(--color-gray-900);
   --color-syntax-dark-text: var(--color-gray-200);
+
+  /* Card color variations */
+  --color-primary-bg: rgba(59, 130, 246, 0.05);
+  --color-primary-border: rgba(59, 130, 246, 0.2);
+  --color-secondary-bg: rgba(107, 114, 128, 0.05);
+  --color-secondary-border: rgba(107, 114, 128, 0.2);
+  --color-warning-bg: rgba(245, 158, 11, 0.05);
+  --color-warning-border: rgba(245, 158, 11, 0.2);
+  --color-danger-bg: rgba(239, 68, 68, 0.05);
+  --color-danger-border: rgba(239, 68, 68, 0.2);
+  --color-info-bg: rgba(6, 182, 212, 0.05);
+  --color-info-border: rgba(6, 182, 212, 0.2);
+
+  /* Shadow definitions */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 /* Base styles */

@@ -10,4 +10,12 @@ class FormErrorsComponent < ViewComponent::Base
   private
 
   attr_reader :object
+
+  def alert_component
+    AlertComponent.new(
+      type: :danger,
+      messages: object.errors.full_messages,
+      spec_class: "spec--error-messages"
+    )
+  end
 end
