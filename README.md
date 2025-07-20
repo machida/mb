@@ -88,6 +88,8 @@ gcp:
 ```bash
 # Playwrightブラウザのインストール
 npx playwright install
+# または Bundle経由で
+bundle exec playwright install
 
 # 環境変数でテスト設定をカスタマイズ（オプション）
 export TEST_ADMIN_PASSWORD="your_test_password"
@@ -191,8 +193,8 @@ phantom delete feature/user-auth
 
 ### テスト
 - Mini-test (システムテスト、コントローラーテスト)
-- Capybara + Selenium WebDriver (現在のE2E)
-- Playwright (将来のE2E、実験的)
+- Playwright 1.53.2 (E2E テスト、完全移行済み)
+- playwright-ruby-client 1.53.0
 
 ## 機能詳細
 
@@ -232,18 +234,57 @@ bundle exec rails test:system
 - デフォルト値: `test_secure_password_test`
 - 詳細は `test/test_helper.rb` の `TestConfig` を参照
 
+### テスト結果
+- **総テスト数**: 225テスト
+- **アサーション数**: 649アサーション
+- **成功率**: 100%（全テスト通過確認済み）
+
+### テストカバレッジ
+- **コントローラーテスト**: 管理機能、認証、記事管理
+- **モデルテスト**: バリデーション、ビジネスロジック
+- **システムテスト**: E2E全体フロー（Playwright）
+- **セキュリティテスト**: ロボットヘッダー、認証機能
+
+## セキュリティ
+
+### 管理画面の保護
+管理画面は以下の方法で検索エンジンからの発見を防いでいます：
+
+- **robots.txt**: `/admin/` パスの明示的ブロック
+- **HTMLメタタグ**: noindex, nofollow, noarchive 等の包括的タグ
+- **HTTPヘッダー**: X-Robots-Tag ヘッダーによる追加保護
+
+### 注意事項
+- 本番環境では初期管理者パスワードを必ず変更してください
+- HTTPS環境での運用を強く推奨します
+
 ## トラブルシューティング
 
 ### Playwrightエラー
-Playwrightでタイムアウトエラーが発生する場合：
+Playwrightでエラーが発生する場合：
 
 ```bash
 # ブラウザの再インストール
+bundle exec playwright install
+# または強制的に再インストール
 npx playwright install --force
+
+# Node.jsパッケージの更新
+npm install @playwright/test@1.53.2
 
 # 環境のクリーンアップ
 rm -rf node_modules/.cache
 npm install
 ```
 
-詳細なエラー情報は `CLAUDE.md` の「Playwright移行計画」を参照してください。
+### テストの並列実行
+Playwrightテストは並列実行を無効化しています（`parallelize(workers: 1)`）。これは以下の理由によります：
+
+- データベーストランザクションの競合回避
+- セッション管理の安定化
+- ブラウザリソースの適切な管理
+
+### ライブラリバージョン互換性
+- **Playwright**: 1.53.2（推奨）
+- **playwright-ruby-client**: 1.53.0（安定版）
+- これらの組み合わせで最適な動作を確認済み

@@ -58,16 +58,18 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
     begin
       Rails.logger.info "Setting up Playwright (attempt #{retry_count + 1}/#{max_retries})"
       
-      # Create Playwright instance without block for persistent use
+      # Create Playwright driver instance (new API in 1.53.0)
+      @playwright_driver = Playwright.create(
+        playwright_cli_executable_path: find_playwright_executable
+      )
+      
       if ENV['CI'] || ENV['GITHUB_ACTIONS']
-        @playwright = Playwright.create
-        @browser = @playwright.playwright.chromium.launch(
+        @browser = @playwright_driver.playwright.chromium.launch(
           headless: true,
-          args: ['--no-sandbox', '--disable-dev-shm-usage'] # CI-friendly arguments
+          args: ['--no-sandbox', '--disable-dev-shm-usage']
         )
       else
-        @playwright = Playwright.create(playwright_cli_executable_path: find_playwright_executable)
-        @browser = @playwright.playwright.chromium.launch(headless: true)
+        @browser = @playwright_driver.playwright.chromium.launch(headless: true)
       end
       @context = @browser.new_context
       @page = @context.new_page
@@ -125,7 +127,7 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
     end
     
     begin
-      @playwright&.stop
+      @playwright_driver&.stop
     rescue => e
       Rails.logger.debug "Error stopping Playwright: #{e.message}"
     end
@@ -134,7 +136,7 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
     @page = nil
     @context = nil
     @browser = nil
-    @playwright = nil
+    @playwright_driver = nil
   end
 
   # Rails server management

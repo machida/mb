@@ -3,6 +3,10 @@ require "application_playwright_test_case"
 class AdminManagementPlaywrightTest < ApplicationPlaywrightTestCase
   def setup
     super
+    
+    # 確実にテスト用管理者をクリーンアップ
+    Admin.where(email: ["test_admin_main@example.com", "test_new_admin@example.com"]).destroy_all
+    
     # テスト用の管理者を作成（フィクスチャと重複しないemailを使用）
     @admin = Admin.create!(
       email: "test_admin_main@example.com",
@@ -221,12 +225,23 @@ class AdminManagementPlaywrightTest < ApplicationPlaywrightTestCase
     @page.click("input[type='submit'][value='パスワードを変更']")
     @page.wait_for_load_state(state: 'networkidle')
     
+    # セッションとデータベースの更新を確実にするため少し待機
+    sleep 0.5
+    
     # 管理画面に戻る
     @page.goto("http://localhost:#{@server_port}/admin/articles")
     @page.wait_for_load_state(state: 'networkidle')
     
+    # データベース状態を確認
+    @new_admin.reload
+    Rails.logger.debug "Admin password_changed_at after update: #{@new_admin.password_changed_at}"
+    Rails.logger.debug "Admin needs_password_change?: #{@new_admin.needs_password_change?}"
+    
     # パスワード変更通知が消える
     notice_elements = @page.locator(".spec--password-change-notice")
+    if notice_elements.count > 0
+      Rails.logger.debug "Password change notice still visible. Page content: #{@page.locator('body').text_content}"
+    end
     assert_equal 0, notice_elements.count, "Password change notice should disappear after password change"
   end
 end
