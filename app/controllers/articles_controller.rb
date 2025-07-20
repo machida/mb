@@ -3,6 +3,7 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = Article.published.order(created_at: :desc).page(params[:page])
+    @show_author_info = calculate_show_author_info
   end
 
   def show
@@ -18,6 +19,7 @@ class ArticlesController < ApplicationController
     @monthly_counts = Article.published.where("strftime('%Y', created_at) = ?", @year.to_s)
                             .group("strftime('%m', created_at)")
                             .count
+    @show_author_info = calculate_show_author_info
   end
 
   def archive_month
@@ -27,6 +29,7 @@ class ArticlesController < ApplicationController
                              @year.to_s, sprintf("%02d", @month))
                       .order(created_at: :desc)
                       .page(params[:page])
+    @show_author_info = calculate_show_author_info
   end
 
   def feed
@@ -41,5 +44,9 @@ class ArticlesController < ApplicationController
 
   def set_article
     @article = Article.find(params[:id])
+  end
+
+  def calculate_show_author_info
+    @_show_author_info ||= SiteSetting.author_display_enabled && Article.published.select(:author).distinct.count >= 2
   end
 end
