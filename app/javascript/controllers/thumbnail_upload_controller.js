@@ -131,7 +131,7 @@ export default class extends Controller {
         <button type="button" class="a-button is-md is-primary" data-action="click->thumbnail-upload#selectFile">
           ファイルを選択
         </button>
-        <p class="text-xs text-gray-500 mt-2">JPG, PNG, GIF (最大5MB)</p>
+        <p class="a--form-help mt-2">JPG, PNG, GIF (最大5MB)</p>
       </div>
     `;
   }

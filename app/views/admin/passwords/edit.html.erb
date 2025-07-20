@@ -14,13 +14,13 @@
         <div class="a--form-item">
           <%= f.label :password, "新しいパスワード", class: "a--form-label mb-1" %>
           <%= f.password_field :password, required: true,                              class: "a--text-input spec--password-input" %>
-          <p class="text-xs text-gray-500 mt-1">8文字以上で設定してください</p>
+          <p class="a--form-help mt-1">8文字以上で設定してください</p>
         </div>
 
         <div class="a--form-item">
           <%= f.label :password_confirmation, "パスワード確認", class: "a--form-label mb-1" %>
           <%= f.password_field :password_confirmation, required: true,                              class: "a--text-input spec--password-confirmation-input" %>
-          <p class="text-xs text-gray-500 mt-1">確認のため同じパスワードを入力してください</p>
+          <p class="a--form-help mt-1">確認のため同じパスワードを入力してください</p>
         </div>
       </div>
     </div>
