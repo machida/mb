@@ -5,7 +5,7 @@
 
   <%= form_with model: @admin, url: admin_password_path, local: true, class: "space-y-6" do |f| %>
     <% if @admin.errors.any? %>
-      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded spec--error-messages">
+      <div class="a--card is-danger text-red-700 spec--error-messages">
         <ul>
           <% @admin.errors.full_messages.each do |message| %>
             <li><%= message %></li>
@@ -20,13 +20,13 @@
 
       <div class="space-y-4">
         <div>
-          <%= f.label :password, "新しいパスワード", class: "block text-sm font-medium mb-1" %>
+          <%= f.label :password, "新しいパスワード", class: "a--form-label mb-1" %>
           <%= f.password_field :password, required: true,                              class: "a--text-input spec--password-input" %>
           <p class="text-xs text-gray-500 mt-1">8文字以上で設定してください</p>
         </div>
 
         <div>
-          <%= f.label :password_confirmation, "パスワード確認", class: "block text-sm font-medium mb-1" %>
+          <%= f.label :password_confirmation, "パスワード確認", class: "a--form-label mb-1" %>
           <%= f.password_field :password_confirmation, required: true,                              class: "a--text-input spec--password-confirmation-input" %>
           <p class="text-xs text-gray-500 mt-1">確認のため同じパスワードを入力してください</p>
         </div>

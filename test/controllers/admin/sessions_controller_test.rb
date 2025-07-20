@@ -32,7 +32,7 @@ class Admin::SessionsControllerTest < ActionDispatch::IntegrationTest
     
     assert_response :unprocessable_entity
     assert_nil session[:admin_id]
-    assert_select ".bg-red-100", text: /メールアドレスまたはパスワードが間違っています/
+    assert_select ".a--card.is-danger", text: /メールアドレスまたはパスワードが間違っています/
   end
 
   test "should not login with invalid password" do
@@ -43,7 +43,7 @@ class Admin::SessionsControllerTest < ActionDispatch::IntegrationTest
     
     assert_response :unprocessable_entity
     assert_nil session[:admin_id]
-    assert_select ".bg-red-100", text: /メールアドレスまたはパスワードが間違っています/
+    assert_select ".a--card.is-danger", text: /メールアドレスまたはパスワードが間違っています/
   end
 
   test "should logout" do
