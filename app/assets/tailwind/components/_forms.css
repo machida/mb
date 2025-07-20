@@ -35,6 +35,10 @@
   margin-top: 0.25rem;
 }
 
+.a--form-item {
+  margin-bottom: 1rem;
+}
+
 .a--form-label {
   display: block;
   font-size: 0.875rem;

@@ -1,0 +1,15 @@
+<div class="<%= card_classes %>">
+  <% if display_title.present? %>
+    <h3 class="font-medium mb-2"><%= display_title %></h3>
+  <% end %>
+  
+  <% if message.present? %>
+    <p><%= message %></p>
+  <% elsif messages.present? %>
+    <ul class="list-disc list-inside space-y-1">
+      <% messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

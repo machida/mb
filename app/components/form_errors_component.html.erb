@@ -1,8 +1,1 @@
-<div class="a--card is-danger text-red-700 spec--error-messages">
-  <h3 class="font-medium mb-2">エラーが発生しました</h3>
-  <ul class="list-disc list-inside space-y-1">
-    <% object.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-</div>
+<%= render alert_component %>

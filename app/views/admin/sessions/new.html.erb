@@ -2,23 +2,23 @@
   <h1 class="a--heading is-xl text-center mb-6 spec--login-title">管理者ログイン</h1>
 
   <% if flash[:alert] %>
-    <div class="a--card is-danger text-red-700 mb-4">
-      <%= flash[:alert] %>
+    <div class="mb-4">
+      <%= render AlertComponent.new(type: :danger, message: flash[:alert], spec_class: "spec--error-alert") %>
     </div>
   <% end %>
 
   <%= form_with url: admin_login_path, local: true, class: "space-y-4" do |f| %>
-    <div>
+    <div class="a--form-item">
       <%= f.label :email, "メールアドレス", class: "a--form-label mb-1 spec--email-label" %>
       <%= f.email_field :email, required: true, class: "a--text-input spec--email-input" %>
     </div>
 
-    <div>
+    <div class="a--form-item">
       <%= f.label :password, "パスワード", class: "a--form-label mb-1 spec--password-label" %>
       <%= f.password_field :password, required: true, class: "a--text-input spec--password-input" %>
     </div>
 
-    <div>
+    <div class="a--form-item">
       <%= f.submit "ログイン", class: "a--button is-lg is-primary is-flex spec--login-button" %>
     </div>
   <% end %>
