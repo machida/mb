@@ -20,13 +20,43 @@
 ## 開発コマンド
 
 ### セットアップ
-- `bin/setup` - 完全セットアップ（推奨）
-- `bin/quick-setup` - 最小限セットアップ
-- `bin/dev-help` - 開発者向けヘルプ表示
+```bash
+bin/setup                    # 完全セットアップ（推奨）
+bin/quick-setup             # 最小限セットアップ
+bin/dev-help                # 開発者向けヘルプ表示
+bin/setup --skip-server     # サーバー起動をスキップしてセットアップ
+```
 
 ### 開発サーバー
-- `bin/dev` - 開発サーバー起動（Procfile.devを使用）
-- `bin/setup --skip-server` - サーバー起動をスキップしてセットアップ
+```bash
+bin/dev                     # 開発サーバー起動（Procfile.devを使用）
+bundle exec rails server   # Rails サーバーのみ
+bundle exec foreman start  # 複数プロセス起動
+```
+
+### テスト実行
+```bash
+bundle exec rails test:all                    # 全テスト実行
+bundle exec rails test --exclude "playwright" # 非Playwrightテスト
+bundle exec rails test test/system/           # システムテストのみ
+```
+
+### コード品質チェック
+```bash
+bundle exec rubocop                # Ruby linting
+bundle exec rubocop -a             # Auto-correct Ruby code
+bundle exec brakeman               # Security scanning
+bundle exec erb_lint app/views/    # ERB template linting
+npm run lint                       # JavaScript/CSS linting
+```
+
+### データベース操作
+```bash
+rails db:create                    # データベース作成
+rails db:migrate                   # マイグレーション実行
+rails db:seed                      # シードデータ投入
+rails db:reset                     # データベースリセット
+```
 
 ## 重要な注意事項
 - テストファイルでは必ず`.spec--`クラスを使用してHTML要素を選択
@@ -257,29 +287,74 @@ phantom delete fix/login-bug
 - 詳細なデバッグ情報とスクリーンショット
 - 複数ブラウザでの並列実行
 
-## リンター設定
+## コード品質ツール
 
-### RuboCop設定（.rubocop.yml）
-- ERBファイルを除外 (`app/views/**/*.erb`)
-- 行長制限: 120文字
-- String literals: double_quotes統一
-- Rails omakase設定継承
+### Ruby品質管理
+- **RuboCop**: Ruby コードスタイルの統一
+  - 設定ファイル: `.rubocop.yml`
+  - ERBファイルを除外 (`app/views/**/*.erb`)
+  - 行長制限: 120文字
+  - String literals: double_quotes統一
+  - Rails omakase設定継承
+- **Brakeman**: セキュリティ脆弱性の検出
+- **ERB Lint**: ERB テンプレートの品質管理
+  - 設定ファイル: `.erb_lint.yml`
+  - セキュリティ: ErbSafety有効
+  - 構文チェック: ParserErrors有効
+  - フォーマット: SpaceAroundErbTag、TrailingWhitespace等
+  - ERB専用RuboCop: 行長制限150文字、InitialIndentation無効化
 
-### ERB Lint設定（.erb_lint.yml）
-- **セキュリティ**: ErbSafety有効
-- **構文チェック**: ParserErrors有効
-- **フォーマット**: SpaceAroundErbTag、TrailingWhitespace等
-- **ERB専用RuboCop**: 行長制限150文字、InitialIndentation無効化
-- **設定分離**: RuboCopとERB lintを完全に分離管理
+### JavaScript品質管理
+- **ESLint**: JavaScript コード品質とスタイル
+  - ES2024対応、modern JavaScript機能サポート
+- **Prettier**: コード フォーマット統一
+- **Node.js環境**:
+  - バージョン管理: .nvmrcでv22.17.1を指定
+  - 開発環境: nodebrew使用でバージョン切り替え
 
-### Node.js環境
-- **バージョン管理**: .nvmrcでv22.17.1を指定
-- **ESLint設定**: ES2024対応、modern JavaScript機能サポート
-- **開発環境**: nodebrew使用でバージョン切り替え
+### テスト品質管理
+- **Mini-test**: Ruby テストフレームワーク（RSpecではない）
+- **Playwright**: E2Eテストフレームワーク
+  - Chromium, Firefox, Webkit サポート
+  - より安定したE2Eテスト（sleep不要）
+  - 高速な実行速度
+  - 詳細なデバッグ情報とスクリーンショット
+
+## 環境設定
+
+### 開発環境
+- Ruby 3.4.2 (rbenv管理)
+- Rails 7.2.2
+- Node.js v22.17.1 (nodebrew管理)
+- PostgreSQL (開発・テスト環境)
+
+### バージョン管理
+- `.ruby-version` - Ruby バージョン指定
+- `.nvmrc` - Node.js バージョン指定
+- `package.json` と `package-lock.json` - Node.js依存関係管理
+- `Gemfile` と `Gemfile.lock` - Ruby依存関係管理
+
+### セキュリティ
+- Brakeman によるセキュリティスキャン
+- ERB Lint による ERB テンプレートの安全性チェック
+- テスト用の認証情報は環境変数で管理
+
+## パフォーマンス最適化
+
+### データベース最適化
+- N+1クエリ問題の継続的な監視と修正
+- `includes()` を使用した関連データの事前読み込み
+- メモ化パターンによる重複計算の回避
+
+### フロントエンド最適化
+- Tailwind CSS による効率的なスタイリング
+- ESBuild による高速なJavaScriptビルド
+- 画像最適化サービス（ImageUploadService）による自動リサイズ
 
 ## 現在の状態
-- **テスト**: 138テスト全て成功（0 failures, 0 errors, 0 skips）
+- **テスト**: 165テスト全て成功（0 failures, 0 errors, 0 skips）
 - **E2Eテスト**: Playwright完全移行済み
 - **リンター**: ERB構文エラー問題解決済み
 - **Node.js**: 最新安定版（v22.17.1）にアップグレード
 - **ブラウザー**: Playwright全ブラウザー（Chromium, Firefox, Webkit）インストール済み
+- **Git管理**: node_modules追跡問題解決済み（1392ファイル除外完了）
