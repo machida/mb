@@ -89,4 +89,20 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", admin_articles_path, text: "記事管理"
     assert_select "form[action=?]", admin_logout_path
   end
+
+  test "should not access draft article when not logged in" do
+    get article_path(@draft_article)
+    assert_redirected_to root_path
+    follow_redirect!
+    assert_match "この記事は非公開です。", response.body
+  end
+
+  test "should access draft article when logged in as admin" do
+    post admin_login_path, params: { email: @admin.email, password: "password123" }
+    
+    get article_path(@draft_article)
+    assert_response :success
+    assert_select ".spec--article-title", @draft_article.title
+    assert_select ".spec--article-content"
+  end
 end

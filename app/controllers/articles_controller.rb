@@ -7,6 +7,11 @@ class ArticlesController < ApplicationController
   end
 
   def show
+    # 下書き記事は管理者以外アクセス不可
+    if @article.draft? && !current_user_signed_in?
+      redirect_to root_path, alert: "この記事は非公開です。"
+      return
+    end
   end
 
   def archive_year
