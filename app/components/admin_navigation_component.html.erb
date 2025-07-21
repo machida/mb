@@ -1,0 +1,7 @@
+<nav class="a--pill">
+  <% nav_items.each do |item| %>
+    <%= link_to item[:path], class: nav_class_for(item) do %>
+      <span class="<%= item[:text] == '全員' ? 'spec--all-admins-title' : 'spec--self-admin-title' %>"><%= item[:text] %></span><%= "(#{item[:count]})" if item[:count] %>
+    <% end %>
+  <% end %>
+</nav>

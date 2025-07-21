@@ -14,6 +14,9 @@ class Admin::AdminsControllerTest < ActionDispatch::IntegrationTest
     assert_select ".spec--admin-user-id", text: @admin.user_id
     # Check that new admin button is displayed in page title area
     assert_select ".spec--new-admin-link", text: "新規管理者追加"
+    # Check that admin navigation is displayed
+    assert_select ".spec--all-admins-title", text: "全員"
+    assert_select ".spec--self-admin-title", text: "自分自身"
   end
 
   test "should get new" do
@@ -60,6 +63,9 @@ class Admin::AdminsControllerTest < ActionDispatch::IntegrationTest
     get admin_admin_url(@admin)
     assert_response :success
     assert_select ".spec--admin-user-id", text: @admin.user_id
+    # Check that admin navigation is displayed
+    assert_select ".spec--all-admins-title", text: "全員"
+    assert_select ".spec--self-admin-title", text: "自分自身"
   end
 
   test "should destroy admin when not last admin" do

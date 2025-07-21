@@ -1,6 +1,9 @@
 <%= render PageTitleComponent.new(title: "管理者詳細") %>
 <div class="a--page-body py-6">
   <div class="l--container is-md">
+    <div class="flex justify-center items-center mb-8">
+      <%= render AdminNavigationComponent.new(current_admin: current_admin) %>
+    </div>
     <div class="a--card">
       <div class="flex justify-between items-start mb-6">
         <div>

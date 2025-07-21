@@ -5,6 +5,10 @@
 
 <div class="a--page-body py-6">
   <div class="l--container is-sm">
+    <div class="flex justify-center items-center mb-8">
+      <%= render AdminNavigationComponent.new(current_admin: current_admin) %>
+    </div>
+
     <div class="mb-6">
       <p class="text-gray-600 spec--admins-count">
         管理者数: <%= @admins.count %>人
