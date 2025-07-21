@@ -4,6 +4,11 @@
       <h1 class="a--heading is-xxl spec--page-title <%= title_class %>">
         <%= title %>
       </h1>
+      <% if action_button %>
+        <div class="spec--page-action-button">
+          <%= action_button %>
+        </div>
+      <% end %>
     </div>
   </div>
 </header>
