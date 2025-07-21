@@ -1,0 +1,43 @@
+<div class="a--form-item" data-controller="thumbnail-upload" data-thumbnail-upload-upload-url-value="<%= upload_url %>">
+  <% if form %>
+    <%= form.label field_name, label, class: "a--form-label mb-1" %>
+  <% else %>
+    <label class="a--form-label mb-1"><%= label %></label>
+  <% end %>
+
+  <!-- Hidden file input -->
+  <input type="file" accept="<%= accept %>" class="hidden" data-thumbnail-upload-target="input" data-action="change->thumbnail-upload#fileSelected">
+
+  <!-- Hidden URL field -->
+  <% if form %>
+    <%= form.text_field field_name, class: input_classes, data: { thumbnail_upload_target: "url" } %>
+  <% else %>
+    <input type="hidden" name="<%= field_name %>" class="<%= input_classes %>" data-thumbnail-upload-target="url">
+  <% end %>
+
+  <!-- Drop zone -->
+  <div class="border-2 border-dashed border-gray-300 rounded-lg transition-colors" data-thumbnail-upload-target="dropzone">
+    <div class="flex flex-col items-center justify-center py-8">
+      <svg class="w-12 h-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+      </svg>
+      <p class="text-gray-600 text-center mb-2">
+        画像をドラッグ&ドロップするか
+      </p>
+      <button type="button" class="a--button is-md is-primary" data-action="click->thumbnail-upload#selectFile">
+        ファイルを選択
+      </button>
+      <p class="a--form-help mt-2"><%= help_text %></p>
+    </div>
+  </div>
+
+  <!-- Preview area -->
+  <div class="mt-4">
+    <img data-thumbnail-upload-target="preview" src="<%= preview_image_src %>" class="<%= preview_classes %>" alt="">
+    <div class="<%= clear_button_container_classes %>">
+      <button type="button" class="a--button is-sm is-danger" data-action="click->thumbnail-upload#clearThumbnail" data-thumbnail-upload-target="clearButton">
+        画像を削除
+      </button>
+    </div>
+  </div>
+</div>

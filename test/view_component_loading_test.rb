@@ -21,6 +21,15 @@ class ViewComponentLoadingTest < ActiveSupport::TestCase
     component = ArticleNavigationComponent.new
     assert_instance_of ArticleNavigationComponent, component
   end
+
+  test "ImageUploadComponent can be instantiated" do
+    component = ImageUploadComponent.new(
+      field_name: :image,
+      label: "Test Image",
+      upload_url: "/test/upload"
+    )
+    assert_instance_of ImageUploadComponent, component
+  end
   
   test "all view components are autoloaded correctly" do
     # This test ensures app/components is in the autoload path
@@ -29,6 +38,7 @@ class ViewComponentLoadingTest < ActiveSupport::TestCase
       FormErrorsComponent  
       PasswordChangeNoticeComponent
       ArticleNavigationComponent
+      ImageUploadComponent
     end
   end
 end
