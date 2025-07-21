@@ -105,4 +105,19 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".spec--article-title", @draft_article.title
     assert_select ".spec--article-content"
   end
+
+  test "should show draft notification for draft articles when logged in as admin" do
+    post admin_login_path, params: { email: @admin.email, password: "password123" }
+    
+    get article_path(@draft_article)
+    assert_response :success
+    assert_select ".spec--draft-notice", text: /この記事は下書きです/
+    assert_select ".spec--draft-notice", text: /一般には公開されていません/
+  end
+
+  test "should not show draft notification for published articles" do
+    get article_path(@published_article)
+    assert_response :success
+    assert_select ".spec--draft-notice", count: 0
+  end
 end
