@@ -70,3 +70,27 @@
     min-height: 15rem;
   }
 }
+
+.a--form-item.is-xs {
+  max-width: 20rem; /* 320px */
+}
+
+.a--form-item.is-sm {
+  max-width: 40rem; /* 640px */
+}
+
+.a--form-item.is-md {
+  max-width: 48rem; /* 768px */
+}
+
+.a--form-item.is-lg {
+  max-width: 64rem; /* 1024px */
+}
+
+.a--form-item.is-xl {
+  max-width: 80rem; /* 1280px */
+}
+
+.l--container.is-xxl {
+  max-width: 96rem; /* 1536px */
+}

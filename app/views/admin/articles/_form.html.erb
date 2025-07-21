@@ -1,12 +1,12 @@
 <%= form_with model: [ :admin, article ], local: true, class: "space-y-6" do |f| %>
   <%= render AlertComponent.new(type: :danger, messages: article.errors.full_messages) if article.errors.any? %>
 
-  <div class="a--form-item">
+  <div class="a--form-item is-sm">
     <%= f.label :title, "タイトル", class: "a--form-label mb-1" %>
     <%= f.text_field :title, class: "a--text-input spec--title-input" %>
   </div>
 
-  <div class="a--form-item">
+  <div class="a--form-item is-sm">
     <%= f.label :summary, "概要", class: "a--form-label mb-1" %>
     <%= f.text_area :summary, rows: 3, class: "a--text-input spec--summary-input" %>
   </div>
@@ -15,13 +15,12 @@
     <%= f.label :body, "本文 (Markdown記法)", class: "a--form-label mb-1" %>
     <div class="a--form-help mb-2">
       Markdown記法が使用できます。**太字**、*斜体*、`コード`、[リンク](URL)、見出し(#)、リスト(-)など
+      <br>
+      画像をドラッグ&ドロップするか、貼り付けてアップロードできます
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4" data-controller="markdown-preview">
-      <div class="a--form-item">
+      <div class="">
         <label class="a--form-label mb-1">編集</label>
-        <div class="a--form-help mb-2">
-          画像をドラッグ&ドロップするか、貼り付けてアップロードできます
-        </div>
         <%= f.text_area :body, rows: 15,
                         class: "a--text-input a--markdown-textarea font-mono text-sm spec--body-input js-markdown-textarea",
                         data: {
@@ -29,7 +28,7 @@
                           action: "input->markdown-preview#update keyup->markdown-preview#update dragover->image-upload#dragover dragleave->image-upload#dragleave drop->image-upload#drop",
                           image_upload_target: "textarea",                          image_upload_upload_url_value: admin_articles_upload_image_path                        } %>
       </div>
-      <div class="a--form-item">
+      <div class="">
         <label class="a--form-label mb-1">プレビュー</label>
         <div class="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 overflow-y-auto">
           <div data-markdown-preview-target="preview" class="a--markdown-body js-markdown-preview">
