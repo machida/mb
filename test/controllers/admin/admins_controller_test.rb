@@ -12,6 +12,8 @@ class Admin::AdminsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select ".spec--admins-list"
     assert_select ".spec--admin-user-id", text: @admin.user_id
+    # Check that new admin button is displayed in page title area
+    assert_select ".spec--new-admin-link", text: "新規管理者追加"
   end
 
   test "should get new" do
