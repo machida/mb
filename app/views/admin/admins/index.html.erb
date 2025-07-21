@@ -9,12 +9,6 @@
       <%= render AdminNavigationComponent.new(current_admin: current_admin) %>
     </div>
 
-    <div class="mb-6">
-      <p class="text-gray-600 spec--admins-count">
-        管理者数: <%= @admins.count %>人
-      </p>
-    </div>
-
     <div class="space-y-4 spec--admins-list">
       <% @admins.each do |admin| %>
         <div class="a--card">
