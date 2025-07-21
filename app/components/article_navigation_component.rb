@@ -8,11 +8,13 @@ class ArticleNavigationComponent < ViewComponent::Base
     [
       {
         text: "全ての記事",
+        count: Article.count,
         path: admin_articles_path,
         active: current_page?(admin_articles_path)
       },
       {
-        text: "下書き記事", 
+        text: "下書き記事",
+        count: Article.drafts.count,
         path: drafts_admin_articles_path,
         active: current_page?(drafts_admin_articles_path)
       }
