@@ -1,33 +1,33 @@
-<div class="spec--password-edit-container max-w-2xl mx-auto">
-  <div class="mb-8">
-    <h1 class="text-3xl font-bold spec--password-edit-title">パスワード変更</h1>
-  </div>
+<%= render PageTitleComponent.new(title: "パスワード変更", title_class: "spec--password-edit-title") %>
 
-  <%= form_with model: @admin, url: admin_password_path, local: true, class: "space-y-6" do |f| %>
-    <%= render AlertComponent.new(type: :danger, messages: @admin.errors.full_messages, spec_class: "spec--error-messages") if @admin.errors.any? %>
+<div class="a--page-body py-6">
+  <div class="spec--password-edit-container l--container is-sm">
+    <%= form_with model: @admin, url: admin_password_path, local: true, class: "space-y-6" do |f| %>
+      <%= render AlertComponent.new(type: :danger, messages: @admin.errors.full_messages, spec_class: "spec--error-messages") if @admin.errors.any? %>
 
-    <div class="a--card">
-      <h2 class="text-xl font-semibold mb-4 spec--password-section-title">パスワード変更</h2>
-      <p class="text-sm text-gray-500 mb-4">新しいパスワードを入力してください。</p>
+      <div class="a--card">
+        <h2 class="text-xl font-semibold mb-4 spec--password-section-title">パスワード変更</h2>
+        <p class="text-sm text-gray-500 mb-4">新しいパスワードを入力してください。</p>
 
-      <div class="space-y-4">
-        <div class="a--form-item">
-          <%= f.label :password, "新しいパスワード", class: "a--form-label mb-1" %>
-          <%= f.password_field :password, required: true,                              class: "a--text-input spec--password-input" %>
-          <p class="a--form-help mt-1">8文字以上で設定してください</p>
-        </div>
+        <div class="space-y-4">
+          <div class="a--form-item">
+            <%= f.label :password, "新しいパスワード", class: "a--form-label mb-1" %>
+            <%= f.password_field :password, required: true,                              class: "a--text-input spec--password-input" %>
+            <p class="a--form-help mt-1">8文字以上で設定してください</p>
+          </div>
 
-        <div class="a--form-item">
-          <%= f.label :password_confirmation, "パスワード確認", class: "a--form-label mb-1" %>
-          <%= f.password_field :password_confirmation, required: true,                              class: "a--text-input spec--password-confirmation-input" %>
-          <p class="a--form-help mt-1">確認のため同じパスワードを入力してください</p>
+          <div class="a--form-item">
+            <%= f.label :password_confirmation, "パスワード確認", class: "a--form-label mb-1" %>
+            <%= f.password_field :password_confirmation, required: true,                              class: "a--text-input spec--password-confirmation-input" %>
+            <p class="a--form-help mt-1">確認のため同じパスワードを入力してください</p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="flex gap-4">
-      <%= f.submit "パスワードを変更", class: "a--button is-lg is-primary spec--update-button spec--password-change-button" %>
-      <%= link_to "キャンセル", edit_admin_profile_path, class: "a--button is-lg is-border-secondary spec--cancel-button" %>
-    </div>
-  <% end %>
+      <div class="flex gap-4">
+        <%= f.submit "パスワードを変更", class: "a--button is-lg is-primary spec--update-button spec--password-change-button" %>
+        <%= link_to "キャンセル", edit_admin_profile_path, class: "a--button is-lg is-border-secondary spec--cancel-button" %>
+      </div>
+    <% end %>
+  </div>
 </div>

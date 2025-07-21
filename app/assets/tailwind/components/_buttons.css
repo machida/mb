@@ -169,12 +169,10 @@
 
 /* Button States */
 .a--button:disabled {
-  opacity: 0.5;
+  background-color: var(--color-bg-muted);
   cursor: not-allowed;
-}
-
-.a--button:disabled:hover {
-  background-color: currentColor;
+  border: dashed 1px currentColor;
+  color: var(--color-text-muted)
 }
 
 /* Button Width */

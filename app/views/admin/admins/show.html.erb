@@ -73,61 +73,65 @@
     </div>
 
     <% if @admin.articles.exists? %>
-      <div class="a--card mt-6">
-        <h3 class="text-lg font-semibold mb-4">記事の処理</h3>
-        <p class="text-gray-600 mb-4">
-          この管理者を削除する前に、作成された記事の処理方法を選択してください。
-        </p>
+      <div class="mt-6">
+        <header class="a--card-header">
+          <h3 class="a--heading is-md">記事の処理</h3>
+        </header>
+        <div class="a--card">
+          <p class="text-gray-600 mb-4">
+            この管理者を削除する前に、作成された記事の処理方法を選択してください。
+          </p>
 
-        <%= form_with url: process_delete_admin_admin_path(@admin), local: true, class: "space-y-4" do |f| %>
-          <div class="space-y-3">
-            <label class="flex items-start space-x-3">
-              <%= f.radio_button :action_type, "transfer", class: "mt-1 spec--transfer-radio" %>
-              <div>
-                <span class="font-medium">他の管理者に移譲</span>
-                <p class="text-sm text-gray-600">記事の著者を別の管理者に変更します</p>
-                <div class="mt-2">
-                  <%= f.select :target_admin_id,
-                              options_from_collection_for_select(Admin.where.not(id: @admin.id), :id, :user_id),
-                              { prompt: "移譲先の管理者を選択" },
-                              { class: "a--select spec--target-admin-select" } %>
+          <%= form_with url: process_delete_admin_admin_path(@admin), local: true, class: "space-y-4" do |f| %>
+            <div class="space-y-3">
+              <label class="flex items-start space-x-3">
+                <%= f.radio_button :action_type, "transfer", class: "mt-1 spec--transfer-radio" %>
+                <div>
+                  <span class="font-medium">他の管理者に移譲</span>
+                  <p class="text-sm text-gray-600">記事の著者を別の管理者に変更します</p>
+                  <div class="mt-2">
+                    <%= f.select :target_admin_id,
+                                options_from_collection_for_select(Admin.where.not(id: @admin.id), :id, :user_id),
+                                { prompt: "移譲先の管理者を選択" },
+                                { class: "a--select spec--target-admin-select" } %>
+                  </div>
                 </div>
-              </div>
-            </label>
+              </label>
 
-            <label class="flex items-start space-x-3">
-              <%= f.radio_button :action_type, "delete_articles", class: "mt-1 spec--delete-articles-radio" %>
-              <div>
-                <span class="font-medium text-red-600">記事も一緒に削除</span>
-                <p class="text-sm text-gray-600">この管理者の記事をすべて削除します（復元不可）</p>
-              </div>
-            </label>
-          </div>
+              <label class="flex items-start space-x-3">
+                <%= f.radio_button :action_type, "delete_articles", class: "mt-1 spec--delete-articles-radio" %>
+                <div>
+                  <span class="font-medium text-red-600">記事も一緒に削除</span>
+                  <p class="text-sm text-gray-600">この管理者の記事をすべて削除します（復元不可）</p>
+                </div>
+              </label>
+            </div>
 
-          <div class="flex gap-4 pt-4">
-            <% unless @admin.last_admin? %>
-              <%= f.submit "管理者を削除", class: "a--button is-lg is-danger spec--confirm-delete-button" %>
-            <% else %>
-              <button type="button" disabled class="a--button is-lg is-disabled spec--cannot-delete-button">
-                最後の管理者は削除できません
-              </button>
-            <% end %>
-            <%= link_to "キャンセル", admin_admins_path, class: "a--button is-lg is-border-secondary spec--cancel-button" %>
-          </div>
-        <% end %>
+            <div class="flex gap-4 pt-4">
+              <% unless @admin.last_admin? %>
+                <%= f.submit "管理者を削除", class: "a--button is-md is-danger spec--confirm-delete-button" %>
+              <% else %>
+                <button type="button" disabled class="a--button is-md is-disabled spec--cannot-delete-button">
+                  最後の管理者は削除できません
+                </button>
+              <% end %>
+              <%= link_to "キャンセル", admin_admins_path, class: "a--button is-md is-border-secondary spec--cancel-button" %>
+            </div>
+          <% end %>
+        </div>
       </div>
     <% else %>
       <div class="flex gap-4 mt-6">
         <% unless @admin.last_admin? %>
           <%= link_to "管理者を削除", admin_admin_path(@admin), method: :delete,
                       data: { confirm: "この管理者を削除しますか？" },
-                      class: "a--button is-lg is-danger spec--simple-delete-button" %>
+                      class: "a--button is-md is-danger spec--simple-delete-button" %>
         <% else %>
-          <button type="button" disabled class="a--button is-lg is-disabled spec--cannot-delete-button">
+          <button type="button" disabled class="a--button is-md is-disabled spec--cannot-delete-button">
             最後の管理者は削除できません
           </button>
         <% end %>
-        <%= link_to "管理者一覧に戻る", admin_admins_path, class: "a--button is-lg is-border-secondary spec--back-button" %>
+        <%= link_to "管理者一覧に戻る", admin_admins_path, class: "a--button is-md is-border-secondary spec--back-button" %>
       </div>
     <% end %>
   </div>
