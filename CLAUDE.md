@@ -65,6 +65,7 @@
 - **mainブランチに戻った際は必ず`git pull`を実行して最新の状態にする**
 - **feature/作業内容でブランチを切って作業する**
 - **pushする前に必ず`bundle exec rails test:all`を実行してテストが通ることを確認する**
+- **pushする前に必ず`git pull --rebase origin main`を実行して最新のmainを取り込む**
 - **作業完了後はpushしてプルリクエストを作成する**
 
 ## Phantomを使った複数ブランチ同時開発
