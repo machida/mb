@@ -50,11 +50,7 @@ module ApplicationHelper
 
   # Article list helpers
   def link_path_for_article(article)
-    if current_page?(drafts_admin_articles_path)
-      admin_article_path(article)
-    else
-      article_path(article)
-    end
+    article_path(article)
   end
 
   def status_badge_class(article)
