@@ -2,7 +2,7 @@ class Admin::AdminsController < Admin::BaseController
   before_action :set_admin, only: [:show, :destroy]
 
   def index
-    @admins = Admin.all.order(:user_id)
+    @admins = Admin.includes(:articles).order(:user_id)
   end
 
   def show
@@ -44,7 +44,7 @@ class Admin::AdminsController < Admin::BaseController
   end
 
   def confirm_delete
-    @admin = Admin.find(params[:id])
+    @admin = Admin.includes(:articles).find(params[:id])
     
     if @admin.last_admin?
       redirect_to admin_admins_path, alert: "最後の管理者は削除できません。"
@@ -56,7 +56,7 @@ class Admin::AdminsController < Admin::BaseController
   end
 
   def process_delete
-    @admin = Admin.find(params[:id])
+    @admin = Admin.includes(:articles).find(params[:id])
     action_type = params[:action_type]
     
     case action_type
@@ -85,7 +85,7 @@ class Admin::AdminsController < Admin::BaseController
   private
 
   def set_admin
-    @admin = Admin.find(params[:id])
+    @admin = Admin.includes(:articles).find(params[:id])
   end
 
   def admin_params
