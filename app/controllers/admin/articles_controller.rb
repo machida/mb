@@ -1,5 +1,5 @@
 class Admin::ArticlesController < Admin::BaseController
-  before_action :set_article, only: [ :show, :edit, :update, :destroy ]
+  before_action :set_article, only: [ :edit, :update, :destroy ]
 
   def index
     @articles = Article.all.order(created_at: :desc).page(params[:page])
@@ -7,9 +7,6 @@ class Admin::ArticlesController < Admin::BaseController
 
   def drafts
     @articles = Article.drafts.order(created_at: :desc).page(params[:page])
-  end
-
-  def show
   end
 
   def new

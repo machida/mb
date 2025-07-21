@@ -1,3 +1,14 @@
+.a--card-header {
+  background-color: var(--color-bg-primary);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border-light);
+  padding: .75rem 1.5rem;
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
 /* Card Component Styles */
 
 .a--card {
@@ -6,6 +17,11 @@
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--color-border-light);
   padding: 1.5rem;
+}
+
+.a--card-header + .a--card {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .a--card.is-hover {
@@ -30,26 +46,30 @@
 }
 
 /* Card color variations */
+.a--card-header.is-primary
 .a--card.is-primary {
   background-color: var(--color-primary-bg);
   border-color: var(--color-primary-border);
 }
 
+.a--card-header.is-secondary,
 .a--card.is-secondary {
   background-color: var(--color-secondary-bg);
   border-color: var(--color-secondary-border);
 }
 
+.a--card-header.is-warning,
 .a--card.is-warning {
   background-color: var(--color-warning-bg);
   border-color: var(--color-warning-border);
 }
 
+.a--card-header.is-danger,
 .a--card.is-danger {
   background-color: var(--color-danger-bg);
   border-color: var(--color-danger-border);
 }
-
+.a--card-header.is-info,
 .a--card.is-info {
   background-color: var(--color-info-bg);
   border-color: var(--color-info-border);

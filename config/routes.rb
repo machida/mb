@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       end
     end
     
-    resources :articles, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+    resources :articles, only: [:index, :new, :create, :edit, :update, :destroy] do
       collection do
         get :drafts
       end

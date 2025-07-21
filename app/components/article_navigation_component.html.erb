@@ -1,7 +1,7 @@
 <nav class="a--pill">
   <% nav_items.each do |item| %>
     <%= link_to item[:path], class: nav_class_for(item) do %>
-      <%= item[:text] %> (<%= item[:count] %>)
+      <span class="<%= item[:text] == '全ての記事' ? 'spec--article-index-title spec--draft-section-title' : 'spec--draft-index-title' %>"><%= item[:text] %></span> (<%= item[:count] %>)
     <% end %>
   <% end %>
 </nav>
