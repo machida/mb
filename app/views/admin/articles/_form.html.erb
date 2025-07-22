@@ -1,9 +1,10 @@
-<%= form_with model: [ :admin, article ], local: true, class: "space-y-6" do |f| %>
+<%= form_with model: [ :admin, article ], local: true do |f| %>
   <%= render AlertComponent.new(type: :danger, messages: article.errors.full_messages) if article.errors.any? %>
 
-  <div class="a--form-item is-xs">
+  <div class="l--form-items">
+    <div class="l--form-item is-xs">
     <%= f.label :title, "タイトル", class: "a--form-label mb-1" %>
-    <%= f.text_field :title, 
+    <%= f.text_field :title,
         class: "a--text-input spec--title-input #{'border-red-300' if article.errors[:title].any?}",
         aria_describedby: ("title-error" if article.errors[:title].any?),
         aria_invalid: (article.errors[:title].any? ? "true" : "false"),
@@ -15,9 +16,9 @@
     <% end %>
   </div>
 
-  <div class="a--form-item is-sm">
+  <div class="l--form-item is-sm">
     <%= f.label :summary, "概要", class: "a--form-label mb-1" %>
-    <%= f.text_area :summary, rows: 3, 
+    <%= f.text_area :summary, rows: 3,
         class: "a--text-input spec--summary-input #{'border-red-300' if article.errors[:summary].any?}",
         aria_describedby: ("summary-error" if article.errors[:summary].any?),
         aria_invalid: (article.errors[:summary].any? ? "true" : "false") %>
@@ -28,7 +29,7 @@
     <% end %>
   </div>
 
-  <fieldset class="a--form-item">
+  <fieldset class="l--form-item">
     <legend class="a--form-label mb-1">本文 (Markdown記法)</legend>
     <div id="body-help" class="a--form-help mb-2">
       Markdown記法が使用できます。**太字**、*斜体*、`コード`、[リンク](URL)、見出し(#)、リスト(-)など
@@ -68,34 +69,36 @@
     </div>
   </fieldset>
 
-  <div class="a--form-item is-xs">
+  <div class="l--form-item is-xs">
+    <%= f.label :thumbnail, "サムネイル画像", class: "a--form-label mb-1" %>
+    <div class="a--form-help">
+      記事のOGP画像やカード表示で使用される画像です
+    </div>
     <%= render ImageUploadComponent.new(
       field_name: :thumbnail,
-      label: "サムネイル画像",
       upload_url: admin_site_settings_upload_image_path,
       current_image: article.thumbnail,
       form: f,
       spec_class: "thumbnail"
     ) %>
-
-    <div class="a--form-help">
-      記事のOGP画像やカード表示で使用される画像です
     </div>
   </div>
 
-  <div class="a--form-actions flex gap-4">
-    <% if article.persisted? %>
-      <% if article.draft? %>
-        <%= f.submit "公開", class: "a--button is-lg is-primary spec--update-button" %>
-        <%= f.submit "下書き保存", class: "a--button is-lg is-warning" %>
+  <div class="l--form-actions">
+    <ul>
+      <% if article.persisted? %>
+        <% if article.draft? %>
+          <li><%= f.submit "公開", class: "a--button is-lg is-primary spec--update-button" %></li>
+          <li><%= f.submit "下書き保存", class: "a--button is-lg is-warning" %></li>
+        <% else %>
+          <li><%= f.submit "更新", class: "a--button is-lg is-primary spec--update-button" %></li>
+          <li><%= f.submit "下書き保存", class: "a--button is-lg is-warning" %></li>
+        <% end %>
       <% else %>
-        <%= f.submit "更新", class: "a--button is-lg is-primary spec--update-button" %>
-        <%= f.submit "下書き保存", class: "a--button is-lg is-warning" %>
+        <li><%= f.submit "公開", class: "a--button is-lg is-primary spec--publish-button" %></li>
+        <li><%= f.submit "下書き保存", class: "a--button is-lg is-warning spec--draft-button" %></li>
       <% end %>
-    <% else %>
-      <%= f.submit "公開", class: "a--button is-lg is-primary spec--publish-button" %>
-      <%= f.submit "下書き保存", class: "a--button is-lg is-warning spec--draft-button" %>
-    <% end %>
-    <%= link_to "キャンセル", admin_articles_path, class: "a--button is-lg is-border-secondary spec--cancel-button" %>
+      <li><%= link_to "キャンセル", admin_articles_path, class: "a--button is-lg is-border-secondary spec--cancel-button" %></li>
+    </ul>
   </div>
 <% end %>

@@ -14,26 +14,30 @@
       <fieldset>
         <legend class="sr-only">ログイン情報</legend>
         
-        <div class="a--form-item">
-          <%= f.label :email, "メールアドレス", class: "a--form-label mb-1 spec--email-label" %>
-          <%= f.email_field :email, 
-              required: true, 
-              class: "a--text-input spec--email-input",
-              aria_required: "true",
-              autocomplete: "email" %>
+        <div class="l--form-items">
+          <div class="l--form-item">
+            <%= f.label :email, "メールアドレス", class: "a--form-label mb-1 spec--email-label" %>
+            <%= f.email_field :email, 
+                required: true, 
+                class: "a--text-input spec--email-input",
+                aria_required: "true",
+                autocomplete: "email" %>
+          </div>
+
+          <div class="l--form-item">
+            <%= f.label :password, "パスワード", class: "a--form-label mb-1 spec--password-label" %>
+            <%= f.password_field :password, 
+                required: true, 
+                class: "a--text-input spec--password-input",
+                aria_required: "true",
+                autocomplete: "current-password" %>
+          </div>
         </div>
 
-        <div class="a--form-item">
-          <%= f.label :password, "パスワード", class: "a--form-label mb-1 spec--password-label" %>
-          <%= f.password_field :password, 
-              required: true, 
-              class: "a--text-input spec--password-input",
-              aria_required: "true",
-              autocomplete: "current-password" %>
-        </div>
-
-        <div class="a--form-actions">
-          <%= f.submit "ログイン", class: "a--button is-lg is-primary is-flex spec--login-button" %>
+        <div class="l--form-actions">
+          <ul>
+            <li><%= f.submit "ログイン", class: "a--button is-lg is-primary is-flex spec--login-button" %></li>
+          </ul>
         </div>
       </fieldset>
     <% end %>

@@ -1,7 +1,6 @@
 class ImageUploadComponent < ViewComponent::Base
   def initialize(
     field_name:,
-    label:,
     upload_url:,
     current_image: nil,
     form: nil,
@@ -11,7 +10,6 @@ class ImageUploadComponent < ViewComponent::Base
     spec_class: nil
   )
     @field_name = field_name
-    @label = label
     @upload_url = upload_url
     @current_image = current_image
     @form = form
@@ -23,7 +21,7 @@ class ImageUploadComponent < ViewComponent::Base
 
   private
 
-  attr_reader :field_name, :label, :upload_url, :current_image, :form,
+  attr_reader :field_name, :upload_url, :current_image, :form,
               :accept, :max_file_size, :help_text, :spec_class
 
   def controller_data
@@ -42,7 +40,7 @@ class ImageUploadComponent < ViewComponent::Base
   end
 
   def preview_classes
-    "max-w-xs h-auto rounded-lg border border-gray-300"
+    "w-full aspect-[40/21] object-cover rounded-lg border border-gray-300"
   end
 
   def clear_button_container_classes
@@ -56,7 +54,7 @@ class ImageUploadComponent < ViewComponent::Base
   end
 
   def dropzone_classes
-    base_classes = "border-2 border-dashed border-gray-300 rounded-lg transition-colors"
+    base_classes = "border-2 border-dashed border-gray-300 rounded-lg transition-colors w-full aspect-[40/21] flex items-center justify-center"
     base_classes += " hidden" if current_image.present?
     base_classes
   end

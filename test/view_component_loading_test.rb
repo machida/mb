@@ -25,7 +25,6 @@ class ViewComponentLoadingTest < ActiveSupport::TestCase
   test "ImageUploadComponent can be instantiated" do
     component = ImageUploadComponent.new(
       field_name: :image,
-      label: "Test Image",
       upload_url: "/test/upload"
     )
     assert_instance_of ImageUploadComponent, component

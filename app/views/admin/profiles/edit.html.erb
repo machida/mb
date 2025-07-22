@@ -4,35 +4,43 @@
     <%= form_with model: @admin, url: admin_profile_path, local: true, class: "space-y-6" do |f| %>
       <%= render AlertComponent.new(type: :danger, messages: @admin.errors.full_messages, spec_class: "spec--error-messages") if @admin.errors.any? %>
 
-      <div class="a--card">
-        <h2 class="text-xl font-semibold mb-4 spec--account-info-title">アカウント情報</h2>
-
-        <div class="space-y-4">
-          <div class="a--form-item">
-            <%= f.label :email, "メールアドレス", class: "a--form-label mb-1" %>
-            <%= f.email_field :email, required: true,                            class: "a--text-input spec--email-input" %>
-            <p class="a--form-help mt-1">ログイン時に使用するメールアドレスです</p>
-          </div>
-
-          <div class="a--form-item">
-            <%= f.label :user_id, "ユーザーID", class: "a--form-label mb-1" %>
-            <%= f.text_field :user_id, required: true,                           class: "a--text-input spec--user-id-input" %>
-            <p class="a--form-help mt-1">記事の著者として表示されるIDです</p>
+      <div>
+        <header class="a--card-header">
+          <h2 class="a--heading is-md spec--account-info-title">アカウント情報</h2>
+        </header>
+        <div class="a--card">
+          <div class="l--form-items">
+            <div class="l--form-item">
+              <%= f.label :email, "メールアドレス", class: "a--form-label mb-1" %>
+              <%= f.email_field :email, required: true,                            class: "a--text-input spec--email-input" %>
+              <p class="a--form-help mt-1">ログイン時に使用するメールアドレスです</p>
+            </div>
+            <div class="l--form-item">
+              <%= f.label :user_id, "ユーザーID", class: "a--form-label mb-1" %>
+              <%= f.text_field :user_id, required: true,                           class: "a--text-input spec--user-id-input" %>
+              <p class="a--form-help mt-1">記事の著者として表示されるIDです</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="a--card">
-        <div class="flex justify-between items-center mb-4">
-          <h2 class="text-xl font-semibold spec--password-section-title">パスワード</h2>
-          <%= link_to "パスワードを変更", edit_admin_password_path, class: "a--button is-md is-border-secondary spec--password-change-link" %>
+      <div>
+        <header class="a--card-header">
+          <h2 class="a--heading is-md spec--password-section-title">パスワード</h2>
+        </header>
+        <div class="a--card">
+          <div class="flex justify-between items-center mb-4">
+            <%= link_to "パスワードを変更", edit_admin_password_path, class: "a--button is-md is-border-secondary spec--password-change-link" %>
+          </div>
+          <p class="text-sm text-gray-500">セキュリティのため、パスワードの変更は別ページで行います。</p>
         </div>
-        <p class="text-sm text-gray-500">セキュリティのため、パスワードの変更は別ページで行います。</p>
       </div>
 
-      <div class="flex gap-4">
-        <%= f.submit "更新", class: "a--button is-lg is-primary spec--update-button" %>
-        <%= link_to "キャンセル", admin_articles_path, class: "a--button is-lg is-border-secondary spec--cancel-button" %>
+      <div class="l--form-actions">
+        <ul>
+          <li><%= f.submit "更新", class: "a--button is-lg is-primary spec--update-button" %></li>
+          <li><%= link_to "キャンセル", admin_articles_path, class: "a--button is-lg is-border-secondary spec--cancel-button" %></li>
+        </ul>
       </div>
     <% end %>
 

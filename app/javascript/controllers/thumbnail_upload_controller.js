@@ -116,7 +116,7 @@ export default class extends Controller {
 
   showLoading() {
     this.dropzoneTarget.innerHTML = `
-      <div class="flex items-center justify-center py-8">
+      <div class="flex items-center justify-center">
         <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
         <span class="ml-2 text-gray-600">アップロード中...</span>
       </div>
@@ -129,10 +129,10 @@ export default class extends Controller {
 
   resetDropzone() {
     this.dropzoneTarget.innerHTML = `
-      <div class="flex flex-col items-center justify-center py-8">
-        <svg class="w-12 h-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-        </svg>
+      <div class="flex flex-col items-center justify-center text-center px-4">
+        <span class="material-symbols-outlined text-gray-400 mb-4 text-4xl">
+          cloud_upload
+        </span>
         <p class="text-gray-600 text-center mb-2">
           画像をドラッグ&ドロップするか
         </p>
@@ -151,15 +151,15 @@ export default class extends Controller {
   clearThumbnail() {
     this.urlTarget.value = '';
     this.previewTarget.classList.add('hidden');
-    
+
     // プレビューエリア全体を非表示
     if (this.hasPreviewAreaTarget) {
       this.previewAreaTarget.classList.add('hidden');
     }
-    
+
     // ドロップゾーンを再表示
     this.dropzoneTarget.classList.remove('hidden');
-    
+
     if (this.hasClearButtonTarget) {
       this.clearButtonTarget.classList.add('hidden');
       // 削除ボタンの親要素も非表示

@@ -9,14 +9,14 @@
         <h2 class="text-xl font-semibold mb-4 spec--password-section-title">パスワード変更</h2>
         <p class="text-sm text-gray-500 mb-4">新しいパスワードを入力してください。</p>
 
-        <div class="space-y-4">
-          <div class="a--form-item">
+        <div class="l--form-items">
+          <div class="l--form-item">
             <%= f.label :password, "新しいパスワード", class: "a--form-label mb-1" %>
             <%= f.password_field :password, required: true,                              class: "a--text-input spec--password-input" %>
             <p class="a--form-help mt-1">8文字以上で設定してください</p>
           </div>
 
-          <div class="a--form-item">
+          <div class="l--form-item">
             <%= f.label :password_confirmation, "パスワード確認", class: "a--form-label mb-1" %>
             <%= f.password_field :password_confirmation, required: true,                              class: "a--text-input spec--password-confirmation-input" %>
             <p class="a--form-help mt-1">確認のため同じパスワードを入力してください</p>
@@ -24,9 +24,11 @@
         </div>
       </div>
 
-      <div class="flex gap-4">
-        <%= f.submit "パスワードを変更", class: "a--button is-lg is-primary spec--update-button spec--password-change-button" %>
-        <%= link_to "キャンセル", edit_admin_profile_path, class: "a--button is-lg is-border-secondary spec--cancel-button" %>
+      <div class="l--form-actions">
+        <ul>
+          <li><%= f.submit "パスワードを変更", class: "a--button is-lg is-primary spec--update-button spec--password-change-button" %></li>
+          <li><%= link_to "キャンセル", edit_admin_profile_path, class: "a--button is-lg is-border-secondary spec--cancel-button" %></li>
+        </ul>
       </div>
     <% end %>
   </div>
