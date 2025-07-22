@@ -98,6 +98,9 @@ export default class extends Controller {
       this.previewAreaTarget.classList.remove('hidden');
     }
 
+    // ドロップゾーンを非表示
+    this.dropzoneTarget.classList.add('hidden');
+
     // 削除ボタンを表示
     if (this.hasClearButtonTarget) {
       this.clearButtonTarget.classList.remove('hidden');
@@ -153,6 +156,9 @@ export default class extends Controller {
     if (this.hasPreviewAreaTarget) {
       this.previewAreaTarget.classList.add('hidden');
     }
+    
+    // ドロップゾーンを再表示
+    this.dropzoneTarget.classList.remove('hidden');
     
     if (this.hasClearButtonTarget) {
       this.clearButtonTarget.classList.add('hidden');

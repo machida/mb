@@ -54,4 +54,10 @@ class ImageUploadComponent < ViewComponent::Base
     base_classes += " hidden" unless current_image.present?
     base_classes
   end
+
+  def dropzone_classes
+    base_classes = "border-2 border-dashed border-gray-300 rounded-lg transition-colors"
+    base_classes += " hidden" if current_image.present?
+    base_classes
+  end
 end

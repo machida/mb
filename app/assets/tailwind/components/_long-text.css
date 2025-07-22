@@ -1,13 +1,13 @@
-/* Markdown Content Styles - Simplified and Refactored */
+/* Long Text Content Styles - Simplified and Refactored */
 
-.a--markdown-body {
+.a--long-text {
   /* Base settings */
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  color: var(--color-markdown-text);
+  color: var(--color-long-text-text);
   background-color: transparent;
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.8;
   word-wrap: break-word;
   font-family: var(--font-family-base);
 }
@@ -16,65 +16,65 @@
    Typography
    ================================================================= */
 
-.a--markdown-body h1,
-.a--markdown-body h2,
-.a--markdown-body h3,
-.a--markdown-body h4,
-.a--markdown-body h5,
-.a--markdown-body h6 {
-  margin-top: 1.5rem;
+.a--long-text h1,
+.a--long-text h2,
+.a--long-text h3,
+.a--long-text h4,
+.a--long-text h5,
+.a--long-text h6 {
+  margin-top: 2rem;
   margin-bottom: 1rem;
   font-weight: 700;
-  line-height: 1.25;
-  color: var(--color-markdown-heading);
+  line-height: 1.4;
+  color: var(--color-long-text-heading);
 }
 
-.a--markdown-body h1 {
+.a--long-text h1 {
   font-size: 2em;
-  padding-bottom: 0.3em;
-  border-bottom: 1px solid var(--color-markdown-border);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-long-text-border);
 }
 
-.a--markdown-body h2 {
+.a--long-text h2 {
   font-size: 1.5em;
-  padding-bottom: 0.3em;
-  border-bottom: 1px solid var(--color-markdown-border);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-long-text-border);
 }
 
-.a--markdown-body h3 {
+.a--long-text h3 {
   font-size: 1.25em;
 }
 
-.a--markdown-body h4 {
+.a--long-text h4 {
   font-size: 1em;
 }
 
-.a--markdown-body h5 {
+.a--long-text h5 {
   font-size: 0.875em;
 }
 
-.a--markdown-body h6 {
+.a--long-text h6 {
   font-size: 0.85em;
-  color: var(--color-markdown-muted);
+  color: var(--color-long-text-muted);
 }
 
-.a--markdown-body p {
+.a--long-text p {
   margin-top: 0;
   margin-bottom: 1rem;
-  line-height: 1.6;
+  line-height: 1.8;
 }
 
 /* =================================================================
    Links
    ================================================================= */
 
-.a--markdown-body a {
-  color: var(--color-markdown-link);
+.a--long-text a {
+  color: var(--color-long-text-link);
   text-decoration: none;
 }
 
-.a--markdown-body a:hover {
-  color: var(--color-markdown-link-hover);
+.a--long-text a:hover {
+  color: var(--color-long-text-link-hover);
   text-decoration: underline;
 }
 
@@ -82,39 +82,39 @@
    Lists
    ================================================================= */
 
-.a--markdown-body ul,
-.a--markdown-body ol {
+.a--long-text ul,
+.a--long-text ol {
   margin-top: 0;
   margin-bottom: 1rem;
-  padding-left: 2em;
+  padding-left: 2rem;
 }
 
-.a--markdown-body ul {
+.a--long-text ul {
   list-style-type: disc;
 }
 
-.a--markdown-body ol {
+.a--long-text ol {
   list-style-type: decimal;
 }
 
-.a--markdown-body li {
+.a--long-text li {
   margin: 0.25rem 0;
-  line-height: 1.6;
+  line-height: 1.8;
 }
 
-.a--markdown-body ul ul {
+.a--long-text ul ul {
   list-style-type: circle;
 }
 
-.a--markdown-body ul ul ul {
+.a--long-text ul ul ul {
   list-style-type: square;
 }
 
-.a--markdown-body ol ol {
+.a--long-text ol ol {
   list-style-type: lower-alpha;
 }
 
-.a--markdown-body ol ol ol {
+.a--long-text ol ol ol {
   list-style-type: lower-roman;
 }
 
@@ -122,16 +122,16 @@
    Code
    ================================================================= */
 
-.a--markdown-body code {
-  background-color: var(--color-markdown-bg-code);
-  color: var(--color-markdown-code-text);
+.a--long-text code {
+  background-color: var(--color-long-text-bg-code);
+  color: var(--color-long-text-code-text);
   padding: 0.125rem 0.25rem;
   border-radius: 0.25rem;
   font-size: 0.875em;
   font-family: var(--font-family-mono);
 }
 
-.a--markdown-body pre {
+.a--long-text pre {
   background-color: var(--color-bg-muted);
   color: var(--color-text-primary);
   padding: 1rem;
@@ -140,10 +140,10 @@
   margin: 1rem 0;
   font-family: var(--font-family-mono);
   font-size: 0.875em;
-  line-height: 1.45;
+  line-height: 1.6;
 }
 
-.a--markdown-body pre code {
+.a--long-text pre code {
   background-color: transparent;
   color: inherit;
   padding: 0;
@@ -152,7 +152,7 @@
 }
 
 /* Syntax highlighting blocks */
-.a--markdown-body .highlight {
+.a--long-text .highlight {
   background-color: var(--color-syntax-dark-bg);
   color: var(--color-syntax-dark-text);
   padding: 1rem;
@@ -161,7 +161,7 @@
   margin: 1rem 0;
 }
 
-.a--markdown-body .highlight pre {
+.a--long-text .highlight pre {
   background-color: transparent;
   color: inherit;
   padding: 0;
@@ -169,7 +169,7 @@
   white-space: pre-line;
 }
 
-.a--markdown-body .highlight code {
+.a--long-text .highlight code {
   background-color: transparent;
   color: inherit;
   padding: 0;
@@ -179,19 +179,20 @@
    Blockquotes
    ================================================================= */
 
-.a--markdown-body blockquote {
+.a--long-text blockquote {
   margin: 1rem 0;
-  padding: 0 1em;
-  color: var(--color-markdown-muted);
-  border-left: 4px solid var(--color-markdown-quote-border);
+  padding: 0 1rem;
+  color: var(--color-long-text-muted);
+  border-left: 0.25rem solid var(--color-long-text-quote-border);
   font-style: italic;
+  line-height: 1.8;
 }
 
-.a--markdown-body blockquote > :first-child {
+.a--long-text blockquote > :first-child {
   margin-top: 0;
 }
 
-.a--markdown-body blockquote > :last-child {
+.a--long-text blockquote > :last-child {
   margin-bottom: 0;
 }
 
@@ -199,25 +200,26 @@
    Tables
    ================================================================= */
 
-.a--markdown-body table {
+.a--long-text table {
   border-collapse: collapse;
   width: 100%;
   margin: 1rem 0;
 }
 
-.a--markdown-body table th,
-.a--markdown-body table td {
+.a--long-text table th,
+.a--long-text table td {
   padding: 0.5rem 0.75rem;
-  border: 1px solid var(--color-markdown-border);
+  border: 1px solid var(--color-long-text-border);
   text-align: left;
+  line-height: 1.6;
 }
 
-.a--markdown-body table th {
-  background-color: var(--color-markdown-bg-code);
+.a--long-text table th {
+  background-color: var(--color-long-text-bg-code);
   font-weight: 600;
 }
 
-.a--markdown-body table tr:nth-child(even) {
+.a--long-text table tr:nth-child(even) {
   background-color: var(--color-bg-secondary);
 }
 
@@ -225,10 +227,10 @@
    Images
    ================================================================= */
 
-.a--markdown-body img {
+.a--long-text img {
   max-width: 100%;
   height: auto;
-  border-radius: 0.375rem;
+  border-radius: 0.5rem;
   margin: 0.5rem 0;
 }
 
@@ -236,10 +238,10 @@
    Horizontal Rules
    ================================================================= */
 
-.a--markdown-body hr {
+.a--long-text hr {
   height: 1px;
   border: none;
-  background-color: var(--color-markdown-border);
+  background-color: var(--color-long-text-border);
   margin: 2rem 0;
 }
 
@@ -247,13 +249,13 @@
    Emphasis
    ================================================================= */
 
-.a--markdown-body strong,
-.a--markdown-body b {
+.a--long-text strong,
+.a--long-text b {
   font-weight: 600;
 }
 
-.a--markdown-body em,
-.a--markdown-body i {
+.a--long-text em,
+.a--long-text i {
   font-style: italic;
 }
 
@@ -261,11 +263,11 @@
    Spacing adjustments
    ================================================================= */
 
-.a--markdown-body > *:first-child {
+.a--long-text > *:first-child {
   margin-top: 0;
 }
 
-.a--markdown-body > *:last-child {
+.a--long-text > *:last-child {
   margin-bottom: 0;
 }
 
@@ -273,21 +275,21 @@
    Focus states
    ================================================================= */
 
-.a--markdown-body a:focus {
-  outline: 2px solid var(--color-link);
-  outline-offset: 2px;
-  border-radius: 0.125rem;
+.a--long-text a:focus {
+  outline: 0.125rem solid var(--color-link);
+  outline-offset: 0.125rem;
+  border-radius: 0.25rem;
 }
 
 /* =================================================================
    Task lists (GitHub-style checkboxes)
    ================================================================= */
 
-.a--markdown-body .task-list-item {
+.a--long-text .task-list-item {
   list-style-type: none;
 }
 
-.a--markdown-body .task-list-item-checkbox {
-  margin: 0 0.2em 0.25em -1.4em;
+.a--long-text .task-list-item-checkbox {
+  margin: 0 0.25rem 0.25rem -1.5rem;
   vertical-align: middle;
 }

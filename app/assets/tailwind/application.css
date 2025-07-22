@@ -89,19 +89,19 @@
   --color-syntax-regex: var(--color-green-300);
   --color-syntax-whitespace: var(--color-gray-100);
 
-  /* Markdown colors */
-  --color-markdown-heading: var(--color-gray-900);
-  --color-markdown-text: var(--color-gray-700);
-  --color-markdown-muted: var(--color-gray-500);
-  --color-markdown-border: var(--color-gray-200);
-  --color-markdown-bg-code: var(--color-gray-50);
-  --color-markdown-link: var(--color-blue-600);
-  --color-markdown-link-hover: var(--color-blue-700);
-  --color-markdown-code-text: var(--color-red-500);
-  --color-markdown-table-text: var(--color-gray-600);
-  --color-markdown-quote-border: var(--color-gray-300);
+  /* Long text colors */
+  --color-long-text-heading: var(--color-gray-900);
+  --color-long-text-text: var(--color-gray-700);
+  --color-long-text-muted: var(--color-gray-500);
+  --color-long-text-border: var(--color-gray-200);
+  --color-long-text-bg-code: var(--color-gray-50);
+  --color-long-text-link: var(--color-blue-600);
+  --color-long-text-link-hover: var(--color-blue-700);
+  --color-long-text-code-text: var(--color-red-500);
+  --color-long-text-table-text: var(--color-gray-600);
+  --color-long-text-quote-border: var(--color-gray-300);
 
-  /* Syntax dark theme colors for markdown */
+  /* Syntax dark theme colors for long text content */
   --color-syntax-dark-bg: var(--color-gray-900);
   --color-syntax-dark-text: var(--color-gray-200);
 
@@ -221,7 +221,7 @@
 @import "./components/_forms.css";
 @import "./components/_dropdown.css";
 @import "./components/_hero.css";
-@import "./components/_markdown.css";
+@import "./components/_long-text.css";
 @import "./components/_pager.css";
 @import "./components/_toast.css";
 @import "./components/_spec_classes.css";
