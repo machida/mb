@@ -28,7 +28,4 @@
     <p class="mb-4 text-muted text-sm spec--article-summary"><%= truncate(admin_article_item.summary, length: 150) %></p>
   <% end %>
 
-  <footer class="flex justify-end gap-2">
-    <%= link_to "編集", edit_admin_article_path(admin_article_item), class: "a--button is-sm is-border-secondary" %>
-  </footer>
 </article>
