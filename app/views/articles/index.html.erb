@@ -1,17 +1,23 @@
-<div class="spec--articles-container max-w-4xl mx-auto">
+<main class="spec--articles-container max-w-4xl mx-auto" role="main">
+  <section>
+    <header class="sr-only">
+      <h1>記事一覧</h1>
+    </header>
 
-  <div class="flex flex-col gap-10">
-    <%= render partial: "article_item", collection: @articles %>
-  </div>
-
-  <% if @articles.empty? %>
-    <div class="text-center py-12 spec--no-articles">
-      <p class="text-gray-500 text-lg spec--no-articles-message">記事がまだありません</p>
+    <div class="flex flex-col gap-10">
+      <%= render partial: "article_item", collection: @articles %>
     </div>
-  <% end %>
 
-  <!-- Pagination -->
-  <div class="mt-8 flex justify-center spec--pagination">
-    <%= paginate @articles %>
-  </div>
-</div>
+    <% if @articles.empty? %>
+      <div class="text-center py-12 spec--no-articles">
+        <p class="text-gray-500 text-lg spec--no-articles-message">記事がまだありません</p>
+      </div>
+    <% end %>
+
+    <% if @articles.respond_to?(:total_pages) && @articles.total_pages > 1 %>
+      <nav class="mt-8 flex justify-center spec--pagination" aria-label="記事ページネーション">
+        <%= paginate @articles %>
+      </nav>
+    <% end %>
+  </section>
+</main>

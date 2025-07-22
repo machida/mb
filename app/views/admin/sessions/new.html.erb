@@ -1,25 +1,41 @@
-<div class="mt-16 a--card is-lg spec--login-form max-w-md mx-auto">
-  <h1 class="a--heading is-xl text-center mb-6 spec--login-title">管理者ログイン</h1>
+<main class="mt-16" role="main">
+  <section class="a--card is-lg spec--login-form max-w-md mx-auto">
+    <header>
+      <h1 class="a--heading is-xl text-center mb-6 spec--login-title">管理者ログイン</h1>
+    </header>
 
-  <% if flash[:alert] %>
-    <div class="mb-4">
-      <%= render AlertComponent.new(type: :danger, message: flash[:alert], spec_class: "spec--error-alert") %>
-    </div>
-  <% end %>
+    <% if flash[:alert] %>
+      <div class="mb-4" role="alert" aria-live="polite">
+        <%= render AlertComponent.new(type: :danger, message: flash[:alert], spec_class: "spec--error-alert") %>
+      </div>
+    <% end %>
 
-  <%= form_with url: admin_login_path, local: true, class: "space-y-4" do |f| %>
-    <div class="a--form-item">
-      <%= f.label :email, "メールアドレス", class: "a--form-label mb-1 spec--email-label" %>
-      <%= f.email_field :email, required: true, class: "a--text-input spec--email-input" %>
-    </div>
+    <%= form_with url: admin_login_path, local: true, class: "space-y-4", aria_labelledby: "login-title" do |f| %>
+      <fieldset>
+        <legend class="sr-only">ログイン情報</legend>
+        
+        <div class="a--form-item">
+          <%= f.label :email, "メールアドレス", class: "a--form-label mb-1 spec--email-label" %>
+          <%= f.email_field :email, 
+              required: true, 
+              class: "a--text-input spec--email-input",
+              aria_required: "true",
+              autocomplete: "email" %>
+        </div>
 
-    <div class="a--form-item">
-      <%= f.label :password, "パスワード", class: "a--form-label mb-1 spec--password-label" %>
-      <%= f.password_field :password, required: true, class: "a--text-input spec--password-input" %>
-    </div>
+        <div class="a--form-item">
+          <%= f.label :password, "パスワード", class: "a--form-label mb-1 spec--password-label" %>
+          <%= f.password_field :password, 
+              required: true, 
+              class: "a--text-input spec--password-input",
+              aria_required: "true",
+              autocomplete: "current-password" %>
+        </div>
 
-    <div class="a--form-item">
-      <%= f.submit "ログイン", class: "a--button is-lg is-primary is-flex spec--login-button" %>
-    </div>
-  <% end %>
-</div>
+        <div class="a--form-item">
+          <%= f.submit "ログイン", class: "a--button is-lg is-primary is-flex spec--login-button" %>
+        </div>
+      </fieldset>
+    <% end %>
+  </section>
+</main>

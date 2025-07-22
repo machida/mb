@@ -3,34 +3,59 @@
 
   <div class="a--form-item is-xs">
     <%= f.label :title, "タイトル", class: "a--form-label mb-1" %>
-    <%= f.text_field :title, class: "a--text-input spec--title-input" %>
+    <%= f.text_field :title, 
+        class: "a--text-input spec--title-input #{'border-red-300' if article.errors[:title].any?}",
+        aria_describedby: ("title-error" if article.errors[:title].any?),
+        aria_invalid: (article.errors[:title].any? ? "true" : "false"),
+        aria_required: "true" %>
+    <% if article.errors[:title].any? %>
+      <div id="title-error" class="a--form-error mt-1" role="alert">
+        <%= article.errors[:title].first %>
+      </div>
+    <% end %>
   </div>
 
   <div class="a--form-item is-sm">
     <%= f.label :summary, "概要", class: "a--form-label mb-1" %>
-    <%= f.text_area :summary, rows: 3, class: "a--text-input spec--summary-input" %>
+    <%= f.text_area :summary, rows: 3, 
+        class: "a--text-input spec--summary-input #{'border-red-300' if article.errors[:summary].any?}",
+        aria_describedby: ("summary-error" if article.errors[:summary].any?),
+        aria_invalid: (article.errors[:summary].any? ? "true" : "false") %>
+    <% if article.errors[:summary].any? %>
+      <div id="summary-error" class="a--form-error mt-1" role="alert">
+        <%= article.errors[:summary].first %>
+      </div>
+    <% end %>
   </div>
 
-  <div class="a--form-item">
-    <%= f.label :body, "本文 (Markdown記法)", class: "a--form-label mb-1" %>
-    <div class="a--form-help mb-2">
+  <fieldset class="a--form-item">
+    <legend class="a--form-label mb-1">本文 (Markdown記法)</legend>
+    <div id="body-help" class="a--form-help mb-2">
       Markdown記法が使用できます。**太字**、*斜体*、`コード`、[リンク](URL)、見出し(#)、リスト(-)など
       <br>
       画像をドラッグ&ドロップするか、貼り付けてアップロードできます
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4" data-controller="markdown-preview">
       <div class="">
-        <label class="a--form-label mb-1">編集</label>
+        <label for="<%= f.field_id(:body) %>" class="a--form-label mb-1">編集</label>
         <%= f.text_area :body, rows: 15,
-                        class: "a--text-input a--markdown-textarea font-mono text-sm spec--body-input js-markdown-textarea",
+                        class: "a--text-input a--markdown-textarea font-mono text-sm spec--body-input js-markdown-textarea #{'border-red-300' if article.errors[:body].any?}",
+                        aria_describedby: "body-help#{ ' body-error' if article.errors[:body].any?}",
+                        aria_invalid: (article.errors[:body].any? ? "true" : "false"),
+                        aria_required: "true",
                         data: {
                           controller: "image-upload",
                           action: "input->markdown-preview#update keyup->markdown-preview#update dragover->image-upload#dragover dragleave->image-upload#dragleave drop->image-upload#drop",
                           image_upload_target: "textarea",                          image_upload_upload_url_value: admin_articles_upload_image_path                        } %>
+        <% if article.errors[:body].any? %>
+          <div id="body-error" class="a--form-error mt-1" role="alert">
+            <%= article.errors[:body].first %>
+          </div>
+        <% end %>
       </div>
       <div class="">
         <label class="a--form-label mb-1">プレビュー</label>
-        <div class="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 overflow-y-auto">
+        <div class="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 overflow-y-auto" role="region" aria-label="Markdownプレビュー">
           <div data-markdown-preview-target="preview" class="a--markdown-body js-markdown-preview">
             <% if article.body.present? %>
               <%= markdown(article.body) %>
@@ -41,7 +66,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </fieldset>
 
   <div class="a--form-item is-xs">
     <%= render ImageUploadComponent.new(

@@ -2,23 +2,26 @@
   title: "記事一覧",
   action_button: link_to("新しい記事を作成", new_admin_article_path, class: "a--button is-md is-primary spec--new-article-button")
 ) %>
-<div class="a--page-body py-6">
+<main class="a--page-body py-6" role="main">
   <div class="l--container is-md">
-    <div class="flex justify-center items-center mb-8">
-      <%= render ArticleNavigationComponent.new %>
-    </div>
+    <section>
+      <header class="flex justify-center items-center mb-8">
+        <%= render ArticleNavigationComponent.new %>
+      </header>
 
-    <% if @articles.any? %>
-      <%= render "article_list",
-          articles: @articles,        list_class: "spec--published-articles-list",        delete_button_class: "spec--delete-button" %>
-    <% else %>
-      <%= render "empty_state",
-          message: "記事がありません",        submessage: nil,        show_icon: false %>
-    <% end %>
+      <% if @articles.any? %>
+        <%= render "article_list",
+            articles: @articles,        list_class: "spec--published-articles-list",        delete_button_class: "spec--delete-button" %>
+      <% else %>
+        <%= render "empty_state",
+            message: "記事がありません",        submessage: nil,        show_icon: false %>
+      <% end %>
 
-    <!-- Pagination -->
-    <div class="mt-8 flex justify-center spec--pagination">
-      <%= paginate @articles %>
-    </div>
+      <% if @articles.respond_to?(:total_pages) && @articles.total_pages > 1 %>
+        <nav class="mt-8 flex justify-center spec--pagination" aria-label="記事管理ページネーション">
+          <%= paginate @articles %>
+        </nav>
+      <% end %>
+    </section>
   </div>
-</div>
+</main>
