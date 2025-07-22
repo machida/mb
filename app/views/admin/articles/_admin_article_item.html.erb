@@ -30,7 +30,5 @@
 
   <footer class="flex justify-end gap-2">
     <%= link_to "編集", edit_admin_article_path(admin_article_item), class: "a--button is-sm is-border-secondary" %>
-    <%= link_to "削除", admin_article_path(admin_article_item), method: :delete,
-                data: { confirm: "本当に削除しますか？" }, class: "a--button is-sm is-border-danger #{local_assigns[:delete_button_class]}" %>
   </footer>
 </article>

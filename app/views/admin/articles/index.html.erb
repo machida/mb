@@ -11,7 +11,7 @@
 
       <% if @articles.any? %>
         <%= render "article_list",
-            articles: @articles,        list_class: "spec--published-articles-list",        delete_button_class: "spec--delete-button" %>
+            articles: @articles, list_class: "spec--published-articles-list" %>
       <% else %>
         <%= render "empty_state",
             message: "記事がありません",        submessage: nil,        show_icon: false %>

@@ -52,5 +52,8 @@
   <%= link_to "記事一覧に戻る", root_path, class: "a--button is-md is-border-secondary" %>
   <% if current_user_signed_in? %>
     <%= link_to "編集", edit_admin_article_path(@article), class: "a--button is-md is-border-secondary" %>
+    <%= link_to "削除", admin_article_path(@article), method: :delete,
+                data: { confirm: "この記事を削除しますか？削除すると元に戻せません。" }, 
+                class: "a--button is-md is-border-danger spec--delete-article-button" %>
   <% end %>
 </div>

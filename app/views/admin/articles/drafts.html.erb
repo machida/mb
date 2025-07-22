@@ -10,7 +10,7 @@
 
     <% if @articles.any? %>
       <%= render "article_list",
-          articles: @articles,        list_class: "spec--draft-articles-list",        delete_button_class: "" %>
+          articles: @articles, list_class: "spec--draft-articles-list" %>
     <% else %>
       <%= render "empty_state",
           message: "下書きの記事がありません",        submessage: "新しい記事を作成して下書き保存してみましょう",        show_icon: true %>

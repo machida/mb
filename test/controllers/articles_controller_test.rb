@@ -134,4 +134,18 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "meta[name='robots'][content='noindex, nofollow']", count: 0
   end
+
+  test "should show delete button on article page when logged in as admin" do
+    post admin_login_path, params: { email: @admin.email, password: "password123" }
+    
+    get article_path(@published_article)
+    assert_response :success
+    assert_select ".spec--delete-article-button", text: "削除"
+  end
+
+  test "should not show delete button on article page when not logged in" do
+    get article_path(@published_article)
+    assert_response :success
+    assert_select ".spec--delete-article-button", count: 0
+  end
 end
