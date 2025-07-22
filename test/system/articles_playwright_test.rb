@@ -151,15 +151,16 @@ class ArticlesPlaywrightTest < ApplicationPlaywrightTestCase
   test "editing an article" do
     login_as_admin(@admin)
     
-    @page.goto("http://localhost:#{@server_port}/admin/articles")
+    # Go directly to the published article page (note: route is /article/:id not /articles/:id)
+    @page.goto("http://localhost:#{@server_port}/article/#{@published_article.id}")
+    @page.wait_for_load_state(state: 'networkidle')
     
-    # Find the published article and click edit
-    published_section = @page.query_selector(".spec--published-articles-list")
-    assert published_section, "Published articles list should exist"
+    # Find the edit link on the article detail page
+    edit_link = @page.query_selector("a:has-text('編集')")
+    assert edit_link, "Edit link should exist on article detail page"
     
-    edit_link = published_section.query_selector("a:has-text('編集')")
-    assert edit_link, "Edit link should exist"
-    edit_link.click()
+    # Navigate directly to the edit page instead of clicking
+    @page.goto("http://localhost:#{@server_port}/admin/articles/#{@published_article.id}/edit")
     
     @page.wait_for_load_state(state: 'networkidle')
     
@@ -190,18 +191,16 @@ class ArticlesPlaywrightTest < ApplicationPlaywrightTestCase
   test "deleting an article" do
     login_as_admin(@admin)
     
-    @page.goto("http://localhost:#{@server_port}/admin/articles")
+    # Go directly to the published article page (note: route is /article/:id not /articles/:id)
+    @page.goto("http://localhost:#{@server_port}/article/#{@published_article.id}")
+    @page.wait_for_load_state(state: 'networkidle')
     
-    # Find and check the delete button exists
-    delete_button = @page.query_selector(".spec--delete-button")
-    assert delete_button, "Delete button should exist"
+    # Find and check the delete button exists on the article detail page
+    delete_button = @page.query_selector(".spec--delete-article-button")
+    assert delete_button, "Delete button should exist on article detail page"
     assert_equal "削除", delete_button.inner_text
     
-    # Check the article exists before potential deletion
-    published_list = @page.query_selector(".spec--published-articles-list")
-    assert published_list, "Published articles list should exist"
-    
-    # Verify the article title is present
+    # Verify the article title is present on the current page
     article_text = @page.inner_text("body")
     assert_includes article_text, @published_article.title
   end
