@@ -1,7 +1,7 @@
 <%= form_with model: [ :admin, article ], local: true, class: "space-y-6" do |f| %>
   <%= render AlertComponent.new(type: :danger, messages: article.errors.full_messages) if article.errors.any? %>
 
-  <div class="a--form-item is-sm">
+  <div class="a--form-item is-xs">
     <%= f.label :title, "タイトル", class: "a--form-label mb-1" %>
     <%= f.text_field :title, class: "a--text-input spec--title-input" %>
   </div>
@@ -43,17 +43,19 @@
     </div>
   </div>
 
-  <%= render ImageUploadComponent.new(
-    field_name: :thumbnail,
-    label: "サムネイル画像",
-    upload_url: admin_site_settings_upload_image_path,
-    current_image: article.thumbnail,
-    form: f,
-    spec_class: "thumbnail"
-  ) %>
+  <div class="a--form-item is-xs">
+    <%= render ImageUploadComponent.new(
+      field_name: :thumbnail,
+      label: "サムネイル画像",
+      upload_url: admin_site_settings_upload_image_path,
+      current_image: article.thumbnail,
+      form: f,
+      spec_class: "thumbnail"
+    ) %>
 
-  <div class="a--form-help mt-1">
-    記事のOGP画像やカード表示で使用される画像です
+    <div class="a--form-help">
+      記事のOGP画像やカード表示で使用される画像です
+    </div>
   </div>
 
   <div class="flex gap-4">

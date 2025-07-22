@@ -3,7 +3,7 @@
   <div class="l--container is-md">
 
     <%= form_with url: admin_site_settings_path, method: :patch, local: true, class: "space-y-6" do |f| %>
-      <div class="a--form-item">
+      <div class="a--form-item is-xs">
         <%= label_tag "site_settings[site_title]", "サイトタイトル", class: "a--form-label mb-1" %>
         <%= text_field_tag "site_settings[site_title]",                         @settings[:site_title],                         class: "a--text-input spec--site-title-input" %>
         <div class="a--form-help mt-1">
@@ -11,19 +11,20 @@
         </div>
       </div>
 
-      <%= render ImageUploadComponent.new(
-        field_name: "site_settings[default_og_image]",
-        label: "デフォルトOG画像",
-        upload_url: admin_site_settings_upload_image_path,
-        current_image: (@settings[:default_og_image].present? && !@settings[:default_og_image].include?('example.com')) ? @settings[:default_og_image] : nil,
-        spec_class: "default-og-image"
-      ) %>
-
-      <div class="a--form-help mt-1">
-        記事にサムネイル画像が設定されていない場合に使用される画像です
+      <div class="a--form-item is-xs">
+        <%= render ImageUploadComponent.new(
+          field_name: "site_settings[default_og_image]",
+          label: "デフォルトOG画像",
+          upload_url: admin_site_settings_upload_image_path,
+          current_image: (@settings[:default_og_image].present? && !@settings[:default_og_image].include?('example.com')) ? @settings[:default_og_image] : nil,
+          spec_class: "default-og-image"
+        ) %>
+        <div class="a--form-help mt-1">
+          記事にサムネイル画像が設定されていない場合に使用される画像です
+        </div>
       </div>
 
-      <div class="a--form-item">
+      <div class="a--form-item is-sm">
         <%= label_tag "site_settings[top_page_description]", "トップページの説明文", class: "a--form-label mb-1" %>
         <%= text_area_tag "site_settings[top_page_description]",
                           @settings[:top_page_description],                        rows: 3,                        class: "a--text-input spec--top-page-description-input" %>
@@ -32,7 +33,7 @@
         </div>
       </div>
 
-      <div class="a--form-item">
+      <div class="a--form-item is-xs">
         <%= label_tag "site_settings[copyright]", "著作権者名", class: "a--form-label mb-1" %>
         <%= text_field_tag "site_settings[copyright]",                         @settings[:copyright],                         class: "a--text-input spec--copyright-input" %>
         <div class="a--form-help mt-1">

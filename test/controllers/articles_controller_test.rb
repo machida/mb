@@ -120,4 +120,18 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select ".spec--draft-notice", count: 0
   end
+
+  test "should include noindex robots meta tag for draft articles" do
+    post admin_login_path, params: { email: @admin.email, password: "password123" }
+    
+    get article_path(@draft_article)
+    assert_response :success
+    assert_select "meta[name='robots'][content='noindex, nofollow']"
+  end
+
+  test "should not include robots meta tag for published articles" do
+    get article_path(@published_article)
+    assert_response :success
+    assert_select "meta[name='robots'][content='noindex, nofollow']", count: 0
+  end
 end

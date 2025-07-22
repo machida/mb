@@ -1,4 +1,7 @@
 <% content_for :head do %>
+  <% if @article.draft? %>
+    <meta name="robots" content="noindex, nofollow">
+  <% end %>
   <% if @article.summary.present? %>
     <meta name="description" content="<%= @article.summary %>">
     <meta property="og:description" content="<%= @article.summary %>">
