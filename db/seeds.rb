@@ -3,7 +3,7 @@
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 
 # Create initial site settings
-SiteSetting.set('site_title', 'マチダのブログ')
+SiteSetting.set('site_title', 'ブログ')
 SiteSetting.set('top_page_description', 'マチダのブログへようこそ。技術やライフスタイルについて書いています。')
 SiteSetting.set('default_og_image', 'https://example.com/default-og-image.jpg')
 SiteSetting.set('copyright', 'マチダのブログ')

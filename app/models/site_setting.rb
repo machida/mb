@@ -21,7 +21,7 @@ class SiteSetting < ApplicationRecord
 
   # 便利メソッド
   def self.site_title
-    get("site_title", "マチダのブログ")
+    get("site_title", "ブログ")
   end
 
   def self.default_og_image

@@ -1,4 +1,4 @@
-.a--pill {
+.a--pill ul {
   display: flex;
   align-items: center;
   gap: -.5px
@@ -14,12 +14,12 @@
   z-index: 1;
 }
 
-.a--pill .a--button:first-child {
+.a--pill li:first-child .a--button {
   border-top-left-radius: 10rem;
   border-bottom-left-radius: 10rem;
 }
 
-.a--pill .a--button:last-child {
+.a--pill li:last-child .a--button {
   border-top-right-radius: 10rem;
   border-bottom-right-radius: 10rem;
 }
