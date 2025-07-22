@@ -1,7 +1,12 @@
-<nav class="a--pill">
-  <% nav_items.each do |item| %>
-    <%= link_to item[:path], class: nav_class_for(item) do %>
-      <span class="<%= item[:text] == '全ての記事' ? 'spec--article-index-title spec--draft-section-title' : 'spec--draft-index-title' %>"><%= item[:text] %></span> (<%= item[:count] %>)
+<nav class="a--pill" aria-label="記事ナビゲーション">
+  <ul>
+    <% nav_items.each do |item| %>
+      <li>
+        <%= link_to item[:path], class: nav_class_for(item), 
+            aria_current: (item[:active] ? "page" : nil) do %>
+          <span class="<%= item[:text] == '全ての記事' ? 'spec--article-index-title spec--draft-section-title' : 'spec--draft-index-title' %>"><%= item[:text] %></span> (<%= item[:count] %>)
+        <% end %>
+      </li>
     <% end %>
-  <% end %>
+  </ul>
 </nav>

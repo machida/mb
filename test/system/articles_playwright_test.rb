@@ -105,8 +105,8 @@ class ArticlesPlaywrightTest < ApplicationPlaywrightTestCase
     @page.fill(".spec--summary-input", "Test summary")
     @page.fill(".spec--body-input", "# Test Heading\n\nThis is test content.")
     
-    # Wait a moment for any preview to load
-    @page.wait_for_timeout(500)
+    # Wait for any preview rendering to complete by checking markdown body
+    @page.wait_for_load_state(state: 'networkidle')
     
     @page.click(".spec--publish-button")
     

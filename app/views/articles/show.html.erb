@@ -23,9 +23,11 @@
     <h1 class="a--heading is-xxl spec--article-title"><%= @article.title %></h1>
     <div class="flex items-center gap-4 text-sm text-gray-500 mb-4">
       <% if show_author_info? %>
-        <span class="spec--article-author"><%= @article.author %></span>
+        <span class="spec--article-author">著者: <%= @article.author %></span>
       <% end %>
-      <span><%= format_date_with_weekday(@article.created_at) %></span>
+      <time datetime="<%= @article.created_at.iso8601 %>">
+        <%= format_date_with_weekday(@article.created_at) %>
+      </time>
     </div>
   </header>
 

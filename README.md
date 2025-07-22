@@ -194,7 +194,7 @@ phantom delete feature/user-auth
 ### テスト
 - Mini-test (システムテスト、コントローラーテスト)
 - Playwright 1.53.2 (E2E テスト、完全移行済み)
-- playwright-ruby-client 1.53.0
+- playwright-ruby-client 1.54.0
 
 ## 機能詳細
 
@@ -286,5 +286,5 @@ Playwrightテストは並列実行を無効化しています（`parallelize(wor
 
 ### ライブラリバージョン互換性
 - **Playwright**: 1.53.2（推奨）
-- **playwright-ruby-client**: 1.53.0（安定版）
+- **playwright-ruby-client**: 1.54.0（最新安定版）
 - これらの組み合わせで最適な動作を確認済み
