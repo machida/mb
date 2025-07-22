@@ -42,13 +42,15 @@ class ImageUploadComponent < ViewComponent::Base
   end
 
   def preview_classes
-    base_classes = "max-w-xs h-auto rounded-lg border border-gray-300"
-    base_classes += " hidden" unless current_image.present?
-    base_classes
+    "max-w-xs h-auto rounded-lg border border-gray-300"
   end
 
   def clear_button_container_classes
-    base_classes = "mt-2"
+    "mt-2"
+  end
+
+  def preview_area_classes
+    base_classes = "mt-4"
     base_classes += " hidden" unless current_image.present?
     base_classes
   end

@@ -166,6 +166,7 @@
   color: inherit;
   padding: 0;
   margin: 0;
+  white-space: pre-line;
 }
 
 .a--markdown-body .highlight code {
@@ -290,4 +291,3 @@
   margin: 0 0.2em 0.25em -1.4em;
   vertical-align: middle;
 }
-

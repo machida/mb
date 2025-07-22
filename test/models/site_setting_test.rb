@@ -79,7 +79,7 @@ class SiteSettingTest < ActiveSupport::TestCase
 
   test "should return default values for convenience methods" do
     # 設定が存在しない場合のデフォルト値
-    assert_equal "マチダのブログ", SiteSetting.site_title
+    assert_equal "ブログ", SiteSetting.site_title
     assert_equal "マチダのブログへようこそ", SiteSetting.top_page_description
     assert_equal "© #{Date.current.year} マチダのブログ. All rights reserved.", SiteSetting.copyright_text
     assert_nil SiteSetting.default_og_image

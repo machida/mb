@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-  static targets = ['input', 'preview', 'dropzone', 'url', 'clearButton'];
+  static targets = ['input', 'preview', 'dropzone', 'url', 'clearButton', 'previewArea'];
   static values = { uploadUrl: String };
 
   connect() {
@@ -10,7 +10,7 @@ export default class extends Controller {
 
   setupDropzone() {
     const dropzone = this.dropzoneTarget;
-    
+
     dropzone.addEventListener('dragover', this.handleDragOver.bind(this));
     dropzone.addEventListener('dragleave', this.handleDragLeave.bind(this));
     dropzone.addEventListener('drop', this.handleDrop.bind(this));
@@ -29,7 +29,7 @@ export default class extends Controller {
   async handleDrop(event) {
     event.preventDefault();
     this.dropzoneTarget.classList.remove('border-blue-500', 'bg-blue-50');
-    
+
     const files = event.dataTransfer.files;
     if (files.length > 0) {
       await this.uploadFile(files[0]);
@@ -88,11 +88,16 @@ export default class extends Controller {
   handleUploadSuccess(data) {
     // URLをinputに設定
     this.urlTarget.value = data.url;
-    
+
     // プレビュー画像を表示
     this.previewTarget.src = data.url;
     this.previewTarget.classList.remove('hidden');
-    
+
+    // プレビューエリア全体を表示
+    if (this.hasPreviewAreaTarget) {
+      this.previewAreaTarget.classList.remove('hidden');
+    }
+
     // 削除ボタンを表示
     if (this.hasClearButtonTarget) {
       this.clearButtonTarget.classList.remove('hidden');
@@ -101,7 +106,7 @@ export default class extends Controller {
         this.clearButtonTarget.parentElement.classList.remove('hidden');
       }
     }
-    
+
     // 成功メッセージ
     this.showSuccess('画像がアップロードされました');
   }
@@ -128,7 +133,7 @@ export default class extends Controller {
         <p class="text-gray-600 text-center mb-2">
           画像をドラッグ&ドロップするか
         </p>
-        <button type="button" class="a-button is-md is-primary" data-action="click->thumbnail-upload#selectFile">
+        <button type="button" class="a--button is-md is-primary" data-action="click->thumbnail-upload#selectFile">
           ファイルを選択
         </button>
         <p class="a--form-help mt-2">JPG, PNG, GIF (最大5MB)</p>
@@ -143,6 +148,12 @@ export default class extends Controller {
   clearThumbnail() {
     this.urlTarget.value = '';
     this.previewTarget.classList.add('hidden');
+    
+    // プレビューエリア全体を非表示
+    if (this.hasPreviewAreaTarget) {
+      this.previewAreaTarget.classList.add('hidden');
+    }
+    
     if (this.hasClearButtonTarget) {
       this.clearButtonTarget.classList.add('hidden');
       // 削除ボタンの親要素も非表示
