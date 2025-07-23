@@ -13,21 +13,21 @@
     <%= form_with url: admin_login_path, local: true, class: "space-y-4", aria_labelledby: "login-title" do |f| %>
       <fieldset>
         <legend class="sr-only">ログイン情報</legend>
-        
+
         <div class="l--form-items">
           <div class="l--form-item">
-            <%= f.label :email, "メールアドレス", class: "a--form-label mb-1 spec--email-label" %>
-            <%= f.email_field :email, 
-                required: true, 
+            <%= f.label :email, "メールアドレス", class: "a--form-label mb-2 spec--email-label" %>
+            <%= f.email_field :email,
+                required: true,
                 class: "a--text-input spec--email-input",
                 aria_required: "true",
                 autocomplete: "email" %>
           </div>
 
           <div class="l--form-item">
-            <%= f.label :password, "パスワード", class: "a--form-label mb-1 spec--password-label" %>
-            <%= f.password_field :password, 
-                required: true, 
+            <%= f.label :password, "パスワード", class: "a--form-label mb-2 spec--password-label" %>
+            <%= f.password_field :password,
+                required: true,
                 class: "a--text-input spec--password-input",
                 aria_required: "true",
                 autocomplete: "current-password" %>

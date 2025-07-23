@@ -5,7 +5,7 @@
     <%= form_with url: admin_site_settings_path, method: :patch, local: true, class: "space-y-6" do |f| %>
       <div class="l--form-items">
         <div class="l--form-item is-xs">
-          <%= label_tag "site_settings[site_title]", "サイトタイトル", class: "a--form-label mb-1" %>
+          <%= label_tag "site_settings[site_title]", "サイトタイトル", class: "a--form-label mb-2" %>
           <%= text_field_tag "site_settings[site_title]",                         @settings[:site_title],                         class: "a--text-input spec--site-title-input" %>
           <div class="a--form-help mt-1">
             ブラウザのタブやOGPで使用されるサイトタイトルです
@@ -13,7 +13,7 @@
         </div>
 
         <div class="l--form-item is-xs">
-          <label class="a--form-label mb-1">デフォルトOG画像</label>
+          <label class="a--form-label mb-2">デフォルトOG画像</label>
           <%= render ImageUploadComponent.new(
             field_name: "site_settings[default_og_image]",
             upload_url: admin_site_settings_upload_image_path,
@@ -26,7 +26,7 @@
         </div>
 
         <div class="l--form-item is-sm">
-          <%= label_tag "site_settings[top_page_description]", "トップページの説明文", class: "a--form-label mb-1" %>
+          <%= label_tag "site_settings[top_page_description]", "トップページの説明文", class: "a--form-label mb-2" %>
           <%= text_area_tag "site_settings[top_page_description]",
                             @settings[:top_page_description],                        rows: 3,                        class: "a--text-input spec--top-page-description-input" %>
           <div class="a--form-help mt-1">
@@ -35,7 +35,7 @@
         </div>
 
         <div class="l--form-item is-xs">
-          <%= label_tag "site_settings[copyright]", "著作権者名", class: "a--form-label mb-1" %>
+          <%= label_tag "site_settings[copyright]", "著作権者名", class: "a--form-label mb-2" %>
           <%= text_field_tag "site_settings[copyright]",                         @settings[:copyright],                         class: "a--text-input spec--copyright-input" %>
           <div class="a--form-help mt-1">
             「© <%= Date.current.year %> [ここに入力した名前]. All rights reserved.」の形式で表示されます
@@ -43,7 +43,7 @@
         </div>
 
         <div class="l--form-item">
-          <%= label_tag "site_settings[author_display_enabled]", "記事の著者表示", class: "a--form-label mb-1" %>
+          <%= label_tag "site_settings[author_display_enabled]", "記事の著者表示", class: "a--form-label mb-2" %>
           <div class="flex items-center space-x-4">
             <label class="flex items-center">
               <%= radio_button_tag "site_settings[author_display_enabled]", "true",                               @settings[:author_display_enabled] == "true",                               class: "mr-2 spec--author-display-enabled-true" %>
@@ -62,8 +62,8 @@
 
       <div class="l--form-actions">
         <ul>
-          <li><%= submit_tag "設定を保存", class: "a--button is-lg is-primary spec--save-button" %></li>
-          <li><%= link_to "キャンセル", admin_articles_path, class: "a--button is-lg is-border-secondary spec--cancel-button" %></li>
+          <li><%= submit_tag "設定を保存", class: "a--button is-lg is-primary is-flex spec--save-button" %></li>
+          <li><%= link_to "キャンセル", admin_articles_path, class: "a--button is-lg is-border-secondary is-flex spec--cancel-button" %></li>
         </ul>
       </div>
     <% end %>

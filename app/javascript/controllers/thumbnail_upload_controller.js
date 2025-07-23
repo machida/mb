@@ -134,7 +134,7 @@ export default class extends Controller {
           cloud_upload
         </span>
         <p class="text-gray-600 text-center mb-2">
-          画像をドラッグ&ドロップするか
+          画像をドラッグ&ドロップ
         </p>
         <button type="button" class="a--button is-md is-primary" data-action="click->thumbnail-upload#selectFile">
           ファイルを選択

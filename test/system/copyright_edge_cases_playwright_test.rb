@@ -27,7 +27,7 @@ class CopyrightEdgeCasesPlaywrightTest < ApplicationPlaywrightTestCase
 
   test "changing copyright when starting with default value from seeds" do
     # Reset to exact seeds value
-    SiteSetting.set('copyright', 'マチダのブログ')
+    SiteSetting.set('copyright', 'MB')
     
     login_as_admin(@admin)
     @page.goto("http://localhost:#{@server_port}/admin/site-settings")

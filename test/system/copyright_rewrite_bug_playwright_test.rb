@@ -11,7 +11,7 @@ class CopyrightRewriteBugPlaywrightTest < ApplicationPlaywrightTestCase
     @admin = create_admin
     
     # Set initial copyright value
-    SiteSetting.set('copyright', 'マチダのブログ')
+    SiteSetting.set('copyright', 'MB')
   end
 
   test "can actually change copyright holder name from existing value to new value" do

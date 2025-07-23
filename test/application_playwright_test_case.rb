@@ -30,8 +30,8 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
     
     # Reset default settings
     SiteSetting.create!(name: "site_title", value: "マチダのブログ")
-    SiteSetting.create!(name: "copyright", value: "マチダのブログ")
-    SiteSetting.create!(name: "top_page_description", value: "マチダのブログへようこそ")
+    SiteSetting.create!(name: "copyright", value: "MB")
+    SiteSetting.create!(name: "top_page_description", value: "ブログへようこそ。技術やライフスタイルについて書いています。")
     SiteSetting.create!(name: "default_og_image", value: "https://example.com/default-og-image.jpg")
     
     # Clear cache
@@ -248,7 +248,7 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
       "SELECT value FROM site_settings WHERE name = ?",
       "SQL",
       ["copyright"]
-    ).first&.fetch("value") || "マチダのブログ"
+    ).first&.fetch("value") || "MB"
   end
   
   private

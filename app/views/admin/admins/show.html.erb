@@ -110,13 +110,13 @@
             <div class="l--form-actions pt-4">
               <ul>
                 <% unless @admin.last_admin? %>
-                  <li><%= f.submit "管理者を削除", class: "a--button is-md is-danger spec--confirm-delete-button" %></li>
+                  <li><%= f.submit "管理者を削除", class: "a--button is-md is-danger is-flex spec--confirm-delete-button" %></li>
                 <% else %>
-                  <li><button type="button" disabled class="a--button is-md is-disabled spec--cannot-delete-button">
+                  <li><button type="button" disabled class="a--button is-md is-disabled is-flex spec--cannot-delete-button">
                     最後の管理者は削除できません
                   </button></li>
                 <% end %>
-                <li><%= link_to "キャンセル", admin_admins_path, class: "a--button is-md is-border-secondary spec--cancel-button" %></li>
+                <li><%= link_to "キャンセル", admin_admins_path, class: "a--button is-md is-border-secondary is-flex spec--cancel-button" %></li>
               </ul>
             </div>
           <% end %>
@@ -128,13 +128,13 @@
           <% unless @admin.last_admin? %>
             <li><%= link_to "管理者を削除", admin_admin_path(@admin), method: :delete,
                         data: { confirm: "この管理者を削除しますか？" },
-                        class: "a--button is-md is-danger spec--simple-delete-button" %></li>
+                        class: "a--button is-md is-danger is-flex spec--simple-delete-button" %></li>
           <% else %>
-            <li><button type="button" disabled class="a--button is-md is-disabled spec--cannot-delete-button">
+            <li><button type="button" disabled class="a--button is-md is-disabled is-flex spec--cannot-delete-button">
               最後の管理者は削除できません
             </button></li>
           <% end %>
-          <li><%= link_to "管理者一覧に戻る", admin_admins_path, class: "a--button is-md is-border-secondary spec--back-button" %></li>
+          <li><%= link_to "管理者一覧に戻る", admin_admins_path, class: "a--button is-md is-border-secondary is-flex spec--back-button" %></li>
         </ul>
       </div>
     <% end %>

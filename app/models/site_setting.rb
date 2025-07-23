@@ -34,11 +34,11 @@ class SiteSetting < ApplicationRecord
   end
 
   def self.top_page_description
-    get("top_page_description", "マチダのブログへようこそ")
+    get("top_page_description", "ブログへようこそ。技術やライフスタイルについて書いています。")
   end
 
   def self.copyright
-    get("copyright", "マチダのブログ")
+    get("copyright", "MB")
   end
 
   def self.copyright_text

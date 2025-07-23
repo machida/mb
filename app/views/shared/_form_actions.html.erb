@@ -10,14 +10,14 @@
 
 <div class="l--form-actions">
   <ul>
-    <li><%= form.submit primary_label, class: "a--button is-lg is-primary #{primary_class}" %></li>
+    <li><%= form.submit primary_label, class: "a--button is-lg is-primary is-flex #{primary_class}" %></li>
 
     <% if secondary_label.present? %>
-      <li><%= form.submit secondary_label, class: "a--button is-lg is-warning #{secondary_class}" %></li>
+      <li><%= form.submit secondary_label, class: "a--button is-lg is-warning is-flex #{secondary_class}" %></li>
     <% end %>
 
     <% if cancel_path.present? %>
-      <li><%= link_to cancel_label, cancel_path, class: "a--button is-lg is-border-secondary spec--cancel-button" %></li>
+      <li><%= link_to cancel_label, cancel_path, class: "a--button is-lg is-border-secondary is-flex spec--cancel-button" %></li>
     <% end %>
   </ul>
 </div>

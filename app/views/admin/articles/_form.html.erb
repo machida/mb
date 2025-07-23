@@ -2,8 +2,8 @@
   <%= render AlertComponent.new(type: :danger, messages: article.errors.full_messages) if article.errors.any? %>
 
   <div class="l--form-items">
-    <div class="l--form-item is-xs">
-    <%= f.label :title, "タイトル", class: "a--form-label mb-1" %>
+    <div class="l--form-item is-sm">
+    <%= f.label :title, "タイトル", class: "a--form-label mb-2" %>
     <%= f.text_field :title,
         class: "a--text-input spec--title-input #{'border-red-300' if article.errors[:title].any?}",
         aria_describedby: ("title-error" if article.errors[:title].any?),
@@ -17,7 +17,7 @@
   </div>
 
   <div class="l--form-item is-sm">
-    <%= f.label :summary, "概要", class: "a--form-label mb-1" %>
+    <%= f.label :summary, "概要", class: "a--form-label mb-2" %>
     <%= f.text_area :summary, rows: 3,
         class: "a--text-input spec--summary-input #{'border-red-300' if article.errors[:summary].any?}",
         aria_describedby: ("summary-error" if article.errors[:summary].any?),
@@ -30,15 +30,15 @@
   </div>
 
   <fieldset class="l--form-item">
-    <legend class="a--form-label mb-1">本文 (Markdown記法)</legend>
+    <legend class="a--form-label mb-2">本文 (Markdown記法)</legend>
     <div id="body-help" class="a--form-help mb-2">
       Markdown記法が使用できます。**太字**、*斜体*、`コード`、[リンク](URL)、見出し(#)、リスト(-)など
       <br>
-      画像をドラッグ&ドロップするか、貼り付けてアップロードできます
+      画像をドラッグ&ドロップ、貼り付けてアップロードできます
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4" data-controller="markdown-preview">
       <div class="">
-        <label for="<%= f.field_id(:body) %>" class="a--form-label mb-1">編集</label>
+        <label for="<%= f.field_id(:body) %>" class="a--form-label mb-2">編集</label>
         <%= f.text_area :body, rows: 15,
                         class: "a--text-input a--markdown-textarea font-mono text-sm spec--body-input js-markdown-textarea #{'border-red-300' if article.errors[:body].any?}",
                         aria_describedby: "body-help#{ ' body-error' if article.errors[:body].any?}",
@@ -55,7 +55,7 @@
         <% end %>
       </div>
       <div class="">
-        <label class="a--form-label mb-1">プレビュー</label>
+        <label class="a--form-label mb-2">プレビュー</label>
         <div class="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 overflow-y-auto" role="region" aria-label="Markdownプレビュー">
           <div data-markdown-preview-target="preview" class="a--long-text js-markdown-preview">
             <% if article.body.present? %>
@@ -70,7 +70,7 @@
   </fieldset>
 
   <div class="l--form-item is-xs">
-    <%= f.label :thumbnail, "サムネイル画像", class: "a--form-label mb-1" %>
+    <%= f.label :thumbnail, "サムネイル画像", class: "a--form-label mb-2" %>
     <div class="a--form-help">
       記事のOGP画像やカード表示で使用される画像です
     </div>
@@ -88,17 +88,17 @@
     <ul>
       <% if article.persisted? %>
         <% if article.draft? %>
-          <li><%= f.submit "公開", class: "a--button is-lg is-primary spec--update-button" %></li>
-          <li><%= f.submit "下書き保存", class: "a--button is-lg is-warning" %></li>
+          <li><%= f.submit "公開", class: "a--button is-lg is-primary is-flex spec--update-button" %></li>
+          <li><%= f.submit "下書き保存", class: "a--button is-lg is-warning is-flex" %></li>
         <% else %>
-          <li><%= f.submit "更新", class: "a--button is-lg is-primary spec--update-button" %></li>
-          <li><%= f.submit "下書き保存", class: "a--button is-lg is-warning" %></li>
+          <li><%= f.submit "更新", class: "a--button is-lg is-primary is-flex spec--update-button" %></li>
+          <li><%= f.submit "下書き保存", class: "a--button is-lg is-warning is-flex" %></li>
         <% end %>
       <% else %>
-        <li><%= f.submit "公開", class: "a--button is-lg is-primary spec--publish-button" %></li>
-        <li><%= f.submit "下書き保存", class: "a--button is-lg is-warning spec--draft-button" %></li>
+        <li><%= f.submit "公開", class: "a--button is-lg is-primary is-flex spec--publish-button" %></li>
+        <li><%= f.submit "下書き保存", class: "a--button is-lg is-warning is-flex spec--draft-button" %></li>
       <% end %>
-      <li><%= link_to "キャンセル", admin_articles_path, class: "a--button is-lg is-border-secondary spec--cancel-button" %></li>
+      <li><%= link_to "キャンセル", admin_articles_path, class: "a--button is-lg is-border-secondary is-flex spec--cancel-button" %></li>
     </ul>
   </div>
 <% end %>

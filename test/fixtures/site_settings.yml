@@ -4,6 +4,10 @@ site_title:
   name: site_title
   value: マチダのブログ
 
+copyright:
+  name: copyright
+  value: MB
+
 default_og_image:
   name: default_og_image
   value: https://example.com/default-og-image.jpg
