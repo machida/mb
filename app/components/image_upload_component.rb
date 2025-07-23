@@ -6,7 +6,7 @@ class ImageUploadComponent < ViewComponent::Base
     form: nil,
     accept: "image/*",
     max_file_size: "5MB",
-    help_text: "JPG, PNG, GIF (最大5MB)",
+    help_text: "JPG、PNG、GIF（最大5MB）。",
     spec_class: nil
   )
     @field_name = field_name

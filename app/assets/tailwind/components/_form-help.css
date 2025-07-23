@@ -1,5 +1,6 @@
 /* フォームヘルプテキスト用コンポーネント */
 .a--form-help {
-  font-size: 0.75rem;    /* text-xs */
-  color: #6b7280;        /* text-gray-500 */
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  color: var(--color-form-text-disabled);
 }

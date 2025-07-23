@@ -70,12 +70,6 @@
   color: var(--color-form-label);
 }
 
-.a--form-help {
-  font-size: 0.75rem;
-  line-height: 1rem;
-  color: var(--color-form-text-disabled);
-}
-
 .a--form-error {
   font-size: 0.75rem;
   line-height: 1rem;

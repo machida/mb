@@ -32,9 +32,12 @@
   <fieldset class="l--form-item">
     <legend class="a--form-label mb-2">本文 (Markdown記法)</legend>
     <div id="body-help" class="a--form-help mb-2">
-      Markdown記法が使用できます。**太字**、*斜体*、`コード`、[リンク](URL)、見出し(#)、リスト(-)など
-      <br>
-      画像をドラッグ&ドロップ、貼り付けてアップロードできます
+      <p>Markdown記法が使用できます。</p>
+      <ul>
+        <li>**太字**、*斜体*、`コード`、[リンク](URL)</li>
+        <li>見出し(#)、リスト(-)</li>
+        <li>画像をドラッグ&ドロップ、貼り付けてアップロード</li>
+      </ul>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4" data-controller="markdown-preview">
       <div class="">
@@ -71,8 +74,8 @@
 
   <div class="l--form-item is-xs">
     <%= f.label :thumbnail, "サムネイル画像", class: "a--form-label mb-2" %>
-    <div class="a--form-help">
-      記事のOGP画像やカード表示で使用される画像です
+    <div class="a--form-help mb-2">
+      <p>記事のOGP画像やカード表示で使用される画像です。</p>
     </div>
     <%= render ImageUploadComponent.new(
       field_name: :thumbnail,

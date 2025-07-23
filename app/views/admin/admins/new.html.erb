@@ -14,25 +14,33 @@
             <div class="l--form-item">
               <%= f.label :user_id, "ユーザーID", class: "a--form-label mb-2" %>
               <%= f.text_field :user_id, required: true, class: "a--text-input spec--admin-user-id-input" %>
-              <p class="a--form-help mt-1">記事の著者として表示されるIDです（英数字のみ）</p>
+              <div class="a--form-help mt-1">
+                <p>記事の著者として表示されるIDです（英数字のみ）。</p>
+              </div>
             </div>
 
             <div class="l--form-item">
               <%= f.label :email, "メールアドレス", class: "a--form-label mb-2" %>
               <%= f.email_field :email, required: true, class: "a--text-input spec--admin-email-input" %>
-              <p class="a--form-help mt-1">ログイン時に使用するメールアドレスです</p>
+              <div class="a--form-help mt-1">
+                <p>ログイン時に使用するメールアドレスです。</p>
+              </div>
             </div>
 
             <div class="l--form-item">
               <%= f.label :password, "初期パスワード", class: "a--form-label mb-2" %>
               <%= f.password_field :password, required: true, class: "a--text-input spec--admin-password-input" %>
-              <p class="a--form-help mt-1">8文字以上で設定してください</p>
+              <div class="a--form-help mt-1">
+                <p>8文字以上で設定してください。</p>
+              </div>
             </div>
 
             <div class="l--form-item">
               <%= f.label :password_confirmation, "パスワード確認", class: "a--form-label mb-2" %>
               <%= f.password_field :password_confirmation, required: true, class: "a--text-input spec--admin-password-confirmation-input" %>
-              <p class="a--form-help mt-1">確認のため同じパスワードを入力してください</p>
+              <div class="a--form-help mt-1">
+                <p>確認のため同じパスワードを入力してください。</p>
+              </div>
             </div>
           </div>
         </div>

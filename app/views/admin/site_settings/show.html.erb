@@ -8,7 +8,7 @@
           <%= label_tag "site_settings[site_title]", "サイトタイトル", class: "a--form-label mb-2" %>
           <%= text_field_tag "site_settings[site_title]",                         @settings[:site_title],                         class: "a--text-input spec--site-title-input" %>
           <div class="a--form-help mt-1">
-            ブラウザのタブやOGPで使用されるサイトタイトルです
+            <p>ブラウザのタブやOGPで使用されるサイトタイトルです。</p>
           </div>
         </div>
 
@@ -21,7 +21,7 @@
             spec_class: "default-og-image"
           ) %>
           <div class="a--form-help mt-1">
-            記事にサムネイル画像が設定されていない場合に使用される画像です
+            <p>記事にサムネイル画像が設定されていない場合に使用される画像です。</p>
           </div>
         </div>
 
@@ -30,7 +30,7 @@
           <%= text_area_tag "site_settings[top_page_description]",
                             @settings[:top_page_description],                        rows: 3,                        class: "a--text-input spec--top-page-description-input" %>
           <div class="a--form-help mt-1">
-            トップページのmeta descriptionとOGPで使用される説明文です
+            <p>トップページのmeta descriptionとOGPで使用される説明文です。</p>
           </div>
         </div>
 
@@ -38,7 +38,7 @@
           <%= label_tag "site_settings[copyright]", "著作権者名", class: "a--form-label mb-2" %>
           <%= text_field_tag "site_settings[copyright]",                         @settings[:copyright],                         class: "a--text-input spec--copyright-input" %>
           <div class="a--form-help mt-1">
-            「© <%= Date.current.year %> [ここに入力した名前]. All rights reserved.」の形式で表示されます
+            <p>「© <%= Date.current.year %> [ここに入力した名前]. All rights reserved.」の形式で表示されます。</p>
           </div>
         </div>
 
@@ -55,7 +55,7 @@
             </label>
           </div>
           <div class="a--form-help mt-1">
-            記事一覧や記事詳細ページで著者名を表示するかどうかを設定できます
+            <p>記事一覧や記事詳細ページで著者名を表示するかどうかを設定できます。</p>
           </div>
         </div>
       </div>
