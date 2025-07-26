@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
+  # Letter opener web for development email preview
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
+  
   namespace :admin do
     get "login", to: "sessions#new"
     post "login", to: "sessions#create"
     delete "logout", to: "sessions#destroy"
+    
+    resources :password_resets, only: [:new, :create, :show, :update], param: :token
     
     resource :profile, only: [:edit, :update]
     resource :password, only: [:edit, :update]

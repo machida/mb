@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_18_085054) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_26_050421) do
   create_table "admins", force: :cascade do |t|
     t.string "email"
     t.string "user_id"
@@ -18,6 +18,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_085054) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "password_changed_at"
+    t.string "password_reset_token"
+    t.datetime "password_reset_sent_at"
+    t.index ["password_reset_token"], name: "index_admins_on_password_reset_token", unique: true
   end
 
   create_table "articles", force: :cascade do |t|

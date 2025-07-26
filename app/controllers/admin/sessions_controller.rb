@@ -7,6 +7,8 @@ class Admin::SessionsController < Admin::BaseController
     admin = Admin.find_by(email: params[:email])
 
     if admin && admin.authenticate(params[:password])
+      # セッション固定化攻撃対策: ログイン時にセッションIDを再生成
+      reset_session
       session[:admin_id] = admin.id
       redirect_to root_path, notice: "ログインしました"
     else

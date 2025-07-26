@@ -1,5 +1,5 @@
 class Admin::AdminsController < Admin::BaseController
-  before_action :set_admin, only: [:show, :destroy]
+  before_action :set_admin, only: [ :show, :destroy ]
 
   def index
     @admins = Admin.includes(:articles).order(:user_id)
@@ -14,7 +14,7 @@ class Admin::AdminsController < Admin::BaseController
 
   def create
     @admin = Admin.new(admin_params)
-    
+
     if @admin.save
       redirect_to admin_admins_path, notice: "管理者「#{@admin.user_id}」を追加しました。"
     else
@@ -34,7 +34,7 @@ class Admin::AdminsController < Admin::BaseController
     end
 
     @admin.destroy
-    
+
     if current_admin == @admin
       session[:admin_id] = nil
       redirect_to admin_login_path, notice: "アカウントを削除しました。"
@@ -45,7 +45,7 @@ class Admin::AdminsController < Admin::BaseController
 
   def confirm_delete
     @admin = Admin.includes(:articles).find(params[:id])
-    
+
     if @admin.last_admin?
       redirect_to admin_admins_path, alert: "最後の管理者は削除できません。"
       return
@@ -58,7 +58,7 @@ class Admin::AdminsController < Admin::BaseController
   def process_delete
     @admin = Admin.includes(:articles).find(params[:id])
     action_type = params[:action_type]
-    
+
     case action_type
     when "transfer"
       target_admin = Admin.find(params[:target_admin_id])
@@ -73,7 +73,7 @@ class Admin::AdminsController < Admin::BaseController
     end
 
     @admin.destroy
-    
+
     if current_admin == @admin
       session[:admin_id] = nil
       redirect_to admin_login_path, notice: message

@@ -16,7 +16,7 @@ class AlertComponent < ViewComponent::Base
   attr_reader :type, :message, :messages, :title, :spec_class
 
   def card_classes
-    classes = ["a--card", "is-#{type}", color_class]
+    classes = [ "a--card", "is-#{type}", color_class ]
     classes << spec_class if spec_class.present?
     classes.compact.join(" ")
   end
