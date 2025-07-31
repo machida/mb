@@ -45,13 +45,9 @@ COPY . .
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
-# Build Tailwind CSS and precompile assets for production without requiring secret RAILS_MASTER_KEY
-# Force TailwindCSS to rescan all source files by clearing its cache first
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:clobber && \
-    rm -rf public/assets/* tmp/cache/assets/* && \
-    find app/views -name "*.erb" -exec touch {} \; && \
-    SECRET_KEY_BASE_DUMMY=1 ./bin/rails tailwindcss:build && \
-    SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+# Use pre-built assets from development environment to avoid TailwindCSS Docker scanning issues
+# The assets are already compiled in the development environment with proper content scanning
+RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 
 

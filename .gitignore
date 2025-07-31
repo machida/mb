@@ -28,7 +28,7 @@
 !/tmp/storage/
 !/tmp/storage/.keep
 
-/public/assets
+# /public/assets  # Temporarily allowing assets for production deployment fix
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
