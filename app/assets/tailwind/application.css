@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@source "../../views/**/*.erb";
+
 @theme {
   /* Font families */
   --font-family-base: YakuHanJPs, "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
