@@ -46,6 +46,7 @@ COPY . .
 RUN bundle exec bootsnap precompile app/ lib/
 
 # Build Tailwind CSS and precompile assets for production without requiring secret RAILS_MASTER_KEY
+# Force cache bust - with spacing variable fix
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails tailwindcss:build && \
     SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
