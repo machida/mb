@@ -48,13 +48,21 @@ RUN bundle exec bootsnap precompile app/ lib/
 # Build assets normally to generate proper file structure and manifest
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
+# Debug: Check what TailwindCSS files exist after asset compilation
+RUN echo "=== Available TailwindCSS files ===" && ls -la public/assets/tailwind* || echo "No tailwind files found"
+
 # Replace the Docker-generated TailwindCSS (which lacks proper content scanning) 
 # with the development-generated version that includes all classes like my-12  
-RUN cp public/assets/tailwind-45cd73b1.css /tmp/dev-tailwind.css && \
-    cd public/assets && \
-    DOCKER_TAILWIND=$(ls tailwind-*.css | head -1) && \
-    cp /tmp/dev-tailwind.css "$DOCKER_TAILWIND" && \
-    rm /tmp/dev-tailwind.css
+RUN if [ -f public/assets/tailwind-45cd73b1.css ]; then \
+        echo "Found development TailwindCSS file, replacing..."; \
+        cp public/assets/tailwind-45cd73b1.css /tmp/dev-tailwind.css && \
+        cd public/assets && \
+        DOCKER_TAILWIND=$(ls tailwind-*.css | head -1) && \
+        cp /tmp/dev-tailwind.css "$DOCKER_TAILWIND" && \
+        rm /tmp/dev-tailwind.css; \
+    else \
+        echo "Development TailwindCSS file not found, using Docker-generated version"; \
+    fi
 
 
 
