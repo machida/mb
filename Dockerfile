@@ -45,9 +45,10 @@ COPY . .
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
-# Use pre-built assets from development environment to avoid TailwindCSS Docker scanning issues
+# Use pre-built assets from development environment - skip asset compilation entirely
 # The assets are already compiled in the development environment with proper content scanning
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+# Skipping asset compilation prevents TailwindCSS Docker scanning issues
+COPY public/assets public/assets
 
 
 
