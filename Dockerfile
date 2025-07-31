@@ -49,9 +49,12 @@ RUN bundle exec bootsnap precompile app/ lib/
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 # Replace the Docker-generated TailwindCSS (which lacks proper content scanning) 
-# with the development-generated version that includes all classes like my-12
-COPY public/assets/tailwind-*.css /tmp/dev-tailwind.css
-RUN cp /tmp/dev-tailwind.css public/assets/tailwind-*.css && rm /tmp/dev-tailwind.css
+# with the development-generated version that includes all classes like my-12  
+RUN cp public/assets/tailwind-45cd73b1.css /tmp/dev-tailwind.css && \
+    cd public/assets && \
+    DOCKER_TAILWIND=$(ls tailwind-*.css | head -1) && \
+    cp /tmp/dev-tailwind.css "$DOCKER_TAILWIND" && \
+    rm /tmp/dev-tailwind.css
 
 
 
