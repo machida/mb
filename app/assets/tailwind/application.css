@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
-@source "../../views/**/*.erb";
+@source "../../../app/views/**/*.erb";
+@source "../../../app/views/**/*.html.erb";
+@source "app/views/**/*.erb";
+@source "app/views/**/*.html.erb";
 
 @theme {
   /* Font families */
