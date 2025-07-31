@@ -2,10 +2,8 @@
 
 @source "app/views/**/*.erb";
 @source "app/views/**/*.html.erb";
-
-/* Explicit class definitions to ensure inclusion */
-.my-12 { margin-top: calc(var(--spacing, 0.25rem) * 12); margin-bottom: calc(var(--spacing, 0.25rem) * 12); }
-.h-100 { height: 100vh; }
+@source "/rails/app/views/**/*.erb";
+@source "/rails/app/views/**/*.html.erb";
 
 @theme {
   /* Spacing scale */
