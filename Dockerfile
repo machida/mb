@@ -45,10 +45,8 @@ COPY . .
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
-# Use pre-built assets from development environment - skip asset compilation entirely
-# The assets are already compiled in the development environment with proper content scanning
-# Skipping asset compilation prevents TailwindCSS Docker scanning issues
-COPY public/assets public/assets
+# Skip asset compilation - use pre-built assets that already include proper TailwindCSS content scanning
+# This prevents the Docker environment TailwindCSS scanning issues that lose the my-12 class
 
 
 
