@@ -2,12 +2,12 @@
 service: mb
 
 # Name of the container image.
-image: machida/mb
+image: ghcr.io/machida/mb
 
 # Deploy to these servers.
 servers:
   web:
-    - YOUR_SAKURA_VPS_IP
+    - 153.121.42.228
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -19,11 +19,12 @@ servers:
 # Note: If using Cloudflare, set encryption mode in SSL/TLS setting to "Full" to enable CF-to-app encryption.
 proxy:
   ssl: true
-  host: YOUR_DOMAIN_OR_IP
+  host: mxchida.com
 
 # Credentials for your image host.
 registry:
-  # Using Docker Hub
+  # Using GitHub Container Registry
+  server: ghcr.io
   username: machida
 
   # Always use an access token rather than real password when possible.
@@ -87,8 +88,8 @@ builder:
   #   - RAILS_MASTER_KEY
 
 # Use a different ssh user than root
-# ssh:
-#   user: app
+ssh:
+  user: ubuntu
 
 # Use accessory services (secrets come from .kamal/secrets).
 # accessories:
