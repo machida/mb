@@ -45,11 +45,13 @@ COPY . .
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
-# Create empty public/assets directory to satisfy Kamal asset extraction
-RUN mkdir -p public/assets
+# Build assets normally to generate proper file structure and manifest
+RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
-# Skip asset compilation - use pre-built assets that already include proper TailwindCSS content scanning
-# This prevents the Docker environment TailwindCSS scanning issues that lose the my-12 class
+# Replace the Docker-generated TailwindCSS (which lacks proper content scanning) 
+# with the development-generated version that includes all classes like my-12
+COPY public/assets/tailwind-*.css /tmp/dev-tailwind.css
+RUN cp /tmp/dev-tailwind.css public/assets/tailwind-*.css && rm /tmp/dev-tailwind.css
 
 
 
