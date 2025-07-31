@@ -6,6 +6,9 @@
 @source "app/views/**/*.html.erb";
 
 @theme {
+  /* Spacing scale */
+  --spacing: 0.25rem;
+
   /* Font families */
   --font-family-base: YakuHanJPs, "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
   --font-family-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
