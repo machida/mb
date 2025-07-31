@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-@source "../../../app/views/**/*.erb";
-@source "../../../app/views/**/*.html.erb";
 @source "app/views/**/*.erb";
 @source "app/views/**/*.html.erb";
 
@@ -241,4 +239,4 @@
 @import "./components/_form-help.css";
 @import "./components/_page-notice.css";
 
-/* Force h-100 rebuild - with spacing variable - Compiled at: 2025-07-31 20:00:00 */
+/* Force rebuild with classes: my-12 h-100 flex flex-col min-h-screen - Compiled at: 2025-07-31 21:00:00 */
