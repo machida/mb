@@ -4,6 +4,9 @@
 @source "app/views/**/*.html.erb";
 @source "/rails/app/views/**/*.erb";
 @source "/rails/app/views/**/*.html.erb";
+@source "/rails/app/components/**/*.rb";
+@source "/rails/app/helpers/**/*.rb";
+@source "/rails/config/routes.rb";
 
 @theme {
   /* Spacing scale */
