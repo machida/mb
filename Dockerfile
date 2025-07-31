@@ -45,6 +45,9 @@ COPY . .
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
+# Create empty public/assets directory to satisfy Kamal asset extraction
+RUN mkdir -p public/assets
+
 # Skip asset compilation - use pre-built assets that already include proper TailwindCSS content scanning
 # This prevents the Docker environment TailwindCSS scanning issues that lose the my-12 class
 
