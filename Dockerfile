@@ -28,9 +28,11 @@ ENV RAILS_ENV="production" \
 # Throw-away build stage to reduce size of final image
 FROM base AS build
 
-# Install packages needed to build gems
+# Install packages needed to build gems and Node.js
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libyaml-dev pkg-config && \
+    apt-get install --no-install-recommends -y build-essential git libyaml-dev pkg-config curl && \
+    curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
+    apt-get install -y nodejs && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install application gems
@@ -42,27 +44,26 @@ RUN bundle install && \
 # Copy application code
 COPY . .
 
+# Install Node.js dependencies
+RUN npm install
+
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
-# Build assets normally to generate proper file structure and manifest
+# Download and use TailwindCSS standalone binary for v4 compatibility
+RUN curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64 && \
+    chmod +x tailwindcss-linux-x64 && \
+    echo "=== Building TailwindCSS ===" && \
+    ./tailwindcss-linux-x64 -i app/assets/tailwind/application.css -o app/assets/builds/tailwind.css && \
+    echo "=== my-12 class check ===" && \
+    grep -c "my-12" app/assets/builds/tailwind.css && echo "my-12 found!" || echo "my-12 not found"
+
+# Build assets normally but skip TailwindCSS generation by gem
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 # Debug: Check what TailwindCSS files exist after asset compilation
 RUN echo "=== Available TailwindCSS files ===" && ls -la public/assets/tailwind* || echo "No tailwind files found"
-
-# Replace the Docker-generated TailwindCSS (which lacks proper content scanning) 
-# with the development-generated version that includes all classes like my-12  
-RUN if [ -f public/assets/tailwind-45cd73b1.css ]; then \
-        echo "Found development TailwindCSS file, replacing..."; \
-        cp public/assets/tailwind-45cd73b1.css /tmp/dev-tailwind.css && \
-        cd public/assets && \
-        DOCKER_TAILWIND=$(ls tailwind-*.css | head -1) && \
-        cp /tmp/dev-tailwind.css "$DOCKER_TAILWIND" && \
-        rm /tmp/dev-tailwind.css; \
-    else \
-        echo "Development TailwindCSS file not found, using Docker-generated version"; \
-    fi
+RUN echo "=== Node.js built TailwindCSS info ===" && ls -la app/assets/builds/tailwind.css && echo "Size: $(wc -c < app/assets/builds/tailwind.css) bytes" && echo "my-12 class count: $(grep -c 'my-12' app/assets/builds/tailwind.css || echo '0')"
 
 
 

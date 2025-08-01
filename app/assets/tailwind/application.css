@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* Force-include specific utility classes */
 @source "app/views/**/*.erb";
 @source "app/views/**/*.html.erb";
 @source "/rails/app/views/**/*.erb";
@@ -8,9 +9,21 @@
 @source "/rails/app/helpers/**/*.rb";
 @source "/rails/config/routes.rb";
 
+/* Force utility classes to be generated */
+
 @theme {
-  /* Spacing scale */
-  --spacing: 0.25rem;
+  /* Spacing scale - ensure margin utilities are available */
+  --spacing-0: 0px;
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
 
   /* Font families */
   --font-family-base: YakuHanJPs, "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
@@ -248,3 +261,11 @@
 @import "./components/_page-notice.css";
 
 /* Force rebuild with classes: my-12 h-100 flex flex-col min-h-screen - Updated: 2025-07-31 21:30:00 - CACHE BUST */
+
+/* TailwindCSS v4 utility class explicit definitions */
+@layer utilities {
+  .my-12 {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+}

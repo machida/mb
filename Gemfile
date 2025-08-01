@@ -79,7 +79,7 @@ group :test do
   gem "playwright-ruby-client", "~> 1.54.0"
 end
 
-gem "tailwindcss-rails", "~> 4.3"
+gem "tailwindcss-rails", "~> 4.3", group: [:development, :test]
 gem "redcarpet", "~> 3.6"
 gem "google-cloud-storage", "~> 1.44"
 gem "kaminari", "~> 1.2"

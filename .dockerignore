@@ -34,7 +34,7 @@
 /node_modules/
 /app/assets/builds/*
 !/app/assets/builds/.keep
-/public/assets
+# DO NOT ignore /public/assets - we need development-built TailwindCSS files for Docker build
 
 # Ignore CI service files.
 /.github
