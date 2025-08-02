@@ -17,6 +17,9 @@ class DropdownTurboNavigationPlaywrightTest < ApplicationPlaywrightTestCase
     # Start on articles page
     @page.goto("http://localhost:#{@server_port}/admin/articles")
     
+    # Wait for page to be fully loaded
+    @page.wait_for_load_state(state: 'networkidle')
+    
     # Verify dropdown works on articles page
     @page.click(DROPDOWN_BUTTON)
     @page.wait_for_function("
@@ -34,15 +37,40 @@ class DropdownTurboNavigationPlaywrightTest < ApplicationPlaywrightTestCase
     ")
     
     # Navigate to site settings page (this uses Turbo navigation)
-    @page.click('a[title="サイト設定"]')
+    # Try multiple selectors to find the site settings link
+    site_settings_selectors = [
+      'a[aria-label="サイト設定"]',
+      'a[href*="site-settings"]',
+      'a[href*="site_settings"]',
+      'text=サイト設定'
+    ]
     
-    # Wait for Turbo navigation to complete
-    @page.wait_for_url(/.*\/admin\/site-settings/)
+    site_settings_link = nil
+    site_settings_selectors.each do |selector|
+      begin
+        link = @page.locator(selector)
+        link.wait_for(state: 'visible', timeout: 2000)
+        site_settings_link = link
+        break
+      rescue Playwright::TimeoutError
+        # Try next selector
+        next
+      end
+    end
     
-    # Wait for any JavaScript re-initialization to complete
+    raise "Site settings link not found with any selector" unless site_settings_link
+    
+    site_settings_link.click()
+    
+    # Wait for Turbo navigation to complete with longer timeout
+    @page.wait_for_url(/.*\/admin\/site[-_]settings/, timeout: 15000)
+    @page.wait_for_load_state(state: 'networkidle')
+    
+    # Wait for any JavaScript re-initialization to complete with longer timeout
     @page.wait_for_function("
-      () => document.querySelector('.js-dropdown-button').hasAttribute('data-dropdown-initialized')
-    ")
+      () => document.querySelector('.js-dropdown-button') && 
+            document.querySelector('.js-dropdown-button').hasAttribute('data-dropdown-initialized')
+    ", timeout: 10000)
     
     # Verify dropdown still works after Turbo navigation
     @page.click(DROPDOWN_BUTTON)

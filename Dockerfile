@@ -50,6 +50,9 @@ RUN npm install
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
+# Remove any existing TailwindCSS build files
+RUN rm -f app/assets/builds/tailwind.css public/assets/tailwind*.css
+
 # Download and use TailwindCSS standalone binary for v4 compatibility
 RUN curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64 && \
     chmod +x tailwindcss-linux-x64 && \
@@ -58,7 +61,7 @@ RUN curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/downlo
     echo "=== my-12 class check ===" && \
     grep -c "my-12" app/assets/builds/tailwind.css && echo "my-12 found!" || echo "my-12 not found"
 
-# Build assets normally but skip TailwindCSS generation by gem
+# Build assets normally - TailwindCSS gem is disabled in production
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 # Debug: Check what TailwindCSS files exist after asset compilation
