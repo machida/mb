@@ -9,8 +9,6 @@
     "lint:fix": "npm run lint:js -- --fix && npm run lint:erb -- --autocorrect",
     "format": "prettier --write app/javascript/**/*.js",
     "build": "rails assets:precompile",
-    "build:css": "npx tailwindcss -i app/assets/tailwind/application.css -o app/assets/builds/tailwind.css",
-    "build:css:watch": "npx tailwindcss -i app/assets/tailwind/application.css -o app/assets/builds/tailwind.css --watch",
     "playwright:install": "playwright install",
     "playwright:install-force": "playwright install --force",
     "test:playwright": "bundle exec rails test test/system/",
@@ -18,9 +16,6 @@
     "postinstall": "echo '✅ Node.js dependencies installed. Run bin/setup for complete setup.'",
     "dev": "bundle exec bin/dev",
     "help": "bundle exec bin/dev-help"
-  },
-  "dependencies": {
-    "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
     "@playwright/test": "^1.53.2",

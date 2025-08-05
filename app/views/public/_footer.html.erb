@@ -1,5 +1,5 @@
 <!-- Footer -->
-<footer class="py-8">
+<footer class="l--footer">
   <div class="l--container is-lg">
     <div class="flex flex-col md:flex-row justify-between items-center gap-4">
       <% if SiteSetting.copyright.present? %>
@@ -12,7 +12,7 @@
           <span class="text-gray-500">|</span>
           <%= button_to "ログアウト", admin_logout_path, method: :delete,                      class: "text-primary hover:text-white text-sm spec--logout-link bg-transparent border-0 p-0 cursor-pointer" %>
         <% else %>
-          <%= link_to "ログイン", admin_login_path, class: "text-primary hover:text-white text-sm spec--login-link" %>
+          <%= link_to "ログイン", admin_login_path, class: "text-primary text-sm spec--login-link" %>
         <% end %>
       </nav>
     </div>

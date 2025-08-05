@@ -3,4 +3,19 @@
 .a--hero {
   background: var(--color-text-primary);
   color: var(--color-bg-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.a--hero__inner {
+  height: 25rem;
+  position: relative;
+}
+
+.a--hero__image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
 }

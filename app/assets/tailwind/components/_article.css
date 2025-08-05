@@ -1,0 +1,7 @@
+.l--article-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  height: 15rem;
+}
