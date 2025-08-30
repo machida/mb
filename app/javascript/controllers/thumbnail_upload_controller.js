@@ -78,7 +78,7 @@ export default class extends Controller {
         this.showError(errorData.error || 'アップロードに失敗しました');
       }
     } catch (error) {
-      console.error('Upload error:', error);
+      // Upload error - show error to user via showError method
       this.showError('アップロードに失敗しました');
     } finally {
       this.hideLoading();
@@ -177,7 +177,7 @@ export default class extends Controller {
     alert(message);
   }
 
-  showSuccess(message) {
-    // Simple success display - you might want to use a more sophisticated toast system
+  showSuccess() {
+    // Success message already shown in UI update - no additional action needed
   }
 }

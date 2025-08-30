@@ -18,7 +18,7 @@ class Admin::AdminsController < Admin::BaseController
     if @admin.save
       redirect_to admin_admins_path, notice: "管理者「#{@admin.user_id}」を追加しました。"
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 

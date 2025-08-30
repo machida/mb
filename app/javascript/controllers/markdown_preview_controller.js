@@ -13,7 +13,7 @@ export default class extends Controller {
     const textarea = event?.target || this.element.querySelector('textarea');
     
     if (!textarea) {
-      console.error('Textarea not found');
+      // Textarea not found - silently return
       return;
     }
 
@@ -41,7 +41,7 @@ export default class extends Controller {
         this.previewTarget.innerHTML = '<p class="text-red-500">プレビューの生成に失敗しました</p>';
       }
     } catch (error) {
-      console.error('Preview error:', error);
+      // Preview generation error - show error message to user
       this.previewTarget.innerHTML = '<p class="text-red-500">プレビューの生成に失敗しました</p>';
     }
   }

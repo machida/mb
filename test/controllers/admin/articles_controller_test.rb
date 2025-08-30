@@ -186,7 +186,7 @@ class Admin::ArticlesControllerTest < ActionDispatch::IntegrationTest
     )
     
     post admin_articles_upload_image_path, params: { image: file }
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     
     json_response = JSON.parse(response.body)
     assert_equal "画像ファイルのみアップロード可能です", json_response['error']

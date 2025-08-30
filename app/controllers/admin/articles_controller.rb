@@ -28,7 +28,7 @@ class Admin::ArticlesController < Admin::BaseController
         redirect_to article_path(@article), notice: "記事を公開しました。"
       end
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -49,7 +49,7 @@ class Admin::ArticlesController < Admin::BaseController
         redirect_to article_path(@article), notice: "記事を公開しました。"
       end
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

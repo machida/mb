@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -53,16 +53,16 @@
     <div class="header">
       <h1>パスワードリセットのお知らせ</h1>
     </div>
-    
+
     <div class="content">
       <p><%= @admin.email %> 様</p>
-      
+
       <p>パスワードリセットのリクエストを受け付けました。</p>
-      
+
       <p>以下のリンクをクリックして、新しいパスワードを設定してください：</p>
-      
+
       <a href="<%= @reset_url %>" class="button">パスワードをリセット</a>
-      
+
       <div class="warning">
         <strong>重要:</strong>
         <ul>
@@ -71,13 +71,13 @@
           <li>このメールに心当たりがない場合は、アカウントが不正利用されている可能性があります</li>
         </ul>
       </div>
-      
+
       <p>リンクがクリックできない場合は、以下のURLをブラウザのアドレスバーにコピー&ペーストしてください：</p>
       <p style="word-break: break-all; background-color: #f8f9fa; padding: 10px; border-radius: 3px;">
         <%= @reset_url %>
       </p>
     </div>
-    
+
     <div class="footer">
       <p>このメールは自動送信されています。返信はできません。</p>
       <p>ご不明な点がございましたら、管理者までお問い合わせください。</p>

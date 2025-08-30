@@ -1,14 +1,14 @@
-<%= form_with model: [ :admin, article ], local: true do |f| %>
+<%= form_with model: [:admin, article], local: true do |f| %>
   <%= render AlertComponent.new(type: :danger, messages: article.errors.full_messages) if article.errors.any? %>
 
   <div class="l--form-items">
     <div class="l--form-item is-sm">
     <%= f.label :title, "タイトル", class: "a--form-label mb-2" %>
     <%= f.text_field :title,
-        class: "a--text-input spec--title-input #{'border-red-300' if article.errors[:title].any?}",
-        aria_describedby: ("title-error" if article.errors[:title].any?),
-        aria_invalid: (article.errors[:title].any? ? "true" : "false"),
-        aria_required: "true" %>
+                     class: "a--text-input spec--title-input #{'border-red-300' if article.errors[:title].any?}",
+                     aria_describedby: ("title-error" if article.errors[:title].any?),
+                     aria_invalid: (article.errors[:title].any? ? "true" : "false"),
+                     aria_required: "true" %>
     <% if article.errors[:title].any? %>
       <div id="title-error" class="a--form-error mt-1" role="alert">
         <%= article.errors[:title].first %>
@@ -43,14 +43,17 @@
       <div class="">
         <label for="<%= f.field_id(:body) %>" class="a--form-label mb-2">編集</label>
         <%= f.text_area :body, rows: 15,
-                        class: "a--text-input a--markdown-textarea font-mono text-sm spec--body-input js-markdown-textarea #{'border-red-300' if article.errors[:body].any?}",
-                        aria_describedby: "body-help#{ ' body-error' if article.errors[:body].any?}",
+                        class: "a--text-input a--markdown-textarea font-mono text-sm spec--body-input js-markdown-textarea #{if article.errors[:body].any?
+                                                                                                                               'border-red-300'
+                                                                                                                             end}",
+                        aria_describedby: "body-help#{' body-error' if article.errors[:body].any?}",
                         aria_invalid: (article.errors[:body].any? ? "true" : "false"),
                         aria_required: "true",
                         data: {
                           controller: "image-upload",
                           action: "input->markdown-preview#update keyup->markdown-preview#update dragover->image-upload#dragover dragleave->image-upload#dragleave drop->image-upload#drop",
-                          image_upload_target: "textarea",                          image_upload_upload_url_value: admin_articles_upload_image_path                        } %>
+                          image_upload_target: "textarea", image_upload_upload_url_value: admin_articles_upload_image_path
+                        } %>
         <% if article.errors[:body].any? %>
           <div id="body-error" class="a--form-error mt-1" role="alert">
             <%= article.errors[:body].first %>
@@ -78,12 +81,12 @@
       <p>記事のOGP画像やカード表示で使用される画像です。</p>
     </div>
     <%= render ImageUploadComponent.new(
-      field_name: :thumbnail,
-      upload_url: admin_site_settings_upload_image_path,
-      current_image: article.thumbnail,
-      form: f,
-      spec_class: "thumbnail"
-    ) %>
+          field_name: :thumbnail,
+          upload_url: admin_site_settings_upload_image_path,
+          current_image: article.thumbnail,
+          form: f,
+          spec_class: "thumbnail"
+        ) %>
     </div>
   </div>
 

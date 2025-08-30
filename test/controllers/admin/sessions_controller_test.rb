@@ -30,7 +30,7 @@ class Admin::SessionsControllerTest < ActionDispatch::IntegrationTest
       password: "password123"
     }
     
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     assert_nil session[:admin_id]
     assert_select ".spec--error-alert", text: /メールアドレスまたはパスワードが間違っています/
   end
@@ -41,7 +41,7 @@ class Admin::SessionsControllerTest < ActionDispatch::IntegrationTest
       password: "wrongpassword"
     }
     
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     assert_nil session[:admin_id]
     assert_select ".spec--error-alert", text: /メールアドレスまたはパスワードが間違っています/
   end

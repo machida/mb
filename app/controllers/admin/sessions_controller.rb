@@ -13,7 +13,7 @@ class Admin::SessionsController < Admin::BaseController
       redirect_to root_path, notice: "ログインしました"
     else
       flash.now[:alert] = "メールアドレスまたはパスワードが間違っています"
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 

@@ -87,7 +87,7 @@ class Admin::PasswordResetsControllerTest < ActionDispatch::IntegrationTest
       }
     }
     
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     assert flash[:alert].include?("パスワードと確認用パスワードが一致しません")
   end
 
@@ -103,7 +103,7 @@ class Admin::PasswordResetsControllerTest < ActionDispatch::IntegrationTest
       }
     }
     
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     assert flash[:alert].include?("パスワードは8文字以上で設定してください")
   end
 end

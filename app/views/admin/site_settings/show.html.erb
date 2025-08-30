@@ -6,7 +6,9 @@
       <div class="l--form-items">
         <div class="l--form-item is-xs">
           <%= label_tag "site_settings[site_title]", "サイトタイトル", class: "a--form-label mb-2" %>
-          <%= text_field_tag "site_settings[site_title]",                         @settings[:site_title],                         class: "a--text-input spec--site-title-input" %>
+          <%= text_field_tag "site_settings[site_title]", @settings[:site_title],
+                             class: "a--text-input spec--site-title-input",
+                             autocomplete: "off" %>
           <div class="a--form-help mt-1">
             <p>ブラウザのタブやOGPで使用されるサイトタイトルです。</p>
           </div>
@@ -15,11 +17,11 @@
         <div class="l--form-item is-xs">
           <label class="a--form-label mb-2">デフォルトOG画像</label>
           <%= render ImageUploadComponent.new(
-            field_name: "site_settings[default_og_image]",
-            upload_url: admin_site_settings_upload_image_path,
-            current_image: (@settings[:default_og_image].present? && !@settings[:default_og_image].include?('example.com')) ? @settings[:default_og_image] : nil,
-            spec_class: "default-og-image"
-          ) %>
+                field_name: "site_settings[default_og_image]",
+                upload_url: admin_site_settings_upload_image_path,
+                current_image: @settings[:default_og_image].present? && !@settings[:default_og_image].include?("example.com") ? @settings[:default_og_image] : nil,
+                spec_class: "default-og-image"
+              ) %>
           <div class="a--form-help mt-1">
             <p>記事にサムネイル画像が設定されていない場合に使用される画像です。</p>
           </div>
@@ -28,7 +30,7 @@
         <div class="l--form-item is-sm">
           <%= label_tag "site_settings[top_page_description]", "トップページの説明文", class: "a--form-label mb-2" %>
           <%= text_area_tag "site_settings[top_page_description]",
-                            @settings[:top_page_description],                        rows: 3,                        class: "a--text-input spec--top-page-description-input" %>
+                            @settings[:top_page_description], rows: 3, class: "a--text-input spec--top-page-description-input" %>
           <div class="a--form-help mt-1">
             <p>トップページのmeta descriptionとOGPで使用される説明文です。</p>
           </div>
@@ -36,7 +38,9 @@
 
         <div class="l--form-item is-xs">
           <%= label_tag "site_settings[copyright]", "著作権者名", class: "a--form-label mb-2" %>
-          <%= text_field_tag "site_settings[copyright]",                         @settings[:copyright],                         class: "a--text-input spec--copyright-input" %>
+          <%= text_field_tag "site_settings[copyright]", @settings[:copyright],
+                             class: "a--text-input spec--copyright-input",
+                             autocomplete: "off" %>
           <div class="a--form-help mt-1">
             <p>「© <%= Date.current.year %> [ここに入力した名前]. All rights reserved.」の形式で表示されます。</p>
           </div>
@@ -46,11 +50,13 @@
           <%= label_tag "site_settings[author_display_enabled]", "記事の著者表示", class: "a--form-label mb-2" %>
           <div class="flex items-center space-x-4">
             <label class="flex items-center">
-              <%= radio_button_tag "site_settings[author_display_enabled]", "true",                               @settings[:author_display_enabled] == "true",                               class: "mr-2 spec--author-display-enabled-true" %>
+              <%= radio_button_tag "site_settings[author_display_enabled]", "true",
+                                   @settings[:author_display_enabled] == "true", class: "mr-2 spec--author-display-enabled-true" %>
               <span class="text-sm">表示する</span>
             </label>
             <label class="flex items-center">
-              <%= radio_button_tag "site_settings[author_display_enabled]", "false",                               @settings[:author_display_enabled] == "false",                               class: "mr-2 spec--author-display-enabled-false" %>
+              <%= radio_button_tag "site_settings[author_display_enabled]", "false",
+                                   @settings[:author_display_enabled] == "false", class: "mr-2 spec--author-display-enabled-false" %>
               <span class="text-sm">表示しない</span>
             </label>
           </div>

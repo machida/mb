@@ -49,7 +49,7 @@ class ErrorHandlingTest < ActionDispatch::IntegrationTest
 
   test "should handle malformed requests" do
     post admin_login_path, params: { malformed: "data" }
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
   end
 
   test "should handle SQL injection attempts in search" do
@@ -122,7 +122,7 @@ class ErrorHandlingTest < ActionDispatch::IntegrationTest
     )
     
     post admin_articles_upload_image_path, params: { image: invalid_file }
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     
     json_response = JSON.parse(response.body)
     assert_equal "画像ファイルのみアップロード可能です", json_response['error']
@@ -139,7 +139,7 @@ class ErrorHandlingTest < ActionDispatch::IntegrationTest
     )
     
     post admin_articles_upload_image_path, params: { image: large_file }
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     
     json_response = JSON.parse(response.body)
     assert_equal "ファイルサイズは5MB以下にしてください", json_response['error']

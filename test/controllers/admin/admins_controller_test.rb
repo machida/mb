@@ -56,7 +56,7 @@ class Admin::AdminsControllerTest < ActionDispatch::IntegrationTest
       }
     end
     
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
   end
 
   test "should show admin" do

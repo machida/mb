@@ -28,7 +28,7 @@ class Admin::BaseController < ApplicationController
     true
   end
 
-  def render_with_errors(template, object, status = :unprocessable_entity)
+  def render_with_errors(template, object, status = :unprocessable_content)
     handle_validation_errors(object)
     render template, status: status
   end

@@ -4,7 +4,10 @@
       <li>
         <%= link_to item[:path], class: nav_class_for(item),
             aria_current: (item[:active] ? "page" : nil) do %>
-          <span class="<%= item[:text] == '全員' ? 'spec--all-admins-title' : 'spec--self-admin-title' %>"><%= item[:text] %></span><%= "(#{item[:count]})" if item[:count] %>
+          <span class="<%= item[:text] == "全員" ? "spec--all-admins-title" : "spec--self-admin-title" %>">
+            <%= item[:text] %>
+          </span>
+          <%= "(#{item[:count]})" if item[:count] %>
         <% end %>
       </li>
     <% end %>

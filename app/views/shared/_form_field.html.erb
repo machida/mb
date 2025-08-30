@@ -14,17 +14,17 @@
 
   <% if type == "textarea" %>
     <%= form.text_area field,
-                      rows: rows,
-                      required: required,                      placeholder: placeholder,                      class: css_class %>
+                       rows: rows,
+                       required: required, placeholder: placeholder, class: css_class %>
   <% elsif type == "email" %>
     <%= form.email_field field,
-                        required: required,                        placeholder: placeholder,                        class: css_class %>
+                         required: required, placeholder: placeholder, class: css_class %>
   <% elsif type == "password" %>
     <%= form.password_field field,
-                           required: required,                           placeholder: placeholder,                           class: css_class %>
+                            required: required, placeholder: placeholder, class: css_class %>
   <% else %>
     <%= form.text_field field,
-                       required: required,                       placeholder: placeholder,                       class: css_class %>
+                        required: required, placeholder: placeholder, class: css_class %>
   <% end %>
 
   <% if help_text.present? %>

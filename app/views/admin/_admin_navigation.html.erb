@@ -3,7 +3,7 @@
     <li>
       <%= link_to "サイトを表示", root_path, class: "text-primary text-sm" %>
     </li>
-    
+
     <% if current_user_signed_in? %>
       <li>
         <%= link_to admin_articles_path, class: "text-gray-500 hover:text-gray-700 p-2", aria_label: "記事管理" do %>
@@ -25,8 +25,8 @@
 
       <li>
         <div class="a--dropdown">
-          <button class="a--dropdown-button js-dropdown-button spec--dropdown-button" 
-                  aria-expanded="false" 
+          <button class="a--dropdown-button js-dropdown-button spec--dropdown-button"
+                  aria-expanded="false"
                   aria-haspopup="true"
                   aria-controls="user-menu"
                   aria-label="ユーザーメニューを開く">

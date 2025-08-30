@@ -25,19 +25,19 @@ class Admin::PasswordResetsController < ApplicationController
   def update
     if params[:admin][:password].blank?
       flash.now[:alert] = "パスワードを入力してください"
-      render :show, status: :unprocessable_entity
+      render :show, status: :unprocessable_content
       return
     end
 
     if params[:admin][:password] != params[:admin][:password_confirmation]
       flash.now[:alert] = "パスワードと確認用パスワードが一致しません"
-      render :show, status: :unprocessable_entity
+      render :show, status: :unprocessable_content
       return
     end
 
     if params[:admin][:password].length < 8
       flash.now[:alert] = "パスワードは8文字以上で設定してください"
-      render :show, status: :unprocessable_entity
+      render :show, status: :unprocessable_content
       return
     end
 
@@ -48,7 +48,7 @@ class Admin::PasswordResetsController < ApplicationController
       redirect_to root_path, notice: "パスワードが正常に変更されました。ログインしました。"
     else
       flash.now[:alert] = "パスワードの変更に失敗しました"
-      render :show, status: :unprocessable_entity
+      render :show, status: :unprocessable_content
     end
   end
 

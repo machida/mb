@@ -9,7 +9,7 @@ class Admin::ProfilesController < Admin::BaseController
     if @admin.update(profile_params)
       redirect_to edit_admin_profile_path, notice: "プロフィールを更新しました。"
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

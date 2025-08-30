@@ -91,9 +91,9 @@
                   <p class="text-sm text-gray-600">記事の著者を別の管理者に変更します</p>
                   <div class="mt-2">
                     <%= f.select :target_admin_id,
-                                options_from_collection_for_select(Admin.where.not(id: @admin.id), :id, :user_id),
-                                { prompt: "移譲先の管理者を選択" },
-                                { class: "a--select spec--target-admin-select" } %>
+                                 options_from_collection_for_select(Admin.where.not(id: @admin.id), :id, :user_id),
+                                 { prompt: "移譲先の管理者を選択" },
+                                 { class: "a--select spec--target-admin-select" } %>
                   </div>
                 </div>
               </label>

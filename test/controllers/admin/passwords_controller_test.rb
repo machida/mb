@@ -56,7 +56,7 @@ class Admin::PasswordsControllerTest < ActionDispatch::IntegrationTest
       }
     }
     
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     assert_select ".spec--error-messages"
     
     # Password should not have changed
@@ -74,7 +74,7 @@ class Admin::PasswordsControllerTest < ActionDispatch::IntegrationTest
       }
     }
     
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     assert_select ".spec--error-messages"
   end
 
@@ -88,7 +88,7 @@ class Admin::PasswordsControllerTest < ActionDispatch::IntegrationTest
       }
     }
     
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     assert_select ".spec--error-messages"
   end
 

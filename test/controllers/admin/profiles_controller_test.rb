@@ -57,7 +57,7 @@ class Admin::ProfilesControllerTest < ActionDispatch::IntegrationTest
       }
     }
     
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     assert_select ".spec--error-messages"
   end
 
@@ -71,7 +71,7 @@ class Admin::ProfilesControllerTest < ActionDispatch::IntegrationTest
       }
     }
     
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     assert_select ".spec--error-messages"
   end
 
@@ -94,7 +94,7 @@ class Admin::ProfilesControllerTest < ActionDispatch::IntegrationTest
       }
     }
     
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     assert_select ".spec--error-messages"
   end
 
@@ -116,7 +116,7 @@ class Admin::ProfilesControllerTest < ActionDispatch::IntegrationTest
       }
     }
     
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_content
     assert_select ".spec--error-messages"
   end
 end
