@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-/* Test change for CSS watch - Updated */
-
 @theme {
   /* Spacing scale - ensure margin utilities are available */
   --spacing-0: 0px;

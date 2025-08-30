@@ -179,6 +179,5 @@ export default class extends Controller {
 
   showSuccess(message) {
     // Simple success display - you might want to use a more sophisticated toast system
-    console.log(message);
   }
 }
