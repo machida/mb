@@ -2,7 +2,7 @@
 service: mb
 
 # Name of the container image.
-image: ghcr.io/machida/mb
+image: machida/mb
 
 # Deploy to these servers.
 servers:
