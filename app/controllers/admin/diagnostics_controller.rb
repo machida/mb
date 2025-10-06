@@ -22,12 +22,19 @@ class Admin::DiagnosticsController < Admin::BaseController
   def gcs_check
     if Rails.env.production?
       {
+        status: "production",
         project_id: Rails.application.credentials.dig(:gcp, :project_id).present?,
         bucket: Rails.application.credentials.dig(:gcp, :bucket).present?,
         credentials: Rails.application.credentials.dig(:gcp, :credentials).present?
       }
     else
-      { status: "development", message: "GCS not required in development" }
+      {
+        status: "development",
+        message: "GCS not required in development",
+        project_id: false,
+        bucket: false,
+        credentials: false
+      }
     end
   end
 end

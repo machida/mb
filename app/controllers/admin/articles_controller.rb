@@ -1,5 +1,6 @@
 class Admin::ArticlesController < Admin::BaseController
   before_action :set_article, only: [ :edit, :update, :destroy ]
+  before_action :set_openai_api_key_configured, only: [ :new, :edit ]
 
   def index
     @articles = Article.all.order(created_at: :desc).page(params[:page])
@@ -11,7 +12,6 @@ class Admin::ArticlesController < Admin::BaseController
 
   def new
     @article = Article.new
-    @openai_api_key_configured = SiteSetting.openai_api_key_configured?
   end
 
   def create
@@ -34,7 +34,6 @@ class Admin::ArticlesController < Admin::BaseController
   end
 
   def edit
-    @openai_api_key_configured = SiteSetting.openai_api_key_configured?
   end
 
   def update
@@ -105,6 +104,10 @@ class Admin::ArticlesController < Admin::BaseController
 
   def set_article
     @article = Article.find(params[:id])
+  end
+
+  def set_openai_api_key_configured
+    @openai_api_key_configured = SiteSetting.openai_api_key_configured?
   end
 
   def article_params

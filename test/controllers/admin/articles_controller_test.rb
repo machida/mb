@@ -29,6 +29,10 @@ class Admin::ArticlesControllerTest < ActionDispatch::IntegrationTest
     )
   end
 
+  def teardown
+    Rails.cache.delete("site_setting_openai_api_key")
+  end
+
   def login_as_admin
     post admin_login_path, params: { email: @admin.email, password: "password123" }
   end
@@ -218,8 +222,6 @@ class Admin::ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     json_response = JSON.parse(response.body)
     assert_equal "これはAIが生成したテスト概要です。", json_response['summary']
-  ensure
-    Rails.cache.delete("site_setting_openai_api_key")
   end
 
   test "should return error when API key is not configured" do
@@ -234,8 +236,6 @@ class Admin::ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_content
     json_response = JSON.parse(response.body)
     assert_equal "OpenAI API Keyが設定されていません", json_response['error']
-  ensure
-    Rails.cache.delete("site_setting_openai_api_key")
   end
 
   test "should return error when title is blank" do
@@ -250,8 +250,6 @@ class Admin::ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_content
     json_response = JSON.parse(response.body)
     assert_equal "タイトルと本文を入力してください", json_response['error']
-  ensure
-    Rails.cache.delete("site_setting_openai_api_key")
   end
 
   test "should return error when body is blank" do
@@ -266,7 +264,5 @@ class Admin::ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_content
     json_response = JSON.parse(response.body)
     assert_equal "タイトルと本文を入力してください", json_response['error']
-  ensure
-    Rails.cache.delete("site_setting_openai_api_key")
   end
 end

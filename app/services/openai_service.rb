@@ -34,7 +34,8 @@ class OpenaiService
       { success: true, summary: response }
     rescue StandardError => e
       Rails.logger.error "OpenAI API error: #{e.message}"
-      { success: false, error: "概要の生成に失敗しました: #{e.message}" }
+      error_detail = Rails.env.production? ? "" : ": #{e.message}"
+      { success: false, error: "概要の生成に失敗しました#{error_detail}" }
     end
   end
 
@@ -70,7 +71,7 @@ class OpenaiService
         }
       ],
       max_tokens: MAX_TOKENS,
-      temperature: 0.7
+      temperature: 0.3
     }.to_json
 
     response = http.request(request)

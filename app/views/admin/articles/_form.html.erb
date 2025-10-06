@@ -67,7 +67,7 @@
     <div class="flex gap-2 items-start">
       <%= f.text_area :summary, rows: 3,
           class: "a--text-input spec--summary-input flex-1 #{'border-red-300' if article.errors[:summary].any?}",
-          aria_describedby: ("summary-error summary-help" if article.errors[:summary].any?) || "summary-help",
+          aria_describedby: article.errors[:summary].any? ? "summary-error summary-help" : "summary-help",
           aria_invalid: (article.errors[:summary].any? ? "true" : "false") %>
       <% if @openai_api_key_configured %>
         <button type="button"

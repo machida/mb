@@ -10,9 +10,10 @@ export default class extends Controller {
     event.preventDefault()
 
     const button = event.currentTarget
-    const titleInput = document.querySelector(".spec--title-input")
-    const bodyInput = document.querySelector(".spec--body-input")
-    const summaryInput = document.querySelector(".spec--summary-input")
+    const form = this.element.closest("form")
+    const titleInput = form.querySelector(".spec--title-input")
+    const bodyInput = form.querySelector(".spec--body-input")
+    const summaryInput = form.querySelector(".spec--summary-input")
 
     if (!titleInput || !bodyInput || !summaryInput) {
       this.showError("フォーム要素が見つかりません")
@@ -74,20 +75,32 @@ export default class extends Controller {
     }
   }
 
-  showError(message) {
-    // Toastコンポーネントを使ってエラーを表示
+  createToast(message, type = "success") {
     const toastContainer = document.querySelector(".a--toast-container")
     if (toastContainer) {
+      // XSS対策のため、メッセージをエスケープ
+      const escapedMessage = message
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;")
+
+      const icons = {
+        success: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>',
+        error: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>'
+      }
+
       const toast = document.createElement("div")
-      toast.className = "a--toast is-error"
+      toast.className = `a--toast is-${type}`
       toast.setAttribute("data-controller", "toast")
       toast.setAttribute("data-toast-auto-dismiss-value", "true")
       toast.innerHTML = `
         <div class="a--toast-content">
           <svg class="a--toast-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            ${icons[type]}
           </svg>
-          <span>${message}</span>
+          <span>${escapedMessage}</span>
         </div>
       `
       toastContainer.appendChild(toast)
@@ -96,23 +109,11 @@ export default class extends Controller {
     }
   }
 
+  showError(message) {
+    this.createToast(message, "error")
+  }
+
   showSuccess(message) {
-    // Toastコンポーネントを使って成功メッセージを表示
-    const toastContainer = document.querySelector(".a--toast-container")
-    if (toastContainer) {
-      const toast = document.createElement("div")
-      toast.className = "a--toast is-success"
-      toast.setAttribute("data-controller", "toast")
-      toast.setAttribute("data-toast-auto-dismiss-value", "true")
-      toast.innerHTML = `
-        <div class="a--toast-content">
-          <svg class="a--toast-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-          </svg>
-          <span>${message}</span>
-        </div>
-      `
-      toastContainer.appendChild(toast)
-    }
+    this.createToast(message, "success")
   }
 }
