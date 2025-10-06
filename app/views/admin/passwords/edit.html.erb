@@ -10,31 +10,33 @@
         <p class="text-sm text-gray-500 mb-4">新しいパスワードを入力してください。</p>
 
         <div class="l--form-items">
-          <div class="l--form-item">
-            <%= f.label :password, "新しいパスワード", class: "a--form-label mb-2" %>
-            <%= f.password_field :password, required: true, class: "a--text-input spec--password-input" %>
-            <div class="a--form-help mt-1">
-              <p>8文字以上で設定してください。</p>
-            </div>
-          </div>
-
-          <div class="l--form-item">
-            <%= f.label :password_confirmation, "パスワード確認", class: "a--form-label mb-2" %>
-            <%= f.password_field :password_confirmation, required: true,
-class: "a--text-input spec--password-confirmation-input" %>
-            <div class="a--form-help mt-1">
-              <p>確認のため同じパスワードを入力してください。</p>
-            </div>
-          </div>
+          <%= render FormFieldComponent.new(
+            form: f,
+            field: :password,
+            label: "新しいパスワード",
+            type: "password",
+            required: true,
+            help_text: "8文字以上で設定してください。",
+            spec_class: "spec--password-input"
+          ) %>
+          <%= render FormFieldComponent.new(
+            form: f,
+            field: :password_confirmation,
+            label: "パスワード確認",
+            type: "password",
+            required: true,
+            help_text: "確認のため同じパスワードを入力してください。",
+            spec_class: "spec--password-confirmation-input"
+          ) %>
         </div>
       </div>
 
-      <div class="l--form-actions">
-        <ul>
-          <li><%= f.submit "パスワードを変更", class: "a--button is-lg is-primary is-flex spec--update-button spec--password-change-button" %></li>
-          <li><%= link_to "キャンセル", edit_admin_profile_path, class: "a--button is-lg is-border-secondary is-flex spec--cancel-button" %></li>
-        </ul>
-      </div>
+      <%= render FormActionsComponent.new(
+        form: f,
+        primary_label: "パスワードを変更",
+        primary_class: "spec--update-button spec--password-change-button",
+        cancel_path: edit_admin_profile_path
+      ) %>
     <% end %>
   </div>
 </div>

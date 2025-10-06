@@ -15,30 +15,31 @@
         <legend class="sr-only">ログイン情報</legend>
 
         <div class="l--form-items">
-          <div class="l--form-item">
-            <%= f.label :email, "メールアドレス", class: "a--form-label mb-2 spec--email-label" %>
-            <%= f.email_field :email,
-                              required: true,
-                              class: "a--text-input spec--email-input",
-                              aria_required: "true",
-                              autocomplete: "email" %>
-          </div>
-
-          <div class="l--form-item">
-            <%= f.label :password, "パスワード", class: "a--form-label mb-2 spec--password-label" %>
-            <%= f.password_field :password,
-                                 required: true,
-                                 class: "a--text-input spec--password-input",
-                                 aria_required: "true",
-                                 autocomplete: "current-password" %>
-          </div>
+          <%= render FormFieldComponent.new(
+            form: f,
+            field: :email,
+            label: "メールアドレス",
+            type: "email",
+            required: true,
+            spec_class: "spec--email-input",
+            autocomplete: "email"
+          ) %>
+          <%= render FormFieldComponent.new(
+            form: f,
+            field: :password,
+            label: "パスワード",
+            type: "password",
+            required: true,
+            spec_class: "spec--password-input",
+            autocomplete: "current-password"
+          ) %>
         </div>
 
-        <div class="l--form-actions">
-          <ul>
-            <li><%= f.submit "ログイン", class: "a--button is-lg is-primary is-flex spec--login-button" %></li>
-          </ul>
-        </div>
+        <%= render FormActionsComponent.new(
+          form: f,
+          primary_label: "ログイン",
+          primary_class: "spec--login-button"
+        ) %>
 
         <div class="text-center mt-4">
           <%= link_to "パスワードを忘れた場合", new_admin_password_reset_path,

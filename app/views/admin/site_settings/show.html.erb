@@ -66,12 +66,11 @@
         </div>
       </div>
 
-      <div class="l--form-actions">
-        <ul>
-          <li><%= submit_tag "設定を保存", class: "a--button is-lg is-primary is-flex spec--save-button" %></li>
-          <li><%= link_to "キャンセル", admin_articles_path, class: "a--button is-lg is-border-secondary is-flex spec--cancel-button" %></li>
-        </ul>
-      </div>
+      <%= render FormActionsComponent.new(
+        form: f,
+        primary_label: "設定を保存",
+        cancel_path: admin_articles_path
+      ) %>
     <% end %>
   </div>
 </div>
