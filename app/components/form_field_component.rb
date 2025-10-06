@@ -41,7 +41,8 @@ class FormFieldComponent < ViewComponent::Base
 
   private
 
-  attr_reader :form, :field, :label, :type, :required, :placeholder, :help_text, :spec_class, :rows, :autocomplete
+  attr_reader :form, :field, :label, :type
+  attr_reader :required, :placeholder, :help_text, :spec_class, :rows, :autocomplete
 
   # 入力フィールドのCSSクラスを生成
   #

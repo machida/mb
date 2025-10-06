@@ -32,7 +32,10 @@ class FormActionsComponent < ViewComponent::Base
 
   private
 
-  attr_reader :form, :primary_label, :primary_class, :secondary_label, :secondary_class, :cancel_path, :cancel_label
+  attr_reader :form
+  attr_reader :primary_label, :primary_class
+  attr_reader :secondary_label, :secondary_class
+  attr_reader :cancel_path, :cancel_label
 
   # セカンダリボタンを表示するかどうかを判定
   #
