@@ -1,5 +1,16 @@
 class FormFieldComponent < ViewComponent::Base
-  def initialize(form:, field:, label:, type: "text", required: false, placeholder: "", help_text: "", spec_class: "", rows: 3, autocomplete: nil)
+  def initialize(
+    form:,
+    field:,
+    label:,
+    type: "text",
+    required: false,
+    placeholder: "",
+    help_text: "",
+    spec_class: "",
+    rows: 3,
+    autocomplete: nil
+  )
     @form = form
     @field = field
     @label = label

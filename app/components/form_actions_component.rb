@@ -1,5 +1,13 @@
 class FormActionsComponent < ViewComponent::Base
-  def initialize(form:, primary_label: "保存", primary_class: "spec--save-button", secondary_label: nil, secondary_class: "spec--draft-button", cancel_path: nil, cancel_label: "キャンセル")
+  def initialize(
+    form:,
+    primary_label: "保存",
+    primary_class: "spec--save-button",
+    secondary_label: nil,
+    secondary_class: "spec--draft-button",
+    cancel_path: nil,
+    cancel_label: "キャンセル"
+  )
     @form = form
     @primary_label = primary_label
     @primary_class = primary_class
