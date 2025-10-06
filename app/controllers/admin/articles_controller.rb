@@ -11,6 +11,7 @@ class Admin::ArticlesController < Admin::BaseController
 
   def new
     @article = Article.new
+    @openai_api_key_configured = SiteSetting.openai_api_key_configured?
   end
 
   def create
@@ -33,6 +34,7 @@ class Admin::ArticlesController < Admin::BaseController
   end
 
   def edit
+    @openai_api_key_configured = SiteSetting.openai_api_key_configured?
   end
 
   def update
@@ -80,6 +82,23 @@ class Admin::ArticlesController < Admin::BaseController
   rescue => e
     Rails.logger.error "Image upload controller error: #{e.message}"
     render json: { error: "アップロードに失敗しました" }, status: 500
+  end
+
+  def generate_summary
+    title = params[:title]
+    body = params[:body]
+
+    service = OpenaiService.new
+    result = service.generate_summary(title: title, body: body)
+
+    if result[:success]
+      render json: { summary: result[:summary] }
+    else
+      render json: { error: result[:error] }, status: 422
+    end
+  rescue => e
+    Rails.logger.error "Generate summary controller error: #{e.message}"
+    render json: { error: "概要生成に失敗しました" }, status: 500
   end
 
   private

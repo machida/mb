@@ -16,19 +16,6 @@
     <% end %>
   </div>
 
-  <div class="l--form-item is-sm">
-    <%= f.label :summary, "概要", class: "a--form-label mb-2" %>
-    <%= f.text_area :summary, rows: 3,
-        class: "a--text-input spec--summary-input #{'border-red-300' if article.errors[:summary].any?}",
-        aria_describedby: ("summary-error" if article.errors[:summary].any?),
-        aria_invalid: (article.errors[:summary].any? ? "true" : "false") %>
-    <% if article.errors[:summary].any? %>
-      <div id="summary-error" class="a--form-error mt-1" role="alert">
-        <%= article.errors[:summary].first %>
-      </div>
-    <% end %>
-  </div>
-
   <fieldset class="l--form-item">
     <legend class="a--form-label mb-2">本文 (Markdown記法)</legend>
     <div id="body-help" class="a--form-help mb-2">
@@ -74,6 +61,41 @@
       </div>
     </div>
   </fieldset>
+
+  <div class="l--form-item is-sm">
+    <%= f.label :summary, "概要", class: "a--form-label mb-2" %>
+    <div class="flex gap-2 items-start">
+      <%= f.text_area :summary, rows: 3,
+          class: "a--text-input spec--summary-input flex-1 #{'border-red-300' if article.errors[:summary].any?}",
+          aria_describedby: ("summary-error summary-help" if article.errors[:summary].any?) || "summary-help",
+          aria_invalid: (article.errors[:summary].any? ? "true" : "false") %>
+      <% if @openai_api_key_configured %>
+        <button type="button"
+                class="a--button is-sm is-border-primary spec--generate-summary-button flex-shrink-0"
+                data-controller="ai-summary"
+                data-ai-summary-url-value="<%= admin_articles_generate_summary_path %>"
+                data-action="click->ai-summary#generate">
+          <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          AIで生成
+        </button>
+      <% end %>
+    </div>
+    <div id="summary-help" class="a--form-help mt-1">
+      <p>meta descriptionやOGPで使用される説明文です。100文字程度を推奨します。</p>
+      <% unless @openai_api_key_configured %>
+        <p class="mt-1">
+          <%= link_to "サイト設定", admin_site_settings_path, class: "text-blue-600 hover:underline" %>からOpenAI API Keyを登録すると、AIで概要を自動生成できます。
+        </p>
+      <% end %>
+    </div>
+    <% if article.errors[:summary].any? %>
+      <div id="summary-error" class="a--form-error mt-1" role="alert">
+        <%= article.errors[:summary].first %>
+      </div>
+    <% end %>
+  </div>
 
   <div class="l--form-item is-xs">
     <%= f.label :thumbnail, "サムネイル画像", class: "a--form-label mb-2" %>

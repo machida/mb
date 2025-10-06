@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     end
     post "articles/preview", to: "articles#preview"
     post "articles/upload_image", to: "articles#upload_image"
+    post "articles/generate_summary", to: "articles#generate_summary"
   end
   root "articles#index"
   resources :articles, path: "article", only: [:index, :show]

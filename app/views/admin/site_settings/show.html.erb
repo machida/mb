@@ -64,6 +64,18 @@
             <p>記事一覧や記事詳細ページで著者名を表示するかどうかを設定できます。</p>
           </div>
         </div>
+
+        <div class="l--form-item is-sm">
+          <%= label_tag "site_settings[openai_api_key]", "OpenAI API Key", class: "a--form-label mb-2" %>
+          <%= password_field_tag "site_settings[openai_api_key]", @settings[:openai_api_key],
+                                 class: "a--text-input spec--openai-api-key-input",
+                                 autocomplete: "off",
+                                 placeholder: "sk-..." %>
+          <div class="a--form-help mt-1">
+            <p>記事の概要をAI生成する機能を使用するために必要です。</p>
+            <p>APIキーは<a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">OpenAI Platform</a>で取得できます。</p>
+          </div>
+        </div>
       </div>
 
       <%= render FormActionsComponent.new(
