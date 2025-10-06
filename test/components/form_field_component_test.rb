@@ -27,6 +27,18 @@ class FormFieldComponentTest < ViewComponent::TestCase
     assert_match(/Allowed types: text, email, password, textarea/, error.message)
   end
 
+  def test_nil_form_raises_argument_error
+    error = assert_raises(ArgumentError) do
+      FormFieldComponent.new(
+        form: nil,
+        field: :test_field,
+        label: "Test Label"
+      )
+    end
+
+    assert_equal "form is required", error.message
+  end
+
   private
 
   def mock_form_builder

@@ -17,7 +17,7 @@ class FormFieldComponent < ViewComponent::Base
   # @param spec_class [String] テスト用CSSクラス
   # @param rows [Integer] テキストエリアの行数
   # @param autocomplete [String, nil] autocomplete属性の値
-  # @raise [ArgumentError] 無効なtypeが指定された場合
+  # @raise [ArgumentError] formがnilの場合、または無効なtypeが指定された場合
   def initialize(
     form:,
     field:,
@@ -30,9 +30,11 @@ class FormFieldComponent < ViewComponent::Base
     rows: 3,
     autocomplete: nil
   )
+    raise ArgumentError, "form is required" if form.nil?
     unless ALLOWED_TYPES.include?(type)
       raise ArgumentError, "Invalid type: #{type}. Allowed types: #{ALLOWED_TYPES.join(', ')}"
     end
+
     @form = form
     @field = field
     @label = label

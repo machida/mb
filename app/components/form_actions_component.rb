@@ -12,6 +12,7 @@ class FormActionsComponent < ViewComponent::Base
   # @param secondary_class [String] セカンダリボタンのテスト用CSSクラス
   # @param cancel_path [String, nil] キャンセルリンクのパス（nilの場合は非表示）
   # @param cancel_label [String] キャンセルリンクのラベル
+  # @raise [ArgumentError] formがnilの場合
   def initialize(
     form:,
     primary_label: "保存",
@@ -21,6 +22,8 @@ class FormActionsComponent < ViewComponent::Base
     cancel_path: nil,
     cancel_label: "キャンセル"
   )
+    raise ArgumentError, "form is required" if form.nil?
+
     @form = form
     @primary_label = primary_label
     @primary_class = primary_class
