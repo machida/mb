@@ -2,7 +2,10 @@ ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
 require "mocha/minitest"
+require "webmock/minitest"
 
+# WebMock configuration: allow localhost connections for tests
+WebMock.disable_net_connect!(allow_localhost: true)
 
 module TestConfig
   # Centralized test configuration to avoid hardcoded values

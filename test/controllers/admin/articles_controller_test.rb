@@ -178,17 +178,95 @@ class Admin::ArticlesControllerTest < ActionDispatch::IntegrationTest
 
   test "should reject non-image upload" do
     login_as_admin
-    
+
     file = Rack::Test::UploadedFile.new(
       StringIO.new("not an image"),
       "text/plain",
       original_filename: "test.txt"
     )
-    
+
     post admin_articles_upload_image_path, params: { image: file }
     assert_response :unprocessable_content
-    
+
     json_response = JSON.parse(response.body)
     assert_equal "画像ファイルのみアップロード可能です", json_response['error']
+  end
+
+  test "should generate summary with valid inputs" do
+    login_as_admin
+    SiteSetting.set("openai_api_key", "test-key")
+
+    # モックレスポンス
+    mock_response = {
+      "choices" => [
+        {
+          "message" => {
+            "content" => "これはAIが生成したテスト概要です。"
+          }
+        }
+      ]
+    }
+
+    stub_request(:post, "https://api.openai.com/v1/chat/completions")
+      .to_return(status: 200, body: mock_response.to_json, headers: { "Content-Type" => "application/json" })
+
+    post admin_articles_generate_summary_path, params: {
+      title: "テスト記事",
+      body: "これはテスト本文です。" * 10
+    }
+
+    assert_response :success
+    json_response = JSON.parse(response.body)
+    assert_equal "これはAIが生成したテスト概要です。", json_response['summary']
+  ensure
+    Rails.cache.delete("site_setting_openai_api_key")
+  end
+
+  test "should return error when API key is not configured" do
+    login_as_admin
+    SiteSetting.set("openai_api_key", "")
+
+    post admin_articles_generate_summary_path, params: {
+      title: "テスト記事",
+      body: "これはテスト本文です。"
+    }
+
+    assert_response :unprocessable_content
+    json_response = JSON.parse(response.body)
+    assert_equal "OpenAI API Keyが設定されていません", json_response['error']
+  ensure
+    Rails.cache.delete("site_setting_openai_api_key")
+  end
+
+  test "should return error when title is blank" do
+    login_as_admin
+    SiteSetting.set("openai_api_key", "test-key")
+
+    post admin_articles_generate_summary_path, params: {
+      title: "",
+      body: "これはテスト本文です。"
+    }
+
+    assert_response :unprocessable_content
+    json_response = JSON.parse(response.body)
+    assert_equal "タイトルと本文を入力してください", json_response['error']
+  ensure
+    Rails.cache.delete("site_setting_openai_api_key")
+  end
+
+  test "should return error when body is blank" do
+    login_as_admin
+    SiteSetting.set("openai_api_key", "test-key")
+
+    post admin_articles_generate_summary_path, params: {
+      title: "テスト記事",
+      body: ""
+    }
+
+    assert_response :unprocessable_content
+    json_response = JSON.parse(response.body)
+    assert_equal "タイトルと本文を入力してください", json_response['error']
+  ensure
+    Rails.cache.delete("site_setting_openai_api_key")
   end
 end

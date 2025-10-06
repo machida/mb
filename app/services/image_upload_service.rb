@@ -49,12 +49,25 @@ class ImageUploadService
       processed_image.call(destination: temp_file.path)
 
       # GCSの設定
+      project_id = Rails.application.credentials.dig(:gcp, :project_id)
+      bucket_name = Rails.application.credentials.dig(:gcp, :bucket)
+      credentials = Rails.application.credentials.dig(:gcp, :credentials)
+
+      Rails.logger.info "GCS Upload - Project: #{project_id}, Bucket: #{bucket_name}"
+
+      unless project_id && bucket_name && credentials
+        raise "GCS credentials not configured properly. Check credentials.yml.enc"
+      end
+
       storage = Google::Cloud::Storage.new(
-        project_id: Rails.application.credentials.dig(:gcp, :project_id),
-        credentials: Rails.application.credentials.dig(:gcp, :credentials)
+        project_id: project_id,
+        credentials: credentials
       )
 
-      bucket = storage.bucket(Rails.application.credentials.dig(:gcp, :bucket))
+      bucket = storage.bucket(bucket_name)
+      unless bucket
+        raise "Bucket '#{bucket_name}' not found or not accessible"
+      end
 
       # リサイズされたファイルをGCSにアップロード
       blob = bucket.create_file(
@@ -74,8 +87,9 @@ class ImageUploadService
         markdown: "![画像](#{image_url})"
       }
     rescue => e
-      Rails.logger.error "GCS upload error: #{e.message}"
-      { error: "アップロードに失敗しました" }
+      Rails.logger.error "GCS upload error: #{e.class.name} - #{e.message}"
+      Rails.logger.error e.backtrace.join("\n")
+      { error: "アップロードに失敗しました: #{e.message}" }
     ensure
       temp_file.close
       temp_file.unlink

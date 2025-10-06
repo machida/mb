@@ -5,7 +5,8 @@ class Admin::SiteSettingsController < Admin::BaseController
       default_og_image: SiteSetting.default_og_image,
       top_page_description: SiteSetting.top_page_description,
       copyright: SiteSetting.copyright,
-      author_display_enabled: SiteSetting.get("author_display_enabled", "true")
+      author_display_enabled: SiteSetting.get("author_display_enabled", "true"),
+      openai_api_key: SiteSetting.openai_api_key
     }
   end
 
@@ -53,7 +54,14 @@ class Admin::SiteSettingsController < Admin::BaseController
   private
 
   def settings_params
-    params.require(:site_settings).permit(:site_title, :default_og_image, :top_page_description, :copyright, :author_display_enabled)
+    params.require(:site_settings).permit(
+      :site_title,
+      :default_og_image,
+      :top_page_description,
+      :copyright,
+      :author_display_enabled,
+      :openai_api_key
+    )
   end
 
   # フル著作権テキストから著作権者名だけを抽出

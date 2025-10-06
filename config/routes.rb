@@ -8,13 +8,16 @@ Rails.application.routes.draw do
     get "login", to: "sessions#new"
     post "login", to: "sessions#create"
     delete "logout", to: "sessions#destroy"
-    
+
     resources :password_resets, only: [:new, :create, :show, :update], param: :token
-    
+
     resource :profile, only: [:edit, :update]
     resource :password, only: [:edit, :update]
     resource :site_settings, only: [:show, :update], path: "site-settings"
     post "site_settings/upload_image", to: "site_settings#upload_image"
+
+    # Diagnostics
+    get "diagnostics/image_upload_check", to: "diagnostics#image_upload_check"
     
     resources :admins, only: [:index, :show, :new, :create, :destroy] do
       member do
@@ -30,6 +33,7 @@ Rails.application.routes.draw do
     end
     post "articles/preview", to: "articles#preview"
     post "articles/upload_image", to: "articles#upload_image"
+    post "articles/generate_summary", to: "articles#generate_summary"
   end
   root "articles#index"
   resources :articles, path: "article", only: [:index, :show]

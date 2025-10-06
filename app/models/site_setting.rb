@@ -49,9 +49,17 @@ class SiteSetting < ApplicationRecord
     get("author_display_enabled", "true") == "true"
   end
 
+  def self.openai_api_key
+    get("openai_api_key")
+  end
+
+  def self.openai_api_key_configured?
+    openai_api_key.present?
+  end
+
   private
 
   def allows_blank_value?
-    name.in?(%w[copyright default_og_image])
+    name.in?(%w[copyright default_og_image openai_api_key])
   end
 end
