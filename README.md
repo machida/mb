@@ -1,6 +1,6 @@
 # マチダのブログ
 
-Rails 8.0.2で作成されたブログアプリケーション
+Rails 8.0.3で作成されたブログアプリケーション
 
 ## 機能
 
@@ -182,8 +182,8 @@ phantom delete feature/user-auth
 
 ## 技術スタック
 
-- Ruby 3.4.2
-- Rails 8.0.2
+- Ruby 3.4.5
+- Rails 8.0.3
 - SQLite3 (開発環境)
 - Tailwind CSS v4.x
 - Stimulus (Hotwire)
@@ -193,8 +193,8 @@ phantom delete feature/user-auth
 
 ### テスト
 - Mini-test (システムテスト、コントローラーテスト)
-- Playwright 1.53.2 (E2E テスト、完全移行済み)
-- playwright-ruby-client 1.54.0
+- Playwright 1.55.0 (E2E テスト、完全移行済み)
+- playwright-ruby-client 1.55.0
 
 ## 機能詳細
 
@@ -270,7 +270,7 @@ bundle exec playwright install
 npx playwright install --force
 
 # Node.jsパッケージの更新
-npm install @playwright/test@1.53.2
+npm install @playwright/test@1.55.0
 
 # 環境のクリーンアップ
 rm -rf node_modules/.cache
@@ -285,6 +285,6 @@ Playwrightテストは並列実行を無効化しています（`parallelize(wor
 - ブラウザリソースの適切な管理
 
 ### ライブラリバージョン互換性
-- **Playwright**: 1.53.2（推奨）
-- **playwright-ruby-client**: 1.54.0（最新安定版）
+- **Playwright**: 1.55.0（推奨）
+- **playwright-ruby-client**: 1.55.0（最新安定版）
 - これらの組み合わせで最適な動作を確認済み
