@@ -45,3 +45,5 @@ node_modules/
 
 # Phantom worktrees
 /.git/phantom/
+
+/config/credentials/production.key
