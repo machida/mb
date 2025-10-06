@@ -1,0 +1,19 @@
+<div class="l--form-item space-y-1">
+  <%= form.label field, label, class: "a--form-label text-gray-700" %>
+
+  <% if textarea? %>
+    <%= form.text_area field, rows: rows, required: required, placeholder: placeholder, class: css_class, autocomplete: autocomplete %>
+  <% elsif email? %>
+    <%= form.email_field field, required: required, placeholder: placeholder, class: css_class, autocomplete: autocomplete %>
+  <% elsif password? %>
+    <%= form.password_field field, required: required, placeholder: placeholder, class: css_class, autocomplete: autocomplete %>
+  <% else %>
+    <%= form.text_field field, required: required, placeholder: placeholder, class: css_class, autocomplete: autocomplete %>
+  <% end %>
+
+  <% if help_text.present? %>
+    <div class="a--form-help mt-1">
+      <p><%= help_text %></p>
+    </div>
+  <% end %>
+</div>

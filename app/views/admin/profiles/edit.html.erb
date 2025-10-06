@@ -10,20 +10,23 @@
         </header>
         <div class="a--card">
           <div class="l--form-items">
-            <div class="l--form-item">
-              <%= f.label :email, "メールアドレス", class: "a--form-label mb-2" %>
-              <%= f.email_field :email, required: true, class: "a--text-input spec--email-input" %>
-              <div class="a--form-help mt-1">
-                <p>ログイン時に使用するメールアドレスです。</p>
-              </div>
-            </div>
-            <div class="l--form-item">
-              <%= f.label :user_id, "ユーザーID", class: "a--form-label mb-2" %>
-              <%= f.text_field :user_id, required: true, class: "a--text-input spec--user-id-input" %>
-              <div class="a--form-help mt-1">
-                <p>記事の著者として表示されるIDです。</p>
-              </div>
-            </div>
+            <%= render FormFieldComponent.new(
+              form: f,
+              field: :email,
+              label: "メールアドレス",
+              type: "email",
+              required: true,
+              help_text: "ログイン時に使用するメールアドレスです。",
+              spec_class: "spec--email-input"
+            ) %>
+            <%= render FormFieldComponent.new(
+              form: f,
+              field: :user_id,
+              label: "ユーザーID",
+              required: true,
+              help_text: "記事の著者として表示されるIDです。",
+              spec_class: "spec--user-id-input"
+            ) %>
           </div>
         </div>
       </div>
@@ -40,12 +43,12 @@
         </div>
       </div>
 
-      <div class="l--form-actions">
-        <ul>
-          <li><%= f.submit "更新", class: "a--button is-lg is-primary is-flex spec--update-button" %></li>
-          <li><%= link_to "キャンセル", admin_articles_path, class: "a--button is-lg is-border-secondary is-flex spec--cancel-button" %></li>
-        </ul>
-      </div>
+      <%= render FormActionsComponent.new(
+        form: f,
+        primary_label: "更新",
+        primary_class: "spec--update-button",
+        cancel_path: admin_articles_path
+      ) %>
     <% end %>
 
   </div>

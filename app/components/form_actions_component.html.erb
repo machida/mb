@@ -1,0 +1,13 @@
+<div class="l--form-actions">
+  <ul>
+    <li><%= form.submit primary_label, class: "a--button is-lg is-primary is-flex #{primary_class}" %></li>
+
+    <% if show_secondary? %>
+      <li><%= form.submit secondary_label, class: "a--button is-lg is-warning is-flex #{secondary_class}" %></li>
+    <% end %>
+
+    <% if show_cancel? %>
+      <li><%= link_to cancel_label, cancel_path, class: "a--button is-lg is-border-secondary is-flex spec--cancel-button" %></li>
+    <% end %>
+  </ul>
+</div>
