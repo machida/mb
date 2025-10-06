@@ -1,2 +1,2 @@
-<%= render ToastComponent.new(message: notice, type: :success) if notice %>
-<%= render ToastComponent.new(message: alert, type: :error) if alert %>
+<%= render ToastComponent.new(message: notice, type: :success) if notice.present? %>
+<%= render ToastComponent.new(message: alert, type: :error) if alert.present? %>

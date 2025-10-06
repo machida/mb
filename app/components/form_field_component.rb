@@ -3,7 +3,7 @@
 # テキスト、メール、パスワード、テキストエリアなどの入力フィールドを統一的に表示します。
 # ラベル、ヘルプテキスト、バリデーション、autocomplete属性をサポートします。
 class FormFieldComponent < ViewComponent::Base
-  ALLOWED_TYPES = %w[text email password textarea].freeze
+  VALID_TYPES = %w[text email password textarea].freeze
 
   # フォームフィールドコンポーネントを初期化
   #
@@ -31,8 +31,8 @@ class FormFieldComponent < ViewComponent::Base
     autocomplete: nil
   )
     raise ArgumentError, "form is required" if form.nil?
-    unless ALLOWED_TYPES.include?(type)
-      raise ArgumentError, "Invalid type: #{type}. Allowed types: #{ALLOWED_TYPES.join(', ')}"
+    unless VALID_TYPES.include?(type)
+      raise ArgumentError, "Invalid type: #{type}. Allowed types: #{VALID_TYPES.join(', ')}"
     end
 
     @form = form

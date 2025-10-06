@@ -2,7 +2,7 @@ require "test_helper"
 
 class FormFieldComponentTest < ViewComponent::TestCase
   def test_valid_types
-    FormFieldComponent::ALLOWED_TYPES.each do |type|
+    FormFieldComponent::VALID_TYPES.each do |type|
       component = FormFieldComponent.new(
         form: mock_form_builder,
         field: :test_field,
