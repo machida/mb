@@ -1,4 +1,17 @@
+# フォームアクションボタンを表示するコンポーネント
+#
+# プライマリボタン、セカンダリボタン、キャンセルリンクを統一的に表示します。
+# spec_classでテスト用クラスをカスタマイズ可能です。
 class FormActionsComponent < ViewComponent::Base
+  # フォームアクションコンポーネントを初期化
+  #
+  # @param form [ActionView::Helpers::FormBuilder] フォームビルダーオブジェクト
+  # @param primary_label [String] プライマリボタンのラベル
+  # @param primary_class [String] プライマリボタンのテスト用CSSクラス
+  # @param secondary_label [String, nil] セカンダリボタンのラベル（nilの場合は非表示）
+  # @param secondary_class [String] セカンダリボタンのテスト用CSSクラス
+  # @param cancel_path [String, nil] キャンセルリンクのパス（nilの場合は非表示）
+  # @param cancel_label [String] キャンセルリンクのラベル
   def initialize(
     form:,
     primary_label: "保存",
@@ -21,10 +34,16 @@ class FormActionsComponent < ViewComponent::Base
 
   attr_reader :form, :primary_label, :primary_class, :secondary_label, :secondary_class, :cancel_path, :cancel_label
 
+  # セカンダリボタンを表示するかどうかを判定
+  #
+  # @return [Boolean] セカンダリボタンを表示する場合true
   def show_secondary?
     secondary_label.present?
   end
 
+  # キャンセルリンクを表示するかどうかを判定
+  #
+  # @return [Boolean] キャンセルリンクを表示する場合true
   def show_cancel?
     cancel_path.present?
   end

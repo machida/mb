@@ -1,9 +1,20 @@
+# トースト通知を表示するコンポーネント
+#
+# 成功メッセージやエラーメッセージをトースト形式で表示します。
+# アイコンと背景色は自動的に切り替わります。
 class ToastComponent < ViewComponent::Base
+  # トースト通知コンポーネントを初期化
+  #
+  # @param message [String] 表示するメッセージ
+  # @param type [Symbol] 通知タイプ (:success または :error)
   def initialize(message:, type: :success)
     @message = message
     @type = type
   end
 
+  # コンポーネントを表示するかどうかを判定
+  #
+  # @return [Boolean] メッセージが存在する場合true
   def render?
     message.present?
   end
@@ -12,10 +23,16 @@ class ToastComponent < ViewComponent::Base
 
   attr_reader :message, :type
 
+  # 背景色のCSSクラスを取得
+  #
+  # @return [String] 背景色のCSSクラス
   def background_color
     type == :success ? "bg-green-500" : "bg-red-500"
   end
 
+  # アイコンのSVGパスを取得
+  #
+  # @return [String] SVGパス文字列
   def icon_path
     if type == :success
       "M5 13l4 4L19 7"
