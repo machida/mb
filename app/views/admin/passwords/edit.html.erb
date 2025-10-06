@@ -17,7 +17,8 @@
             type: "password",
             required: true,
             help_text: "8文字以上で設定してください。",
-            spec_class: "spec--password-input"
+            spec_class: "spec--password-input",
+            autocomplete: "new-password"
           ) %>
           <%= render FormFieldComponent.new(
             form: f,
@@ -26,7 +27,8 @@
             type: "password",
             required: true,
             help_text: "確認のため同じパスワードを入力してください。",
-            spec_class: "spec--password-confirmation-input"
+            spec_class: "spec--password-confirmation-input",
+            autocomplete: "new-password"
           ) %>
         </div>
       </div>
