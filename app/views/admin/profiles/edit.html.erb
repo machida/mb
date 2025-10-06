@@ -17,7 +17,8 @@
               type: "email",
               required: true,
               help_text: "ログイン時に使用するメールアドレスです。",
-              spec_class: "spec--email-input"
+              spec_class: "spec--email-input",
+              autocomplete: "email"
             ) %>
             <%= render FormFieldComponent.new(
               form: f,
@@ -25,7 +26,8 @@
               label: "ユーザーID",
               required: true,
               help_text: "記事の著者として表示されるIDです。",
-              spec_class: "spec--user-id-input"
+              spec_class: "spec--user-id-input",
+              autocomplete: "username"
             ) %>
           </div>
         </div>
