@@ -76,10 +76,9 @@ class ImageUploadService
         content_type: content_type
       )
 
-      # 公開アクセス可能にする
-      blob.acl.public_read!
-
       # 公開URLを返す
+      # Note: バケットは"allUsers"に対してStorage Object Viewerロールを付与する必要があります
+      # GCPコンソール > Storage > バケット > Permissions で設定
       image_url = blob.public_url
 
       {
