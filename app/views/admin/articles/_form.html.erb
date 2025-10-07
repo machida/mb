@@ -28,7 +28,7 @@
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4" data-controller="markdown-preview">
       <div class="">
-        <label for="<%= f.field_id(:body) %>" class="a--form-label mb-2">編集</label>
+        <label for="<%= f.field_id(:body) %>" class="a--form-label mb-2">本文 (Markdown記法)</label>
         <%= f.text_area :body, rows: 15,
                         class: "a--text-input a--markdown-textarea font-mono text-sm spec--body-input js-markdown-textarea #{if article.errors[:body].any?
                                                                                                                                'border-red-300'

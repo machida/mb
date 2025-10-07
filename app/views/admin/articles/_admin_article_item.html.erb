@@ -1,11 +1,11 @@
-<article>
+<article class="a--card">
   <header>
     <div class="flex justify-between items-start mb-2">
       <div class="flex items-center gap-3">
         <span class="<%= status_badge_class(admin_article_item) %>">
           <%= status_text(admin_article_item) %>
         </span>
-        <h2 class="a--heading is-xl">
+        <h2 class="a--heading is-lg">
           <%= link_to admin_article_item.title, link_path_for_article(admin_article_item), class: "hover-text-link text-primary" %>
         </h2>
       </div>

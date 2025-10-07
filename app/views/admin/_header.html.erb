@@ -1,15 +1,39 @@
 <!-- Admin Header -->
-<header class="bg-white border-b border-gray-200 spec--admin-header">
-  <div class="l--container">
-    <div class="flex justify-between items-center h-16">
-      <div class="flex items-center">
-        <h1 class="a--heading is-lg">
-          <%= link_to "管理画面", admin_articles_path, class: "hover:text-gray-600" %>
-        </h1>
+<header class="bg-white border-b border-gray-200">
+  <div class="l--container is-xxl">
+    <div class="flex items-center justify-between h-14">
+      <h1 class="a--heading is-lg">
+        <%= link_to "管理画面", admin_articles_path, class: "hover:text-gray-600" %>
+      </h1>
+      <div class="">
+        <ul class="flex items-center gap-2">
+          <li class="flex-1">
+            <%= link_to "サイトを表示", root_path, class: "a--button is-sm is-border-secondary spec--new-article-link" %>
+          </li>
+
+          <li class="flex-1">
+            <div class="a--dropdown">
+              <button class="a--dropdown-button js-dropdown-button spec--dropdown-button"
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                      aria-controls="user-menu"
+                      aria-label="ユーザーメニューを開く">
+                <span class="material-symbols-outlined" aria-hidden="true">person</span>
+              </button>
+              <div class="a--dropdown-menu js-dropdown-menu" id="user-menu" role="menu">
+                <%= link_to edit_admin_profile_path, class: "a--dropdown-menu-item spec--profile-edit-link", role: "menuitem" do %>
+                  プロフィール編集
+                <% end %>
+                <div class="a--dropdown-menu-separator" role="separator"></div>
+                <%= button_to "サインアウト", admin_logout_path, method: :delete,
+                              class: "a--dropdown-menu-item spec--logout-button w-full text-left bg-transparent border-0 cursor-pointer", role: "menuitem" %>
+              </div>
+            </div>
+          </li>
+
+        </ul>
       </div>
-
-      <%= render "admin/admin_navigation" %>
-
     </div>
   </div>
 </header>
+<%= render "admin/admin_navigation" %>

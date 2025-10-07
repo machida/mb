@@ -50,6 +50,7 @@
   --color-form-border-invalid-focus: var(--color-red-500);
   --color-form-text: var(--color-gray-900);
   --color-form-text-disabled: var(--color-gray-500);
+  --color-form-bg: var(--color-white);
   --color-form-bg-disabled: var(--color-gray-50);
   --color-form-placeholder: var(--color-gray-400);
   --color-form-label: var(--color-gray-700);

@@ -6,9 +6,8 @@
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--color-form-border);
   border-radius: 0.375rem;
-  box-shadow: var(--shadow-sm);
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
   color: var(--color-form-text);
   background-color: var(--color-form-bg);
 }
@@ -17,7 +16,6 @@
   outline: 2px solid transparent;
   outline-offset: 2px;
   border-color: var(--color-form-border-focus);
-  box-shadow: 0 0 0 1px var(--color-form-border-focus);
 }
 
 .a--text-input::placeholder {
@@ -64,8 +62,8 @@
 
 .a--form-label {
   display: block;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
   font-weight: 700;
   color: var(--color-form-label);
 }
@@ -94,7 +92,7 @@
 .l--form-items {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .l--form-item {

@@ -24,12 +24,14 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-white min-h-screen flex flex-col layout-admin">
-    <%= render "admin/header" %>
-
+  <body class="bg-stone-100 min-h-screen flex flex-col layout-admin <%= 'is-logged-in pl-[100px]' if current_user_signed_in? %>">
     <!-- Password Change Notice -->
     <% if current_admin&.needs_password_change? %>
       <%= render PasswordChangeNoticeComponent.new %>
+    <% end %>
+
+    <% if current_user_signed_in? %>
+      <%= render "admin/header" %>
     <% end %>
 
     <!-- Admin Main Content -->
@@ -40,7 +42,7 @@
     <%= render "admin/footer" %>
 
     <!-- Toast Container -->
-    <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2 js-toast-container">
+    <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2 js--toast-container">
       <%= render "shared/toasts" %>
     </div>
   </body>

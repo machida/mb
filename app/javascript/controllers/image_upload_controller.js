@@ -76,10 +76,10 @@ export default class extends Controller {
         const data = await response.json();
         // アップロード中テキストを実際のMarkdownに置換
         this.replaceText(uploadingText, data.markdown);
-        
+
         // プレビューを更新
         this.textareaTarget.dispatchEvent(new Event('input'));
-        
+
         // 成功メッセージを表示
         this.showToast('画像をアップロードしました', 'success');
       } else {
@@ -99,7 +99,7 @@ export default class extends Controller {
     const end = textarea.selectionEnd;
     const before = textarea.value.substring(0, start);
     const after = textarea.value.substring(end);
-    
+
     textarea.value = before + text + after;
     textarea.selectionStart = textarea.selectionEnd = start + text.length;
   }
@@ -111,20 +111,20 @@ export default class extends Controller {
 
   showToast(message, type) {
     // 既存のトーストコンテナを取得
-    const container = document.querySelector('.js-toast-container');
+    const container = document.querySelector('.js--toast-container');
     if (!container) return;
 
     // トーストの色を決定
     const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
-    const icon = type === 'success' 
+    const icon = type === 'success'
       ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>'
       : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 15.5c-.77.833.192 2.5 1.732 2.5z"></path>';
 
     // トースト要素を作成
     const toast = document.createElement('div');
-    toast.className = 'toast-notification js-toast-notification';
+    toast.className = 'toast-notification js--toast-notification';
     toast.innerHTML = `
-      <div class="${bgColor} text-white px-6 py-3 rounded-lg transform translate-x-full transition-transform duration-300 ease-in-out max-w-sm js-toast-element">
+      <div class="${bgColor} text-white px-6 py-3 rounded-lg transform translate-x-full transition-transform duration-300 ease-in-out max-w-sm js--toast-element">
         <div class="flex items-center justify-between">
           <div class="flex items-center">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -132,7 +132,7 @@ export default class extends Controller {
             </svg>
             <span>${message}</span>
           </div>
-          <button class="ml-4 hover:opacity-70 js-toast-close">
+          <button class="ml-4 hover:opacity-70 js--toast-close">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
@@ -145,13 +145,13 @@ export default class extends Controller {
 
     // アニメーションで表示
     setTimeout(() => {
-      const toastElement = toast.querySelector('.js-toast-element');
+      const toastElement = toast.querySelector('.js--toast-element');
       toastElement.classList.add('translate-x-0');
       toastElement.classList.remove('translate-x-full');
     }, 100);
 
     // クローズボタンのイベント
-    toast.querySelector('.js-toast-close').addEventListener('click', () => {
+    toast.querySelector('.js--toast-close').addEventListener('click', () => {
       this.hideToast(toast);
     });
 
@@ -162,10 +162,10 @@ export default class extends Controller {
   }
 
   hideToast(toast) {
-    const toastElement = toast.querySelector('.js-toast-element');
+    const toastElement = toast.querySelector('.js--toast-element');
     toastElement.classList.add('translate-x-full');
     toastElement.classList.remove('translate-x-0');
-    
+
     setTimeout(() => {
       toast.remove();
     }, 300);
@@ -187,11 +187,11 @@ export default class extends Controller {
     // クリップボードのアイテムをチェック
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
-      
+
       // 画像タイプをチェック
       if (item.type.startsWith('image/')) {
         event.preventDefault();
-        
+
         const file = item.getAsFile();
         if (file) {
           this.uploadImage(file);

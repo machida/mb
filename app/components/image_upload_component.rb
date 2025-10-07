@@ -54,7 +54,7 @@ class ImageUploadComponent < ViewComponent::Base
   end
 
   def dropzone_classes
-    base_classes = "border-2 border-dashed border-gray-300 rounded-lg transition-colors w-full aspect-[40/21] flex items-center justify-center"
+    base_classes = "border-2 border-dashed border-gray-300 rounded-lg transition-colors w-full aspect-[40/21] flex items-center justify-center bg-white hover:border-gray-400 focus-within:border-gray-400"
     base_classes += " hidden" if current_image.present?
     base_classes
   end
