@@ -1,0 +1,40 @@
+.a--image-upload__dropzone {
+  width: 100%;
+  aspect-ratio: 40 / 21;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-sky-50);
+  border: 2px dashed var(--color-sky-300);
+  border-radius: 0.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-out, border-color 0.2s ease-out;
+}
+
+.a--image-upload__dropzone:hover {
+  border-color: var(--color-sky-400);
+  background-color: var(--color-white);
+}
+
+.a--image-upload__dropzone:focus-within {
+  border-color: var(--color-sky-400);
+}
+
+.a--image-upload__dropzone.is--hidden,
+.a--image-upload__preview-area.is--hidden {
+  display: none;
+}
+
+
+.a--image-upload__preview-area {
+  margin-top: 1rem;
+}
+
+.a--image-upload__preview {
+  width: 100%;
+  aspect-ratio: 40 / 21;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-sky-300);
+}

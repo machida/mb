@@ -232,10 +232,10 @@
     --color-button-primary-bg-light: var(--color-sky-50);
     --color-form-border-focus: var(--color-sky-500);
     --color-link: var(--color-sky-700);
-    --color-link-hover: var(--color-sky-800);
-    --color-text-primary: var(--color-sky-900);
+    --color-link-hover: var(--color-sky-700);
+    --color-text-primary: var(--color-sky-800);
     --color-border-light: var(--color-sky-200);
-    --color-border-default: var(--color-sky-300);
+    --color-border-default: var(--color-sky-500);
     --color-border-dark: var(--color-sky-400);
     --color-form-border: var(--color-sky-300);
     --color-bg-primary: var(--color-sky-50);
@@ -262,6 +262,7 @@
 @import "./components/_hero.css";
 @import "./components/_long-text.css";
 @import "./components/_short-text.css";
+@import "./components/_image-upload.css";
 @import "./components/_pager.css";
 @import "./components/_toast.css";
 @import "./components/_spec_classes.css";

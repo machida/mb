@@ -91,22 +91,22 @@ export default class extends Controller {
 
     // プレビュー画像を表示
     this.previewTarget.src = data.url;
-    this.previewTarget.classList.remove('hidden');
+    this.previewTarget.classList.remove('is--hidden');
 
     // プレビューエリア全体を表示
     if (this.hasPreviewAreaTarget) {
-      this.previewAreaTarget.classList.remove('hidden');
+      this.previewAreaTarget.classList.remove('is--hidden');
     }
 
     // ドロップゾーンを非表示
-    this.dropzoneTarget.classList.add('hidden');
+    this.dropzoneTarget.classList.add('is--hidden');
 
     // 削除ボタンを表示
     if (this.hasClearButtonTarget) {
-      this.clearButtonTarget.classList.remove('hidden');
+      this.clearButtonTarget.classList.remove('is--hidden');
       // 削除ボタンの親要素も表示
       if (this.clearButtonTarget.parentElement) {
-        this.clearButtonTarget.parentElement.classList.remove('hidden');
+        this.clearButtonTarget.parentElement.classList.remove('is--hidden');
       }
     }
 
@@ -152,21 +152,21 @@ export default class extends Controller {
 
   clearThumbnail() {
     this.urlTarget.value = '';
-    this.previewTarget.classList.add('hidden');
+    this.previewTarget.classList.add('is--hidden');
 
     // プレビューエリア全体を非表示
     if (this.hasPreviewAreaTarget) {
-      this.previewAreaTarget.classList.add('hidden');
+      this.previewAreaTarget.classList.add('is--hidden');
     }
 
     // ドロップゾーンを再表示
-    this.dropzoneTarget.classList.remove('hidden');
+    this.dropzoneTarget.classList.remove('is--hidden');
 
     if (this.hasClearButtonTarget) {
-      this.clearButtonTarget.classList.add('hidden');
+      this.clearButtonTarget.classList.add('is--hidden');
       // 削除ボタンの親要素も非表示
       if (this.clearButtonTarget.parentElement) {
-        this.clearButtonTarget.parentElement.classList.add('hidden');
+        this.clearButtonTarget.parentElement.classList.add('is--hidden');
       }
     }
     this.resetDropzone();

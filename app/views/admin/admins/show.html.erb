@@ -10,7 +10,7 @@
           <h2 class="text-2xl font-bold spec--admin-user-id">
             <%= @admin.user_id %>
           </h2>
-          <p class="text-gray-600 spec--admin-email">
+          <p class="spec--admin-email">
             <%= @admin.email %>
           </p>
         </div>
@@ -30,13 +30,13 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <div>
-          <h3 class="text-sm font-medium text-gray-500 mb-1">作成日時</h3>
+          <h3 class="text-sm font-medium mb-1">作成日時</h3>
           <p class="spec--admin-created-at">
             <%= @admin.created_at.strftime("%Y年%m月%d日 %H:%M") %>
           </p>
         </div>
         <div>
-          <h3 class="text-sm font-medium text-gray-500 mb-1">パスワード最終変更</h3>
+          <h3 class="text-sm font-medium mb-1">パスワード最終変更</h3>
           <p class="spec--admin-password-changed-at">
             <% if @admin.password_changed_at %>
               <%= @admin.password_changed_at.strftime("%Y年%m月%d日 %H:%M") %>
@@ -48,25 +48,25 @@
       </div>
 
       <div class="mb-6">
-        <h3 class="text-sm font-medium text-gray-500 mb-2">記事統計</h3>
+        <h3 class="text-sm font-medium mb-2">記事統計</h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="a--card is--secondary is--sm">
+          <div class="a--card is--primary is--sm">
             <p class="text-lg font-semibold spec--total-articles-count">
               <%= @admin.articles.count %>
             </p>
-            <p class="text-sm text-gray-600">総記事数</p>
+            <p class="text-sm">総記事数</p>
           </div>
-          <div class="a--card is--secondary is--sm">
+          <div class="a--card is--primary is--sm">
             <p class="text-lg font-semibold spec--published-articles-count">
               <%= @admin.articles.published.count %>
             </p>
-            <p class="text-sm text-gray-600">公開記事</p>
+            <p class="text-sm">公開記事</p>
           </div>
-          <div class="a--card is--secondary is--sm">
+          <div class="a--card is--primary is--sm">
             <p class="text-lg font-semibold spec--draft-articles-count">
               <%= @admin.articles.drafts.count %>
             </p>
-            <p class="text-sm text-gray-600">下書き</p>
+            <p class="text-sm">下書き</p>
           </div>
         </div>
       </div>
@@ -78,7 +78,7 @@
           <h3 class="a--heading is--md">記事の処理</h3>
         </header>
         <div class="a--card">
-          <p class="text-gray-600 mb-4">
+          <p class="mb-4">
             この管理者を削除する前に、作成された記事の処理方法を選択してください。
           </p>
 

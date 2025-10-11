@@ -3,17 +3,20 @@
   <div class="l--container is--xxl">
     <div class="flex items-center justify-between h-14">
       <h1 class="a--heading is--lg">
-        <%= link_to "管理画面", admin_articles_path, class: "hover:text-gray-600" %>
+        <%= link_to "管理画面", admin_articles_path, class: "hover:text-sky-600" %>
       </h1>
       <div class="">
         <ul class="flex items-center gap-2">
           <li class="flex-1">
-            <%= link_to "サイトを表示", root_path, class: "a--button is--sm is--secondary spec--new-article-link" %>
+            <%= link_to root_path, class: "a--button is--sm is--secondary spec--new-article-link" do %>
+              <span class="material-symbols-outlined" aria-hidden="true">home</span>
+              <span class="sr-only">サイトのトップページへ</span>
+            <% end %>
           </li>
 
           <li class="flex-1">
             <div class="a--dropdown">
-              <button class="a--dropdown-button js-dropdown-button spec--dropdown-button"
+              <button class="a--button is--sm is--secondary js-dropdown-button spec--dropdown-button"
                       aria-expanded="false"
                       aria-haspopup="true"
                       aria-controls="user-menu"

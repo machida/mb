@@ -40,7 +40,7 @@ class ImageUploadComponent < ViewComponent::Base
   end
 
   def preview_classes
-    "w-full aspect-[40/21] object-cover rounded-lg border border-gray-300"
+    "a--image-upload__preview"
   end
 
   def clear_button_container_classes
@@ -48,14 +48,14 @@ class ImageUploadComponent < ViewComponent::Base
   end
 
   def preview_area_classes
-    base_classes = "mt-4"
-    base_classes += " hidden" unless current_image.present?
+    base_classes = "a--image-upload__preview-area"
+    base_classes += " is--hidden" unless current_image.present?
     base_classes
   end
 
   def dropzone_classes
-    base_classes = "border-2 border-dashed border-gray-300 rounded-lg transition-colors w-full aspect-[40/21] flex items-center justify-center bg-white hover:border-gray-400 focus-within:border-gray-400"
-    base_classes += " hidden" if current_image.present?
+    base_classes = "a--image-upload__dropzone"
+    base_classes += " is--hidden" if current_image.present?
     base_classes
   end
 end

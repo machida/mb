@@ -1,6 +1,9 @@
 <%= render PageTitleComponent.new(
       title: "管理者一覧",
-      action_button: link_to("新規管理者追加", new_admin_admin_path, class: "a--button is--md is--primary spec--new-admin-link")
+      action_button: link_to(new_admin_admin_path, class: "a--button is--sm is--secondary spec--new-admin-link") do
+        content_tag(:span, "add", class: "material-symbols-outlined") +
+        content_tag(:span, "新規管理者追加")
+      end
     ) %>
 
 <div class="a--page-body py-6">
