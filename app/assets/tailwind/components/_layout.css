@@ -25,27 +25,27 @@
 }
 
 /* Container size modifiers */
-.l--container.is-xs {
+.l--container.is--xs {
   max-width: 20rem; /* 320px */
 }
 
-.l--container.is-sm {
+.l--container.is--sm {
   max-width: 40rem; /* 640px */
 }
 
-.l--container.is-md {
+.l--container.is--md {
   max-width: 48rem; /* 768px */
 }
 
-.l--container.is-lg {
+.l--container.is--lg {
   max-width: 64rem; /* 1024px */
 }
 
-.l--container.is-xl {
+.l--container.is--xl {
   max-width: 80rem; /* 1280px */
 }
 
-.l--container.is-xxl {
+.l--container.is--xxl {
   max-width: 96rem; /* 1536px */
 }
 

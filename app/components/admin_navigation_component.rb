@@ -25,6 +25,6 @@ class AdminNavigationComponent < ViewComponent::Base
   end
 
   def nav_class_for(item)
-    "a--button is-md #{item[:active] ? 'is-warning' : 'is-border-secondary'}"
+    "a--button is--md #{item[:active] ? 'is--primary' : 'is--secondary'}"
   end
 end

@@ -1,8 +1,9 @@
-<%= form_with model: [:admin, article], local: true do |f| %>
-  <%= render AlertComponent.new(type: :danger, messages: article.errors.full_messages) if article.errors.any? %>
+<div data-controller="help-modal">
+  <%= form_with model: [:admin, article], local: true do |f| %>
+    <%= render AlertComponent.new(type: :danger, messages: article.errors.full_messages) if article.errors.any? %>
 
-  <div class="l--form-items">
-    <div class="l--form-item is-sm">
+    <div class="l--form-items">
+    <div class="l--form-item is--sm">
     <%= f.label :title, "タイトル", class: "a--form-label mb-2" %>
     <%= f.text_field :title,
                      class: "a--text-input spec--title-input #{'border-red-300' if article.errors[:title].any?}",
@@ -17,8 +18,7 @@
   </div>
 
   <fieldset class="l--form-item">
-    <legend class="a--form-label mb-2">本文 (Markdown記法)</legend>
-    <div id="body-help" class="a--form-help mb-2">
+    <div id="body-help" class="a--form-help mb-2 hidden" data-help-modal-target="content">
       <p>Markdown記法が使用できます。</p>
       <ul>
         <li>**太字**、*斜体*、`コード`、[リンク](URL)</li>
@@ -26,62 +26,95 @@
         <li>画像をドラッグ&ドロップ、貼り付けてアップロード</li>
       </ul>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4" data-controller="markdown-preview">
-      <div class="">
-        <label for="<%= f.field_id(:body) %>" class="a--form-label mb-2">本文 (Markdown記法)</label>
-        <%= f.text_area :body, rows: 15,
-                        class: "a--text-input a--markdown-textarea font-mono text-sm spec--body-input js-markdown-textarea #{if article.errors[:body].any?
-                                                                                                                               'border-red-300'
-                                                                                                                             end}",
-                        aria_describedby: "body-help#{' body-error' if article.errors[:body].any?}",
-                        aria_invalid: (article.errors[:body].any? ? "true" : "false"),
-                        aria_required: "true",
-                        data: {
-                          controller: "image-upload",
-                          action: "input->markdown-preview#update keyup->markdown-preview#update dragover->image-upload#dragover dragleave->image-upload#dragleave drop->image-upload#drop",
-                          image_upload_target: "textarea", image_upload_upload_url_value: admin_articles_upload_image_path
-                        } %>
-        <% if article.errors[:body].any? %>
-          <div id="body-error" class="a--form-error mt-1" role="alert">
-            <%= article.errors[:body].first %>
-          </div>
-        <% end %>
+    <div data-controller="markdown-preview markdown-tab">
+      <!-- タブナビゲーション（モバイル・タブレット） -->
+      <div class="flex mb-4 border-b border-gray-300 lg:hidden" role="tablist">
+        <button type="button"
+                class="flex-1 px-4 py-2 font-semibold border-b-2 border-indigo-600 text-indigo-600 spec--markdown-edit-tab"
+                data-markdown-tab-target="editTab"
+                data-action="click->markdown-tab#showEdit"
+                role="tab"
+                aria-selected="true"
+                aria-controls="markdown-edit-panel">
+          編集
+        </button>
+        <button type="button"
+                class="flex-1 px-4 py-2 font-semibold border-b-2 border-transparent text-gray-500 spec--markdown-preview-tab"
+                data-markdown-tab-target="previewTab"
+                data-action="click->markdown-tab#showPreview"
+                role="tab"
+                aria-selected="false"
+                aria-controls="markdown-preview-panel">
+          プレビュー
+        </button>
       </div>
-      <div class="">
-        <label class="a--form-label mb-2">プレビュー</label>
-        <div class="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 overflow-y-auto" role="region" aria-label="Markdownプレビュー">
-          <div data-markdown-preview-target="preview" class="a--long-text js-markdown-preview">
-            <% if article.body.present? %>
-              <%= markdown(article.body) %>
-            <% else %>
-              <p class="text-gray-500 italic">プレビューがここに表示されます...</p>
-            <% end %>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <!-- 編集パネル -->
+        <div class="" data-markdown-tab-target="editPanel" id="markdown-edit-panel" role="tabpanel">
+          <div class="flex items-center gap-2 mb-2">
+            <label for="<%= f.field_id(:body) %>" class="a--form-label">本文 (Markdown記法)</label>
+            <button type="button"
+                    class="flex text-gray-500 hover:text-gray-700 cursor-pointer spec--body-help-button"
+                    data-action="click->help-modal#open"
+                    aria-label="Markdown記法のヘルプを表示">
+              <span class="material-symbols-outlined text-xl">help</span>
+            </button>
+          </div>
+          <%= f.text_area :body,
+                          class: "a--text-input a--markdown-textarea font-mono text-sm spec--body-input js-markdown-textarea #{if article.errors[:body].any?
+                                                                                                                                 'border-red-300'
+                                                                                                                               end}",
+                          aria_describedby: "body-help#{' body-error' if article.errors[:body].any?}",
+                          aria_invalid: (article.errors[:body].any? ? "true" : "false"),
+                          aria_required: "true",
+                          data: {
+                            controller: "image-upload",
+                            action: "input->markdown-preview#update keyup->markdown-preview#update dragover->image-upload#dragover dragleave->image-upload#dragleave drop->image-upload#drop",
+                            image_upload_target: "textarea", image_upload_upload_url_value: admin_articles_upload_image_path
+                          } %>
+          <% if article.errors[:body].any? %>
+            <div id="body-error" class="a--form-error mt-1" role="alert">
+              <%= article.errors[:body].first %>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- プレビューパネル -->
+        <div class="hidden lg:block" data-markdown-tab-target="previewPanel" id="markdown-preview-panel" role="tabpanel">
+          <label class="a--form-label mb-2">プレビュー</label>
+          <div class="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 overflow-y-auto min-h-[20rem]" role="region" aria-label="Markdownプレビュー">
+            <div data-markdown-preview-target="preview" class="a--long-text js-markdown-preview">
+              <% if article.body.present? %>
+                <%= markdown(article.body) %>
+              <% else %>
+                <p class="text-gray-400">プレビューがここに表示されます...</p>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </fieldset>
 
-  <div class="l--form-item is-sm">
+  <div class="l--form-item is--sm">
     <%= f.label :summary, "概要", class: "a--form-label mb-2" %>
-    <div class="flex gap-2 items-start">
-      <%= f.text_area :summary, rows: 3,
-          class: "a--text-input spec--summary-input flex-1 #{'border-red-300' if article.errors[:summary].any?}",
-          aria_describedby: article.errors[:summary].any? ? "summary-error summary-help" : "summary-help",
-          aria_invalid: (article.errors[:summary].any? ? "true" : "false") %>
-      <% if @openai_api_key_configured %>
-        <button type="button"
-                class="a--button is-sm is-border-primary spec--generate-summary-button flex-shrink-0"
-                data-controller="ai-summary"
-                data-ai-summary-url-value="<%= admin_articles_generate_summary_path %>"
-                data-action="click->ai-summary#generate">
-          <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          AIで生成
-        </button>
-      <% end %>
-    </div>
+    <%= f.text_area :summary, rows: 3,
+        class: "a--text-input spec--summary-input #{'border-red-300' if article.errors[:summary].any?}",
+        aria_describedby: article.errors[:summary].any? ? "summary-error summary-help" : "summary-help",
+        aria_invalid: (article.errors[:summary].any? ? "true" : "false") %>
+    <% if @openai_api_key_configured %>
+      <button type="button"
+              class="a--button is--sm is--secondary spec--generate-summary-button mt-2"
+              data-controller="ai-summary"
+              data-ai-summary-url-value="<%= admin_articles_generate_summary_path %>"
+              data-action="click->ai-summary#generate">
+        <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+        </svg>
+        AIで生成
+      </button>
+    <% end %>
     <div id="summary-help" class="a--form-help mt-1">
       <p>meta descriptionやOGPで使用される説明文です。100文字程度を推奨します。</p>
       <% unless @openai_api_key_configured %>
@@ -97,7 +130,23 @@
     <% end %>
   </div>
 
-  <div class="l--form-item is-xs">
+  <div class="l--form-item is--xs">
+    <%= f.label :published_at, "公開日", class: "a--form-label mb-2" %>
+    <%= f.datetime_local_field :published_at,
+                                value: (article.published_at || Time.current).strftime("%Y-%m-%dT%H:%M"),
+                                class: "a--text-input spec--published-at-input #{'border-red-300' if article.errors[:published_at].any?}",
+                                aria_describedby: ("published-at-error" if article.errors[:published_at].any?) %>
+    <div class="a--form-help mt-1">
+      <p>記事の公開日時を指定できます。未指定の場合は現在日時が設定されます。</p>
+    </div>
+    <% if article.errors[:published_at].any? %>
+      <div id="published-at-error" class="a--form-error mt-1" role="alert">
+        <%= article.errors[:published_at].first %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="l--form-item is--xs">
     <%= f.label :thumbnail, "サムネイル画像", class: "a--form-label mb-2" %>
     <div class="a--form-help mb-2">
       <p>記事のOGP画像やカード表示で使用される画像です。</p>
@@ -116,17 +165,49 @@
     <ul>
       <% if article.persisted? %>
         <% if article.draft? %>
-          <li><%= f.submit "公開", class: "a--button is-lg is-primary is-flex spec--update-button" %></li>
-          <li><%= f.submit "下書き保存", class: "a--button is-lg is-warning is-flex" %></li>
+          <li><%= f.submit "公開", class: "a--button is--lg is--primary is--flex min-w-40 spec--update-button" %></li>
+          <li><%= f.submit "下書き保存", class: "a--button is--lg is--warning is--flex min-w-40" %></li>
         <% else %>
-          <li><%= f.submit "更新", class: "a--button is-lg is-primary is-flex spec--update-button" %></li>
-          <li><%= f.submit "下書き保存", class: "a--button is-lg is-warning is-flex" %></li>
+          <li><%= f.submit "更新", class: "a--button is--lg is--primary is--flex min-w-40 spec--update-button" %></li>
+          <li><%= f.submit "下書き保存", class: "a--button is--lg is--warning is--flex min-w-40" %></li>
         <% end %>
       <% else %>
-        <li><%= f.submit "公開", class: "a--button is-lg is-primary is-flex spec--publish-button" %></li>
-        <li><%= f.submit "下書き保存", class: "a--button is-lg is-warning is-flex spec--draft-button" %></li>
+        <li><%= f.submit "公開", class: "a--button is--lg is--primary is--flex min-w-40 spec--publish-button" %></li>
+        <li><%= f.submit "下書き保存", class: "a--button is--lg is--warning is--flex min-w-40 spec--draft-button" %></li>
       <% end %>
-      <li><%= link_to "キャンセル", admin_articles_path, class: "a--button is-lg is-border-secondary is-flex spec--cancel-button" %></li>
+      <li><%= link_to "キャンセル", admin_articles_path, class: "a--button is--lg is--secondary is--flex min-w-40 spec--cancel-button" %></li>
     </ul>
   </div>
-<% end %>
+  <% end %>
+
+  <!-- Help Modal -->
+  <div class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 spec--help-modal"
+       data-help-modal-target="modal"
+       data-action="click->help-modal#closeOnBackdrop">
+    <div class="bg-sky-50 rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[80vh] overflow-y-auto"
+         data-help-modal-target="dialog"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="help-modal-title">
+      <div class="sticky top-0 bg-sky-50 border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+        <h2 id="help-modal-title" class="text-xl font-semibold">Markdown記法のヘルプ</h2>
+        <button type="button"
+                class="text-gray-400 hover:text-gray-600 cursor-pointer spec--help-modal-close"
+                data-action="click->help-modal#close"
+                aria-label="閉じる">
+          <span class="material-symbols-outlined text-2xl">close</span>
+        </button>
+      </div>
+      <div class="px-6 py-4">
+        <div class="a--form-help">
+          <p>Markdown記法が使用できます。</p>
+          <ul>
+            <li>**太字**、*斜体*、`コード`、[リンク](URL)</li>
+            <li>見出し(#)、リスト(-)</li>
+            <li>画像をドラッグ&ドロップ、貼り付けてアップロード</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

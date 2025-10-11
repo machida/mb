@@ -1,6 +1,6 @@
 <!-- Footer -->
 <footer class="l--footer">
-  <div class="l--container is-lg">
+  <div class="l--container is--lg">
     <div class="flex flex-col md:flex-row justify-between items-center gap-4">
       <% if SiteSetting.copyright.present? %>
         <small class="text-sm text-primary">© <%= Date.current.year %> <%= SiteSetting.copyright %>. All rights reserved.</small>
@@ -8,12 +8,11 @@
 
       <nav class="flex items-center gap-4">
         <% if current_user_signed_in? %>
-          <%= link_to "記事管理", admin_articles_path, class: "text-primary hover:text-white text-sm spec--admin-link" %>
-          <span class="text-gray-500">|</span>
+          <%= link_to "記事管理", admin_articles_path, class: "text-primary hover:text-indigo-600 hover:underline text-sm spec--admin-link" %>
           <%= button_to "ログアウト", admin_logout_path, method: :delete,
-class: "text-primary hover:text-white text-sm spec--logout-link bg-transparent border-0 p-0 cursor-pointer" %>
+class: "text-primary hover:text-indigo-600 hover:underline text-sm spec--logout-link bg-transparent border-0 p-0 cursor-pointer" %>
         <% else %>
-          <%= link_to "ログイン", admin_login_path, class: "text-primary text-sm spec--login-link" %>
+          <%= link_to "ログイン", admin_login_path, class: "text-primary hover:text-indigo-600 hover:underline text-sm spec--login-link" %>
         <% end %>
       </nav>
     </div>

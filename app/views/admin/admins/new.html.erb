@@ -1,13 +1,13 @@
 <%= render PageTitleComponent.new(title: "新規管理者追加") %>
 
 <div class="a--page-body py-6">
-  <div class="l--container is-sm">
+  <div class="l--container is--sm">
     <%= form_with model: [:admin, @admin], local: true, class: "space-y-6" do |f| %>
       <%= render FormErrorsComponent.new(object: @admin) %>
 
       <div>
         <header class="a--card-header">
-          <h2 class="a--heading is-md spec--admin-form-title">管理者情報</h2>
+          <h2 class="a--heading is--md spec--admin-form-title">管理者情報</h2>
         </header>
         <div class="a--card">
           <div class="l--form-items">
@@ -46,7 +46,7 @@
         </div>
       </div>
 
-      <div class="a--card is-info">
+      <div class="a--card is--info">
         <div class="flex items-start">
           <svg class="w-5 h-5 text-blue-600 mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
@@ -63,8 +63,8 @@
 
       <div class="l--form-actions">
         <ul>
-          <li><%= f.submit "管理者を追加", class: "a--button is-lg is-primary is-flex spec--create-admin-button" %></li>
-          <li><%= link_to "キャンセル", admin_admins_path, class: "a--button is-lg is-border-secondary is-flex spec--cancel-button" %></li>
+          <li><%= f.submit "管理者を追加", class: "a--button is--lg is--primary is--flex spec--create-admin-button" %></li>
+          <li><%= link_to "キャンセル", admin_admins_path, class: "a--button is--lg is--secondary is--flex spec--cancel-button" %></li>
         </ul>
       </div>
     <% end %>

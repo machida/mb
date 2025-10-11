@@ -11,16 +11,16 @@ export default class extends Controller {
   async update(event) {
     // textarea を見つけて値を取得
     const textarea = event?.target || this.element.querySelector('textarea');
-    
+
     if (!textarea) {
       // Textarea not found - silently return
       return;
     }
 
     const content = textarea.value;
-    
+
     if (!content.trim()) {
-      this.previewTarget.innerHTML = '<p class="text-gray-500 italic">プレビューがここに表示されます...</p>';
+      this.previewTarget.innerHTML = '<p class="text-gray-400">プレビューがここに表示されます...</p>';
       return;
     }
 

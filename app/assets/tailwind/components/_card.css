@@ -22,53 +22,54 @@
   border-top-right-radius: 0;
 }
 
-.a--card.is-hover {
+.a--card.is--hover {
   transition: box-shadow 0.15s ease-in-out;
 }
 
-.a--card.is-hover:hover {
+.a--card.is--hover:hover {
   box-shadow: var(--shadow-md);
 }
 
 /* Card sizes */
-.a--card.is-sm {
+.a--card.is--sm {
   padding: 1rem;
 }
 
-.a--card.is-md {
+.a--card.is--md {
   padding: 1.5rem;
 }
 
-.a--card.is-lg {
+.a--card.is--lg {
   padding: 2rem;
 }
 
 /* Card color variations */
-.a--card-header.is-primary
-.a--card.is-primary {
+.a--card-header.is--primary
+.a--card.is--primary {
   background-color: var(--color-primary-bg);
   border-color: var(--color-primary-border);
 }
 
-.a--card-header.is-secondary,
-.a--card.is-secondary {
+.a--card-header.is--secondary,
+.a--card.is--secondary {
   background-color: var(--color-secondary-bg);
   border-color: var(--color-secondary-border);
 }
 
-.a--card-header.is-warning,
-.a--card.is-warning {
+.a--card-header.is--warning,
+.a--card.is--warning {
   background-color: var(--color-warning-bg);
   border-color: var(--color-warning-border);
+  color: var(--color-warning-text)
 }
 
-.a--card-header.is-danger,
-.a--card.is-danger {
+.a--card-header.is--danger,
+.a--card.is--danger {
   background-color: var(--color-danger-bg);
   border-color: var(--color-danger-border);
 }
-.a--card-header.is-info,
-.a--card.is-info {
+.a--card-header.is--info,
+.a--card.is--info {
   background-color: var(--color-info-bg);
   border-color: var(--color-info-border);
 }

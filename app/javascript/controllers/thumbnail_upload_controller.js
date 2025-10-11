@@ -136,7 +136,7 @@ export default class extends Controller {
         <p class="text-gray-600 text-center mb-2">
           画像をドラッグ&ドロップ
         </p>
-        <button type="button" class="a--button is-md is-primary" data-action="click->thumbnail-upload#selectFile">
+        <button type="button" class="a--button is--md is--primary" data-action="click->thumbnail-upload#selectFile">
           ファイルを選択
         </button>
         <div class="a--form-help mt-2">

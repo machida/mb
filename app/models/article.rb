@@ -8,6 +8,7 @@ class Article < ApplicationRecord
   scope :published, -> { where(draft: false) }
   scope :drafts, -> { where(draft: true) }
 
+  before_validation :set_published_at, on: :create
 
   def published?
     !draft
@@ -23,5 +24,11 @@ class Article < ApplicationRecord
 
   def og_image_url
     service.og_image_url
+  end
+
+  private
+
+  def set_published_at
+    self.published_at ||= Time.current
   end
 end

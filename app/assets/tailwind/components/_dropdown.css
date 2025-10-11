@@ -37,7 +37,7 @@
   transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
 }
 
-.a--dropdown-menu.is-open {
+.a--dropdown-menu.is--open {
   opacity: 1;
   visibility: visible;
 }

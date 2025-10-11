@@ -1,10 +1,10 @@
 <%= render PageTitleComponent.new(
       title: "管理者一覧",
-      action_button: link_to("新規管理者追加", new_admin_admin_path, class: "a--button is-md is-primary spec--new-admin-link")
+      action_button: link_to("新規管理者追加", new_admin_admin_path, class: "a--button is--md is--primary spec--new-admin-link")
     ) %>
 
 <div class="a--page-body py-6">
-  <div class="l--container is-sm">
+  <div class="l--container is--sm">
     <div class="flex justify-center items-center mb-8">
       <%= render AdminNavigationComponent.new(current_admin: current_admin) %>
     </div>
@@ -19,12 +19,12 @@
                   <%= admin.user_id %>
                 </h3>
                 <% if admin == current_admin %>
-                  <span class="a--badge is-primary is-xs spec--current-admin-badge">
+                  <span class="a--badge is--primary is--xs spec--current-admin-badge">
                     現在ログイン中
                   </span>
                 <% end %>
                 <% if admin.needs_password_change? %>
-                  <span class="a--badge is-warning is-xs spec--needs-password-change-badge">
+                  <span class="a--badge is--warning is--xs spec--needs-password-change-badge">
                     パスワード変更要
                   </span>
                 <% end %>
@@ -47,11 +47,11 @@
               </div>
             </div>
             <div class="flex gap-2">
-              <%= link_to "詳細", admin_admin_path(admin), class: "a--button is-sm is-border-secondary spec--admin-show-button" %>
+              <%= link_to "詳細", admin_admin_path(admin), class: "a--button is--sm is--secondary spec--admin-show-button" %>
               <% unless admin.last_admin? %>
                 <%= link_to "削除", admin_admin_path(admin), method: :delete,
                             data: { confirm: "本当に削除しますか？" },
-                            class: "a--button is-sm is-border-danger spec--admin-delete-button" %>
+                            class: "a--button is--sm is--border-danger spec--admin-delete-button" %>
               <% end %>
             </div>
           </div>

@@ -5,27 +5,29 @@
   </div>
 
   <!-- ナビゲーション -->
-  <div class="mb-6 flex gap-4">
-    <%= link_to archive_year_path(@year), class: "a--button is-md is-primary" do %>
-      ← <%= @year %>年の一覧
-    <% end %>
-
+  <div class="mb-12 flex justify-center gap-12">
     <% if @month > 1 %>
-      <%= link_to archive_month_path(@year, @month - 1), class: "a--button is-md is-secondary" do %>
-        ← <%= @month - 1 %>月
+      <%= link_to archive_month_path(@year, @month - 1), class: "a--button is--md is--secondary" do %>
+        <span class="material-symbols-outlined">chevron_left</span>
+        <%= @month - 1 %>月
       <% end %>
     <% end %>
 
+    <%= link_to archive_year_path(@year), class: "a--button is--md is--primary" do %>
+      <%= @year %>年の一覧
+    <% end %>
+
     <% if @month < 12 %>
-      <%= link_to archive_month_path(@year, @month + 1), class: "a--button is-md is-secondary" do %>
-        <%= @month + 1 %>月 →
+      <%= link_to archive_month_path(@year, @month + 1), class: "a--button is--md is--secondary" do %>
+        <%= @month + 1 %>月
+        <span class="material-symbols-outlined">chevron_right</span>
       <% end %>
     <% end %>
   </div>
 
   <!-- 記事一覧 -->
-  <div class="space-y-6">
-    <%= render partial: "archive_article_item", collection: @articles %>
+  <div class="l__articles">
+    <%= render partial: "article_item", collection: @articles %>
   </div>
 
   <% if @articles.empty? %>
@@ -41,6 +43,6 @@
 
   <!-- ナビゲーション -->
   <div class="mt-8 text-center">
-    <%= link_to "トップページに戻る", root_path, class: "a--button is-lg is-secondary" %>
+    <%= link_to "トップページに戻る", root_path, class: "a--button is--lg is--secondary" %>
   </div>
 </div>

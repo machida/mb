@@ -62,21 +62,21 @@
   --color-interactive-bg-hover: var(--color-gray-100);
 
   /* Button colors */
-  --color-button-primary: var(--color-blue-600);
-  --color-button-primary-hover: var(--color-blue-700);
-  --color-button-secondary: var(--color-gray-600);
-  --color-button-secondary-hover: var(--color-gray-700);
-  --color-button-focus: var(--color-blue-500);
+  --color-button-primary: var(--color-indigo-600);
+  --color-button-primary-hover: var(--color-indigo-700);
+  --color-button-secondary: var(--color-white);
+  --color-button-secondary-hover: var(--color-sky-100);
+  --color-button-focus: var(--color-indigo-500);
   --color-button-focus-ring: var(--color-white);
   --color-button-danger-hover: var(--color-red-700);
   --color-button-warning-hover: var(--color-amber-700);
   --color-button-warning-focus: var(--color-amber-500);
   --color-button-danger-focus: var(--color-red-500);
-  --color-button-primary-bg-light: var(--color-blue-50);
+  --color-button-primary-bg-light: var(--color-indigo-50);
   --color-button-secondary-bg-light: var(--color-gray-50);
   --color-button-warning-bg-light: var(--color-amber-50);
   --color-button-danger-bg-light: var(--color-red-50);
-  --color-gradient-primary: var(--color-blue-600);
+  --color-gradient-primary: var(--color-indigo-600);
   --color-gradient-secondary: var(--color-violet-600);
 
   /* Syntax highlighting colors (GitHub style - using Tailwind variables) */
@@ -126,6 +126,7 @@
   --color-secondary-border: var(--color-gray-200);
   --color-warning-bg: var(--color-amber-50);
   --color-warning-border: var(--color-amber-200);
+  --color-warning-text: var(--color-amber-700);
   --color-danger-bg: var(--color-red-50);
   --color-danger-border: var(--color-red-200);
   --color-info-bg: var(--color-cyan-50);
@@ -137,6 +138,7 @@
   body {
     color: var(--color-text-primary);
     font-family: var(--font-family-base);
+    overflow-y: scroll;
   }
 }
 
@@ -221,6 +223,31 @@
   .border-dark {
     border-color: var(--color-border-dark);
   }
+
+  /* Admin page overrides - only apply within admin layout */
+  .layout-admin {
+    --color-button-primary: var(--color-sky-600);
+    --color-button-primary-hover: var(--color-sky-700);
+    --color-button-focus: var(--color-sky-500);
+    --color-button-primary-bg-light: var(--color-sky-50);
+    --color-form-border-focus: var(--color-sky-500);
+    --color-link: var(--color-sky-700);
+    --color-link-hover: var(--color-sky-800);
+    --color-text-primary: var(--color-sky-900);
+    --color-border-light: var(--color-sky-200);
+    --color-border-default: var(--color-sky-300);
+    --color-border-dark: var(--color-sky-400);
+    --color-form-border: var(--color-sky-300);
+    --color-bg-primary: var(--color-sky-50);
+    --color-button-secondary: var(--color-sky-50);
+    --color-form-bg: var(--color-sky-50);
+    --color-form-bg-focus: var(--color-white);
+  }
+
+  /* Override bg-white in admin layout */
+  .layout-admin .bg-white {
+    background-color: var(--color-sky-50);
+  }
 }
 
 /* Import Custom Components */
@@ -244,3 +271,4 @@
 @import "./components/_headings.css";
 @import "./components/_form-help.css";
 @import "./components/_page-notice.css";
+@import "./components/_navigation.css";

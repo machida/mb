@@ -1,10 +1,10 @@
 <%= render PageTitleComponent.new(title: "サイト設定", title_class: "spec--site-settings-title") %>
 <div class="a--page-body py-6">
-  <div class="l--container is-md">
+  <div class="l--container is--md">
 
     <%= form_with url: admin_site_settings_path, method: :patch, local: true, class: "space-y-6" do |f| %>
       <div class="l--form-items">
-        <div class="l--form-item is-xs">
+        <div class="l--form-item is--xs">
           <%= label_tag "site_settings[site_title]", "サイトタイトル", class: "a--form-label mb-2" %>
           <%= text_field_tag "site_settings[site_title]", @settings[:site_title],
                              class: "a--text-input spec--site-title-input",
@@ -14,7 +14,7 @@
           </div>
         </div>
 
-        <div class="l--form-item is-xs">
+        <div class="l--form-item is--xs">
           <label class="a--form-label mb-2">デフォルトOG画像</label>
           <%= render ImageUploadComponent.new(
                 field_name: "site_settings[default_og_image]",
@@ -27,7 +27,7 @@
           </div>
         </div>
 
-        <div class="l--form-item is-sm">
+        <div class="l--form-item is--sm">
           <%= label_tag "site_settings[top_page_description]", "トップページの説明文", class: "a--form-label mb-2" %>
           <%= text_area_tag "site_settings[top_page_description]",
                             @settings[:top_page_description], rows: 3, class: "a--text-input spec--top-page-description-input" %>
@@ -36,7 +36,7 @@
           </div>
         </div>
 
-        <div class="l--form-item is-xs">
+        <div class="l--form-item is--xs">
           <%= label_tag "site_settings[copyright]", "著作権者名", class: "a--form-label mb-2" %>
           <%= text_field_tag "site_settings[copyright]", @settings[:copyright],
                              class: "a--text-input spec--copyright-input",
@@ -65,7 +65,7 @@
           </div>
         </div>
 
-        <div class="l--form-item is-sm">
+        <div class="l--form-item is--sm">
           <%= label_tag "site_settings[openai_api_key]", "OpenAI API Key", class: "a--form-label mb-2" %>
           <%= password_field_tag "site_settings[openai_api_key]", @settings[:openai_api_key],
                                  class: "a--text-input spec--openai-api-key-input",

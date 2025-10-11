@@ -1,14 +1,14 @@
 <!-- Admin Header -->
-<header class="bg-white border-b border-gray-200">
-  <div class="l--container is-xxl">
+<header class="bg-sky-50">
+  <div class="l--container is--xxl">
     <div class="flex items-center justify-between h-14">
-      <h1 class="a--heading is-lg">
+      <h1 class="a--heading is--lg">
         <%= link_to "管理画面", admin_articles_path, class: "hover:text-gray-600" %>
       </h1>
       <div class="">
         <ul class="flex items-center gap-2">
           <li class="flex-1">
-            <%= link_to "サイトを表示", root_path, class: "a--button is-sm is-border-secondary spec--new-article-link" %>
+            <%= link_to "サイトを表示", root_path, class: "a--button is--sm is--secondary spec--new-article-link" %>
           </li>
 
           <li class="flex-1">
@@ -36,4 +36,5 @@
     </div>
   </div>
 </header>
+<hr class="border-sky-200">
 <%= render "admin/admin_navigation" %>

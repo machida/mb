@@ -2,11 +2,12 @@ module ApplicationHelper
   class HTMLWithSyntaxHighlighting < Redcarpet::Render::HTML
     def block_code(code, language)
       if language.present?
-        formatter = Rouge::Formatters::HTML.new(css_class: "highlight")
+        formatter = Rouge::Formatters::HTML.new
         lexer = Rouge::Lexer.find(language) || Rouge::Lexers::PlainText
         highlighted = formatter.format(lexer.lex(code))
-        "<div class=\"highlight\"><pre><code>#{highlighted}</code></pre></div>"
+        "<div class=\"highlight\"><pre><code class=\"language-#{language}\">#{highlighted}</code></pre></div>"
       else
+        # インデントを保持するためにpreタグ内でエスケープ
         "<pre><code>#{ERB::Util.html_escape(code)}</code></pre>"
       end
     end
@@ -55,9 +56,9 @@ module ApplicationHelper
 
   def status_badge_class(article)
     if current_page?(drafts_admin_articles_path)
-      "a--badge is-warning is-xs"
+      "a--badge is--warning is--xs"
     else
-      article.draft? ? "a--badge is-warning is-xs" : "a--badge is-info is-xs"
+      article.draft? ? "a--badge is--warning is--xs" : "a--badge is--info is--xs"
     end
   end
 

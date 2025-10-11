@@ -1,9 +1,9 @@
-<article class="<%= local_assigns[:css_class] || "spec--article-item" %>">
-  <header>
-    <h2 class="<%= local_assigns[:title_class] || "a--heading is-xl" %> spec--article-title">
+<article class="<%= local_assigns[:css_class] || "spec--article-item" %> flex flex-col gap-2">
+  <header class="flex flex-col gap-2">
+    <h2 class="<%= local_assigns[:title_class] || "a--heading is--xl" %> spec--article-title">
       <%= link_to article_item.title, article_path(article_item), class: "hover-text-link text-primary" %>
     </h2>
-    <div class="flex flex-col justify-between items-start gap-2 mb-2">
+    <div class="flex flex-col justify-between items-start gap-2">
       <time class="text-gray-500 text-sm whitespace-nowrap spec--article-date" datetime="<%= article_item.created_at.iso8601 %>">
         <%= format_date_with_weekday(article_item.created_at) %>
       </time>

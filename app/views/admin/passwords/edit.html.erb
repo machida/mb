@@ -1,7 +1,7 @@
 <%= render PageTitleComponent.new(title: "パスワード変更", title_class: "spec--password-edit-title") %>
 
 <div class="a--page-body py-6">
-  <div class="spec--password-edit-container l--container is-sm">
+  <div class="spec--password-edit-container l--container is--sm">
     <%= form_with model: @admin, url: admin_password_path, local: true, class: "space-y-6" do |f| %>
       <%= render AlertComponent.new(type: :danger, messages: @admin.errors.full_messages, spec_class: "spec--error-messages") if @admin.errors.any? %>
 

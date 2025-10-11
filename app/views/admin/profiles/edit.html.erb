@@ -1,12 +1,12 @@
 <%= render PageTitleComponent.new(title: "プロフィール編集", title_class: "spec--profile-edit-title") %>
 <div class="a--page-body py-6">
-  <div class="spec--profile-edit-container l--container is-sm">
+  <div class="spec--profile-edit-container l--container is--sm">
     <%= form_with model: @admin, url: admin_profile_path, local: true, class: "space-y-6" do |f| %>
       <%= render AlertComponent.new(type: :danger, messages: @admin.errors.full_messages, spec_class: "spec--error-messages") if @admin.errors.any? %>
 
       <div>
         <header class="a--card-header">
-          <h2 class="a--heading is-md spec--account-info-title">アカウント情報</h2>
+          <h2 class="a--heading is--md spec--account-info-title">アカウント情報</h2>
         </header>
         <div class="a--card">
           <div class="l--form-items">
@@ -35,11 +35,11 @@
 
       <div>
         <header class="a--card-header">
-          <h2 class="a--heading is-md spec--password-section-title">パスワード</h2>
+          <h2 class="a--heading is--md spec--password-section-title">パスワード</h2>
         </header>
         <div class="a--card">
           <div class="flex justify-between items-center mb-4">
-            <%= link_to "パスワードを変更", edit_admin_password_path, class: "a--button is-md is-border-secondary spec--password-change-link" %>
+            <%= link_to "パスワードを変更", edit_admin_password_path, class: "a--button is--md is--secondary spec--password-change-link" %>
           </div>
           <p class="text-sm text-gray-500">セキュリティのため、パスワードの変更は別ページで行います。</p>
         </div>

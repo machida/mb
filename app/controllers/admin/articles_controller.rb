@@ -111,6 +111,6 @@ class Admin::ArticlesController < Admin::BaseController
   end
 
   def article_params
-    params.require(:article).permit(:title, :body, :summary, :thumbnail)
+    params.require(:article).permit(:title, :body, :summary, :thumbnail, :published_at)
   end
 end

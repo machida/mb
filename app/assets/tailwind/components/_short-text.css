@@ -166,7 +166,7 @@
   color: inherit;
   padding: 0;
   margin: 0;
-  white-space: pre-line;
+  white-space: pre-wrap;
 }
 
 .a--short-text .highlight code {
@@ -298,76 +298,76 @@
    Size variants
    ================================================================= */
 
-.a--short-text.is-sm {
+.a--short-text.is--sm {
   font-size: 0.875rem;
   line-height: 1.25rem; /* 20px = 4px multiple for 14px font */
 }
 
-.a--short-text.is-sm h1 {
+.a--short-text.is--sm h1 {
   font-size: 1.75em; /* Proportionally smaller than default 2em */
 }
 
-.a--short-text.is-sm h2 {
+.a--short-text.is--sm h2 {
   font-size: 1.375em; /* Proportionally smaller than default 1.5em */
 }
 
-.a--short-text.is-sm h3 {
+.a--short-text.is--sm h3 {
   font-size: 1.125em; /* Proportionally smaller than default 1.25em */
 }
 
-.a--short-text.is-sm h4 {
+.a--short-text.is--sm h4 {
   font-size: 1em;
 }
 
-.a--short-text.is-sm h5 {
+.a--short-text.is--sm h5 {
   font-size: 0.875em;
 }
 
-.a--short-text.is-sm h6 {
+.a--short-text.is--sm h6 {
   font-size: 0.75em; /* Proportionally smaller than default 0.85em */
 }
 
-.a--short-text.is-sm code {
+.a--short-text.is--sm code {
   font-size: 0.8125em; /* Slightly smaller than default 0.875em */
 }
 
-.a--short-text.is-sm pre {
+.a--short-text.is--sm pre {
   font-size: 0.8125em; /* Slightly smaller than default 0.875em */
 }
 
-.a--short-text.is-xs {
+.a--short-text.is--xs {
   font-size: 0.75rem;
   line-height: 1rem; /* 16px = 4px multiple for 12px font */
 }
 
-.a--short-text.is-xs h1 {
+.a--short-text.is--xs h1 {
   font-size: 1.5em; /* Proportionally smaller than default 2em */
 }
 
-.a--short-text.is-xs h2 {
+.a--short-text.is--xs h2 {
   font-size: 1.25em; /* Proportionally smaller than default 1.5em */
 }
 
-.a--short-text.is-xs h3 {
+.a--short-text.is--xs h3 {
   font-size: 1.125em; /* Proportionally smaller than default 1.25em */
 }
 
-.a--short-text.is-xs h4 {
+.a--short-text.is--xs h4 {
   font-size: 1em;
 }
 
-.a--short-text.is-xs h5 {
+.a--short-text.is--xs h5 {
   font-size: 0.875em;
 }
 
-.a--short-text.is-xs h6 {
+.a--short-text.is--xs h6 {
   font-size: 0.75em; /* Proportionally smaller than default 0.85em */
 }
 
-.a--short-text.is-xs code {
+.a--short-text.is--xs code {
   font-size: 0.75em; /* Smaller than default 0.875em */
 }
 
-.a--short-text.is-xs pre {
+.a--short-text.is--xs pre {
   font-size: 0.75em; /* Smaller than default 0.875em */
 }
