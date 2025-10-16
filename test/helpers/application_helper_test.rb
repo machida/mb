@@ -17,10 +17,10 @@ class ApplicationHelperTest < ActionView::TestCase
   test "markdown should render code blocks" do
     markdown_text = "```ruby\ncode here\n```"
     result = markdown(markdown_text)
-    
+
     # With syntax highlighting, the output should contain proper HTML structure
     assert_includes result, '<div class="highlight">'
-    assert_includes result, "<pre><code>"
+    assert_includes result, '<pre><code class="language-ruby">'
     assert_includes result, "<span class=\"n\">code</span>"
     assert_includes result, "<span class=\"n\">here</span>"
   end
