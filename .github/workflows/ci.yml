@@ -101,11 +101,26 @@ jobs:
         mkdir -p ~/.ssh
         ssh-keyscan -H 153.121.42.228 >> ~/.ssh/known_hosts
 
-    - name: Deploy with Kamal
+    - name: Setup secrets for Kamal
       env:
         KAMAL_REGISTRY_PASSWORD: ${{ secrets.KAMAL_REGISTRY_PASSWORD }}
         RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
       run: |
-        export KAMAL_REGISTRY_PASSWORD="${KAMAL_REGISTRY_PASSWORD}"
-        export RAILS_MASTER_KEY="${RAILS_MASTER_KEY}"
-        kamal deploy
+        set -e
+        if [[ -z "${KAMAL_REGISTRY_PASSWORD}" ]] || [[ -z "${RAILS_MASTER_KEY}" ]]; then
+          echo "Error: Required secrets (KAMAL_REGISTRY_PASSWORD, RAILS_MASTER_KEY) are not set" >&2
+          exit 1
+        fi
+        # Create temporary secret files for CI
+        echo "KAMAL_REGISTRY_PASSWORD=${KAMAL_REGISTRY_PASSWORD}" > .env.kamal
+        mkdir -p config/credentials
+        echo "${RAILS_MASTER_KEY}" > config/credentials/production.key
+
+    - name: Deploy with Kamal
+      run: kamal deploy
+
+    - name: Cleanup secrets
+      if: always()
+      run: |
+        rm -f .env.kamal
+        rm -f config/credentials/production.key
