@@ -99,7 +99,8 @@ jobs:
     - name: Add server to known hosts
       run: |
         mkdir -p ~/.ssh
-        ssh-keyscan -H 153.121.42.228 >> ~/.ssh/known_hosts
+        ssh-keyscan 153.121.42.228 >> ~/.ssh/known_hosts
+        chmod 644 ~/.ssh/known_hosts
 
     - name: Setup secrets for Kamal
       env:
