@@ -1,0 +1,125 @@
+/* Custom utility and component styles */
+@layer components {
+  /* Typography utility classes */
+  .font-base {
+    font-family: var(--font-family-base);
+  }
+
+  .font-mono {
+    font-family: var(--font-family-mono);
+  }
+
+  /* Text color utility classes */
+  .text-primary {
+    color: var(--color-text-primary);
+  }
+
+  .text-secondary {
+    color: var(--color-text-secondary);
+  }
+
+  .text-muted {
+    color: var(--color-text-muted);
+  }
+
+  .text-light {
+    color: var(--color-text-light);
+  }
+
+  .text-link {
+    color: var(--color-link);
+  }
+
+  .text-link:hover {
+    color: var(--color-link-hover);
+  }
+
+  .hover-text-link {
+    text-decoration: none;
+  }
+
+  .hover-text-link:hover {
+    text-decoration: underline;
+  }
+
+  .text-error {
+    color: var(--color-error);
+  }
+
+  .text-warning {
+    color: var(--color-warning);
+  }
+
+  .text-success {
+    color: var(--color-success);
+  }
+
+  /* Background utility classes */
+  .bg-primary {
+    background-color: var(--color-bg-primary);
+  }
+
+  .bg-secondary {
+    background-color: var(--color-bg-secondary);
+  }
+
+  .bg-muted {
+    background-color: var(--color-bg-muted);
+  }
+
+  /* Border utility classes */
+  .border-light {
+    border-color: var(--color-border-light);
+  }
+
+  .border-default {
+    border-color: var(--color-border-default);
+  }
+
+  .border-dark {
+    border-color: var(--color-border-dark);
+  }
+
+  /* Admin page overrides - only apply within admin layout */
+  /* Note: Admin color variables are now defined in _admin-colors.css */
+  .layout-admin {
+    --color-button-primary: var(--color-admin-button-primary);
+    --color-button-primary-hover-background: var(--color-admin-button-primary-hover);
+    --color-button-common-focus: var(--color-admin-border-strong);
+    --color-button-primary-background: var(--color-admin-button-primary-bg);
+    --color-button-secondary: var(--color-admin-bg-base);
+    --color-button-secondary-border: var(--color-admin-primary-500);
+    --color-button-secondary-hover-background: var(--color-admin-primary-100);
+    --color-button-secondary-hover-border: var(--color-admin-primary-700);
+    --color-button-secondary-hover-text: var(--color-admin-primary-700);
+    --color-button-secondary-focus: var(--color-admin-primary-500);
+    --color-form-border-focus: var(--color-admin-form-border-focus);
+    --color-form-label: var(--color-admin-form-label);
+    --color-form-help: var(--color-admin-form-help);
+    --color-image-upload-bg: var(--color-admin-primary-50);
+    --color-image-upload-border: var(--color-admin-primary-300);
+    --color-image-upload-border-hover: var(--color-admin-primary-400);
+    --color-image-upload-border-focus: var(--color-admin-primary-400);
+    --color-image-upload-icon: var(--color-admin-primary-400);
+    --color-image-upload-text: var(--color-admin-text-medium);
+    --color-interactive: var(--color-admin-text-medium);
+    --color-interactive-hover: var(--color-admin-text-strong);
+    --color-interactive-bg-hover: var(--color-admin-primary-100);
+    --color-link: var(--color-admin-text-strong);
+    --color-link-hover: var(--color-admin-text-strong);
+    --color-text-primary: var(--color-admin-text-heading);
+    --color-text-muted: var(--color-admin-text-medium);
+    --color-border-light: var(--color-admin-border-light);
+    --color-border-default: var(--color-admin-border-strong);
+    --color-border-dark: var(--color-admin-border-medium);
+    --color-form-border: var(--color-admin-form-border);
+    --color-bg-primary: var(--color-admin-bg-base);
+    --color-form-bg: var(--color-admin-form-bg);
+    --color-form-bg-focus: var(--color-white);
+  }
+
+  /* Override bg-white in admin layout */
+  .layout-admin .bg-white {
+    background-color: var(--color-admin-bg-base);
+  }
+}
