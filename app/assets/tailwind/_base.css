@@ -1,0 +1,8 @@
+/* Base styles */
+@layer base {
+  body {
+    color: var(--color-text-primary);
+    font-family: var(--font-family-base);
+    overflow-y: scroll;
+  }
+}
