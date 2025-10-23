@@ -62,22 +62,41 @@
   --color-interactive-bg-hover: var(--color-gray-100);
 
   /* Button colors */
+
+  /* Common */
+  --color-button-common-focus-ring: var(--color-white);
+  --color-button-common-focus: var(--color-indigo-500);
+
+  /* Primary */
   --color-button-primary: var(--color-indigo-600);
-  --color-button-primary-hover: var(--color-indigo-700);
+  --color-button-primary-background: var(--color-indigo-50);
+
+  /* Primary hover */
+  --color-button-primary-hover-background: var(--color-indigo-700);
+
+  /* Primary focus */
+  --color-button-primary-focus: var(--color-indigo-500);
+
+  /* Secondary */
   --color-button-secondary: var(--color-white);
-  --color-button-secondary-hover: var(--color-sky-100);
-  --color-button-focus: var(--color-indigo-500);
-  --color-button-focus-ring: var(--color-white);
+  --color-button-secondary-background: var(--color-gray-50);
+  --color-button-secondary-border: var(--color-gray-500);
+
+  /* Secondary hover */
+  --color-button-secondary-hover-background: var(--color-sky-100);
+  --color-button-secondary-hover-border: var(--color-sky-700);
+  --color-button-secondary-hover-text: var(--color-sky-700);
+
+  /* Secondary focus */
+  --color-button-secondary-focus: var(--color-indigo-500);
+
   --color-button-danger-hover: var(--color-red-700);
+  --color-button-danger-focus: var(--color-red-500);
+  --color-button-danger-bg-light: var(--color-red-50);
+
   --color-button-warning-hover: var(--color-amber-700);
   --color-button-warning-focus: var(--color-amber-500);
-  --color-button-danger-focus: var(--color-red-500);
-  --color-button-primary-bg-light: var(--color-indigo-50);
-  --color-button-secondary-bg-light: var(--color-gray-50);
   --color-button-warning-bg-light: var(--color-amber-50);
-  --color-button-danger-bg-light: var(--color-red-50);
-  --color-gradient-primary: var(--color-indigo-600);
-  --color-gradient-secondary: var(--color-violet-600);
 
   /* Syntax highlighting colors (GitHub style - using Tailwind variables) */
   --color-syntax-comment: var(--color-gray-500);
@@ -227,9 +246,9 @@
   /* Admin page overrides - only apply within admin layout */
   .layout-admin {
     --color-button-primary: var(--color-sky-600);
-    --color-button-primary-hover: var(--color-sky-700);
-    --color-button-focus: var(--color-sky-500);
-    --color-button-primary-bg-light: var(--color-sky-50);
+    --color-button-primary-hover-background: var(--color-sky-700);
+    --color-button-common-focus: var(--color-sky-500);
+    --color-button-primary-background: var(--color-sky-50);
     --color-form-border-focus: var(--color-sky-500);
     --color-link: var(--color-sky-700);
     --color-link-hover: var(--color-sky-700);

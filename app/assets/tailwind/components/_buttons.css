@@ -19,7 +19,7 @@
 .a--button:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
-  box-shadow: 0 0 0 2px var(--color-button-focus-ring), 0 0 0 3px var(--color-button-focus);
+  box-shadow: 0 0 0 2px var(--color-button-common-focus-ring), 0 0 0 3px var(--color-button-common-focus);
 }
 
 /* Button Sizes */
@@ -63,25 +63,27 @@
 }
 
 .a--button.is--primary:hover {
-  background-color: var(--color-button-primary-hover);
+  background-color: var(--color-button-primary-hover-background);
 }
 
 .a--button.is--primary:focus {
-  box-shadow: 0 0 0 2px var(--color-button-focus-ring), 0 0 0 3px var(--color-button-focus);
+  box-shadow: 0 0 0 2px var(--color-button-common-focus-ring), 0 0 0 3px var(--color-button-primary-focus);
 }
 
 .a--button.is--secondary {
   background-color: var(--color-button-secondary);
-  color: var(--color-border-default);
-  border: solid 1px var(--color-border-default);
+  color: var(--color-button-secondary-border);
+  border: solid 1px var(--color-button-secondary-border);
 }
 
 .a--button.is--secondary:hover {
-  background-color: var(--color-button-secondary-hover);
+  background-color: var(--color-button-secondary-hover-background);
+  border-color: var(--color-button-secondary-hover-border);
+  color: var(--color-button-secondary-hover-text);
 }
 
 .a--button.is--secondary:focus {
-  box-shadow: 0 0 0 2px var(--color-button-focus-ring), 0 0 0 3px var(--color-button-focus);
+  box-shadow: 0 0 0 2px var(--color-button-common-focus-ring), 0 0 0 3px var(--color-button-secondary-focus);
 }
 
 .a--button.is--warning {
@@ -95,7 +97,7 @@
 }
 
 .a--button.is--warning:focus {
-  box-shadow: 0 0 0 2px var(--color-button-focus-ring), 0 0 0 3px var(--color-button-warning-focus);
+  box-shadow: 0 0 0 2px var(--color-button-common-focus-ring), 0 0 0 3px var(--color-button-warning-focus);
 }
 
 .a--button.is--danger {
@@ -109,7 +111,7 @@
 }
 
 .a--button.is--danger:focus {
-  box-shadow: 0 0 0 2px var(--color-button-focus-ring), 0 0 0 3px var(--color-button-danger-focus);
+  box-shadow: 0 0 0 2px var(--color-button-common-focus-ring), 0 0 0 3px var(--color-button-danger-focus);
 }
 
 /* Border Button Variants */
@@ -120,11 +122,11 @@
 }
 
 .a--button.is--border-primary:hover {
-  background-color: var(--color-button-primary-bg-light);
+  background-color: var(--color-button-primary-background);
 }
 
 .a--button.is--border-primary:focus {
-  box-shadow: 0 0 0 2px var(--color-button-focus-ring), 0 0 0 3px var(--color-button-focus);
+  box-shadow: 0 0 0 2px var(--color-button-common-focus-ring), 0 0 0 3px var(--color-button-primary-focus);
 }
 
 .a--button.is--border-secondary {
@@ -134,11 +136,11 @@
 }
 
 .a--button.is--border-secondary:hover {
-  background-color: var(--color-button-secondary-bg-light);
+  background-color: var(--color-button-secondary-background);
 }
 
 .a--button.is--border-secondary:focus {
-  box-shadow: 0 0 0 2px var(--color-button-focus-ring), 0 0 0 3px var(--color-interactive);
+  box-shadow: 0 0 0 2px var(--color-button-common-focus-ring), 0 0 0 3px var(--color-interactive);
 }
 
 .a--button.is--border-warning {
@@ -152,7 +154,7 @@
 }
 
 .a--button.is--border-warning:focus {
-  box-shadow: 0 0 0 2px var(--color-button-focus-ring), 0 0 0 3px var(--color-button-warning-focus);
+  box-shadow: 0 0 0 2px var(--color-button-common-focus-ring), 0 0 0 3px var(--color-button-warning-focus);
 }
 
 .a--button.is--border-danger {
@@ -166,7 +168,7 @@
 }
 
 .a--button.is--border-danger:focus {
-  box-shadow: 0 0 0 2px var(--color-button-focus-ring), 0 0 0 3px var(--color-button-danger-focus);
+  box-shadow: 0 0 0 2px var(--color-button-common-focus-ring), 0 0 0 3px var(--color-button-danger-focus);
 }
 
 /* Button States */
