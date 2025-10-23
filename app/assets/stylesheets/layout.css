@@ -4,8 +4,8 @@
 .l--action-banner {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
-  border-top-width: 1px;
-  border-bottom-width: 1px;
+  border-top-width: 0.0625rem;
+  border-bottom-width: 0.0625rem;
 }
 
 .l--action-banner.is--warning {
