@@ -79,7 +79,7 @@ group :test do
   gem "playwright-ruby-client", "~> 1.55.0"
 
   # HTTP request stubbing for testing
-  gem "webmock", "~> 3.24"
+  gem "webmock", "~> 3.26"
 end
 
 gem "tailwindcss-rails", "~> 4.3", group: [ :development, :test ]
