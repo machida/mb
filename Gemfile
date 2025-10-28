@@ -82,7 +82,7 @@ group :test do
   gem "webmock", "~> 3.24"
 end
 
-gem "tailwindcss-rails", "~> 4.3", group: [ :development, :test ]
+gem "tailwindcss-rails", "~> 4.4", group: [ :development, :test ]
 gem "redcarpet", "~> 3.6"
 gem "google-cloud-storage", "~> 1.57"
 gem "kaminari", "~> 1.2"
