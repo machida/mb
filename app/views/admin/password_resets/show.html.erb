@@ -1,12 +1,12 @@
 <% content_for :title, "新しいパスワードの設定" %>
 
-<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+<div class="min-h-screen flex items-center justify-center bg-sky-50 py-12 px-4 sm:px-6 lg:px-8">
   <div class="max-w-md w-full space-y-8">
     <div>
-      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+      <h2 class="mt-6 text-center text-3xl font-extrabold text-sky-900">
         新しいパスワードの設定
       </h2>
-      <p class="mt-2 text-center text-sm text-gray-600">
+      <p class="mt-2 text-center text-sm text-sky-600">
         <%= @admin.email %> のパスワードを変更します
       </p>
     </div>
@@ -14,20 +14,20 @@
     <%= form_with model: @admin, url: admin_password_reset_path(token: params[:token]), method: :patch, local: true, class: "mt-8 space-y-6" do |form| %>
       <div class="rounded-md shadow-sm space-y-4">
         <div>
-          <%= form.label :password, "新しいパスワード", class: "block text-sm font-medium text-gray-700" %>
+          <%= form.label :password, "新しいパスワード", class: "block text-sm font-medium text-sky-700" %>
           <%= form.password_field :password,
                                   required: true,
                                   minlength: 8,
-                                  class: "mt-1 appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm spec--new-password",
+                                  class: "mt-1 appearance-none rounded-md relative block w-full px-3 py-2 border border-sky-300 placeholder-sky-500 text-sky-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm spec--new-password",
                                   placeholder: "8文字以上で入力してください" %>
         </div>
 
         <div>
-          <%= form.label :password_confirmation, "パスワード確認", class: "block text-sm font-medium text-gray-700" %>
+          <%= form.label :password_confirmation, "パスワード確認", class: "block text-sm font-medium text-sky-700" %>
           <%= form.password_field :password_confirmation,
                                   required: true,
                                   minlength: 8,
-                                  class: "mt-1 appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm spec--confirm-password",
+                                  class: "mt-1 appearance-none rounded-md relative block w-full px-3 py-2 border border-sky-300 placeholder-sky-500 text-sky-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm spec--confirm-password",
                                   placeholder: "同じパスワードを再入力してください" %>
         </div>
       </div>

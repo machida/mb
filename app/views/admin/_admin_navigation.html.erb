@@ -2,21 +2,21 @@
   <nav aria-label="管理メニュー" class="l--admin-nav bg-sky-800 spec--admin-header fixed z-50 bottom-0 left-0 right-0 h-16 md:top-0 md:bottom-0 md:left-0 md:right-auto md:w-[100px] md:h-auto">
     <ul class="flex flex-row md:flex-col items-stretch md:items-stretch justify-around md:justify-start gap-0 md:gap-0 h-full md:h-auto py-0 md:py-0">
       <li class="flex-1 md:flex-none">
-        <%= link_to admin_articles_path, class: "text-gray-400 hover:text-white p-2 md:py-4 flex flex-col items-center justify-center gap-1 h-full md:w-full #{controller_name == 'articles' ? 'is--active' : ''}", aria_label: "記事管理" do %>
+        <%= link_to admin_articles_path, class: "text-sky-400 hover:text-white p-2 md:py-4 flex flex-col items-center justify-center gap-1 h-full md:w-full #{controller_name == 'articles' ? 'is--active' : ''}", aria_label: "記事管理" do %>
           <span class="material-symbols-outlined text-2xl" aria-hidden="true">table_chart</span>
           <span class="text-xs">記事</span>
         <% end %>
       </li>
 
       <li class="flex-1 md:flex-none">
-        <%= link_to admin_site_settings_path, class: "text-gray-400 hover:text-white p-2 md:py-4 flex flex-col items-center justify-center gap-1 h-full md:w-full #{controller_name == 'site_settings' ? 'is--active' : ''}", aria_label: "サイト設定" do %>
+        <%= link_to admin_site_settings_path, class: "text-sky-400 hover:text-white p-2 md:py-4 flex flex-col items-center justify-center gap-1 h-full md:w-full #{controller_name == 'site_settings' ? 'is--active' : ''}", aria_label: "サイト設定" do %>
           <span class="material-symbols-outlined text-2xl" aria-hidden="true">settings</span>
           <span class="text-xs">設定</span>
         <% end %>
       </li>
 
       <li class="flex-1 md:flex-none">
-        <%= link_to admin_admins_path, class: "text-gray-400 hover:text-white p-2 md:py-4 flex flex-col items-center justify-center gap-1 h-full md:w-full #{controller_name == 'admins' ? 'is--active' : ''}", aria_label: "管理者管理" do %>
+        <%= link_to admin_admins_path, class: "text-sky-400 hover:text-white p-2 md:py-4 flex flex-col items-center justify-center gap-1 h-full md:w-full #{controller_name == 'admins' ? 'is--active' : ''}", aria_label: "管理者管理" do %>
           <span class="material-symbols-outlined text-2xl" aria-hidden="true">group</span>
           <span class="text-xs">管理者</span>
         <% end %>
