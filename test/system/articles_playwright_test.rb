@@ -91,15 +91,19 @@ class ArticlesPlaywrightTest < ApplicationPlaywrightTestCase
 
   test "creating a new article" do
     login_as_admin(@admin)
-    
+
     @page.goto("http://localhost:#{@server_port}/admin/articles")
-    
+
     new_article_link = @page.query_selector(".spec--new-article-link")
     assert new_article_link, "New article link should exist"
     @page.click(".spec--new-article-link")
-    
+
+    @page.wait_for_url(/.*\/admin\/articles\/new/)
     @page.wait_for_load_state(state: 'networkidle')
-    
+
+    # Wait for form to be visible
+    @page.wait_for_selector(".spec--title-input", timeout: 10000)
+
     # Fill in article form
     @page.fill(".spec--title-input", "New Test Article")
     @page.fill(".spec--summary-input", "Test summary")

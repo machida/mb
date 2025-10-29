@@ -2,5 +2,5 @@
 .a--form-help {
   font-size: 0.75rem;
   line-height: 1.25rem;
-  color: var(--color-form-text-disabled);
+  color: var(--color-form-help);
 }

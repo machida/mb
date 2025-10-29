@@ -53,8 +53,8 @@
   --color-form-bg: var(--color-white);
   --color-form-bg-disabled: var(--color-gray-50);
   --color-form-placeholder: var(--color-gray-400);
-  --color-form-label: var(--color-gray-700);
-  --color-form-help: var(--color-gray-500);
+  --color-form-label: var(--color-sky-700);
+  --color-form-help: var(--color-sky-600);
 
   /* Interactive colors */
   --color-interactive: var(--color-gray-500);
@@ -80,7 +80,7 @@
   /* Secondary */
   --color-button-secondary: var(--color-white);
   --color-button-secondary-background: var(--color-gray-50);
-  --color-button-secondary-border: var(--color-gray-500);
+  --color-button-secondary-border: var(--color-sky-500);
 
   /* Secondary hover */
   --color-button-secondary-hover-background: var(--color-sky-100);
@@ -270,6 +270,7 @@
 }
 
 /* Import Custom Components */
+@import "./components/_action-banner.css";
 @import "./components/_article.css";
 @import "./components/_articles.css";
 @import "./components/_footer.css";

@@ -50,7 +50,7 @@ class Admin::ArticlesControllerTest < ActionDispatch::IntegrationTest
     # Check that both articles are displayed
     assert_select ".spec--articles-list > article", count: 2
     # Check that new article button is displayed
-    assert_select ".spec--new-article-button", text: "新しい記事を作成"
+    assert_select ".spec--new-article-link", text: "新しい記事を作成"
   end
 
   test "should get drafts page" do
@@ -61,7 +61,7 @@ class Admin::ArticlesControllerTest < ActionDispatch::IntegrationTest
     # Check that only draft article is displayed
     assert_select ".spec--draft-articles-list > article", count: 1
     # Check that new article button is displayed
-    assert_select ".spec--new-article-button", text: "新しい記事を作成"
+    assert_select ".spec--new-article-link", text: "新しい記事を作成"
   end
 
   test "should get new when authenticated" do
