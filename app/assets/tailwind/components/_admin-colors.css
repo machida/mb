@@ -1,0 +1,57 @@
+/* Admin Color Theme Variables */
+
+/*
+ * デフォルトはskyカラーパレット
+ * 管理画面から他のカラーパレットに変更可能
+ * 対応パレット: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose, stone, neutral, zinc, gray, slate
+ */
+
+.layout-admin {
+  /* Primary admin colors - 管理画面のメインカラー */
+  --color-admin-primary-50: var(--color-sky-50);
+  --color-admin-primary-100: var(--color-sky-100);
+  --color-admin-primary-200: var(--color-sky-200);
+  --color-admin-primary-300: var(--color-sky-300);
+  --color-admin-primary-400: var(--color-sky-400);
+  --color-admin-primary-500: var(--color-sky-500);
+  --color-admin-primary-600: var(--color-sky-600);
+  --color-admin-primary-700: var(--color-sky-700);
+  --color-admin-primary-800: var(--color-sky-800);
+  --color-admin-primary-900: var(--color-sky-900);
+
+  /* Semantic color mappings - 用途別カラー */
+  --color-admin-bg-base: var(--color-admin-primary-50);
+  --color-admin-bg-hover: var(--color-admin-primary-100);
+  --color-admin-bg-active: var(--color-admin-primary-700);
+  --color-admin-bg-dark: var(--color-admin-primary-800);
+
+  --color-admin-border-light: var(--color-admin-primary-200);
+  --color-admin-border-default: var(--color-admin-primary-300);
+  --color-admin-border-medium: var(--color-admin-primary-400);
+  --color-admin-border-strong: var(--color-admin-primary-500);
+
+  --color-admin-text-light: var(--color-admin-primary-400);
+  --color-admin-text-medium: var(--color-admin-primary-500);
+  --color-admin-text-default: var(--color-admin-primary-600);
+  --color-admin-text-strong: var(--color-admin-primary-700);
+  --color-admin-text-heading: var(--color-admin-primary-800);
+  --color-admin-text-contrast: var(--color-admin-primary-900);
+
+  /* Button colors */
+  --color-admin-button-primary: var(--color-admin-primary-600);
+  --color-admin-button-primary-hover: var(--color-admin-primary-700);
+  --color-admin-button-primary-bg: var(--color-admin-primary-50);
+
+  /* Form colors */
+  --color-admin-form-label: var(--color-admin-primary-700);
+  --color-admin-form-help: var(--color-admin-primary-600);
+  --color-admin-form-border: var(--color-admin-primary-300);
+  --color-admin-form-border-focus: var(--color-admin-primary-500);
+  --color-admin-form-bg: var(--color-admin-primary-50);
+
+  /* Navigation colors */
+  --color-admin-nav-bg: var(--color-admin-primary-800);
+  --color-admin-nav-text: var(--color-admin-primary-400);
+  --color-admin-nav-text-hover: var(--color-white);
+  --color-admin-nav-active-bg: var(--color-admin-primary-700);
+}

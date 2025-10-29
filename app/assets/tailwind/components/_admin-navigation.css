@@ -1,0 +1,95 @@
+/* Admin Navigation Component */
+
+.l--admin-nav {
+  background-color: var(--color-admin-nav-bg);
+  position: fixed;
+  z-index: 50;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4rem;
+}
+
+@media (min-width: 768px) {
+  .l--admin-nav {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: auto;
+    width: 100px;
+    height: auto;
+  }
+}
+
+.l--admin-nav__list {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-around;
+  gap: 0;
+  height: 100%;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .l--admin-nav__list {
+    flex-direction: column;
+    justify-content: flex-start;
+    height: auto;
+  }
+}
+
+.l--admin-nav__item {
+  flex: 1 1 0%;
+}
+
+@media (min-width: 768px) {
+  .l--admin-nav__item {
+    flex: none;
+  }
+}
+
+.l--admin-nav__link {
+  color: var(--color-admin-nav-text);
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  height: 100%;
+  width: 100%;
+  transition: all 0.2s ease-out;
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .l--admin-nav__link {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+
+.l--admin-nav__link:hover {
+  color: var(--color-admin-nav-text-hover);
+}
+
+.l--admin-nav__link.is--active {
+  background-color: var(--color-admin-nav-active-bg);
+  color: var(--color-admin-nav-text-hover);
+}
+
+.l--admin-nav__link.is--active:hover {
+  background-color: var(--color-admin-button-primary);
+}
+
+.l--admin-nav__icon {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.l--admin-nav__text {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}

@@ -1,0 +1,9 @@
+/* Admin Footer Component */
+
+.l--admin-footer {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  margin-top: auto;
+  border-top-width: 1px;
+  border-top-color: var(--color-admin-border-light);
+}

@@ -244,28 +244,29 @@
   }
 
   /* Admin page overrides - only apply within admin layout */
+  /* Note: Admin color variables are now defined in _admin-colors.css */
   .layout-admin {
-    --color-button-primary: var(--color-sky-600);
-    --color-button-primary-hover-background: var(--color-sky-700);
-    --color-button-common-focus: var(--color-sky-500);
-    --color-button-primary-background: var(--color-sky-50);
-    --color-form-border-focus: var(--color-sky-500);
-    --color-link: var(--color-sky-700);
-    --color-link-hover: var(--color-sky-700);
-    --color-text-primary: var(--color-sky-800);
-    --color-border-light: var(--color-sky-200);
-    --color-border-default: var(--color-sky-500);
-    --color-border-dark: var(--color-sky-400);
-    --color-form-border: var(--color-sky-300);
-    --color-bg-primary: var(--color-sky-50);
-    --color-button-secondary: var(--color-sky-50);
-    --color-form-bg: var(--color-sky-50);
+    --color-button-primary: var(--color-admin-button-primary);
+    --color-button-primary-hover-background: var(--color-admin-button-primary-hover);
+    --color-button-common-focus: var(--color-admin-border-strong);
+    --color-button-primary-background: var(--color-admin-button-primary-bg);
+    --color-form-border-focus: var(--color-admin-form-border-focus);
+    --color-link: var(--color-admin-text-strong);
+    --color-link-hover: var(--color-admin-text-strong);
+    --color-text-primary: var(--color-admin-text-heading);
+    --color-border-light: var(--color-admin-border-light);
+    --color-border-default: var(--color-admin-border-strong);
+    --color-border-dark: var(--color-admin-border-medium);
+    --color-form-border: var(--color-admin-form-border);
+    --color-bg-primary: var(--color-admin-bg-base);
+    --color-button-secondary: var(--color-admin-bg-base);
+    --color-form-bg: var(--color-admin-form-bg);
     --color-form-bg-focus: var(--color-white);
   }
 
   /* Override bg-white in admin layout */
   .layout-admin .bg-white {
-    background-color: var(--color-sky-50);
+    background-color: var(--color-admin-bg-base);
   }
 }
 
@@ -293,3 +294,10 @@
 @import "./components/_form-help.css";
 @import "./components/_page-notice.css";
 @import "./components/_navigation.css";
+
+/* Import Admin Components */
+@import "./components/_admin-colors.css";
+@import "./components/_admin-navigation.css";
+@import "./components/_admin-footer.css";
+@import "./components/_admin-forms.css";
+@import "./components/_admin-text.css";
