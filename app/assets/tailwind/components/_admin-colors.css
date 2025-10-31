@@ -20,6 +20,7 @@
   --color-admin-primary-900: var(--color-sky-900);
 
   /* Semantic color mappings - 用途別カラー */
+  --color-admin-bg-body: var(--color-admin-primary-100);
   --color-admin-bg-base: var(--color-admin-primary-50);
   --color-admin-bg-hover: var(--color-admin-primary-100);
   --color-admin-bg-active: var(--color-admin-primary-700);
