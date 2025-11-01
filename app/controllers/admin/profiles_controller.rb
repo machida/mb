@@ -16,6 +16,6 @@ class Admin::ProfilesController < Admin::BaseController
   private
 
   def profile_params
-    params.require(:admin).permit(:email, :user_id)
+    params.require(:admin).permit(:email, :user_id, :theme_color)
   end
 end

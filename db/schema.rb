@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_10_075117) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_31_090349) do
   create_table "admins", force: :cascade do |t|
     t.string "email"
     t.string "user_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_10_075117) do
     t.datetime "password_changed_at"
     t.string "password_reset_token"
     t.datetime "password_reset_sent_at"
+    t.string "theme_color", default: "sky", null: false
     t.index ["password_reset_token"], name: "index_admins_on_password_reset_token", unique: true
   end
 

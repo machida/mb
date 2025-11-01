@@ -96,11 +96,61 @@ class AdminProfilePlaywrightTest < ApplicationPlaywrightTestCase
 
   test "admin can cancel profile edit" do
     login_as_admin(@admin)
-    
+
     @page.goto("http://localhost:#{@server_port}/admin/profile/edit")
     @page.click(".spec--cancel-button")
-    
+
     @page.wait_for_url(/.*\/admin\/articles/)
     assert_match /\/admin\/articles/, @page.url
+  end
+
+  test "admin can see theme color section" do
+    login_as_admin(@admin)
+
+    @page.goto("http://localhost:#{@server_port}/admin/profile/edit")
+
+    # Check theme section exists
+    theme_title = @page.query_selector(".spec--theme-section-title")
+    assert theme_title, "Theme section title should exist"
+    assert_equal "テーマカラー", theme_title.inner_text
+
+    # Check theme color options exist (22 colors)
+    theme_options = @page.query_selector_all(".spec--theme-color-option")
+    assert_equal 22, theme_options.length, "Should have 22 theme color options"
+
+    # Check default theme (sky) is selected
+    sky_option = @page.query_selector(".spec--theme-color-option[data-color='sky']")
+    assert sky_option, "Sky theme option should exist"
+
+    sky_radio = sky_option.query_selector(".spec--theme-color-input")
+    assert sky_radio.checked?, "Sky theme should be selected by default"
+  end
+
+  test "admin can change theme color" do
+    login_as_admin(@admin)
+
+    @page.goto("http://localhost:#{@server_port}/admin/profile/edit")
+
+    # Select a different theme color (indigo)
+    indigo_option = @page.query_selector(".spec--theme-color-option[data-color='indigo']")
+    assert indigo_option, "Indigo theme option should exist"
+
+    indigo_option.click
+
+    # Submit the form
+    @page.click(".spec--update-button")
+
+    # Wait for toast notification
+    toast_selector = ".spec--toast-notification"
+    @page.wait_for_selector(toast_selector, timeout: 10000)
+
+    # Check if theme color is updated in database
+    @admin.reload
+    assert_equal "indigo", @admin.theme_color
+
+    # Check if body has the new theme class
+    @page.wait_for_load_state(state: 'networkidle')
+    body_classes = @page.evaluate("() => document.body.className")
+    assert_includes body_classes, "is--indigo", "Body should have indigo theme class"
   end
 end

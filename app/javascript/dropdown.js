@@ -1,7 +1,7 @@
 // ドロップダウンメニューの制御
 function initializeDropdown() {
-  const dropdownButton = document.querySelector('.js-dropdown-button');
-  const dropdownMenu = document.querySelector('.js-dropdown-menu');
+  const dropdownButton = document.querySelector('.js--dropdown-button');
+  const dropdownMenu = document.querySelector('.js--dropdown-menu');
 
   if (dropdownButton && dropdownMenu) {
     // 既にイベントリスナーが設定されているかチェック

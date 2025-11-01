@@ -1,0 +1,71 @@
+/* ========================================
+ * Admin Layout Components
+ * ========================================
+ * 管理画面のレイアウト要素
+ * テーマカラーに対応した背景色とボーダー色
+ * ======================================== */
+/* Page Title */
+.a--page-title {
+  background-color: var(--color-admin-bg-base);
+}
+/* Horizontal Rule */
+.a--hr {
+  border-color: var(--color-admin-border-light);
+}
+/* Admin Header */
+.l--admin-header {
+  background-color: var(--color-admin-bg-base);
+}
+.l--admin-header__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 3.5rem;
+}
+.l--admin-header__title-link {
+  transition: color 0.2s ease-in-out;
+}
+.l--admin-header__title-link:hover {
+  color: var(--color-admin-text-medium);
+}
+.l--admin-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.l--admin-header__nav-item {
+  flex: 1 1 0%;
+}
+/* Theme Color Selector */
+.l--theme-color-option {
+  position: relative;
+  display: flex;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-color: var(--color-gray-300);
+  padding: 0.75rem;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.l--theme-color-option:focus-within {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-admin-primary-500);
+}
+.l--theme-color-option.is--selected {
+  border-color: var(--color-admin-primary-600);
+  box-shadow: 0 0 0 2px var(--color-admin-primary-600);
+}
+.l--theme-color-option__check {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 1.25rem;
+  color: var(--color-admin-primary-600);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+.l--theme-color-option.is--selected .l--theme-color-option__check {
+  opacity: 1;
+  transform: scale(1);
+}

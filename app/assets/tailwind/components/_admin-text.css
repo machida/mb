@@ -1,68 +1,61 @@
-/* Admin Text Component */
-
-/* Text colors for admin area */
+/* Admin Text Utilities and Components */
+/* ========================================
+ * ユーティリティクラス (Atomic Design)
+ * ======================================== */
+/* Text colors - 管理画面用テキストカラー */
 .a--admin-text-light {
   color: var(--color-admin-text-light);
 }
-
 .a--admin-text-medium {
   color: var(--color-admin-text-medium);
 }
-
 .a--admin-text-default {
   color: var(--color-admin-text-default);
 }
-
 .a--admin-text-strong {
   color: var(--color-admin-text-strong);
 }
-
 .a--admin-text-heading {
   color: var(--color-admin-text-heading);
 }
-
 .a--admin-text-contrast {
   color: var(--color-admin-text-contrast);
 }
-
-/* Admin specific text sizes */
+/* Text sizes - 管理画面用テキストサイズ */
 .a--admin-text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
-
 .a--admin-text-base {
   font-size: 1rem;
   line-height: 1.5rem;
 }
-
 .a--admin-text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
-
-/* Empty state text */
+/* ========================================
+ * コンポーネント専用クラス
+ * ======================================== */
+/* Empty state - 空状態表示 */
 .a--admin-empty-state__message {
   color: var(--color-admin-text-medium);
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
-
 .a--admin-empty-state__submessage {
   color: var(--color-admin-text-light);
   font-size: 0.875rem;
   line-height: 1.25rem;
   margin-top: 0.5rem;
 }
-
-/* Admin info text */
+/* Info text - 情報テキスト */
 .a--admin-info-text {
   font-size: 0.875rem;
   line-height: 1.25rem;
   color: var(--color-admin-text-medium);
 }
-
-/* Admin article meta */
+/* Article meta - 記事メタ情報 */
 .a--admin-article-meta {
   display: flex;
   flex-direction: column;
@@ -72,15 +65,13 @@
   color: var(--color-admin-text-medium);
   margin-bottom: 0.5rem;
 }
-
-/* Admin email display */
+/* Email display - メールアドレス表示 */
 .a--admin-email {
   color: var(--color-admin-text-default);
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
-
-/* Admin metadata display */
+/* Metadata display - メタデータ表示 */
 .a--admin-metadata {
   display: flex;
   gap: 1rem;

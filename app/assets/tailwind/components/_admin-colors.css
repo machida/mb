@@ -1,11 +1,21 @@
-/* Admin Color Theme Variables */
-
-/*
+/* ========================================
+ * Admin Color Theme Variables
+ * ========================================
  * 管理画面のカラーテーマを定義
  * bodyタグに .layout-admin.is--{color} クラスを付与することでテーマを切り替え
- * 対応カラー: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose, stone, neutral, zinc, gray, slate
- */
-
+ *
+ * 対応カラー（22色）:
+ * - 暖色系: red, orange, amber, yellow
+ * - 緑系: lime, green, emerald, teal
+ * - 青系: cyan, sky, blue, indigo
+ * - 紫系: violet, purple, fuchsia, pink, rose
+ * - 無彩色: stone, neutral, zinc, gray, slate
+ *
+ * 構造:
+ * 1. 各テーマは10段階の色変数 (50-900) を定義
+ * 2. Semantic mappings で用途別の色を指定
+ * 3. レイアウト内で semantic color を使用
+ * ======================================== */
 /* デフォルト: Sky */
 .layout-admin {
   --color-admin-primary-50: var(--color-sky-50);
@@ -19,41 +29,48 @@
   --color-admin-primary-800: var(--color-sky-800);
   --color-admin-primary-900: var(--color-sky-900);
 
-  /* Semantic color mappings - 用途別カラー */
+  /* ========================================
+   * Semantic color mappings - 用途別カラー
+   * 各テーマで共通の用途別カラー変数を定義
+   * ======================================== */
+  /* Background colors */
   --color-admin-bg-body: var(--color-admin-primary-100);
   --color-admin-bg-base: var(--color-admin-primary-50);
   --color-admin-bg-hover: var(--color-admin-primary-100);
   --color-admin-bg-active: var(--color-admin-primary-700);
   --color-admin-bg-dark: var(--color-admin-primary-800);
-
+  /* Border colors */
   --color-admin-border-light: var(--color-admin-primary-200);
   --color-admin-border-default: var(--color-admin-primary-300);
   --color-admin-border-medium: var(--color-admin-primary-400);
   --color-admin-border-strong: var(--color-admin-primary-500);
-
+  /* Text colors */
   --color-admin-text-light: var(--color-admin-primary-400);
   --color-admin-text-medium: var(--color-admin-primary-500);
   --color-admin-text-default: var(--color-admin-primary-600);
   --color-admin-text-strong: var(--color-admin-primary-700);
   --color-admin-text-heading: var(--color-admin-primary-800);
   --color-admin-text-contrast: var(--color-admin-primary-900);
-
+  /* Button colors */
   --color-admin-button-primary: var(--color-admin-primary-600);
   --color-admin-button-primary-hover: var(--color-admin-primary-700);
   --color-admin-button-primary-bg: var(--color-admin-primary-50);
-
+  /* Form colors */
   --color-admin-form-label: var(--color-admin-primary-700);
   --color-admin-form-help: var(--color-admin-primary-600);
   --color-admin-form-border: var(--color-admin-primary-300);
   --color-admin-form-border-focus: var(--color-admin-primary-500);
   --color-admin-form-bg: var(--color-admin-primary-50);
-
+  /* Navigation colors */
   --color-admin-nav-bg: var(--color-admin-primary-800);
   --color-admin-nav-text: var(--color-admin-primary-400);
   --color-admin-nav-text-hover: var(--color-white);
   --color-admin-nav-active-bg: var(--color-admin-primary-700);
 }
 
+/* ========================================
+ * カラーテーマバリエーション
+ * ======================================== */
 /* Red Theme */
 .layout-admin.is--red {
   --color-admin-primary-50: var(--color-red-50);

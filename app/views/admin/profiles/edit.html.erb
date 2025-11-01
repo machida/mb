@@ -35,6 +35,34 @@
 
       <div>
         <header class="a--card-header">
+          <h2 class="a--heading is--md spec--theme-section-title">テーマカラー</h2>
+        </header>
+        <div class="a--card">
+          <div class="l--form-items">
+            <div>
+              <label class="a--label">カラーテーマを選択</label>
+              <p class="a--help-text">管理画面のテーマカラーを選択してください。</p>
+              <div class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+                <% Admin::THEME_COLORS.each do |color| %>
+                  <label class="l--theme-color-option js--theme-color-option spec--theme-color-option" data-color="<%= color %>">
+                    <%= f.radio_button :theme_color, color, class: "sr-only js--theme-color-input spec--theme-color-input" %>
+                    <span class="flex flex-1 flex-col">
+                      <span class="block text-sm font-medium text-gray-900 capitalize"><%= color %></span>
+                      <span class="mt-2 flex h-8 w-full rounded border-2" style="background-color: var(--color-<%= color %>-500); border-color: var(--color-<%= color %>-700);"></span>
+                    </span>
+                    <span class="material-symbols-outlined l--theme-color-option__check spec--theme-color-check" aria-hidden="true">
+                      check_circle
+                    </span>
+                  </label>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <header class="a--card-header">
           <h2 class="a--heading is--md spec--password-section-title">パスワード</h2>
         </header>
         <div class="a--card">

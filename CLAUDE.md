@@ -72,6 +72,7 @@ rails db:reset                     # データベースリセット
 - **ERBファイルのリンター設定は.erb_lint.ymlで管理（RuboCopとは独立）**
 - **行末の半角スペースは削除する（trailing whitespace削除）**
 - **CSSではpxではなくremを使用する**
+- **CSSが更新されない場合は`bin/rails assets:clobber`を実行してアセットをクリーンアップする**
 
 ## 開発ルール
 - **うまくいかなかったら公式ドキュメントを確認してから行動する（勝手に予測して作業しない）**

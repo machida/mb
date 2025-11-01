@@ -255,16 +255,33 @@
     --color-button-primary-hover-background: var(--color-admin-button-primary-hover);
     --color-button-common-focus: var(--color-admin-border-strong);
     --color-button-primary-background: var(--color-admin-button-primary-bg);
+    --color-button-secondary: var(--color-admin-bg-base);
+    --color-button-secondary-border: var(--color-admin-primary-500);
+    --color-button-secondary-hover-background: var(--color-admin-primary-100);
+    --color-button-secondary-hover-border: var(--color-admin-primary-700);
+    --color-button-secondary-hover-text: var(--color-admin-primary-700);
+    --color-button-secondary-focus: var(--color-admin-primary-500);
     --color-form-border-focus: var(--color-admin-form-border-focus);
+    --color-form-label: var(--color-admin-form-label);
+    --color-form-help: var(--color-admin-form-help);
+    --color-image-upload-bg: var(--color-admin-primary-50);
+    --color-image-upload-border: var(--color-admin-primary-300);
+    --color-image-upload-border-hover: var(--color-admin-primary-400);
+    --color-image-upload-border-focus: var(--color-admin-primary-400);
+    --color-image-upload-icon: var(--color-admin-primary-400);
+    --color-image-upload-text: var(--color-admin-text-medium);
+    --color-interactive: var(--color-admin-text-medium);
+    --color-interactive-hover: var(--color-admin-text-strong);
+    --color-interactive-bg-hover: var(--color-admin-primary-100);
     --color-link: var(--color-admin-text-strong);
     --color-link-hover: var(--color-admin-text-strong);
     --color-text-primary: var(--color-admin-text-heading);
+    --color-text-muted: var(--color-admin-text-medium);
     --color-border-light: var(--color-admin-border-light);
     --color-border-default: var(--color-admin-border-strong);
     --color-border-dark: var(--color-admin-border-medium);
     --color-form-border: var(--color-admin-form-border);
     --color-bg-primary: var(--color-admin-bg-base);
-    --color-button-secondary: var(--color-admin-bg-base);
     --color-form-bg: var(--color-admin-form-bg);
     --color-form-bg-focus: var(--color-white);
   }
@@ -298,11 +315,12 @@
 @import "./components/_headings.css";
 @import "./components/_form-help.css";
 @import "./components/_page-notice.css";
-@import "./components/_navigation.css";
 
 /* Import Admin Components */
 @import "./components/_admin-colors.css";
-@import "./components/_admin-navigation.css";
+@import "./components/_admin-nav.css";
 @import "./components/_admin-footer.css";
 @import "./components/_admin-forms.css";
+@import "./components/_admin-password-reset.css";
 @import "./components/_admin-text.css";
+@import "./components/_admin-layout.css";

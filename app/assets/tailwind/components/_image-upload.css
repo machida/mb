@@ -4,21 +4,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-sky-50);
-  border: 2px dashed var(--color-sky-300);
+  background-color: var(--color-image-upload-bg, var(--color-sky-50));
+  border: 2px dashed var(--color-image-upload-border, var(--color-sky-300));
   border-radius: 0.5rem;
   text-align: center;
   cursor: pointer;
   transition: background-color 0.2s ease-out, border-color 0.2s ease-out;
 }
 
+.a--image-upload__icon {
+  color: var(--color-image-upload-icon, var(--color-gray-400));
+  margin-bottom: 0.25rem;
+  font-size: 2.25rem;
+}
+
+.a--image-upload__text {
+  color: var(--color-image-upload-text, var(--color-gray-600));
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
 .a--image-upload__dropzone:hover {
-  border-color: var(--color-sky-400);
+  border-color: var(--color-image-upload-border-hover, var(--color-sky-400));
   background-color: var(--color-white);
 }
 
 .a--image-upload__dropzone:focus-within {
-  border-color: var(--color-sky-400);
+  border-color: var(--color-image-upload-border-focus, var(--color-sky-400));
 }
 
 .a--image-upload__dropzone.is--hidden,
@@ -36,5 +48,5 @@
   aspect-ratio: 40 / 21;
   object-fit: cover;
   border-radius: 0.5rem;
-  border: 1px solid var(--color-sky-300);
+  border: 1px solid var(--color-image-upload-border, var(--color-sky-300));
 }

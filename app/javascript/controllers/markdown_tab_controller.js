@@ -9,12 +9,12 @@ export default class extends Controller {
 
   showEdit() {
     // タブの状態を更新
-    this.editTabTarget.classList.add("border-indigo-600", "text-indigo-600")
-    this.editTabTarget.classList.remove("border-transparent", "text-gray-500")
+    this.editTabTarget.classList.add("is--active")
+    this.editTabTarget.classList.remove("is--inactive")
     this.editTabTarget.setAttribute("aria-selected", "true")
 
-    this.previewTabTarget.classList.remove("border-indigo-600", "text-indigo-600")
-    this.previewTabTarget.classList.add("border-transparent", "text-gray-500")
+    this.previewTabTarget.classList.remove("is--active")
+    this.previewTabTarget.classList.add("is--inactive")
     this.previewTabTarget.setAttribute("aria-selected", "false")
 
     // パネルの表示/非表示を切り替え
@@ -24,12 +24,12 @@ export default class extends Controller {
 
   showPreview() {
     // タブの状態を更新
-    this.previewTabTarget.classList.add("border-indigo-600", "text-indigo-600")
-    this.previewTabTarget.classList.remove("border-transparent", "text-gray-500")
+    this.previewTabTarget.classList.add("is--active")
+    this.previewTabTarget.classList.remove("is--inactive")
     this.previewTabTarget.setAttribute("aria-selected", "true")
 
-    this.editTabTarget.classList.remove("border-indigo-600", "text-indigo-600")
-    this.editTabTarget.classList.add("border-transparent", "text-gray-500")
+    this.editTabTarget.classList.remove("is--active")
+    this.editTabTarget.classList.add("is--inactive")
     this.editTabTarget.setAttribute("aria-selected", "false")
 
     // パネルの表示/非表示を切り替え

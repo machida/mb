@@ -2,9 +2,15 @@ class Admin < ApplicationRecord
   has_secure_password
   has_secure_token :password_reset_token
 
+  THEME_COLORS = %w[
+    red orange amber yellow lime green emerald teal cyan sky blue indigo
+    violet purple fuchsia pink rose stone neutral zinc gray slate
+  ].freeze
+
   validates :email, presence: true, uniqueness: true
   validates :user_id, presence: true, uniqueness: true
   validates :password, length: { minimum: 8 }, allow_blank: true
+  validates :theme_color, presence: true, inclusion: { in: THEME_COLORS }
 
   has_many :articles, foreign_key: :author, primary_key: :user_id
 
