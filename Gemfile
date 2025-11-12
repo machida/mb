@@ -59,7 +59,7 @@ group :development, :test do
   gem "erb_lint", require: false
 
   # Testing gems
-  gem "mocha", "~> 2.1"
+  gem "mocha", "~> 2.8"
 end
 
 group :development do
