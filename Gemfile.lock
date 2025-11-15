@@ -260,7 +260,7 @@ GEM
       logger
     mini_mime (1.1.5)
     minitest (5.26.0)
-    mocha (2.7.1)
+    mocha (2.8.0)
       ruby2_keywords (>= 0.0.5)
     msgpack (1.8.0)
     multi_json (1.17.0)
@@ -522,7 +522,7 @@ DEPENDENCIES
   kaminari (~> 1.2)
   letter_opener_web
   listen (~> 3.3)
-  mocha (~> 2.1)
+  mocha (~> 2.8)
   playwright-ruby-client (~> 1.56.0)
   propshaft
   puma (>= 5.0)
