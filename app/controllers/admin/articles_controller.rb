@@ -17,17 +17,10 @@ class Admin::ArticlesController < Admin::BaseController
   def create
     @article = Article.new(article_params)
     @article.author = current_admin.user_id
-
-    if params[:commit] == "下書き保存"
-      @article.draft = true
-    end
+    publication_flow.apply_state(@article)
 
     if @article.save
-      if @article.draft?
-        redirect_to admin_articles_path, notice: "下書きを保存しました。"
-      else
-        redirect_to article_path(@article), notice: "記事を公開しました。"
-      end
+      redirect_with_publication_flow(@article)
     else
       render :new, status: :unprocessable_content
     end
@@ -37,18 +30,10 @@ class Admin::ArticlesController < Admin::BaseController
   end
 
   def update
-    if params[:commit] == "下書き保存"
-      @article.draft = true
-    elsif params[:commit] == "公開"
-      @article.draft = false
-    end
+    publication_flow.apply_state(@article)
 
     if @article.update(article_params)
-      if @article.draft?
-        redirect_to admin_articles_path, notice: "下書きを保存しました。"
-      else
-        redirect_to article_path(@article), notice: "記事を公開しました。"
-      end
+      redirect_with_publication_flow(@article)
     else
       render :edit, status: :unprocessable_content
     end
@@ -112,5 +97,14 @@ class Admin::ArticlesController < Admin::BaseController
 
   def article_params
     params.require(:article).permit(:title, :body, :summary, :thumbnail, :published_at)
+  end
+
+  def publication_flow
+    @publication_flow ||= ArticlePublicationFlow.new(params[:commit])
+  end
+
+  def redirect_with_publication_flow(article)
+    redirect_to publication_flow.redirect_path(article),
+      notice: publication_flow.notice_message(article)
   end
 end
