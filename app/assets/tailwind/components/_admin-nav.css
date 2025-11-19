@@ -8,7 +8,7 @@
   right: 0;
   height: 4rem;
 }
-@media (min-width: 768px) {
+@media (--breakpoint-md) {
   .l--admin-nav {
     top: 0;
     bottom: 0;
@@ -28,7 +28,7 @@
   padding-top: 0;
   padding-bottom: 0;
 }
-@media (min-width: 768px) {
+@media (--breakpoint-md) {
   .l--admin-nav__list {
     flex-direction: column;
     justify-content: flex-start;
@@ -38,7 +38,7 @@
 .l--admin-nav__item {
   flex: 1 1 0%;
 }
-@media (min-width: 768px) {
+@media (--breakpoint-md) {
   .l--admin-nav__item {
     flex: none;
   }
@@ -56,7 +56,7 @@
   transition: all 0.2s ease-out;
   text-decoration: none;
 }
-@media (min-width: 768px) {
+@media (--breakpoint-md) {
   .l--admin-nav__link {
     padding-top: 1rem;
     padding-bottom: 1rem;
