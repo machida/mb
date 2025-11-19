@@ -16,11 +16,11 @@
   --spacing-12: 3rem;
   --spacing-16: 4rem;
 
-  /* Semantic spacing aliases */
-  --spacing-xs: var(--spacing-2);
-  --spacing-sm: var(--spacing-3);
-  --spacing-md: var(--spacing-4);
-  --spacing-lg: var(--spacing-6);
+  /* Semantic spacing aliases (prefixed to avoid clashing with Tailwind tokens) */
+  --app-spacing-xs: var(--spacing-2);
+  --app-spacing-sm: var(--spacing-3);
+  --app-spacing-md: var(--spacing-4);
+  --app-spacing-lg: var(--spacing-6);
 
   /* Border widths */
   --border-width-thin: 0.0625rem;

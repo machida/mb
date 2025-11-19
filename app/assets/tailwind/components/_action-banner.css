@@ -1,8 +1,8 @@
 /* Action banner component */
 @layer components {
   .l--action-banner {
-    padding-top: var(--spacing-sm);
-    padding-bottom: var(--spacing-sm);
+    padding-top: var(--app-spacing-sm);
+    padding-bottom: var(--app-spacing-sm);
     border-top-width: var(--border-width-thin);
     border-bottom-width: var(--border-width-thin);
   }
@@ -21,19 +21,19 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: var(--spacing-xs);
+    gap: var(--app-spacing-xs);
   }
 
   @media (--breakpoint-md) {
     .l--action-banner__inner {
       flex-direction: row;
-      gap: var(--spacing-md);
+      gap: var(--app-spacing-md);
     }
   }
 
   .l--action-banner__content {
     display: flex;
-    gap: var(--spacing-xs);
+    gap: var(--app-spacing-xs);
     align-items: center;
   }
 
@@ -44,7 +44,7 @@
 
   @media (--breakpoint-md) {
     .l--action-banner__icon {
-      font-size: var(--spacing-lg);
+      font-size: var(--app-spacing-lg);
       line-height: 2rem;
     }
   }
@@ -56,8 +56,8 @@
 
   @media (--breakpoint-md) {
     .l--action-banner__text {
-      font-size: var(--spacing-md);
-      line-height: var(--spacing-lg);
+      font-size: var(--app-spacing-md);
+      line-height: var(--app-spacing-lg);
     }
   }
 }
