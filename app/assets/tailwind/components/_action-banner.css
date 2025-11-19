@@ -1,16 +1,16 @@
 /* Action banner component */
 @layer components {
   .l--action-banner {
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    border-top-width: 0.0625rem;
-    border-bottom-width: 0.0625rem;
+    padding-top: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
+    border-top-width: var(--border-width-thin);
+    border-bottom-width: var(--border-width-thin);
   }
 
   .l--action-banner.is--warning {
-    background-color: #fffbeb;
-    border-color: #fde68a;
-    color: #b45309;
+    background-color: var(--color-warning-bg, #fffbeb);
+    border-color: var(--color-warning-border, #fde68a);
+    color: var(--color-warning-text, #b45309);
   }
 
   .l--action-banner__inner {
@@ -21,19 +21,19 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: var(--spacing-xs);
   }
 
-  @media (min-width: 768px) {
+  @media (--breakpoint-md) {
     .l--action-banner__inner {
       flex-direction: row;
-      gap: 1rem;
+      gap: var(--spacing-md);
     }
   }
 
   .l--action-banner__content {
     display: flex;
-    gap: 0.5rem;
+    gap: var(--spacing-xs);
     align-items: center;
   }
 
@@ -42,9 +42,9 @@
     line-height: 1.75rem;
   }
 
-  @media (min-width: 768px) {
+  @media (--breakpoint-md) {
     .l--action-banner__icon {
-      font-size: 1.5rem;
+      font-size: var(--spacing-lg);
       line-height: 2rem;
     }
   }
@@ -54,10 +54,10 @@
     line-height: 1.25rem;
   }
 
-  @media (min-width: 768px) {
+  @media (--breakpoint-md) {
     .l--action-banner__text {
-      font-size: 1rem;
-      line-height: 1.5rem;
+      font-size: var(--spacing-md);
+      line-height: var(--spacing-lg);
     }
   }
 }

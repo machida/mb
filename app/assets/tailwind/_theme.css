@@ -1,3 +1,7 @@
+@custom-media --breakpoint-sm (min-width: 640px);
+@custom-media --breakpoint-md (min-width: 768px);
+@custom-media --breakpoint-lg (min-width: 1024px);
+
 @theme {
   /* Spacing scale - ensure margin utilities are available */
   --spacing-0: 0px;
@@ -11,6 +15,15 @@
   --spacing-10: 2.5rem;
   --spacing-12: 3rem;
   --spacing-16: 4rem;
+
+  /* Semantic spacing aliases */
+  --spacing-xs: var(--spacing-2);
+  --spacing-sm: var(--spacing-3);
+  --spacing-md: var(--spacing-4);
+  --spacing-lg: var(--spacing-6);
+
+  /* Border widths */
+  --border-width-thin: 0.0625rem;
 
   /* Font families */
   --font-family-base: YakuHanJPs, "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
