@@ -186,6 +186,7 @@ phantom delete feature/user-auth
 - Rails 8.0.3
 - SQLite3 (開発環境)
 - Tailwind CSS v4.x
+- 独自のCSSカスタムプロパティ（`--app-spacing-*`, `@custom-media --breakpoint-*`）で余白・ブレークポイントを一元管理
 - Stimulus (Hotwire)
 - Turbo (Hotwire)
 - Redcarpet (Markdown)
