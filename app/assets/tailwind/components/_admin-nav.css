@@ -1,5 +1,6 @@
 /* Admin Navigation Component */
 .l--admin-nav {
+  --admin-nav-width: 16rem;
   background-color: var(--color-admin-nav-bg);
   position: fixed;
   z-index: 50;
@@ -7,15 +8,17 @@
   left: 0;
   right: 0;
   height: 4rem;
+  border-top: var(--border-width-thin) solid var(--color-admin-border-light);
 }
-@media (--breakpoint-md) {
+@media (--breakpoint-lg) {
   .l--admin-nav {
     top: 0;
-    bottom: 0;
-    left: 0;
+    bottom: auto;
     right: auto;
-    width: 100px;
-    height: auto;
+    width: var(--admin-nav-width);
+    height: 100vh;
+    border-top: none;
+    border-right: var(--border-width-thin) solid var(--color-admin-border-light);
   }
 }
 .l--admin-nav__list {
@@ -27,18 +30,22 @@
   height: 100%;
   padding-top: 0;
   padding-bottom: 0;
+  overflow: hidden;
 }
-@media (--breakpoint-md) {
+@media (--breakpoint-lg) {
   .l--admin-nav__list {
     flex-direction: column;
     justify-content: flex-start;
-    height: auto;
+    gap: 0.25rem;
+    height: 100%;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
   }
 }
 .l--admin-nav__item {
   flex: 1 1 0%;
 }
-@media (--breakpoint-md) {
+@media (--breakpoint-lg) {
   .l--admin-nav__item {
     flex: none;
   }
@@ -56,10 +63,15 @@
   transition: all 0.2s ease-out;
   text-decoration: none;
 }
-@media (--breakpoint-md) {
+@media (--breakpoint-lg) {
   .l--admin-nav__link {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0 999px 999px 0;
+    margin-right: 0.5rem;
   }
 }
 .l--admin-nav__link:hover {
@@ -76,6 +88,12 @@
 .l--admin-nav__icon {
   font-size: 1.5rem;
   line-height: 2rem;
+}
+@media (--breakpoint-lg) {
+  .l--admin-nav__icon {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
 }
 .l--admin-nav__text {
   font-size: 0.75rem;
