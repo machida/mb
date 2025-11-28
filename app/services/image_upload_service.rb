@@ -30,13 +30,21 @@ class ImageUploadService
       # アップロードタイプに応じた画像処理
       processed_image = ImageProcessing::Vips.source(file.tempfile)
 
-      if upload_type == "content"
+      case upload_type
+      when "content"
         # 記事本文用: 最大2000px、WebP形式
         processed_image = processed_image
           .resize_to_limit(2000, 2000)
           .convert("webp")
           .saver(quality: 80)
         content_type = "image/webp"
+      when "hero"
+        # ヒーロー背景用: ワイドサイズ、JPEG形式
+        processed_image = processed_image
+          .resize_to_fill(1920, 1080, crop: :attention)
+          .convert("jpeg")
+          .saver(quality: 85)
+        content_type = "image/jpeg"
       else
         # サムネイル用: OGサイズ（1200x630）、JPEG形式
         processed_image = processed_image
@@ -124,12 +132,19 @@ class ImageUploadService
 
     processed_image = ImageProcessing::Vips.source(source_path)
 
-    if upload_type == "content"
+    case upload_type
+    when "content"
       # 記事本文用: 最大2000px、WebP形式
       processed_image
         .resize_to_limit(2000, 2000)
         .convert("webp")
         .saver(quality: 80)
+        .call(destination: file_path)
+    when "hero"
+      processed_image
+        .resize_to_fill(1920, 1080, crop: :attention)
+        .convert("jpeg")
+        .saver(quality: 85)
         .call(destination: file_path)
     else
       # サムネイル用: OGサイズ（1200x630）、JPEG形式

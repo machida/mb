@@ -33,6 +33,15 @@ class SiteSetting < ApplicationRecord
     default_og_image
   end
 
+  def self.hero_background_image
+    get("hero_background_image")
+  end
+
+  def self.hero_text_color
+    value = get("hero_text_color", "white")
+    %w[white black].include?(value) ? value : "white"
+  end
+
   def self.top_page_description
     get("top_page_description", "ブログへようこそ。技術やライフスタイルについて書いています。")
   end
@@ -60,6 +69,6 @@ class SiteSetting < ApplicationRecord
   private
 
   def allows_blank_value?
-    name.in?(%w[copyright default_og_image openai_api_key])
+    name.in?(%w[copyright default_og_image hero_background_image openai_api_key])
   end
 end

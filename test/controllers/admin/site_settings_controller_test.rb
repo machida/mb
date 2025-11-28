@@ -23,6 +23,8 @@ class Admin::SiteSettingsControllerTest < ActionDispatch::IntegrationTest
     assert_select ".spec--copyright-input"
     # Check for thumbnail upload components
     assert_select "div[data-controller='thumbnail-upload']"
+    assert_select ".spec--hero-background-image-input"
+    assert_select ".spec--hero-text-color-white"
   end
 
   test "should update site settings" do
@@ -30,6 +32,8 @@ class Admin::SiteSettingsControllerTest < ActionDispatch::IntegrationTest
       site_settings: {
         site_title: "新しいブログタイトル",
         default_og_image: "https://example.com/new-image.jpg",
+        hero_background_image: "https://example.com/hero.jpg",
+        hero_text_color: "black",
         top_page_description: "新しい説明文です",
         copyright: "© 2025 新しいブログ. All rights reserved."
       }
@@ -42,6 +46,8 @@ class Admin::SiteSettingsControllerTest < ActionDispatch::IntegrationTest
     # 設定値が更新されているか確認
     assert_equal "新しいブログタイトル", SiteSetting.site_title
     assert_equal "https://example.com/new-image.jpg", SiteSetting.default_og_image
+    assert_equal "https://example.com/hero.jpg", SiteSetting.hero_background_image
+    assert_equal "black", SiteSetting.hero_text_color
     assert_equal "新しい説明文です", SiteSetting.top_page_description
     assert_equal "新しいブログ", SiteSetting.copyright
   end
