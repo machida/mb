@@ -68,11 +68,15 @@ class SiteSettingTest < ActiveSupport::TestCase
   test "should provide convenience methods" do
     SiteSetting.set("site_title", "テストブログ")
     SiteSetting.set("default_og_image", "https://example.com/image.jpg")
+    SiteSetting.set("hero_background_image", "https://example.com/hero.jpg")
+    SiteSetting.set("hero_text_color", "black")
     SiteSetting.set("top_page_description", "テスト説明文")
     SiteSetting.set("copyright", "© 2025 テストブログ")
     
     assert_equal "テストブログ", SiteSetting.site_title
     assert_equal "https://example.com/image.jpg", SiteSetting.default_og_image
+    assert_equal "https://example.com/hero.jpg", SiteSetting.hero_background_image
+    assert_equal "black", SiteSetting.hero_text_color
     assert_equal "テスト説明文", SiteSetting.top_page_description
     assert_equal "© 2025 テストブログ", SiteSetting.copyright
   end
@@ -83,5 +87,12 @@ class SiteSettingTest < ActiveSupport::TestCase
     assert_equal "ブログへようこそ。技術やライフスタイルについて書いています。", SiteSetting.top_page_description
     assert_equal "© #{Date.current.year} MB. All rights reserved.", SiteSetting.copyright_text
     assert_nil SiteSetting.default_og_image
+    assert_nil SiteSetting.hero_background_image
+    assert_equal "white", SiteSetting.hero_text_color
+  end
+
+  test "hero text color falls back to white for invalid values" do
+    SiteSetting.set("hero_text_color", "purple")
+    assert_equal "white", SiteSetting.hero_text_color
   end
 end

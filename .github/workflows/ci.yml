@@ -117,6 +117,10 @@ jobs:
         mkdir -p config/credentials
         echo "${RAILS_MASTER_KEY}" > config/credentials/production.key
 
+    - name: Release existing Kamal deploy lock
+      run: |
+        kamal lock release || echo "No existing lock to release"
+
     - name: Deploy with Kamal
       run: kamal deploy
 

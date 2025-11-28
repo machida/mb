@@ -1,13 +1,44 @@
 /* Hero Component Styles */
 
 .a--hero {
-  background: var(--color-text-primary);
+  background-color: var(--color-text-primary);
   color: var(--color-bg-primary);
   position: relative;
   overflow: hidden;
 }
 
+.a--hero.has-background {
+  background-image: var(--hero-bg-image);
+  background-size: cover;
+  background-position: center;
+}
+
+.a--hero.has-background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55));
+  z-index: 0;
+}
+
+.a--hero.has-background.is--text-dark::after {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.35));
+}
+
+.a--hero.is--text-dark {
+  color: var(--color-gray-900);
+}
+
+.a--hero.is--text-light {
+  color: var(--color-white);
+}
+
+.a--hero.has-background .a--hero__inner {
+  position: relative;
+  z-index: 1;
+}
+
 .a--hero__inner {
-  height: 25rem;
+  min-height: 25rem;
   position: relative;
 }

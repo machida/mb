@@ -33,6 +33,8 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
     SiteSetting.create!(name: "copyright", value: "MB")
     SiteSetting.create!(name: "top_page_description", value: "ブログへようこそ。技術やライフスタイルについて書いています。")
     SiteSetting.create!(name: "default_og_image", value: "https://example.com/default-og-image.jpg")
+    SiteSetting.create!(name: "hero_background_image", value: "")
+    SiteSetting.create!(name: "hero_text_color", value: "white")
     
     # Clear cache
     Rails.cache.clear

@@ -3,6 +3,8 @@ class Admin::SiteSettingsController < Admin::BaseController
     @settings = {
       site_title: SiteSetting.site_title,
       default_og_image: SiteSetting.default_og_image,
+      hero_background_image: SiteSetting.hero_background_image,
+      hero_text_color: SiteSetting.hero_text_color,
       top_page_description: SiteSetting.top_page_description,
       copyright: SiteSetting.copyright,
       author_display_enabled: SiteSetting.get("author_display_enabled", "true"),
@@ -18,9 +20,12 @@ class Admin::SiteSettingsController < Admin::BaseController
           # また、フル著作権テキスト（© 年 名前. All rights reserved.）から名前部分だけを抽出
           cleaned_value = extract_copyright_name(value.to_s.strip)
           SiteSetting.set(key, cleaned_value)
+        elsif key == "hero_text_color"
+          allowed = %w[white black]
+          SiteSetting.set(key, allowed.include?(value) ? value : "white")
         elsif value.present?
           SiteSetting.set(key, value)
-        elsif key == "default_og_image" && value.blank?
+        elsif %w[default_og_image hero_background_image].include?(key) && value.blank?
           # デフォルトOG画像が削除された場合は空文字を設定
           SiteSetting.set(key, "")
         end
@@ -35,8 +40,9 @@ class Admin::SiteSettingsController < Admin::BaseController
 
   def upload_image
     if params[:image].present?
-      # サイト設定用の画像アップロード（OGサイズ、JPEG形式）
-      result = ImageUploadService.upload(params[:image], upload_type: "thumbnail")
+      # サイト設定用の画像アップロード
+      upload_type = params[:upload_type].presence || "thumbnail"
+      result = ImageUploadService.upload(params[:image], upload_type: upload_type)
 
       if result[:error]
         render json: { error: result[:error] }, status: 422
@@ -57,6 +63,8 @@ class Admin::SiteSettingsController < Admin::BaseController
     params.require(:site_settings).permit(
       :site_title,
       :default_og_image,
+      :hero_background_image,
+      :hero_text_color,
       :top_page_description,
       :copyright,
       :author_display_enabled,

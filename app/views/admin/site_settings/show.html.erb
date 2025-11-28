@@ -27,6 +27,20 @@
           </div>
         </div>
 
+        <div class="l--form-item is--xs">
+          <label class="a--form-label mb-2">トップページヒーロー背景画像</label>
+          <%= render ImageUploadComponent.new(
+                field_name: "site_settings[hero_background_image]",
+                upload_url: admin_site_settings_upload_image_path(upload_type: "hero"),
+                current_image: @settings[:hero_background_image].presence,
+                spec_class: "hero-background-image",
+                help_text: "推奨: 1920x1080px 以上のJPG/PNG（最大5MB）"
+              ) %>
+          <div class="a--form-help mt-1">
+            <p>トップページヒーローセクションの背景に使用されます（推奨サイズ: 1920x1080以上）。</p>
+          </div>
+        </div>
+
         <div class="l--form-item is--sm">
           <%= label_tag "site_settings[top_page_description]", "トップページの説明文", class: "a--form-label mb-2" %>
           <%= text_area_tag "site_settings[top_page_description]",
@@ -43,6 +57,27 @@
                              autocomplete: "off" %>
           <div class="a--form-help mt-1">
             <p>「© <%= Date.current.year %> [ここに入力した名前]. All rights reserved.」の形式で表示されます。</p>
+          </div>
+        </div>
+
+        <div class="l--form-item">
+          <%= label_tag "site_settings[hero_text_color]", "ヒーローテキストカラー", class: "a--form-label mb-2" %>
+          <div class="flex items-center space-x-4">
+            <label class="flex items-center">
+              <%= radio_button_tag "site_settings[hero_text_color]", "white",
+                                   @settings[:hero_text_color] == "white",
+                                   class: "mr-2 spec--hero-text-color-white" %>
+              <span class="text-sm">白</span>
+            </label>
+            <label class="flex items-center">
+              <%= radio_button_tag "site_settings[hero_text_color]", "black",
+                                   @settings[:hero_text_color] == "black",
+                                   class: "mr-2 spec--hero-text-color-black" %>
+              <span class="text-sm">黒</span>
+            </label>
+          </div>
+          <div class="a--form-help mt-1">
+            <p>背景画像に合わせてヒーロー内テキストの色を選択します。</p>
           </div>
         </div>
 

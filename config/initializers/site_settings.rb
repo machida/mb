@@ -5,7 +5,9 @@ Rails.application.configure do
     site_title: "マチダのブログ",
     top_page_description: "プログラミングと日常の雑記ブログ",
     copyright: "マチダのブログ",
-    default_og_image: ""
+    default_og_image: "",
+    hero_background_image: "",
+    hero_text_color: "white"
   }
 
   # 環境別設定
