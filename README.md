@@ -4,6 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/machida/mb/badge.svg?branch=main)](https://coveralls.io/github/machida/mb?branch=main)
 ![Ruby 3.4.5](https://img.shields.io/badge/Ruby-3.4.5-red.svg)
 ![Node.js 20](https://img.shields.io/badge/Node.js-20.x-339933.svg)
+![License](https://img.shields.io/github/license/machida/mb)
 
 Rails 8.0.3で作成されたブログアプリケーション
 
