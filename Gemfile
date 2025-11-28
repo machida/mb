@@ -60,6 +60,8 @@ group :development, :test do
 
   # Testing gems
   gem "mocha", "~> 2.8"
+  gem "simplecov", require: false
+  gem "coveralls", require: false
 end
 
 group :development do
