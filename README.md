@@ -295,3 +295,8 @@ Playwrightテストは並列実行を無効化しています（`parallelize(wor
 - **Playwright**: 1.55.0（推奨）
 - **playwright-ruby-client**: 1.55.0（最新安定版）
 - これらの組み合わせで最適な動作を確認済み
+
+## ライセンス
+
+- このリポジトリは [MIT License](LICENSE) の下で提供されています。
+- 変更内容に応じて README や AGENTS.md / CLAUDE.md も必ず更新し、ドキュメントの不整合を防いでください。
