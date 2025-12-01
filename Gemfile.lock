@@ -301,7 +301,7 @@ GEM
     parser (3.3.10.0)
       ast (~> 2.4.1)
       racc
-    playwright-ruby-client (1.56.0)
+    playwright-ruby-client (1.57.0)
       concurrent-ruby (>= 1.1.6)
       mime-types (>= 3.0)
     pp (0.6.3)
@@ -524,7 +524,7 @@ DEPENDENCIES
   letter_opener_web
   listen (~> 3.3)
   mocha (~> 2.8)
-  playwright-ruby-client (~> 1.56.0)
+  playwright-ruby-client (~> 1.57.0)
   propshaft
   puma (>= 5.0)
   rails (~> 8.1.1)
