@@ -1,10 +1,9 @@
-@source "./app/views/**/*.{html,erb}"
-@source "./app/components/**/*.{rb,erb}"
-@source "./app/helpers/**/*.rb"
-@source "./app/javascript/**/*.{js,ts}"
-@source "./config/initializers/**/*.rb"
-@source "./lib/**/*.rb"
-
+@source "../../views/**/*.{html,erb}";
+@source "../../components/**/*.{rb,erb}";
+@source "../../helpers/**/*.rb";
+@source "../../javascript/**/*.{js,ts}";
+@source "../../../config/initializers/**/*.rb";
+@source "../../../lib/**/*.rb";
 @import "tailwindcss";
 @import "./_theme.css";
 @import "./_base.css";
