@@ -22,35 +22,6 @@ chat:
   # Enable chat functionality
   auto_reply: false
 
-# Path-based settings
-path_filters:
-  # Files to always review
-  include:
-    - "**/*.rb"
-    - "**/*.js"
-    - "**/*.ts"
-    - "**/*.css"
-    - "**/*.scss"
-    - "**/*.erb"
-    - "**/*.yml"
-    - "**/*.yaml"
-    - "Gemfile"
-    - "Dockerfile"
-    
-  # Files to exclude from review
-  exclude:
-    - "node_modules/**"
-    - "vendor/**"
-    - "log/**"
-    - "tmp/**"
-    - "storage/**"
-    - "public/assets/**"
-    - "app/assets/builds/**"
-    - "db/schema.rb"
-    - "*.lock"
-    - "*.min.js"
-    - "*.min.css"
-
 # Knowledge base settings
 knowledge_base:
   # Opt in to learnings from your codebase
@@ -62,33 +33,6 @@ knowledge_base:
 
 # Tone and style (shortened to under 250 characters)
 tone_instructions: "Rails 8のベストプラクティス、セキュリティ、保守性、パフォーマンス、CSSアーキテクチャ、エラーハンドリング、一貫したコードスタイルに重点を置いてレビューしてください。"
-
-# Path-specific review instructions in Japanese
-path_instructions:
-  - path: "**/*.rb"
-    instructions: |
-      - Railsの規約に従ったコードか確認
-      - セキュリティの脆弱性がないか注意
-      - パフォーマンスに問題がないか確認
-      - テストカバレッジが適切か確認
-  
-  - path: "**/*.erb"
-    instructions: |
-      - XSS脆弱性がないかチェック
-      - CSSクラス名が命名規則（.a--、.spec--）に従っているか確認
-      - アクセシビリティが考慮されているか確認
-  
-  - path: "**/*.css"
-    instructions: |
-      - Tailwind CSS v4の機能を適切に使用しているか確認
-      - カスタムCSSが本当に必要か検討
-      - 命名規則（.a--、.spec--）に従っているか確認
-  
-  - path: "test/**/*.rb"
-    instructions: |
-      - テストが適切にカバーしているか確認
-      - システムテストでは.spec--クラスを使用しているか確認
-      - テストが安定して実行できるか確認
 
 # Early access features
 early_access: false
