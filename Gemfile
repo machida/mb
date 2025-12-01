@@ -76,7 +76,7 @@ end
 group :test do
   # Playwright for E2E testing - unified system testing framework
   # Using 1.53.0 with Playwright 1.53.2: compatible versions
-  gem "playwright-ruby-client", "~> 1.56.0"
+  gem "playwright-ruby-client", "~> 1.57.0"
 
   # HTTP request stubbing for testing
   gem "webmock", "~> 3.26"
