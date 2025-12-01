@@ -2,6 +2,7 @@
 
 ![CI](https://github.com/machida/mb/actions/workflows/ci.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/machida/mb/badge.svg?branch=main)](https://coveralls.io/github/machida/mb?branch=main)
+![License](https://img.shields.io/github/license/machida/mb)
 ![Ruby 3.4.5](https://img.shields.io/badge/Ruby-3.4.5-red.svg)
 ![Node.js 20](https://img.shields.io/badge/Node.js-20.x-339933.svg)
 
