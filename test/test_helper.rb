@@ -11,6 +11,19 @@ if ENV["COVERAGE"] || ENV["CI"]
   end
 end
 
+if ENV["COVERAGE"] || ENV["CI"]
+  require "simplecov"
+  require "simplecov_json_formatter"
+
+  SimpleCov.start "rails" do
+    enable_coverage :branch
+    formatter SimpleCov::Formatter::MultiFormatter.new([
+      SimpleCov::Formatter::HTMLFormatter,
+      SimpleCov::Formatter::JSONFormatter
+    ])
+  end
+end
+
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
