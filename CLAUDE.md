@@ -6,8 +6,8 @@
 - 既定の管理者は `admin@example.com` (`admin123`) なので、新環境ごとに必ずパスワードを変更し安全な保管場所(1Password等)に記録してください。
 
 ## メタルール
-- `AGENTS.md` と `CLAUDE.md` は常に同一内容の日本語ドキュメントとして保守すること。どちらかを更新した場合は、同一コミット内で必ず他方も同じ変更を反映させる。
-- 作業に入る前に必ず `AGENTS.md` と `CLAUDE.md` を読み、最新ルールを再確認してから着手する。
+- `AGENTS.md` は `CLAUDE.md` へのシンボリックリンクです。`CLAUDE.md` のみを編集してください。
+- 作業に入る前に必ず `CLAUDE.md` を読み、最新ルールを再確認してから着手する。
 - すぐに解決方法がわからない問題に遭遇したら、推測で試行錯誤せず公式ドキュメントや信頼できる情報源を確認してから対応方針を決める。
 
 ## ディレクトリ構成とモジュール設計
@@ -49,6 +49,37 @@ npm run test:playwright                         # Playwright E2E
 ## CSS/HTMLクラス規約
 - `.a--` はAtomレベルの最小パーツ、`.l--` はレイアウト、`.spec--` はテスト専用でCSSセレクタには使わないこと。
 - `.spec--` クラスはPlaywright/MiniTestから参照し、追加・変更時は `test/support/selectors.rb` も更新します。
+
+## Tailwind CSS 設定
+
+### @source ディレクティブのパス指定ルール
+`app/assets/tailwind/application.css` の `@source` パスは **プロジェクトルート (Rails.root) からの相対パス** として解釈されます。
+
+```css
+/* ✅ 正しい記法 */
+@source "./app/views/**/*.{html,erb}"
+@source "app/components/**/*.{rb,erb}"
+
+/* ❌ 間違い（CSS ファイルからの相対パスではない） */
+@source "../app/views/**/*.erb"
+@source "../../app/components/**/*.rb"
+```
+
+**理由**: `tailwindcss-rails` gem は Rails.root ディレクトリから Tailwind CLI を実行するため、CWD = プロジェクトルートとなります。
+
+### ビルド確認コマンド
+設定変更後は必ずビルドテストを実行してください:
+```bash
+bundle exec rails tailwindcss:build           # ビルド実行
+ls -lh app/assets/builds/tailwind.css         # 成果物サイズ確認
+grep "\.bg-white" app/assets/builds/tailwind.css  # 使用クラスの存在確認
+bundle exec rails test test/lib/tailwind_config_test.rb  # パス検証テスト
+```
+
+### トラブルシューティング
+- **スタイルが反映されない**: `bin/rails assets:clobber && bin/dev` でキャッシュをクリア
+- **ビルドが遅い**: `@source` パスが広すぎないか確認（`node_modules` などを含めない）
+- **クラスが見つからない**: ファイル拡張子が `@source` のglob パターンに含まれているか確認
 
 ## コード品質・設計原則
 - 原則: 予測しやすい / 再利用しやすい / 保守しやすい / 拡張しやすい。
