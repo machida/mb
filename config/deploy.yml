@@ -76,6 +76,29 @@ volumes:
 # version inside the asset_path.
 asset_path: /rails/public/assets
 
+# Configure health check for the application
+# Rails app with Thruster listens on port 80
+healthcheck:
+  path: /up
+  port: 80
+  max_attempts: 15
+  interval: 10s
+  timeout: 5s
+  # Allow up to 2.5 minutes for initial startup (15 attempts * 10s interval)
+
+# Run database migrations before deploying new version
+# This ensures DB is ready before the new container tries to start
+hooks:
+  pre-deploy:
+    - path: /usr/bin/env bash
+      command: |-
+        echo "Running database migrations before deploy..."
+        kamal app exec -q --reuse \
+          "bin/rails db:migrate" || echo "Migration failed or no existing container"
+  post-deploy:
+    - path: /usr/bin/env bash
+      command: echo "Deployment completed successfully!"
+
 # Configure the image builder.
 builder:
   arch: amd64

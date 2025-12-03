@@ -8,7 +8,12 @@ fi
 
 # If running the rails server then create or migrate existing database
 if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
+  echo "[Entrypoint] Preparing database..."
+  start_time=$(date +%s)
   ./bin/rails db:prepare
+  end_time=$(date +%s)
+  elapsed=$((end_time - start_time))
+  echo "[Entrypoint] Database preparation completed in ${elapsed}s"
 fi
 
 exec "${@}"
