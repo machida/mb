@@ -48,3 +48,7 @@ node_modules/
 
 /config/credentials/production.key
 .claude/
+
+# Claude Code files
+.claude_todo.md
+.pr_description*.md

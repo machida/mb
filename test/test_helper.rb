@@ -1,15 +1,25 @@
 if ENV["COVERAGE"] || ENV["CI"]
   require "simplecov"
-  require "simplecov_json_formatter"
+  require "simplecov-lcov"
+
+  SimpleCov::Formatter::LcovFormatter.config do |c|
+    c.report_with_single_file = true
+    c.single_report_path = "coverage/lcov.info"
+  end
 
   SimpleCov.start "rails" do
     enable_coverage :branch
     add_filter %w[config/ test/ vendor/]
     track_files "app/**/*.rb"
-    formatter SimpleCov::Formatter::MultiFormatter.new([
-      SimpleCov::Formatter::HTMLFormatter,
-      SimpleCov::Formatter::JSONFormatter
-    ])
+
+    if ENV["CI"]
+      formatter SimpleCov::Formatter::LcovFormatter
+    else
+      formatter SimpleCov::Formatter::MultiFormatter.new([
+        SimpleCov::Formatter::HTMLFormatter,
+        SimpleCov::Formatter::LcovFormatter
+      ])
+    end
 
     # Enable merging of coverage data from parallel test runs
     use_merging true
