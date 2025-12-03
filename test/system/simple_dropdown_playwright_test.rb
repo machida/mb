@@ -18,8 +18,8 @@ class SimpleDropdownPlaywrightTest < ApplicationPlaywrightTestCase
     @page.goto("http://localhost:#{@server_port}/admin/articles")
 
     # Check that dropdown elements exist
-    dropdown_button = @page.query_selector('.js-dropdown-button')
-    dropdown_menu = @page.query_selector('.js-dropdown-menu')
+    dropdown_button = @page.query_selector('.js--dropdown-button')
+    dropdown_menu = @page.query_selector('.js--dropdown-menu')
 
     assert dropdown_button, "Dropdown button should exist"
     assert dropdown_menu, "Dropdown menu should exist"
@@ -39,8 +39,8 @@ class SimpleDropdownPlaywrightTest < ApplicationPlaywrightTestCase
     @page.goto("http://localhost:#{@server_port}/admin/articles")
 
     # Find elements
-    dropdown_button = @page.query_selector('.js-dropdown-button')
-    dropdown_menu = @page.query_selector('.js-dropdown-menu')
+    dropdown_button = @page.query_selector('.js--dropdown-button')
+    dropdown_menu = @page.query_selector('.js--dropdown-menu')
 
     # Initial state should be closed
     class_attr = dropdown_menu.get_attribute("class")
@@ -48,16 +48,16 @@ class SimpleDropdownPlaywrightTest < ApplicationPlaywrightTestCase
     assert_equal "false", dropdown_button.get_attribute("aria-expanded")
 
     # Click to open
-    @page.click('.js-dropdown-button')
+    @page.click('.js--dropdown-button')
 
     # Wait for JavaScript to execute using wait_for_function
     @page.wait_for_function("
-      () => document.querySelector('.js-dropdown-menu').classList.contains('is--open')
+      () => document.querySelector('.js--dropdown-menu').classList.contains('is--open')
     ")
 
     # Check updated state
-    dropdown_button = @page.query_selector('.js-dropdown-button')
-    dropdown_menu = @page.query_selector('.js-dropdown-menu')
+    dropdown_button = @page.query_selector('.js--dropdown-button')
+    dropdown_menu = @page.query_selector('.js--dropdown-menu')
 
     # Should now be open
     class_attr = dropdown_menu.get_attribute("class")

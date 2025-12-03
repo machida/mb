@@ -18,8 +18,8 @@ class AdminDropdownPlaywrightTest < ApplicationPlaywrightTestCase
     @page.goto("http://localhost:#{@server_port}/admin/articles")
 
     # Find the dropdown elements using CSS selectors
-    dropdown_button_selector = DROPDOWN_BUTTON
-    dropdown_menu_selector = '.js-dropdown-menu'
+    dropdown_button_selector = '.js--dropdown-button'
+    dropdown_menu_selector = '.js--dropdown-menu'
 
     # Initially, dropdown should be closed
     assert @page.query_selector(dropdown_button_selector), "Dropdown button should exist"
@@ -49,7 +49,7 @@ class AdminDropdownPlaywrightTest < ApplicationPlaywrightTestCase
     assert class_attr.include?('is--open'), "Menu should have 'is--open' class"
 
     # Click to close dropdown
-    @page.click('.js-dropdown-button')
+    @page.click('.js--dropdown-button')
 
     # Wait for dropdown to close
     @page.wait_for_function("
@@ -57,7 +57,7 @@ class AdminDropdownPlaywrightTest < ApplicationPlaywrightTestCase
     ")
 
     # Verify closed state
-    dropdown_button = @page.query_selector('.js-dropdown-button')
+    dropdown_button = @page.query_selector('.js--dropdown-button')
     assert_equal "false", dropdown_button.get_attribute("aria-expanded")
 
     dropdown_menu = @page.query_selector(dropdown_menu_selector)
@@ -71,8 +71,8 @@ class AdminDropdownPlaywrightTest < ApplicationPlaywrightTestCase
     # Visit admin page
     @page.goto("http://localhost:#{@server_port}/admin/articles")
 
-    dropdown_button_selector = DROPDOWN_BUTTON
-    dropdown_menu_selector = '.js-dropdown-menu'
+    dropdown_button_selector = '.js--dropdown-button'
+    dropdown_menu_selector = '.js--dropdown-menu'
 
     # Open dropdown
     @page.click(dropdown_button_selector)
@@ -99,7 +99,7 @@ class AdminDropdownPlaywrightTest < ApplicationPlaywrightTestCase
     class_attr = dropdown_menu.get_attribute("class")
     assert_not class_attr.include?('is--open'), "Menu should not have 'is--open' class"
 
-    dropdown_button = @page.query_selector('.js-dropdown-button')
+    dropdown_button = @page.query_selector('.js--dropdown-button')
     assert_equal "false", dropdown_button.get_attribute("aria-expanded")
   end
 
@@ -109,8 +109,8 @@ class AdminDropdownPlaywrightTest < ApplicationPlaywrightTestCase
     # Visit admin page
     @page.goto("http://localhost:#{@server_port}/admin/articles")
 
-    dropdown_button_selector = DROPDOWN_BUTTON
-    dropdown_menu_selector = '.js-dropdown-menu'
+    dropdown_button_selector = '.js--dropdown-button'
+    dropdown_menu_selector = '.js--dropdown-menu'
 
     # Open dropdown
     @page.click(dropdown_button_selector)
@@ -137,7 +137,7 @@ class AdminDropdownPlaywrightTest < ApplicationPlaywrightTestCase
     class_attr = dropdown_menu.get_attribute("class")
     assert_not class_attr.include?('is--open'), "Menu should not have 'is--open' class"
 
-    dropdown_button = @page.query_selector('.js-dropdown-button')
+    dropdown_button = @page.query_selector('.js--dropdown-button')
     assert_equal "false", dropdown_button.get_attribute("aria-expanded")
   end
 
@@ -147,8 +147,8 @@ class AdminDropdownPlaywrightTest < ApplicationPlaywrightTestCase
     # Visit admin page
     @page.goto("http://localhost:#{@server_port}/admin/articles")
 
-    dropdown_button_selector = DROPDOWN_BUTTON
-    dropdown_menu_selector = '.js-dropdown-menu'
+    dropdown_button_selector = '.js--dropdown-button'
+    dropdown_menu_selector = '.js--dropdown-menu'
 
     # Open dropdown
     @page.click(dropdown_button_selector)
@@ -163,7 +163,7 @@ class AdminDropdownPlaywrightTest < ApplicationPlaywrightTestCase
     assert class_attr.include?('is--open'), "Menu should have 'is--open' class"
 
     # Click profile edit link - wait for it to be clickable
-    profile_link_selector = PROFILE_EDIT_LINK
+    profile_link_selector = '.spec--profile-edit-link'
     @page.wait_for_selector(profile_link_selector)
     @page.click(profile_link_selector)
 
@@ -171,7 +171,7 @@ class AdminDropdownPlaywrightTest < ApplicationPlaywrightTestCase
     @page.wait_for_url(/.*\/admin\/profile\/edit/)
 
     # Verify we're on the right page
-    page_title = @page.query_selector(PROFILE_EDIT_TITLE)
+    page_title = @page.query_selector('.spec--profile-edit-title')
     assert page_title, "Profile edit title should exist"
     assert_equal "プロフィール編集", page_title.inner_text
   end

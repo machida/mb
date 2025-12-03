@@ -23,17 +23,17 @@ class DropdownTurboNavigationPlaywrightTest < ApplicationPlaywrightTestCase
     # Verify dropdown works on articles page
     @page.click(DROPDOWN_BUTTON)
     @page.wait_for_function("
-      () => document.querySelector('.js-dropdown-menu').classList.contains('is--open')
+      () => document.querySelector('.js--dropdown-menu').classList.contains('is--open')
     ")
 
-    dropdown_menu = @page.query_selector('.js-dropdown-menu')
+    dropdown_menu = @page.query_selector('.js--dropdown-menu')
     class_attr = dropdown_menu.get_attribute("class")
     assert class_attr.include?('is--open'), "Menu should work on articles page"
 
     # Close dropdown
     @page.click(DROPDOWN_BUTTON)
     @page.wait_for_function("
-      () => !document.querySelector('.js-dropdown-menu').classList.contains('is--open')
+      () => !document.querySelector('.js--dropdown-menu').classList.contains('is--open')
     ")
 
     # Navigate to site settings page (this uses Turbo navigation)
@@ -68,27 +68,27 @@ class DropdownTurboNavigationPlaywrightTest < ApplicationPlaywrightTestCase
 
     # Wait for any JavaScript re-initialization to complete with longer timeout
     @page.wait_for_function("
-      () => document.querySelector('.js-dropdown-button') &&
-            document.querySelector('.js-dropdown-button').hasAttribute('data-dropdown-initialized')
+      () => document.querySelector('.js--dropdown-button') &&
+            document.querySelector('.js--dropdown-button').hasAttribute('data-dropdown-initialized')
     ", timeout: 10000)
 
     # Verify dropdown still works after Turbo navigation
     @page.click(DROPDOWN_BUTTON)
     @page.wait_for_function("
-      () => document.querySelector('.js-dropdown-menu').classList.contains('is--open')
+      () => document.querySelector('.js--dropdown-menu').classList.contains('is--open')
     ")
 
-    dropdown_menu = @page.query_selector('.js-dropdown-menu')
+    dropdown_menu = @page.query_selector('.js--dropdown-menu')
     class_attr = dropdown_menu.get_attribute("class")
     assert class_attr.include?('is--open'), "Menu should work after Turbo navigation"
 
     # Test ESC key still works after navigation
     @page.keyboard.press("Escape")
     @page.wait_for_function("
-      () => !document.querySelector('.js-dropdown-menu').classList.contains('is--open')
+      () => !document.querySelector('.js--dropdown-menu').classList.contains('is--open')
     ")
 
-    dropdown_menu = @page.query_selector('.js-dropdown-menu')
+    dropdown_menu = @page.query_selector('.js--dropdown-menu')
     class_attr = dropdown_menu.get_attribute("class")
     assert_not class_attr.include?('is--open'), "ESC should work after Turbo navigation"
   end
@@ -104,20 +104,20 @@ class DropdownTurboNavigationPlaywrightTest < ApplicationPlaywrightTestCase
     # Dropdown should still work normally (no JS errors from duplicate listeners)
     @page.click(DROPDOWN_BUTTON)
     @page.wait_for_function("
-      () => document.querySelector('.js-dropdown-menu').classList.contains('is--open')
+      () => document.querySelector('.js--dropdown-menu').classList.contains('is--open')
     ")
 
-    dropdown_menu = @page.query_selector('.js-dropdown-menu')
+    dropdown_menu = @page.query_selector('.js--dropdown-menu')
     class_attr = dropdown_menu.get_attribute("class")
     assert class_attr.include?('is--open'), "Menu should work after multiple page loads"
 
     # Outside click should still work (only one event listener should respond)
     @page.click('header')
     @page.wait_for_function("
-      () => !document.querySelector('.js-dropdown-menu').classList.contains('is--open')
+      () => !document.querySelector('.js--dropdown-menu').classList.contains('is--open')
     ")
 
-    dropdown_menu = @page.query_selector('.js-dropdown-menu')
+    dropdown_menu = @page.query_selector('.js--dropdown-menu')
     class_attr = dropdown_menu.get_attribute("class")
     assert_not class_attr.include?('is--open'), "Outside click should work correctly"
   end
@@ -132,11 +132,11 @@ class DropdownTurboNavigationPlaywrightTest < ApplicationPlaywrightTestCase
 
     # Wait for dropdown to open and transitions to complete
     @page.wait_for_function("
-      () => document.querySelector('.js-dropdown-menu').classList.contains('is--open')
+      () => document.querySelector('.js--dropdown-menu').classList.contains('is--open')
     ")
 
     # Check that the dropdown menu has is--open class
-    dropdown_menu = @page.query_selector('.js-dropdown-menu')
+    dropdown_menu = @page.query_selector('.js--dropdown-menu')
     class_attr = dropdown_menu.get_attribute("class")
     assert class_attr.include?('is--open'), "Menu should be open"
 

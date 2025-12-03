@@ -196,8 +196,8 @@ class CopyrightEdgeCasesPlaywrightTest < ApplicationPlaywrightTestCase
     
     # Wait for the admin page title to be visible to ensure page is fully loaded
     @page.wait_for_selector(".spec--site-settings-title", timeout: 10000)
-    
-    copyright_field = @page.locator(copyright_selector_after)
+
+    copyright_field = @page.locator(".spec--copyright-input")
     assert_equal "最終値", copyright_field.input_value
     
     # Wait for database sync and verify the setting was actually saved
