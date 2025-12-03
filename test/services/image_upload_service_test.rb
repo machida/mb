@@ -90,15 +90,56 @@ class ImageUploadServiceTest < ActiveSupport::TestCase
 
   test "should process images with correct format based on upload type" do
     Rails.env.stubs(:production?).returns(false)
-    
+
     # サムネイル用（JPEG形式）
     thumbnail_result = ImageUploadService.upload(@valid_image, upload_type: "thumbnail")
     assert_not thumbnail_result[:error]
     assert thumbnail_result[:url].end_with?(".jpg")
-    
+
     # コンテンツ用（WebP形式）
     content_result = ImageUploadService.upload(@valid_image, upload_type: "content")
     assert_not content_result[:error]
     assert content_result[:url].end_with?(".webp")
+  end
+
+  test "should process hero type images with JPEG format" do
+    Rails.env.stubs(:production?).returns(false)
+
+    hero_result = ImageUploadService.upload(@valid_image, upload_type: "hero")
+    assert_not hero_result[:error]
+    assert hero_result[:url].end_with?(".jpg")
+    assert hero_result[:url].starts_with?("/uploads/images/")
+  end
+
+  test "should handle GCS upload errors" do
+    skip "GCS library not loaded in test environment"
+  end
+
+  test "should return error when GCS credentials are missing" do
+    skip "GCS library not loaded in test environment"
+  end
+
+  test "should handle StringIO files in local upload" do
+    Rails.env.stubs(:production?).returns(false)
+
+    # Create a StringIO-based uploaded file (simulates some upload scenarios)
+    string_io_file = Rack::Test::UploadedFile.new(
+      StringIO.new(File.binread(@temp_image_file.path)),
+      "image/jpeg",
+      original_filename: "stringio_test.jpg"
+    )
+
+    result = ImageUploadService.upload(string_io_file, upload_type: "thumbnail")
+    assert_not result[:error], "Should handle StringIO files"
+    assert result[:url]
+  end
+
+  test "should include markdown format in result" do
+    Rails.env.stubs(:production?).returns(false)
+
+    result = ImageUploadService.upload(@valid_image)
+    assert result[:markdown]
+    assert result[:markdown].include?("![画像]")
+    assert result[:markdown].include?(result[:url])
   end
 end
