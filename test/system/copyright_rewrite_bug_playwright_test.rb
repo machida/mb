@@ -22,36 +22,29 @@ class CopyrightRewriteBugPlaywrightTest < ApplicationPlaywrightTestCase
     @page.wait_for_load_state(state: 'networkidle')
     
     # Wait for the admin page title to be visible first to ensure we're on the right page
-    @page.wait_for_selector("h1:has-text('サイト設定')", timeout: 10000)
-    
-    # Wait for copyright input to be available (try both selectors)
-    copyright_selector = nil
-    begin
-      @page.wait_for_selector(COPYRIGHT_INPUT, timeout: 5000)
-      copyright_selector = COPYRIGHT_INPUT
-    rescue Playwright::TimeoutError
-      @page.wait_for_selector("input[name='site_settings[copyright]']", timeout: 5000)
-      copyright_selector = "input[name='site_settings[copyright]']"
-    end
-    
+    @page.wait_for_selector(".spec--site-settings-title", timeout: 10000)
+
+    # Wait for copyright input to be available
+    @page.wait_for_selector(".spec--copyright-input", timeout: 5000)
+
     # Verify current state
     current_db_value = SiteSetting.copyright
     Rails.logger.info "Current copyright value in DB: #{current_db_value}"
-    
+
     # Check current form value
-    copyright_field = @page.locator(copyright_selector)
+    copyright_field = @page.locator(".spec--copyright-input")
     current_value = copyright_field.input_value
     Rails.logger.info "Current form value: #{current_value.inspect}"
-    
+
     # Change to a completely different value
     new_value = "新しい会社名"
-    @page.fill("input[name='site_settings[copyright]']", new_value)
-    
+    @page.fill(".spec--copyright-input", new_value)
+
     # Wait for save button to be available
-    @page.wait_for_selector("input[type='submit'][value='設定を保存']", timeout: 5000)
-    
+    @page.wait_for_selector(".spec--save-button", timeout: 5000)
+
     # Submit the form
-    @page.click("input[type='submit'][value='設定を保存']")
+    @page.click(".spec--save-button")
     
     # Wait for form submission and redirect
     @page.wait_for_url(/.*\/admin\/site-settings/)
@@ -60,10 +53,10 @@ class CopyrightRewriteBugPlaywrightTest < ApplicationPlaywrightTestCase
     @page.wait_for_load_state(state: 'networkidle')
     
     # Wait for the admin page title to be visible to ensure page is fully loaded
-    @page.wait_for_selector("h1:has-text('サイト設定')", timeout: 10000)
-    
+    @page.wait_for_selector(".spec--site-settings-title", timeout: 10000)
+
     # Check form field value after save - this should reflect the server state
-    copyright_field_after = @page.locator(copyright_selector)
+    copyright_field_after = @page.locator(".spec--copyright-input")
     form_value_after = copyright_field_after.input_value
     
     # For system tests, we should verify that the change persists by checking the form display
@@ -90,48 +83,41 @@ class CopyrightRewriteBugPlaywrightTest < ApplicationPlaywrightTestCase
     @page.wait_for_load_state(state: 'networkidle')
     
     # Wait for the admin page title to be visible first to ensure we're on the right page
-    @page.wait_for_selector("h1:has-text('サイト設定')", timeout: 10000)
-    
-    # Wait for copyright input to be available (try both selectors)
-    copyright_selector = nil
-    begin
-      @page.wait_for_selector(COPYRIGHT_INPUT, timeout: 5000)
-      copyright_selector = COPYRIGHT_INPUT
-    rescue Playwright::TimeoutError
-      @page.wait_for_selector("input[name='site_settings[copyright]']", timeout: 5000)
-      copyright_selector = "input[name='site_settings[copyright]']"
-    end
-    
+    @page.wait_for_selector(".spec--site-settings-title", timeout: 10000)
+
+    # Wait for copyright input to be available
+    @page.wait_for_selector(".spec--copyright-input", timeout: 5000)
+
     # Use Playwright's network monitoring instead of execute_script
     @page.on('request', ->(request) {
       if request.method == 'PATCH' && request.url.include?('site_settings')
         Rails.logger.info "Request URL: #{request.url}"
         Rails.logger.info "Request method: #{request.method}"
         Rails.logger.info "Request headers: #{request.headers}"
-        
+
         # Log form data if available
         if request.post_data
           Rails.logger.info "Request body: #{request.post_data}"
         end
       end
     })
-    
+
     # Fill in new copyright
-    @page.fill("input[name='site_settings[copyright]']", "デバッグテスト")
-    
+    @page.fill(".spec--copyright-input", "デバッグテスト")
+
     # Wait for save button to be available
-    @page.wait_for_selector("input[type='submit'][value='設定を保存']", timeout: 5000)
-    
+    @page.wait_for_selector(".spec--save-button", timeout: 5000)
+
     # Submit and wait for completion
-    @page.click("input[type='submit'][value='設定を保存']")
+    @page.click(".spec--save-button")
     @page.wait_for_url(/.*\/admin\/site-settings/)
     @page.wait_for_load_state(state: 'networkidle')
     
     # Wait for the admin page title to be visible to ensure page is fully loaded
-    @page.wait_for_selector("h1:has-text('サイト設定')", timeout: 10000)
-    
+    @page.wait_for_selector(".spec--site-settings-title", timeout: 10000)
+
     # Check form field value after save - this should reflect the server state
-    copyright_field_after = @page.locator(copyright_selector)
+    copyright_field_after = @page.locator(".spec--copyright-input")
     form_value_after = copyright_field_after.input_value
     
     # For system tests, we should verify that the change persists by checking the form display
@@ -163,40 +149,33 @@ class CopyrightRewriteBugPlaywrightTest < ApplicationPlaywrightTestCase
     Rails.logger.info "Step 2 - Visited settings page"
     
     # Wait for the admin page title to be visible first to ensure we're on the right page
-    @page.wait_for_selector("h1:has-text('サイト設定')", timeout: 10000)
+    @page.wait_for_selector(".spec--site-settings-title", timeout: 10000)
     Rails.logger.info "Step 2.1 - Page title loaded"
-    
-    # Wait for copyright input to be available (try both selectors)
-    copyright_selector = nil
-    begin
-      @page.wait_for_selector(COPYRIGHT_INPUT, timeout: 5000)
-      copyright_selector = COPYRIGHT_INPUT
-    rescue Playwright::TimeoutError
-      @page.wait_for_selector("input[name='site_settings[copyright]']", timeout: 5000)
-      copyright_selector = "input[name='site_settings[copyright]']"
-    end
-    
+
+    # Wait for copyright input to be available
+    @page.wait_for_selector(".spec--copyright-input", timeout: 5000)
+
     # Step 3: Check form displays correct initial value
-    copyright_field = @page.locator(copyright_selector)
+    copyright_field = @page.locator(".spec--copyright-input")
     form_initial_value = copyright_field.input_value
     Rails.logger.info "Step 3 - Form shows: #{form_initial_value.inspect}"
     assert_equal initial_value, form_initial_value, "Form should show current value"
-    
+
     # Step 4: Clear and enter new value
     new_value = "段階的テスト著作権者"
-    @page.fill("input[name='site_settings[copyright]']", "")  # Clear first
-    @page.fill("input[name='site_settings[copyright]']", new_value)
+    @page.fill(".spec--copyright-input", "")  # Clear first
+    @page.fill(".spec--copyright-input", new_value)
     Rails.logger.info "Step 4 - Entered new value: #{new_value.inspect}"
-    
+
     # Step 5: Verify field contains new value before submit
-    field_before_submit = @page.locator(copyright_selector).input_value
+    field_before_submit = @page.locator(".spec--copyright-input").input_value
     Rails.logger.info "Step 5 - Field before submit: #{field_before_submit.inspect}"
     assert_equal new_value, field_before_submit, "Field should contain new value before submit"
-    
+
     # Step 6: Submit form
     # Wait for save button to be available
-    @page.wait_for_selector("input[type='submit'][value='設定を保存']", timeout: 5000)
-    @page.click("input[type='submit'][value='設定を保存']")
+    @page.wait_for_selector(".spec--save-button", timeout: 5000)
+    @page.click(".spec--save-button")
     Rails.logger.info "Step 6 - Submitted form"
     
     # Step 7: Verify we're on settings page and wait for completion
@@ -223,22 +202,15 @@ class CopyrightRewriteBugPlaywrightTest < ApplicationPlaywrightTestCase
     db_value_after = get_current_copyright
     Rails.logger.info "Step 8 - DB value after submit: #{db_value_after.inspect}"
     
-    # Step 9: Check form field value after redirect  
+    # Step 9: Check form field value after redirect
     # Wait for the admin page title to be visible first to ensure page is fully loaded
-    @page.wait_for_selector("h1:has-text('サイト設定')", timeout: 10000)
+    @page.wait_for_selector(".spec--site-settings-title", timeout: 10000)
     Rails.logger.info "Step 9.1 - Page reloaded after submit"
-    
-    # Use the same fallback selector approach for consistency
-    copyright_field_after_selector = nil
-    begin
-      @page.wait_for_selector(COPYRIGHT_INPUT, timeout: 5000)
-      copyright_field_after_selector = COPYRIGHT_INPUT
-    rescue Playwright::TimeoutError
-      @page.wait_for_selector("input[name='site_settings[copyright]']", timeout: 5000)
-      copyright_field_after_selector = "input[name='site_settings[copyright]']"
-    end
-    
-    copyright_field_after = @page.locator(copyright_field_after_selector)
+
+    # Wait for copyright input to be available
+    @page.wait_for_selector(".spec--copyright-input", timeout: 5000)
+
+    copyright_field_after = @page.locator(".spec--copyright-input")
     form_value_after = copyright_field_after.input_value
     Rails.logger.info "Step 9 - Form value after redirect: #{form_value_after.inspect}"
     

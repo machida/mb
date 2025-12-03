@@ -40,8 +40,8 @@ class Admin::DiagnosticsControllerTest < ActionDispatch::IntegrationTest
     get admin_diagnostics_image_upload_check_path
     json = JSON.parse(response.body)
 
-    assert_equal "development", json["gcs_configured"]["status"]
-    assert_equal "GCS not required in development", json["gcs_configured"]["message"]
+    assert_equal "test", json["gcs_configured"]["status"]
+    assert_equal "GCS not required in test", json["gcs_configured"]["message"]
     assert_equal false, json["gcs_configured"]["project_id"]
     assert_equal false, json["gcs_configured"]["bucket"]
     assert_equal false, json["gcs_configured"]["credentials"]

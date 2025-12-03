@@ -24,7 +24,7 @@
     gap: var(--app-spacing-xs);
   }
 
-  @media (--breakpoint-md) {
+  @media (min-width: 768px) {
     .l--action-banner__inner {
       flex-direction: row;
       gap: var(--app-spacing-md);
@@ -42,7 +42,7 @@
     line-height: 1.75rem;
   }
 
-  @media (--breakpoint-md) {
+  @media (min-width: 768px) {
     .l--action-banner__icon {
       font-size: var(--app-spacing-lg);
       line-height: 2rem;
@@ -54,7 +54,7 @@
     line-height: 1.25rem;
   }
 
-  @media (--breakpoint-md) {
+  @media (min-width: 768px) {
     .l--action-banner__text {
       font-size: var(--app-spacing-md);
       line-height: var(--app-spacing-lg);
