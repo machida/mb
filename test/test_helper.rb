@@ -10,6 +10,10 @@ if ENV["COVERAGE"] || ENV["CI"]
       SimpleCov::Formatter::HTMLFormatter,
       SimpleCov::Formatter::JSONFormatter
     ])
+
+    # Enable merging of coverage data from parallel test runs
+    use_merging true
+    merge_timeout 3600
   end
 end
 
@@ -32,6 +36,17 @@ module ActiveSupport
     parallelize(workers: :number_of_processors)
     fixtures :all
     include TestConfig
+
+    # SimpleCov parallel test support
+    if ENV["COVERAGE"] || ENV["CI"]
+      parallelize_setup do |worker|
+        SimpleCov.command_name "#{SimpleCov.command_name}-#{worker}"
+      end
+
+      parallelize_teardown do |worker|
+        SimpleCov.result
+      end
+    end
   end
 end
 
