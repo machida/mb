@@ -63,7 +63,8 @@ jobs:
       uses: coverallsapp/github-action@v2
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        coverage-format: simplecov
+        file: coverage/.resultset.json
+        format: simplecov
 
     - name: Run system tests
       env:
