@@ -43,7 +43,7 @@ class AuthorDisplayTogglePlaywrightTest < ApplicationPlaywrightTestCase
 
     # Navigate to site settings
     @page.goto("http://localhost:#{@server_port}/admin/site-settings")
-    @page.wait_for_selector("h1:has-text('サイト設定')")
+    @page.wait_for_selector(".spec--site-settings-title")
 
     # Check that author display is enabled by default
     enabled_radio = @page.locator("input.spec--author-display-enabled-true")
@@ -127,7 +127,7 @@ class AuthorDisplayTogglePlaywrightTest < ApplicationPlaywrightTestCase
     # Test with enabled setting
     SiteSetting.set("author_display_enabled", "true")
     @page.goto("http://localhost:#{@server_port}/admin/site-settings")
-    @page.wait_for_selector("h1:has-text('サイト設定')")
+    @page.wait_for_selector(".spec--site-settings-title")
 
     enabled_radio = @page.locator("input.spec--author-display-enabled-true")
     assert enabled_radio.checked?
@@ -135,7 +135,7 @@ class AuthorDisplayTogglePlaywrightTest < ApplicationPlaywrightTestCase
     # Test with disabled setting
     SiteSetting.set("author_display_enabled", "false")
     @page.goto("http://localhost:#{@server_port}/admin/site-settings")
-    @page.wait_for_selector("h1:has-text('サイト設定')")
+    @page.wait_for_selector(".spec--site-settings-title")
 
     disabled_radio = @page.locator("input.spec--author-display-enabled-false")
     assert disabled_radio.checked?

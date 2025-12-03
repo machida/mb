@@ -88,7 +88,7 @@ class AdminManagementPlaywrightTest < ApplicationPlaywrightTestCase
     
     # パスワード変更ページに遷移
     @page.wait_for_url("**/admin/password/edit", timeout: 10000)
-    assert @page.locator("h1:has-text('パスワード変更')").visible?
+    assert @page.locator(".spec--password-edit-title").visible?
   end
 
   test "admin can delete another admin without articles" do
@@ -217,12 +217,12 @@ class AdminManagementPlaywrightTest < ApplicationPlaywrightTestCase
     @page.wait_for_load_state(state: 'networkidle')
     
     # Wait for form elements to be available
-    @page.wait_for_selector("input[name='admin[password]']", timeout: 10000)
-    @page.fill("input[name='admin[password]']", "newpassword123")
-    @page.fill("input[name='admin[password_confirmation]']", "newpassword123")
-    
+    @page.wait_for_selector(".spec--password-input", timeout: 10000)
+    @page.fill(".spec--password-input", "newpassword123")
+    @page.fill(".spec--password-confirmation-input", "newpassword123")
+
     # Submit form and wait for redirect
-    @page.click("input[type='submit'][value='パスワードを変更']")
+    @page.click(".spec--password-change-button")
     @page.wait_for_load_state(state: 'networkidle')
     
     # セッションとデータベースの更新を確実にするため少し待機

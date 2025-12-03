@@ -83,13 +83,13 @@ class AdminSiteSettingsPlaywrightTest < ApplicationPlaywrightTestCase
     @page.goto("http://localhost:#{@server_port}/admin/site-settings")
     
     # Check form field values
-    site_title_input = @page.locator("input[name='site_settings[site_title]']")
+    site_title_input = @page.locator(".spec--site-title-input")
     assert_equal "テストタイトル", site_title_input.input_value
-    
-    description_input = @page.locator("textarea[name='site_settings[top_page_description]']")
+
+    description_input = @page.locator(".spec--top-page-description-input")
     assert_equal "テスト説明", description_input.input_value
-    
-    copyright_input = @page.locator("input[name='site_settings[copyright]']")
+
+    copyright_input = @page.locator(".spec--copyright-input")
     assert_equal "テスト著作者", copyright_input.input_value
   end
 
