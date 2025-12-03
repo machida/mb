@@ -37,19 +37,12 @@ class CopyrightUpdatePlaywrightTest < ApplicationPlaywrightTestCase
     
     # Wait for the admin page title to be visible first to ensure we're on the right page
     @page.wait_for_selector(".spec--site-settings-title", timeout: 10000)
-    
-    # Wait for copyright input to be available (try both selectors)
-    copyright_selector = nil
-    begin
-      @page.wait_for_selector(COPYRIGHT_INPUT, timeout: 5000)
-      copyright_selector = COPYRIGHT_INPUT
-    rescue Playwright::TimeoutError
-      @page.wait_for_selector(".spec--copyright-input", timeout: 5000)
-      copyright_selector = ".spec--copyright-input"
-    end
-    
+
+    # Wait for copyright input to be available
+    @page.wait_for_selector(".spec--copyright-input", timeout: 5000)
+
     # Verify current copyright value is displayed
-    copyright_input = @page.locator(copyright_selector)
+    copyright_input = @page.locator(".spec--copyright-input")
     assert_equal "テスト著作権者", copyright_input.input_value
     
     # Update copyright holder name
@@ -61,9 +54,9 @@ class CopyrightUpdatePlaywrightTest < ApplicationPlaywrightTestCase
     
     # Wait for the admin page title to be visible to ensure page is fully loaded
     @page.wait_for_selector(".spec--site-settings-title", timeout: 10000)
-    
+
     # Verify the field shows updated value
-    copyright_input = @page.locator(copyright_selector)
+    copyright_input = @page.locator(".spec--copyright-input")
     assert_equal "新しい著作権者名", copyright_input.input_value
     
     # Wait for database sync and verify the setting was actually saved
@@ -84,15 +77,8 @@ class CopyrightUpdatePlaywrightTest < ApplicationPlaywrightTestCase
     # Wait for the admin page title to be visible first to ensure we're on the right page
     @page.wait_for_selector(".spec--site-settings-title", timeout: 10000)
     
-    # Wait for copyright input to be available (try both selectors)
-    copyright_selector = nil
-    begin
-      @page.wait_for_selector(COPYRIGHT_INPUT, timeout: 5000)
-      copyright_selector = COPYRIGHT_INPUT
-    rescue Playwright::TimeoutError
-      @page.wait_for_selector(".spec--copyright-input", timeout: 5000)
-      copyright_selector = ".spec--copyright-input"
-    end
+    # Wait for copyright input to be available
+    @page.wait_for_selector(".spec--copyright-input", timeout: 5000)
     
     # Clear copyright field (empty string)
     @page.fill(".spec--copyright-input", "")
@@ -104,7 +90,7 @@ class CopyrightUpdatePlaywrightTest < ApplicationPlaywrightTestCase
     @page.wait_for_selector(".spec--site-settings-title", timeout: 10000)
     
     # Verify the field is empty
-    copyright_input = @page.locator(copyright_selector)
+    copyright_input = @page.locator(".spec--copyright-input")
     assert_equal "", copyright_input.input_value
     
     # Wait for database sync and verify the setting was actually cleared
@@ -125,15 +111,8 @@ class CopyrightUpdatePlaywrightTest < ApplicationPlaywrightTestCase
     # Wait for the admin page title to be visible first to ensure we're on the right page
     @page.wait_for_selector(".spec--site-settings-title", timeout: 10000)
     
-    # Wait for copyright input to be available (try both selectors)
-    copyright_selector = nil
-    begin
-      @page.wait_for_selector(COPYRIGHT_INPUT, timeout: 5000)
-      copyright_selector = COPYRIGHT_INPUT
-    rescue Playwright::TimeoutError
-      @page.wait_for_selector(".spec--copyright-input", timeout: 5000)
-      copyright_selector = ".spec--copyright-input"
-    end
+    # Wait for copyright input to be available
+    @page.wait_for_selector(".spec--copyright-input", timeout: 5000)
     
     # Update copyright with leading/trailing spaces
     @page.fill(".spec--copyright-input", "  スペース付き著作権者  ")
@@ -165,15 +144,8 @@ class CopyrightUpdatePlaywrightTest < ApplicationPlaywrightTestCase
     # Wait for the admin page title to be visible first to ensure we're on the right page
     @page.wait_for_selector(".spec--site-settings-title", timeout: 10000)
     
-    # Wait for copyright input to be available (try both selectors)
-    copyright_selector = nil
-    begin
-      @page.wait_for_selector(COPYRIGHT_INPUT, timeout: 5000)
-      copyright_selector = COPYRIGHT_INPUT
-    rescue Playwright::TimeoutError
-      @page.wait_for_selector(".spec--copyright-input", timeout: 5000)
-      copyright_selector = ".spec--copyright-input"
-    end
+    # Wait for copyright input to be available
+    @page.wait_for_selector(".spec--copyright-input", timeout: 5000)
     
     @page.fill(".spec--copyright-input", "新しいブログ名")
     submit_settings_and_wait
@@ -198,15 +170,8 @@ class CopyrightUpdatePlaywrightTest < ApplicationPlaywrightTestCase
     # Wait for the admin page title to be visible first to ensure we're on the right page
     @page.wait_for_selector(".spec--site-settings-title", timeout: 10000)
     
-    # Wait for copyright input to be available (try both selectors)
-    copyright_selector = nil
-    begin
-      @page.wait_for_selector(COPYRIGHT_INPUT, timeout: 5000)
-      copyright_selector = COPYRIGHT_INPUT
-    rescue Playwright::TimeoutError
-      @page.wait_for_selector(".spec--copyright-input", timeout: 5000)
-      copyright_selector = ".spec--copyright-input"
-    end
+    # Wait for copyright input to be available
+    @page.wait_for_selector(".spec--copyright-input", timeout: 5000)
     
     @page.fill(".spec--copyright-input", "")
     submit_settings_and_wait
