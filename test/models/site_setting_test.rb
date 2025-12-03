@@ -95,4 +95,76 @@ class SiteSettingTest < ActiveSupport::TestCase
     SiteSetting.set("hero_text_color", "purple")
     assert_equal "white", SiteSetting.hero_text_color
   end
+
+  test "default_og_image_url returns same as default_og_image" do
+    SiteSetting.set("default_og_image", "https://example.com/og-image.jpg")
+    assert_equal "https://example.com/og-image.jpg", SiteSetting.default_og_image_url
+
+    SiteSetting.destroy_all
+    Rails.cache.clear
+    assert_nil SiteSetting.default_og_image_url
+  end
+
+  test "author_display_enabled returns boolean" do
+    # デフォルトはtrue
+    assert_equal true, SiteSetting.author_display_enabled
+
+    # "false"文字列をfalseに変換
+    SiteSetting.set("author_display_enabled", "false")
+    assert_equal false, SiteSetting.author_display_enabled
+
+    # "true"文字列をtrueに変換
+    SiteSetting.set("author_display_enabled", "true")
+    assert_equal true, SiteSetting.author_display_enabled
+  end
+
+  test "openai_api_key and configured check" do
+    # キーが設定されていない場合
+    assert_nil SiteSetting.openai_api_key
+    assert_equal false, SiteSetting.openai_api_key_configured?
+
+    # キーを設定
+    SiteSetting.set("openai_api_key", "sk-test-key-123")
+    assert_equal "sk-test-key-123", SiteSetting.openai_api_key
+    assert_equal true, SiteSetting.openai_api_key_configured?
+  end
+
+  test "allows blank value for copyright" do
+    setting = SiteSetting.new(name: "copyright", value: "")
+    assert setting.valid?, "Copyright should allow blank value"
+  end
+
+  test "allows blank value for default_og_image" do
+    setting = SiteSetting.new(name: "default_og_image", value: "")
+    assert setting.valid?, "default_og_image should allow blank value"
+  end
+
+  test "allows blank value for hero_background_image" do
+    setting = SiteSetting.new(name: "hero_background_image", value: "")
+    assert setting.valid?, "hero_background_image should allow blank value"
+  end
+
+  test "allows blank value for openai_api_key" do
+    setting = SiteSetting.new(name: "openai_api_key", value: "")
+    assert setting.valid?, "openai_api_key should allow blank value"
+  end
+
+  test "does not allow blank value for site_title" do
+    setting = SiteSetting.new(name: "site_title", value: "")
+    assert_not setting.valid?
+    assert_includes setting.errors[:value], "can't be blank"
+  end
+
+  test "copyright_text formats with custom copyright" do
+    SiteSetting.set("copyright", "My Custom Blog")
+    expected = "© #{Date.current.year} My Custom Blog. All rights reserved."
+    assert_equal expected, SiteSetting.copyright_text
+  end
+
+  test "copyright_text formats with default copyright" do
+    SiteSetting.destroy_all
+    Rails.cache.clear
+    expected = "© #{Date.current.year} MB. All rights reserved."
+    assert_equal expected, SiteSetting.copyright_text
+  end
 end

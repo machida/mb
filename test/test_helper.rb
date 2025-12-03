@@ -1,3 +1,5 @@
+ENV["RAILS_ENV"] ||= "test"
+
 if ENV["COVERAGE"] || ENV["CI"]
   require "simplecov"
   require "simplecov-lcov"
@@ -10,7 +12,7 @@ if ENV["COVERAGE"] || ENV["CI"]
   SimpleCov.start "rails" do
     enable_coverage :branch
     add_filter %w[config/ test/ vendor/]
-    track_files "app/**/*.rb"
+    track_files "{app}/**/*.rb"
 
     if ENV["CI"]
       formatter SimpleCov::Formatter::LcovFormatter
@@ -27,7 +29,6 @@ if ENV["COVERAGE"] || ENV["CI"]
   end
 end
 
-ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
 require "mocha/minitest"
@@ -43,20 +44,15 @@ end
 
 module ActiveSupport
   class TestCase
-    parallelize(workers: :number_of_processors)
+    # Disable parallelization when running coverage to ensure accurate results
+    if ENV["COVERAGE"] || ENV["CI"]
+      parallelize(workers: 1)
+    else
+      parallelize(workers: :number_of_processors)
+    end
+
     fixtures :all
     include TestConfig
-
-    # SimpleCov parallel test support
-    if ENV["COVERAGE"] || ENV["CI"]
-      parallelize_setup do |worker|
-        SimpleCov.command_name "#{SimpleCov.command_name}-#{worker}"
-      end
-
-      parallelize_teardown do |worker|
-        SimpleCov.result
-      end
-    end
   end
 end
 
