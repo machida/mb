@@ -1,0 +1,4 @@
+body.layout-admin {
+  color: var(--color-text-primary);
+  background-color: var(--color-admin-bg-body);
+}

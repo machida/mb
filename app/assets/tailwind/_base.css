@@ -1,13 +1,6 @@
 /* Base styles */
-@layer base {
-  body {
-    color: var(--color-text-primary);
-    font-family: var(--font-family-base);
-    overflow-y: scroll;
-  }
-
-  /* Admin body background color */
-  body.layout-admin {
-    background-color: var(--color-admin-bg-body);
-  }
+body {
+  color: var(--color-text-primary);
+  font-family: var(--font-family-base);
+  overflow-y: scroll;
 }

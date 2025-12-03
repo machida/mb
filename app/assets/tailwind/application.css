@@ -1,3 +1,4 @@
+@import "./_theme.css";
 @import "tailwindcss";
 
 @source "app/views/**/*.erb"
@@ -34,6 +35,7 @@
 
 /* Import Admin Components */
 @import "./components/_admin-colors.css";
+@import "./components/_admin-body.css";
 @import "./components/_admin-nav.css";
 @import "./components/_admin-footer.css";
 @import "./components/_admin-forms.css";
