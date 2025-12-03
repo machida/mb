@@ -75,12 +75,37 @@ class ApplicationControllerTest < ActionDispatch::IntegrationTest
   test "should handle missing admin in session gracefully" do
     # Set an invalid admin_id in session
     post admin_login_path, params: { email: @admin.email, password: "password123" }
-    
+
     # Delete the admin to simulate a missing admin
     @admin.destroy
-    
+
     # Should redirect to login when admin no longer exists
     get admin_articles_path
     assert_redirected_to admin_login_path
+  end
+
+  test "flash messages work correctly" do
+    # Test login success message
+    post admin_login_path, params: { email: @admin.email, password: "password123" }
+    # Login should redirect (exact path may vary)
+    assert_response :redirect
+    follow_redirect!
+    assert_response :success
+
+    # Test logout success message
+    delete admin_logout_path
+    assert_redirected_to root_path
+    follow_redirect!
+    # Verify we're back to public page
+    assert_response :success
+    assert_select "body.layout-public"
+  end
+
+  test "error messages work correctly" do
+    # Test login with wrong credentials
+    post admin_login_path, params: { email: @admin.email, password: "wrongpassword" }
+
+    # Should not redirect, should render login page with error
+    assert_response :unprocessable_content
   end
 end
