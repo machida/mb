@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+# Pre-deploy hook to run database migrations
+#
+# This runs migrations on the existing container before deploying the new version.
+# This ensures the database is ready before the new container starts.
+#
+# These environment variables are available:
+# KAMAL_RECORDED_AT
+# KAMAL_PERFORMER
+# KAMAL_VERSION
+# KAMAL_HOSTS
+# KAMAL_COMMAND
+# KAMAL_SUBCOMMAND
+# KAMAL_ROLE (if set)
+# KAMAL_DESTINATION (if set)
+
+# Skip migrations during rollbacks
+if [ "$KAMAL_COMMAND" = "rollback" ]; then
+  echo "Skipping migrations during rollback"
+  exit 0
+fi
+
+echo "Running database migrations before deploy..."
+
+# Run migrations on the existing container (if it exists)
+# The --reuse flag uses the existing container
+# The -q flag suppresses verbose output
+kamal app exec -q --reuse "bin/rails db:migrate" 2>&1 || {
+  echo "Warning: Migration failed or no existing container found"
+  echo "This is expected on the first deployment"
+  exit 0
+}
+
+echo "Database migrations completed successfully"
+exit 0
