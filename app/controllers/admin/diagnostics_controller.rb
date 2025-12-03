@@ -29,8 +29,8 @@ class Admin::DiagnosticsController < Admin::BaseController
       }
     else
       {
-        status: "development",
-        message: "GCS not required in development",
+        status: Rails.env.to_s,
+        message: "GCS not required in #{Rails.env}",
         project_id: false,
         bucket: false,
         credentials: false
