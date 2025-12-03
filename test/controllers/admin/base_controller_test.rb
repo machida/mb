@@ -48,14 +48,22 @@ class Admin::BaseControllerTest < ActionDispatch::IntegrationTest
 
   test "should maintain session across requests when logged in" do
     post admin_login_path, params: { email: @admin.email, password: "password123" }
-    
+
     # Make multiple requests to verify session persistence
     get admin_articles_path
     assert_response :success
     assert_equal @admin.id, session[:admin_id]
-    
+
     get admin_site_settings_path
     assert_response :success
     assert_equal @admin.id, session[:admin_id]
+  end
+
+  test "should set robots meta header on admin pages" do
+    post admin_login_path, params: { email: @admin.email, password: "password123" }
+
+    get admin_articles_path
+    assert_equal "noindex, nofollow, noarchive, nosnippet, nocache",
+                 response.headers["X-Robots-Tag"]
   end
 end
