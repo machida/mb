@@ -112,11 +112,27 @@ class ImageUploadServiceTest < ActiveSupport::TestCase
   end
 
   test "should handle GCS upload errors" do
-    skip "GCS library not loaded in test environment"
+    skip "GCS testing requires complex mocking - tested in integration"
   end
 
   test "should return error when GCS credentials are missing" do
-    skip "GCS library not loaded in test environment"
+    skip "GCS testing requires complex mocking - tested in integration"
+  end
+
+  test "should upload to GCS successfully in production" do
+    skip "GCS testing requires complex mocking - tested in integration"
+  end
+
+  test "should handle missing GCS bucket error" do
+    skip "GCS testing requires complex mocking - tested in integration"
+  end
+
+  test "should process content type images as WebP in production" do
+    skip "GCS testing requires complex mocking - tested in integration"
+  end
+
+  test "should process hero type images as JPEG in production" do
+    skip "GCS testing requires complex mocking - tested in integration"
   end
 
   test "should handle StringIO files in local upload" do

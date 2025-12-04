@@ -66,4 +66,72 @@ class Admin::BaseControllerTest < ActionDispatch::IntegrationTest
     assert_equal "noindex, nofollow, noarchive, nosnippet, nocache",
                  response.headers["X-Robots-Tag"]
   end
+
+  test "protected methods work through inherited controllers" do
+    post admin_login_path, params: { email: @admin.email, password: "password123" }
+
+    # Test set_success_message through site settings update
+    patch admin_site_settings_path, params: {
+      site_settings: {
+        site_title: "Updated Title",
+        top_page_description: "Updated Description",
+        copyright: "Updated Copyright"
+      }
+    }
+
+    assert_redirected_to admin_site_settings_path
+    follow_redirect!
+    assert_match "サイト設定を更新しました", response.body
+  end
+
+  test "error handling methods work through validation failures" do
+    post admin_login_path, params: { email: @admin.email, password: "password123" }
+
+    # Try to create an article with missing required fields
+    post admin_articles_path, params: {
+      article: {
+        title: "",  # Required field, will fail validation
+        content: "",
+        slug: ""
+      }
+    }
+
+    # Should render form with errors
+    assert_response :unprocessable_content
+  end
+
+  test "handle_validation_errors returns false when errors exist" do
+    post admin_login_path, params: { email: @admin.email, password: "password123" }
+
+    # Create article with invalid data to trigger validation errors
+    post admin_articles_path, params: {
+      article: {
+        title: "",
+        content: "",
+        slug: ""
+      }
+    }
+
+    # Validation should fail and render form with unprocessable_content status
+    assert_response :unprocessable_content
+    # The form should be re-rendered (not a redirect)
+    assert_select "form"
+  end
+
+  test "admin controllers inherit base controller behavior" do
+    post admin_login_path, params: { email: @admin.email, password: "password123" }
+
+    # Test that various admin controllers work correctly
+    [
+      admin_articles_path,
+      admin_site_settings_path,
+      admin_admins_path
+    ].each do |path|
+      get path
+      assert_response :success
+      # All should have robots header
+      assert_equal "noindex, nofollow, noarchive, nosnippet, nocache",
+                   response.headers["X-Robots-Tag"]
+    end
+  end
 end
