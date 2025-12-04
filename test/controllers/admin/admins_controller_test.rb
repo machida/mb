@@ -138,8 +138,92 @@ class Admin::AdminsControllerTest < ActionDispatch::IntegrationTest
 
   test "should logout when deleting self" do
     login_as(@second_admin)
-    
+
     delete admin_admin_url(@second_admin)
+    assert_redirected_to admin_login_url
+    assert_nil session[:admin_id]
+  end
+
+  test "should not allow confirm_delete for last admin" do
+    @second_admin.destroy
+    Admin.where.not(id: @admin.id).destroy_all
+
+    get confirm_delete_admin_admin_url(@admin)
+    assert_redirected_to admin_admins_url
+  end
+
+  test "should reject invalid action_type in process_delete" do
+    article = Article.create!(
+      title: "Test Article",
+      body: "Test content",
+      author: @second_admin.user_id,
+      draft: false
+    )
+
+    assert_no_difference("Admin.count") do
+      post process_delete_admin_admin_url(@second_admin), params: {
+        action_type: "invalid_action"
+      }
+    end
+
+    assert_redirected_to admin_admin_url(@second_admin)
+  end
+
+  test "should logout when processing delete of self with transfer" do
+    # Create another admin to be target
+    third_admin = Admin.create!(
+      email: "third@example.com",
+      user_id: "third_admin",
+      password: "password123",
+      password_confirmation: "password123"
+    )
+
+    # Create article by second_admin
+    article = Article.create!(
+      title: "Test Article",
+      body: "Test content",
+      author: @second_admin.user_id,
+      draft: false
+    )
+
+    # Login as second_admin
+    login_as(@second_admin)
+
+    # Process delete with transfer
+    post process_delete_admin_admin_url(@second_admin), params: {
+      action_type: "transfer",
+      target_admin_id: third_admin.id
+    }
+
+    # Should be logged out
+    assert_redirected_to admin_login_url
+    assert_nil session[:admin_id]
+
+    # Article should be transferred
+    article.reload
+    assert_equal third_admin.user_id, article.author
+  end
+
+  test "should logout when processing delete of self with article deletion" do
+    # Create article by second_admin
+    article = Article.create!(
+      title: "Test Article",
+      body: "Test content",
+      author: @second_admin.user_id,
+      draft: false
+    )
+
+    # Login as second_admin
+    login_as(@second_admin)
+
+    # Process delete with article deletion
+    assert_difference("Article.count", -1) do
+      post process_delete_admin_admin_url(@second_admin), params: {
+        action_type: "delete_articles"
+      }
+    end
+
+    # Should be logged out
     assert_redirected_to admin_login_url
     assert_nil session[:admin_id]
   end
