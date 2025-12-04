@@ -148,4 +148,25 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select ".spec--delete-article-button", count: 0
   end
+
+  test "should return 404 for invalid year in archive" do
+    get archive_year_path(0)
+    assert_response :not_found
+  end
+
+  test "should return 404 for invalid month in archive" do
+    get archive_month_path(2024, 0)
+    assert_response :not_found
+
+    get archive_month_path(2024, 13)
+    assert_response :not_found
+  end
+
+  test "should get RSS feed" do
+    get feed_path(format: :rss)
+    assert_response :success
+    assert_equal "application/rss+xml; charset=utf-8", response.content_type
+    assert_match @published_article.title, response.body
+    assert_no_match @draft_article.title, response.body
+  end
 end

@@ -52,4 +52,16 @@ class Admin::DiagnosticsControllerTest < ActionDispatch::IntegrationTest
     get admin_diagnostics_image_upload_check_path
     assert_redirected_to admin_login_path
   end
+
+  test "handles vips_check errors gracefully" do
+    # Stub ImageUploadService.vips_working? to raise an error
+    ImageUploadService.stubs(:vips_working?).raises(StandardError.new("VIPS error"))
+
+    get admin_diagnostics_image_upload_check_path
+    assert_response :success
+
+    json = JSON.parse(response.body)
+    assert_equal "error", json["vips_available"]["status"]
+    assert_equal "VIPS error", json["vips_available"]["message"]
+  end
 end

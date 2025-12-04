@@ -95,15 +95,50 @@ class Admin::PasswordResetsControllerTest < ActionDispatch::IntegrationTest
     @admin.generate_password_reset_token
     @admin.reload
     token = @admin.password_reset_token
-    
+
     patch admin_password_reset_path(token), params: {
       admin: {
         password: "short",
         password_confirmation: "short"
       }
     }
-    
+
     assert_response :unprocessable_content
     assert flash[:alert].include?("パスワードは8文字以上で設定してください")
+  end
+
+  test "should not update password with blank password" do
+    @admin.generate_password_reset_token
+    @admin.reload
+    token = @admin.password_reset_token
+
+    patch admin_password_reset_path(token), params: {
+      admin: {
+        password: "",
+        password_confirmation: ""
+      }
+    }
+
+    assert_response :unprocessable_content
+    assert flash[:alert].include?("パスワードを入力してください")
+  end
+
+  test "should handle reset_password failure" do
+    @admin.generate_password_reset_token
+    @admin.reload
+    token = @admin.password_reset_token
+
+    # Stub reset_password to return false
+    Admin.any_instance.stubs(:reset_password).returns(false)
+
+    patch admin_password_reset_path(token), params: {
+      admin: {
+        password: "newpassword123",
+        password_confirmation: "newpassword123"
+      }
+    }
+
+    assert_response :unprocessable_content
+    assert flash[:alert].include?("パスワードの変更に失敗しました")
   end
 end
