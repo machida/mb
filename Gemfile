@@ -59,7 +59,7 @@ group :development, :test do
   gem "erb_lint", require: false
 
   # Testing gems
-  gem "mocha", "~> 2.8"
+  gem "mocha", "~> 3.0"
   gem "simplecov", "~> 0.22", require: false
   gem "simplecov-lcov", "~> 0.8", require: false
 end
