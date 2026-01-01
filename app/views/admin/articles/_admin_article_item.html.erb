@@ -11,16 +11,35 @@
       </div>
     </div>
 
-    <div class="a--admin-article-meta">
-      <span>著者: <%= admin_article_item.author %></span>
-      <time datetime="<%= admin_article_item.created_at.iso8601 %>">
-        <%= format_date_with_weekday(admin_article_item.created_at) %>
-      </time>
-      <% if admin_article_item.updated_at != admin_article_item.created_at %>
-        <time datetime="<%= admin_article_item.updated_at.iso8601 %>">
-          （<%= format_date_with_weekday(admin_article_item.updated_at) %> 更新）
-        </time>
-      <% end %>
+    <div class="l--admin-article-meta">
+      <dl class="l--admin-article-meta__rows">
+        <div class="l--admin-article-meta__row">
+          <div class="l--admin-article-meta__item">
+            <dt>著者</dt>
+            <dd><%= admin_article_item.author %></dd>
+          </div>
+        </div>
+        <div class="l--admin-article-meta__row">
+          <div class="l--admin-article-meta__item">
+            <dt>公開日時</dt>
+            <dd>
+              <time datetime="<%= admin_article_item.created_at.iso8601 %>">
+                <%= format_date_with_weekday(admin_article_item.created_at) %>
+              </time>
+            </dd>
+          </div>
+          <% if admin_article_item.updated_at != admin_article_item.created_at %>
+            <div class="l--admin-article-meta__item">
+              <dt>最終更新</dt>
+              <dd>
+                <time datetime="<%= admin_article_item.updated_at.iso8601 %>">
+                  <%= format_date_with_weekday(admin_article_item.updated_at) %>
+                </time>
+              </dd>
+            </div>
+          <% end %>
+        </div>
+      </dl>
     </div>
   </header>
 

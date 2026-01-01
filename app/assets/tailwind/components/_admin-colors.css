@@ -45,12 +45,50 @@
   --color-admin-border-medium: var(--color-admin-primary-400);
   --color-admin-border-strong: var(--color-admin-primary-500);
   /* Text colors */
+  --color-admin-text-light: color-mix(
+    in oklab,
+    var(--color-slate-400) 60%,
+    var(--color-admin-primary-400) 40%
+  );
+
+  --color-admin-text-medium: color-mix(
+    in oklab,
+    var(--color-slate-400) 50%,
+    var(--color-admin-primary-500) 50%
+  );
+
+  --color-admin-text-default: color-mix(
+    in oklab,
+    var(--color-slate-500) 55%,
+    var(--color-admin-primary-600) 45%
+  );
+
+  --color-admin-text-strong: color-mix(
+    in oklab,
+    var(--color-slate-500) 40%,
+    var(--color-admin-primary-700) 60%
+  );
+
+  --color-admin-text-heading: color-mix(
+    in oklab,
+    var(--color-slate-600) 45%,
+    var(--color-admin-primary-700) 55%
+  );
+
+  --color-admin-text-contrast: color-mix(
+    in oklab,
+    var(--color-slate-700) 55%,
+    var(--color-admin-primary-800) 45%
+  );
+
+  /*
   --color-admin-text-light: var(--color-admin-primary-400);
   --color-admin-text-medium: var(--color-admin-primary-500);
   --color-admin-text-default: var(--color-admin-primary-600);
   --color-admin-text-strong: var(--color-admin-primary-700);
   --color-admin-text-heading: var(--color-admin-primary-800);
   --color-admin-text-contrast: var(--color-admin-primary-900);
+  */
   /* Button colors */
   --color-admin-button-primary: var(--color-admin-primary-600);
   --color-admin-button-primary-hover: var(--color-admin-primary-700);

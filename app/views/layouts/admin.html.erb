@@ -24,7 +24,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="min-h-screen flex flex-col layout-admin <%= "is--#{current_admin.theme_color}" if current_admin %> <%= 'is--logged-in pb-16 lg:pb-0 lg:pl-[16rem]' if current_user_signed_in? %>">
+  <body class="min-h-screen flex flex-col layout-admin <%= "is--#{current_admin.theme_color}" if current_admin %> <%= 'is--logged-in pb-16 lg:pb-0 lg:pl-[12rem]' if current_user_signed_in? %>">
     <!-- Password Change Notice -->
     <% if current_admin&.needs_password_change? %>
       <%= render PasswordChangeNoticeComponent.new %>
