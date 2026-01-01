@@ -4,9 +4,9 @@
 [![Coverage Status](https://coveralls.io/repos/github/machida/mb/badge.svg?branch=main)](https://coveralls.io/github/machida/mb?branch=main)
 ![License](https://img.shields.io/github/license/machida/mb)
 ![Ruby 3.4.5](https://img.shields.io/badge/Ruby-3.4.5-red.svg)
-![Node.js 20](https://img.shields.io/badge/Node.js-20.x-339933.svg)
+![Node.js 22](https://img.shields.io/badge/Node.js-22.x-339933.svg)
 
-Rails 8.0.3で作成されたブログアプリケーション
+Rails 8.1.1で作成されたブログアプリケーション
 
 ## 機能
 
@@ -189,7 +189,7 @@ phantom delete feature/user-auth
 ## 技術スタック
 
 - Ruby 3.4.5
-- Rails 8.0.3
+- Rails 8.1.1
 - SQLite3 (開発環境)
 - Tailwind CSS v4.x
 - 独自のCSSカスタムプロパティ（`--app-spacing-*`, `@custom-media --breakpoint-*`）で余白・ブレークポイントを一元管理
@@ -200,8 +200,8 @@ phantom delete feature/user-auth
 
 ### テスト
 - Mini-test (システムテスト、コントローラーテスト)
-- Playwright 1.55.0 (E2E テスト、完全移行済み)
-- playwright-ruby-client 1.55.0
+- Playwright 1.57.x (E2E テスト、完全移行済み)
+- playwright-ruby-client 1.57.1
 
 ## 機能詳細
 
@@ -277,7 +277,7 @@ bundle exec playwright install
 npx playwright install --force
 
 # Node.jsパッケージの更新
-npm install @playwright/test@1.55.0
+npm install @playwright/test@latest
 
 # 環境のクリーンアップ
 rm -rf node_modules/.cache
@@ -292,8 +292,8 @@ Playwrightテストは並列実行を無効化しています（`parallelize(wor
 - ブラウザリソースの適切な管理
 
 ### ライブラリバージョン互換性
-- **Playwright**: 1.55.0（推奨）
-- **playwright-ruby-client**: 1.55.0（最新安定版）
+- **Playwright**: 1.57.x（推奨）
+- **playwright-ruby-client**: 1.57.1（最新安定版）
 - これらの組み合わせで最適な動作を確認済み
 
 ## ライセンス
