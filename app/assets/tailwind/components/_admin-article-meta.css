@@ -1,0 +1,19 @@
+.l--admin-article-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--color-admin-text-medium);
+  margin-bottom: 0.5rem;
+}
+
+.l--admin-article-meta__row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.l--admin-article-meta__item {
+  display: flex;
+  gap: 0.25rem;
+}

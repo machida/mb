@@ -55,16 +55,6 @@
   line-height: 1.25rem;
   color: var(--color-admin-text-medium);
 }
-/* Article meta - 記事メタ情報 */
-.a--admin-article-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  color: var(--color-admin-text-medium);
-  margin-bottom: 0.5rem;
-}
 /* Email display - メールアドレス表示 */
 .a--admin-email {
   color: var(--color-admin-text-default);

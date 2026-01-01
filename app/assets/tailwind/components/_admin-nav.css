@@ -1,6 +1,6 @@
 /* Admin Navigation Component */
 .l--admin-nav {
-  --admin-nav-width: 16rem;
+  --admin-nav-width: 12rem;
   background-color: var(--color-admin-nav-bg);
   position: fixed;
   z-index: 50;
