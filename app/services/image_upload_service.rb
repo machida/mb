@@ -6,7 +6,7 @@ class ImageUploadService
 
     # アップロードタイプに応じたファイル名と拡張子の生成
     timestamp = Time.current.strftime("%Y%m%d_%H%M%S")
-    extension = upload_type == "content" ? "webp" : "jpg"
+    extension = "webp"  # すべてWebP形式に統一
     filename = "#{timestamp}_#{SecureRandom.hex(8)}.#{extension}"
 
     if Rails.env.production?
@@ -32,26 +32,26 @@ class ImageUploadService
 
       case upload_type
       when "content"
-        # 記事本文用: 最大2000px、WebP形式
+        # 記事本文用: 最大2000px、WebP形式、強圧縮
         processed_image = processed_image
           .resize_to_limit(2000, 2000)
           .convert("webp")
-          .saver(quality: 80)
+          .saver(quality: 70, strip: true)
         content_type = "image/webp"
       when "hero"
-        # ヒーロー背景用: ワイドサイズ、JPEG形式
+        # ヒーロー背景用: ワイドサイズ、WebP形式、中圧縮
         processed_image = processed_image
           .resize_to_fill(1920, 1080, crop: :attention)
-          .convert("jpeg")
-          .saver(quality: 85)
-        content_type = "image/jpeg"
+          .convert("webp")
+          .saver(quality: 75, strip: true)
+        content_type = "image/webp"
       else
-        # サムネイル用: OGサイズ（1200x630）、JPEG形式
+        # サムネイル用: OGサイズ（1200x630）、WebP形式、強圧縮
         processed_image = processed_image
           .resize_to_fill(1200, 630, crop: :attention)
-          .convert("jpeg")
-          .saver(quality: 85)
-        content_type = "image/jpeg"
+          .convert("webp")
+          .saver(quality: 70, strip: true)
+        content_type = "image/webp"
       end
 
       processed_image.call(destination: temp_file.path)
@@ -134,24 +134,25 @@ class ImageUploadService
 
     case upload_type
     when "content"
-      # 記事本文用: 最大2000px、WebP形式
+      # 記事本文用: 最大2000px、WebP形式、強圧縮
       processed_image
         .resize_to_limit(2000, 2000)
         .convert("webp")
-        .saver(quality: 80)
+        .saver(quality: 70, strip: true)
         .call(destination: file_path)
     when "hero"
+      # ヒーロー背景用: ワイドサイズ、WebP形式、中圧縮
       processed_image
         .resize_to_fill(1920, 1080, crop: :attention)
-        .convert("jpeg")
-        .saver(quality: 85)
+        .convert("webp")
+        .saver(quality: 75, strip: true)
         .call(destination: file_path)
     else
-      # サムネイル用: OGサイズ（1200x630）、JPEG形式
+      # サムネイル用: OGサイズ（1200x630）、WebP形式、強圧縮
       processed_image
         .resize_to_fill(1200, 630, crop: :attention)
-        .convert("jpeg")
-        .saver(quality: 85)
+        .convert("webp")
+        .saver(quality: 70, strip: true)
         .call(destination: file_path)
     end
 
