@@ -1,0 +1,40 @@
+/* Image Cropper Styles */
+.a--crop-container {
+  width: 100%;
+  max-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3f4f6;
+  border-radius: 0.375rem;
+  overflow: hidden;
+}
+
+.a--crop-image {
+  max-width: 100%;
+  max-height: 60vh;
+  display: block;
+}
+
+/* Cropperjs overrides for better integration */
+.cropper-container {
+  direction: ltr;
+  font-size: 0;
+  line-height: 0;
+  position: relative;
+  touch-action: none;
+  user-select: none;
+}
+
+.cropper-view-box {
+  outline: 1px solid var(--color-admin-primary-500);
+  outline-color: rgba(59, 130, 246, 0.75);
+}
+
+.cropper-point {
+  background-color: var(--color-admin-primary-500);
+}
+
+.cropper-line {
+  background-color: var(--color-admin-primary-500);
+}

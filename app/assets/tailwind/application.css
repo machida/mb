@@ -23,6 +23,8 @@
 @import "./components/_long-text.css";
 @import "./components/_short-text.css";
 @import "./components/_image-upload.css";
+@import "./components/_modal.css";
+@import "./components/_crop.css";
 @import "./components/_pager.css";
 @import "./components/_toast.css";
 @import "./components/_spec_classes.css";
