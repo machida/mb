@@ -25,5 +25,8 @@
   },
   "comments": {
     "@playwright/test": "Fixed at 1.46.0 due to compatibility issues with playwright-ruby-client. Versions 1.52.0+ cause 'timeout: expected number, got undefined' errors."
+  },
+  "dependencies": {
+    "cropperjs": "^2.1.0"
   }
 }
