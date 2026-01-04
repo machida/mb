@@ -1,4 +1,4 @@
-<div class="a--image-upload" <%= tag.attributes(controller_data) %>>
+<div class="a--image-upload" data-controller="thumbnail-upload" data-thumbnail-upload-upload-url-value="<%= upload_url %>" data-thumbnail-upload-enable-crop-value="<%= enable_crop %>"<% if aspect_ratio %> data-thumbnail-upload-aspect-ratio-value="<%= aspect_ratio %>"<% end %>>
   <!-- Hidden file input -->
   <input type="file" accept="<%= accept %>" class="hidden" data-thumbnail-upload-target="input" data-action="change->thumbnail-upload#fileSelected">
 
