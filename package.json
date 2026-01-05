@@ -1,6 +1,7 @@
 {
   "name": "mb",
   "version": "1.0.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "lint": "npm run lint:js && npm run lint:erb",
@@ -18,10 +19,11 @@
     "help": "bundle exec bin/dev-help"
   },
   "devDependencies": {
-    "@playwright/test": "^1.53.2",
+    "@playwright/test": "1.46.0",
     "browser-sync": "^3.0.2",
-    "eslint": "^8.57.0",
-    "prettier": "^3.2.5"
+    "eslint": "^9.39.2",
+    "globals": "^17.0.0",
+    "prettier": "^3.7.4"
   },
   "comments": {
     "@playwright/test": "Fixed at 1.46.0 due to compatibility issues with playwright-ruby-client. Versions 1.52.0+ cause 'timeout: expected number, got undefined' errors."
