@@ -14,7 +14,7 @@
     "playwright:install-force": "playwright install --force",
     "test:playwright": "bundle exec rails test test/system/",
     "setup": "npm install && npm run playwright:install",
-    "postinstall": "echo '✅ Node.js dependencies installed. Run bin/setup for complete setup.'",
+    "postinstall": "mkdir -p public/assets/cropperjs && cp node_modules/cropperjs/dist/cropper.min.css public/assets/cropperjs/ && echo '✅ Node.js dependencies installed. Run bin/setup for complete setup.'",
     "dev": "bundle exec bin/dev",
     "help": "bundle exec bin/dev-help"
   },
