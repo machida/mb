@@ -1,11 +1,31 @@
 import { Controller } from '@hotwired/stimulus';
+import Cropper from 'cropperjs';
 
 export default class extends Controller {
-  static targets = ['input', 'preview', 'dropzone', 'url', 'clearButton', 'previewArea'];
-  static values = { uploadUrl: String };
+  static targets = [
+    'input',
+    'preview',
+    'dropzone',
+    'url',
+    'clearButton',
+    'previewArea',
+    'cropModal',
+    'cropImage'
+  ];
+  static values = {
+    uploadUrl: String,
+    aspectRatio: Number,
+    enableCrop: { type: Boolean, default: false }
+  };
 
   connect() {
     this.setupDropzone();
+    this.cropper = null;
+    this.selectedFile = null;
+  }
+
+  disconnect() {
+    this.destroyCropper();
   }
 
   setupDropzone() {
@@ -32,14 +52,23 @@ export default class extends Controller {
 
     const files = event.dataTransfer.files;
     if (files.length > 0) {
-      await this.uploadFile(files[0]);
+      const file = files[0];
+      if (this.enableCropValue && this.hasCropModalTarget) {
+        await this.showCropModal(file);
+      } else {
+        await this.uploadFile(file);
+      }
     }
   }
 
   async fileSelected(event) {
     const file = event.target.files[0];
     if (file) {
-      await this.uploadFile(file);
+      if (this.enableCropValue && this.hasCropModalTarget) {
+        await this.showCropModal(file);
+      } else {
+        await this.uploadFile(file);
+      }
     }
   }
 
@@ -179,5 +208,116 @@ export default class extends Controller {
 
   showSuccess() {
     // Success message already shown in UI update - no additional action needed
+  }
+
+  // Crop機能
+  async showCropModal(file) {
+    this.selectedFile = file;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      this.cropImageTarget.src = e.target.result;
+      this.cropModalTarget.classList.remove('is--hidden');
+      document.body.style.overflow = 'hidden';
+      this.initCropper();
+    };
+    reader.onerror = () => {
+      this.showError('画像の読み込みに失敗しました');
+      this.inputTarget.value = '';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  initCropper() {
+    this.destroyCropper();
+
+    const aspectRatio = this.hasAspectRatioValue
+      ? this.aspectRatioValue
+      : 16 / 9;
+
+    this.cropper = new Cropper(this.cropImageTarget, {
+      aspectRatio: aspectRatio,
+      viewMode: 1,
+      autoCropArea: 0.9,
+      responsive: true,
+      restore: false,
+      guides: true,
+      center: true,
+      highlight: false,
+      cropBoxMovable: true,
+      cropBoxResizable: true,
+      toggleDragModeOnDblclick: false,
+      background: false,
+      modal: true
+    });
+  }
+
+  destroyCropper() {
+    if (this.cropper) {
+      this.cropper.destroy();
+      this.cropper = null;
+    }
+  }
+
+  cancelCrop() {
+    this.closeCropModal();
+    this.inputTarget.value = '';
+  }
+
+  async confirmCrop() {
+    if (!this.cropper) return;
+
+    try {
+      const canvas = this.cropper.getCroppedCanvas();
+
+      if (!canvas) {
+        console.error('Crop error: getCroppedCanvas returned null');
+        this.showError('クロップ処理に失敗しました');
+        return;
+      }
+
+      // Wrap toBlob in a Promise to properly handle errors
+      const blob = await new Promise((resolve, reject) => {
+        canvas.toBlob(
+          (blob) => {
+            if (!blob) {
+              reject(new Error('toBlob returned null'));
+            } else {
+              resolve(blob);
+            }
+          },
+          this.selectedFile.type,
+          0.9 // quality parameter for image compression
+        );
+      });
+
+      if (!blob) {
+        console.error('Crop error: blob is null');
+        this.showError('クロップ処理に失敗しました');
+        return;
+      }
+
+      const file = new File([blob], this.selectedFile.name, {
+        type: this.selectedFile.type,
+        lastModified: Date.now()
+      });
+
+      this.closeCropModal();
+      await this.uploadFile(file);
+
+    } catch (error) {
+      console.error('Crop error:', error);
+      this.showError('クロップ処理に失敗しました');
+    }
+  }
+
+  closeCropModal() {
+    if (this.hasCropModalTarget) {
+      this.cropModalTarget.classList.add('is--hidden');
+      document.body.style.overflow = '';
+    }
+    this.destroyCropper();
+    this.selectedFile = null;
+    this.inputTarget.value = '';
   }
 }

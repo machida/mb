@@ -7,7 +7,9 @@ class ImageUploadComponent < ViewComponent::Base
     accept: "image/*",
     max_file_size: "5MB",
     help_text: "JPG、PNG、GIF（最大5MB）。",
-    spec_class: nil
+    spec_class: nil,
+    enable_crop: false,
+    aspect_ratio: nil
   )
     @field_name = field_name
     @upload_url = upload_url
@@ -17,18 +19,24 @@ class ImageUploadComponent < ViewComponent::Base
     @max_file_size = max_file_size
     @help_text = help_text
     @spec_class = spec_class
+    @enable_crop = enable_crop
+    @aspect_ratio = aspect_ratio
   end
 
   private
 
   attr_reader :field_name, :upload_url, :current_image, :form,
-              :accept, :max_file_size, :help_text, :spec_class
+              :accept, :max_file_size, :help_text, :spec_class,
+              :enable_crop, :aspect_ratio
 
   def controller_data
-    {
+    data = {
       controller: "thumbnail-upload",
-      "thumbnail-upload-upload-url-value": upload_url
+      "thumbnail-upload-upload-url-value": upload_url,
+      "thumbnail-upload-enable-crop-value": enable_crop
     }
+    data["thumbnail-upload-aspect-ratio-value"] = aspect_ratio if aspect_ratio
+    data
   end
 
   def input_classes

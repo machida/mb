@@ -1,4 +1,8 @@
-<div class="a--image-upload" data-controller="thumbnail-upload" data-thumbnail-upload-upload-url-value="<%= upload_url %>">
+<div class="a--image-upload"
+     data-controller="thumbnail-upload"
+     data-thumbnail-upload-upload-url-value="<%= upload_url %>"
+     data-thumbnail-upload-enable-crop-value="<%= enable_crop %>"
+     <% if aspect_ratio %>data-thumbnail-upload-aspect-ratio-value="<%= aspect_ratio %>"<% end %>>
   <!-- Hidden file input -->
   <input type="file" accept="<%= accept %>" class="hidden" data-thumbnail-upload-target="input" data-action="change->thumbnail-upload#fileSelected">
 
@@ -36,4 +40,32 @@
       </button>
     </div>
   </div>
+
+  <% if enable_crop %>
+    <!-- Crop Modal -->
+    <div class="a--modal is--hidden" data-thumbnail-upload-target="cropModal">
+      <div class="a--modal__overlay" data-action="click->thumbnail-upload#cancelCrop"></div>
+      <div class="a--modal__content is--lg">
+        <div class="a--modal__header">
+          <h2 class="a--modal__title">画像のトリミング</h2>
+          <button type="button" class="a--modal__close" data-action="click->thumbnail-upload#cancelCrop">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="a--modal__body">
+          <div class="a--crop-container">
+            <img data-thumbnail-upload-target="cropImage" src="" alt="トリミングプレビュー" class="a--crop-image">
+          </div>
+        </div>
+        <div class="a--modal__footer">
+          <button type="button" class="a--button is--md is--secondary" data-action="click->thumbnail-upload#cancelCrop">
+            キャンセル
+          </button>
+          <button type="button" class="a--button is--md is--primary" data-action="click->thumbnail-upload#confirmCrop">
+            確定
+          </button>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>

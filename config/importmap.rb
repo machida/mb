@@ -7,3 +7,5 @@ pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin "dropdown", to: "dropdown.js"
 pin "theme_color", to: "theme_color.js"
+pin "cropperjs" # @1.6.2
+

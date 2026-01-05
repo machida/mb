@@ -20,10 +20,13 @@
                 field_name: "site_settings[default_og_image]",
                 upload_url: admin_site_settings_upload_image_path,
                 current_image: @settings[:default_og_image].present? && !@settings[:default_og_image].include?("example.com") ? @settings[:default_og_image] : nil,
-                spec_class: "default-og-image"
+                spec_class: "default-og-image",
+                help_text: "JPG、PNG、GIF（最大5MB）。アップロード時に1200:630の比率でトリミングできます。",
+                enable_crop: true,
+                aspect_ratio: 1200.0 / 630.0
               ) %>
           <div class="a--form-help mt-1">
-            <p>記事にサムネイル画像が設定されていない場合に使用される画像です。</p>
+            <p>記事にサムネイル画像が設定されていない場合に使用される画像です。画像選択後、トリミング範囲を調整できます。</p>
           </div>
         </div>
 
@@ -34,10 +37,12 @@
                 upload_url: admin_site_settings_upload_image_path(upload_type: "hero"),
                 current_image: @settings[:hero_background_image].presence,
                 spec_class: "hero-background-image",
-                help_text: "推奨: 1920x1080px 以上のJPG/PNG（最大5MB）"
+                help_text: "JPG、PNG、GIF（最大5MB）。アップロード時に16:9の比率でトリミングできます。",
+                enable_crop: true,
+                aspect_ratio: 16.0 / 9.0
               ) %>
           <div class="a--form-help mt-1">
-            <p>トップページヒーローセクションの背景に使用されます（推奨サイズ: 1920x1080以上）。</p>
+            <p>トップページヒーローセクションの背景に使用されます。画像選択後、トリミング範囲を調整できます。</p>
           </div>
         </div>
 

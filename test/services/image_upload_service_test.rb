@@ -5,8 +5,8 @@ class ImageUploadServiceTest < ActiveSupport::TestCase
     # VIPSで実際の画像ファイルを作成
     require "image_processing/vips"
     image = Vips::Image.black(100, 100)
-    
-    @temp_image_file = Tempfile.new([ "test_image", ".jpg" ])
+
+    @temp_image_file = Tempfile.new([ "test_image", ".webp" ])
     @temp_image_file.close
     image.write_to_file(@temp_image_file.path)
     
@@ -91,10 +91,10 @@ class ImageUploadServiceTest < ActiveSupport::TestCase
   test "should process images with correct format based on upload type" do
     Rails.env.stubs(:production?).returns(false)
 
-    # サムネイル用（JPEG形式）
+    # サムネイル用（WebP形式）
     thumbnail_result = ImageUploadService.upload(@valid_image, upload_type: "thumbnail")
     assert_not thumbnail_result[:error]
-    assert thumbnail_result[:url].end_with?(".jpg")
+    assert thumbnail_result[:url].end_with?(".webp")
 
     # コンテンツ用（WebP形式）
     content_result = ImageUploadService.upload(@valid_image, upload_type: "content")
@@ -102,12 +102,12 @@ class ImageUploadServiceTest < ActiveSupport::TestCase
     assert content_result[:url].end_with?(".webp")
   end
 
-  test "should process hero type images with JPEG format" do
+  test "should process hero type images with WebP format" do
     Rails.env.stubs(:production?).returns(false)
 
     hero_result = ImageUploadService.upload(@valid_image, upload_type: "hero")
     assert_not hero_result[:error]
-    assert hero_result[:url].end_with?(".jpg")
+    assert hero_result[:url].end_with?(".webp")
     assert hero_result[:url].starts_with?("/uploads/images/")
   end
 
