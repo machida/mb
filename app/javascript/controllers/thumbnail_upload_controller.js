@@ -261,15 +261,41 @@ export default class extends Controller {
 
     try {
       const canvas = this.cropper.getCroppedCanvas();
-      canvas.toBlob(async (blob) => {
-        const file = new File([blob], this.selectedFile.name, {
-          type: this.selectedFile.type,
-          lastModified: Date.now()
-        });
 
-        this.closeCropModal();
-        await this.uploadFile(file);
-      }, this.selectedFile.type);
+      if (!canvas) {
+        console.error('Crop error: getCroppedCanvas returned null');
+        this.showError('クロップ処理に失敗しました');
+        return;
+      }
+
+      // Wrap toBlob in a Promise to properly handle errors
+      const blob = await new Promise((resolve, reject) => {
+        canvas.toBlob(
+          (blob) => {
+            if (!blob) {
+              reject(new Error('toBlob returned null'));
+            } else {
+              resolve(blob);
+            }
+          },
+          this.selectedFile.type,
+          0.9 // quality parameter for image compression
+        );
+      });
+
+      if (!blob) {
+        console.error('Crop error: blob is null');
+        this.showError('クロップ処理に失敗しました');
+        return;
+      }
+
+      const file = new File([blob], this.selectedFile.name, {
+        type: this.selectedFile.type,
+        lastModified: Date.now()
+      });
+
+      this.closeCropModal();
+      await this.uploadFile(file);
 
     } catch (error) {
       console.error('Crop error:', error);
