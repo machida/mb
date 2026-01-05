@@ -10,8 +10,7 @@ export default class extends Controller {
     'clearButton',
     'previewArea',
     'cropModal',
-    'cropImage',
-    'cropCanvas'
+    'cropImage'
   ];
   static values = {
     uploadUrl: String,
@@ -53,7 +52,12 @@ export default class extends Controller {
 
     const files = event.dataTransfer.files;
     if (files.length > 0) {
-      await this.uploadFile(files[0]);
+      const file = files[0];
+      if (this.enableCropValue && this.hasCropModalTarget) {
+        await this.showCropModal(file);
+      } else {
+        await this.uploadFile(file);
+      }
     }
   }
 
@@ -216,6 +220,10 @@ export default class extends Controller {
       this.cropModalTarget.classList.remove('is--hidden');
       document.body.style.overflow = 'hidden';
       this.initCropper();
+    };
+    reader.onerror = () => {
+      this.showError('画像の読み込みに失敗しました');
+      this.inputTarget.value = '';
     };
     reader.readAsDataURL(file);
   }

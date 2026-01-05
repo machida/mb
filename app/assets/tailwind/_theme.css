@@ -161,4 +161,9 @@
   --color-danger-border: var(--color-red-200);
   --color-info-bg: var(--color-cyan-50);
   --color-info-border: var(--color-cyan-200);
+
+  /* Z-index layers */
+  --z-dropdown: 100;
+  --z-modal: 1000;
+  --z-toast: 2000;
 }

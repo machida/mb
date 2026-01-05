@@ -1,4 +1,8 @@
-<div class="a--image-upload" data-controller="thumbnail-upload" data-thumbnail-upload-upload-url-value="<%= upload_url %>" data-thumbnail-upload-enable-crop-value="<%= enable_crop %>"<% if aspect_ratio %> data-thumbnail-upload-aspect-ratio-value="<%= aspect_ratio %>"<% end %>>
+<div class="a--image-upload"
+     data-controller="thumbnail-upload"
+     data-thumbnail-upload-upload-url-value="<%= upload_url %>"
+     data-thumbnail-upload-enable-crop-value="<%= enable_crop %>"
+     <% if aspect_ratio %>data-thumbnail-upload-aspect-ratio-value="<%= aspect_ratio %>"<% end %>>
   <!-- Hidden file input -->
   <input type="file" accept="<%= accept %>" class="hidden" data-thumbnail-upload-target="input" data-action="change->thumbnail-upload#fileSelected">
 
@@ -50,7 +54,7 @@
         </div>
         <div class="a--modal__body">
           <div class="a--crop-container">
-            <img data-thumbnail-upload-target="cropImage" src="" alt="Crop preview" class="a--crop-image">
+            <img data-thumbnail-upload-target="cropImage" src="" alt="トリミングプレビュー" class="a--crop-image">
           </div>
         </div>
         <div class="a--modal__footer">
