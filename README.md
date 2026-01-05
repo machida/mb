@@ -315,6 +315,38 @@ Playwrightテストは並列実行を無効化しています（`parallelize(wor
 - **Prettier**: 3.7.4
 - **Cropper.js**: 1.6.2（jQuery依存なし、ゼロ依存ライブラリ）
 
+## デプロイ
+
+本番環境へのデプロイは Kamal を使用します。
+
+### 必要な GitHub Secrets
+
+GitHub Actionsでデプロイするには、以下のSecretsを設定してください：
+
+- `KAMAL_REGISTRY_PASSWORD`: GitHub Container Registry (ghcr.io) のアクセストークン
+- `RAILS_MASTER_KEY`: `config/master.key` の内容
+
+### デプロイ設定
+
+- **ポート**: アプリはThruster経由でポート80で起動
+- **ヘルスチェック**: `/up` エンドポイント（ポート80）
+- **タイムアウト**: デプロイ300秒、ヘルスチェック180秒
+
+### トラブルシューティング
+
+デプロイが失敗する場合：
+
+1. **GitHub Secretsの確認**
+   - `KAMAL_REGISTRY_PASSWORD` と `RAILS_MASTER_KEY` が設定されているか確認
+
+2. **ログの確認**
+   ```bash
+   kamal app logs
+   ```
+
+3. **ヘルスチェックの確認**
+   - `/up` エンドポイントがポート80で応答するか確認
+
 ## ライセンス
 
 - このリポジトリは [MIT License](LICENSE) の下で提供されています。
