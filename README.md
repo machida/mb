@@ -15,6 +15,7 @@ Rails 8.1.1で作成されたブログアプリケーション
 - リアルタイムプレビュー
 - 下書き保存機能
 - 画像のドラッグ&ドロップアップロード
+- **画像クロップ機能**（アップロード前にトリミング可能、16:9や1200:630の縦横比対応）
 - 記事の年別・月別アーカイブ
 - 管理者認証
 - トースト通知
@@ -197,11 +198,17 @@ phantom delete feature/user-auth
 - Turbo (Hotwire)
 - Redcarpet (Markdown)
 - Google Cloud Storage
+- Cropper.js 1.6.2（画像クロップ、ゼロ依存）
 
 ### テスト
 - Mini-test (システムテスト、コントローラーテスト)
-- Playwright 1.57.x (E2E テスト、完全移行済み)
+- Playwright 1.46.0（互換性のため固定）
 - playwright-ruby-client 1.57.1
+
+### 開発ツール
+- ESLint 9.39.2（Flat Config形式）
+- Prettier 3.7.4
+- globals 17.0.0（ESLint用ブラウザ環境サポート）
 
 ## 機能詳細
 
@@ -213,6 +220,10 @@ phantom delete feature/user-auth
 
 ### 画像アップロード
 - ドラッグ&ドロップによる画像アップロード
+- アップロード前の画像クロップ機能（Cropper.js）
+  - ヒーロー背景画像: 16:9の縦横比でトリミング
+  - OGサムネイル画像: 1200:630の縦横比でトリミング
+- 自動WebP変換・圧縮（品質70-75%、メタデータ削除）
 - 自動的なMarkdown記法での挿入
 - 画像形式とサイズの自動検証
 
@@ -292,9 +303,17 @@ Playwrightテストは並列実行を無効化しています（`parallelize(wor
 - ブラウザリソースの適切な管理
 
 ### ライブラリバージョン互換性
-- **Playwright**: 1.57.x（推奨）
-- **playwright-ruby-client**: 1.57.1（最新安定版）
-- これらの組み合わせで最適な動作を確認済み
+
+#### Playwright
+- **@playwright/test**: 1.46.0（固定）
+- **playwright-ruby-client**: 1.57.1
+- **理由**: Playwright 1.52.0以降でタイムアウト関連の互換性問題が発生するため、1.46.0で固定
+- この組み合わせで安定動作を確認済み
+
+#### JavaScript開発ツール
+- **ESLint**: 9.39.2（Flat Config形式に移行済み）
+- **Prettier**: 3.7.4
+- **Cropper.js**: 1.6.2（jQuery依存なし、ゼロ依存ライブラリ）
 
 ## ライセンス
 
