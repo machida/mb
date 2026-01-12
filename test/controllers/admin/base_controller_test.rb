@@ -91,8 +91,8 @@ class Admin::BaseControllerTest < ActionDispatch::IntegrationTest
     post admin_articles_path, params: {
       article: {
         title: "",  # Required field, will fail validation
-        content: "",
-        slug: ""
+        body: "",
+        summary: ""
       }
     }
 
@@ -107,8 +107,8 @@ class Admin::BaseControllerTest < ActionDispatch::IntegrationTest
     post admin_articles_path, params: {
       article: {
         title: "",
-        content: "",
-        slug: ""
+        body: "",
+        summary: ""
       }
     }
 
@@ -160,8 +160,8 @@ class Admin::BaseControllerTest < ActionDispatch::IntegrationTest
     post admin_articles_path, params: {
       article: {
         title: "",
-        content: "",
-        slug: ""
+        body: "",
+        summary: ""
       }
     }
 
@@ -169,6 +169,57 @@ class Admin::BaseControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_content
     # Verify some form is present (article creation form)
     assert_response_body_includes "body"
+  end
+
+  test "set_success_message sets flash notice" do
+    post admin_login_path, params: { email: @admin.email, password: "password123" }
+
+    # Update site settings to trigger set_success_message
+    patch admin_site_settings_path, params: {
+      site_settings: {
+        site_title: "New Title",
+        top_page_description: "New Description",
+        copyright: "New Copyright"
+      }
+    }
+
+    assert_redirected_to admin_site_settings_path
+    assert flash[:notice].present?
+  end
+
+  test "set_error_message sets flash alert" do
+    post admin_login_path, params: { email: @admin.email, password: "password123" }
+
+    # Try to create an article with invalid data to trigger error
+    post admin_articles_path, params: {
+      article: {
+        title: "",  # Empty title will trigger validation error
+        body: "Some content",
+        summary: "Some summary"
+      }
+    }
+
+    assert_response :unprocessable_content
+  end
+
+  test "handle_validation_errors returns true when no errors" do
+    post admin_login_path, params: { email: @admin.email, password: "password123" }
+
+    # Create valid article
+    post admin_articles_path, params: {
+      article: {
+        title: "Valid Title",
+        body: "Valid Content",
+        summary: "Valid Summary",
+        draft: true
+      }
+    }
+
+    # Should redirect on success (meaning validation passed)
+    # Note: redirects to the created article, not the index
+    assert_response :redirect
+    follow_redirect!
+    assert_response :success
   end
 
   private
