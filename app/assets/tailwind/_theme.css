@@ -166,4 +166,7 @@
   --z-dropdown: 100;
   --z-modal: 1000;
   --z-toast: 2000;
+
+  /* Z-index layers */
+  --admin-nav-width: 10rem;
 }

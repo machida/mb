@@ -2,3 +2,9 @@ body.layout-admin {
   color: var(--color-text-primary);
   background-color: var(--color-admin-bg-body);
 }
+
+@media (min-width: 1024px) {
+  body.layout-admin {
+    padding-left: var(--admin-nav-width);
+  }
+}

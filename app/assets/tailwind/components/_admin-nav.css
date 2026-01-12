@@ -1,6 +1,5 @@
 /* Admin Navigation Component */
 .l--admin-nav {
-  --admin-nav-width: 12rem;
   background-color: var(--color-admin-nav-bg);
   position: fixed;
   z-index: 50;
@@ -70,8 +69,6 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1rem;
-    border-radius: 0 999px 999px 0;
-    margin-right: 0.5rem;
   }
 }
 .l--admin-nav__link:hover {

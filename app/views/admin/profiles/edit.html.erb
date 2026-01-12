@@ -40,8 +40,7 @@
         <div class="a--card">
           <div class="l--form-items">
             <div>
-              <label class="a--label">カラーテーマを選択</label>
-              <p class="a--help-text">管理画面のテーマカラーを選択してください。</p>
+              <label class="a--form-label">管理画面のテーマカラーを選択</label>
               <div class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
                 <% Admin::THEME_COLORS.each do |color| %>
                   <label class="l--theme-color-option js--theme-color-option spec--theme-color-option" data-color="<%= color %>">
@@ -66,10 +65,12 @@
           <h2 class="a--heading is--md spec--password-section-title">パスワード</h2>
         </header>
         <div class="a--card">
-          <div class="flex justify-between items-center mb-4">
+          <div class="flex justify-between items-center mb-2">
             <%= link_to "パスワードを変更", edit_admin_password_path, class: "a--button is--md is--secondary spec--password-change-link" %>
           </div>
-          <p class="text-sm text-sky-500">セキュリティのため、パスワードの変更は別ページで行います。</p>
+          <div class="a--form-help mt-1">
+            <p>セキュリティのため、パスワードの変更は別ページで行います。</p>
+          </div>
         </div>
       </div>
 
