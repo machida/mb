@@ -162,6 +162,13 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
+  test "published article link should point to show page in public" do
+    get root_path
+
+    # 公開画面では記事詳細ページへのリンクを指すべき
+    assert_select "a[href=?]", article_path(@published_article)
+  end
+
   test "should get RSS feed" do
     get feed_path(format: :rss)
     assert_response :success

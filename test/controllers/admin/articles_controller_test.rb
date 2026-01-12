@@ -133,12 +133,40 @@ class Admin::ArticlesControllerTest < ActionDispatch::IntegrationTest
 
   test "should destroy article" do
     login_as_admin
-    
+
     assert_difference('Article.count', -1) do
       delete admin_article_path(@article)
     end
-    
+
     assert_redirected_to admin_articles_path
+  end
+
+  test "should destroy draft article" do
+    login_as_admin
+
+    assert_difference('Article.count', -1) do
+      delete admin_article_path(@draft_article)
+    end
+
+    assert_redirected_to admin_articles_path
+    follow_redirect!
+    assert_response :success
+  end
+
+  test "draft article link should point to edit page in admin" do
+    login_as_admin
+    get admin_articles_path
+
+    # 下書き記事のリンクは編集ページを指すべき
+    assert_select "a[href=?]", edit_admin_article_path(@draft_article)
+  end
+
+  test "published article link should point to edit page in admin" do
+    login_as_admin
+    get admin_articles_path
+
+    # 公開済み記事のリンクも管理画面では編集ページを指すべき
+    assert_select "a[href=?]", edit_admin_article_path(@article)
   end
 
   test "should generate preview" do

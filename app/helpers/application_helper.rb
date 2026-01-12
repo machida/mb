@@ -51,7 +51,12 @@ module ApplicationHelper
 
   # Article list helpers
   def link_path_for_article(article)
-    article_path(article)
+    # 管理画面では編集ページへリンク、公開画面では詳細ページへリンク
+    if controller.class.name.start_with?("Admin::")
+      edit_admin_article_path(article)
+    else
+      article_path(article)
+    end
   end
 
   def status_badge_class(article)
