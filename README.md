@@ -110,63 +110,6 @@ export TEST_ADMIN_USER_ID="test_admin"
 bin/dev
 ```
 
-## 複数ブランチでの同時開発
-
-このプロジェクトでは[Phantom](https://github.com/aku11i/phantom)を使用して複数のブランチで同時に開発することができます。
-
-### Phantomのセットアップ
-
-```bash
-# Homebrewでインストール（推奨）
-brew install aku11i/tap/phantom
-
-# または npm でインストール
-npm install -g @aku11i/phantom
-```
-
-### 基本的な使い方
-
-```bash
-# 新しいブランチでワークツリーを作成
-phantom create feature/new-feature
-
-# 既存のブランチにアタッチ
-phantom attach existing-branch
-
-# ワークツリー一覧表示
-phantom list
-
-# 特定のワークツリーでコマンド実行
-phantom exec feature/new-feature npm run build
-
-# ワークツリーでシェルを開く
-phantom shell feature/new-feature
-
-# ワークツリーを削除
-phantom delete feature/new-feature
-```
-
-### 実際の開発フロー
-
-```bash
-# 1. 新機能のワークツリーを作成
-phantom create feature/user-auth
-
-# 2. 別のワークツリーでバグ修正
-phantom create fix/login-issue
-
-# 3. メインのワークツリーで開発サーバーを起動
-bin/dev
-
-# 4. 別のワークツリーでテストを実行
-phantom exec feature/user-auth bundle exec rails test
-
-# 5. 完了したらワークツリーを削除
-phantom delete feature/user-auth
-```
-
-各ワークツリーは独立したディレクトリで管理され、異なるブランチで同時に作業できます。
-
 ## 管理者ログイン
 
 ### 初期ユーザー情報

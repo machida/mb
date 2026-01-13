@@ -87,22 +87,11 @@ bundle exec rails test test/lib/tailwind_config_test.rb  # パス検証テスト
 - 実装はコードで"How"、テストは"What"、コミットは"Why"を語ること。ファイル末尾に改行を入れ、トレーリングスペースは禁止。
 
 ## Git・コミット・PR ルール
-- `phantom` で `feature/...` ブランチを作成し、main直コミット禁止。作業前後で `git pull --rebase origin main` を実行します。
+- `git checkout -b feature/...` でfeatureブランチを作成し、main直コミット禁止。作業前後で `git pull --rebase origin main` を実行します。
 - 作業を始める前に必ず専用ブランチを切り、mainで直接コミットしないこと。
 - コミットはConventional Commits（`fix:`, `refactor:`, `docs:` 等）をベースに小さく刻み、進捗のたびにこまめに作成する。push前に `bundle exec rails test:all` と `npm run lint` を通します。
 - PRには要約、実行済みコマンド、関連Issue、UI変更ならスクリーンショット/TTY記録、環境変数やマイグレーションがあれば明記します。
 - READMEや依存更新を行ったときは必要に応じて本ガイドも更新します。
-
-## Phantom ワークツリー運用
-```bash
-phantom create feature/new-feature
-phantom attach existing-branch
-phantom list
-phantom exec feature/foo bundle exec rails test
-phantom shell feature/foo
-phantom delete feature/foo
-```
-- ワークツリーは `.git/phantom/worktrees` に作成され、DBは共有されるため同時マイグレーションに注意。メインディレクトリで `bin/dev` を動かし、各ワークツリーでテストを実行します。
 
 ## セキュリティ & 設定
 - GCSやAPIキーは `rails credentials:edit` に保存し、`.env` やJSON鍵ファイルをコミットしないでください。新しい秘密設定はPRで必ず説明します。
