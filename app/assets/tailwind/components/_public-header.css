@@ -1,0 +1,10 @@
+.l--public-header {
+  background-color: var(--color-bg-primary);
+}
+
+.l--public-header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+}

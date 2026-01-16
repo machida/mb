@@ -1,0 +1,7 @@
+.l--public-top-header {
+  background-color: var(--color-bg-primary);
+}
+
+.l--public-body {
+  margin-block: 3rem;
+}

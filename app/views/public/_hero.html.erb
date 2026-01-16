@@ -6,17 +6,15 @@
 <% heading_class = hero_text_color == "black" ? "text-gray-900" : "text-white" %>
 <% description_class = hero_text_color == "black" ? "text-gray-800" : "text-white/90" %>
 
-<%= tag.header class: hero_classes.join(" "), style: (hero_background_image ? "--hero-bg-image: url('#{hero_background_image}');" : nil) do %>
-  <div class="l--container is--lg text-center">
-    <div class="a--hero__inner flex flex-col items-center justify-center gap-8">
-      <h1 class="a--heading is--xxxl spec--main-title <%= heading_class %>">
-        <%= SiteSetting.site_title %>
-      </h1>
-      <% if SiteSetting.top_page_description.present? %>
-        <p class="<%= "#{description_class} max-w-2xl mx-auto" %>">
-          <%= SiteSetting.top_page_description %>
-        </p>
-      <% end %>
-    </div>
+<%= tag.div class: hero_classes.join(" "), style: (hero_background_image ? "--hero-bg-image: url('#{hero_background_image}');" : nil) do %>
+  <div class="a--hero__inner">
+    <h1 class="a--heading is--xxl spec--main-title <%= heading_class %>">
+      <%= SiteSetting.site_title %>
+    </h1>
+    <% if SiteSetting.top_page_description.present? %>
+      <p class="<%= "#{description_class}" %>">
+        <%= SiteSetting.top_page_description %>
+      </p>
+    <% end %>
   </div>
 <% end %>

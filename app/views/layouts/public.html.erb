@@ -32,20 +32,27 @@
   </head>
 
   <body class="min-h-screen flex flex-col layout-public">
+    <%= render "public/header" %>
     <% if controller_name == 'articles' && action_name == 'index' %>
-      <%= render "public/hero" %>
+      <header class="l--public-top-header">
+        <div class="l--container is--md">
+          <%= render "public/hero" %>
+        </div>
+      </header>
 
-      <!-- Public Main Content for Top Page -->
-      <main class="flex-1 l--container is--md my-12">
-        <%= yield %>
-      </main>
+      <div class="l--public-body">
+        <!-- Public Main Content for Top Page -->
+        <main class="flex-1 l--container is--md">
+          <%= yield %>
+        </main>
+      </div>
     <% else %>
-      <%= render "public/header" %>
-
-      <!-- Public Main Content for Other Pages -->
-      <main class="flex-1 l--container is--md my-12">
-        <%= yield %>
-      </main>
+      <div class="l--public-body">
+        <!-- Public Main Content for Other Pages -->
+        <main class="flex-1 l--container is--md">
+          <%= yield %>
+        </main>
+      </div>
     <% end %>
 
     <%= render "public/footer" %>

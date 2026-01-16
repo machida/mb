@@ -19,7 +19,6 @@
 @import "./components/_card.css";
 @import "./components/_forms.css";
 @import "./components/_dropdown.css";
-@import "./components/_hero.css";
 @import "./components/_long-text.css";
 @import "./components/_short-text.css";
 @import "./components/_image-upload.css";
@@ -34,6 +33,12 @@
 @import "./components/_headings.css";
 @import "./components/_form-help.css";
 @import "./components/_page-notice.css";
+
+/* Import Public Components */
+@import "./components/_public-top-header.css";
+@import "./components/_public-header.css";
+@import "./components/_public-footer.css";
+@import "./components/_hero.css";
 
 /* Import Admin Components */
 @import "./components/_admin-colors.css";
