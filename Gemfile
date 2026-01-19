@@ -69,7 +69,7 @@ group :development do
   gem "web-console"
 
   # Live reload for development
-  gem "listen", "~> 3.3"
+  gem "listen", "~> 3.10"
 
   # Preview emails in development
   gem "letter_opener_web"
