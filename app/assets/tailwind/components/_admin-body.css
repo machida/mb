@@ -1,4 +1,5 @@
-body.layout-admin {
+body.layout-admin,
+body.layout-admin-auth {
   color: var(--color-text-primary);
   background-color: var(--color-admin-bg-body);
 }

@@ -82,7 +82,8 @@
 
   /* Admin page overrides - only apply within admin layout */
   /* Note: Admin color variables are now defined in _admin-colors.css */
-  .layout-admin {
+  .layout-admin,
+  .layout-admin-auth {
     --color-button-primary: var(--color-admin-button-primary);
     --color-button-primary-hover-background: var(--color-admin-button-primary-hover);
     --color-button-common-focus: var(--color-admin-border-strong);
@@ -119,7 +120,8 @@
   }
 
   /* Override bg-white in admin layout */
-  .layout-admin .bg-white {
+  .layout-admin .bg-white,
+  .layout-admin-auth .bg-white {
     background-color: var(--color-admin-bg-base);
   }
 }
