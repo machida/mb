@@ -69,7 +69,7 @@ group :development do
   gem "web-console"
 
   # Live reload for development
-  gem "listen", "~> 3.3"
+  gem "listen", "~> 3.10"
 
   # Preview emails in development
   gem "letter_opener_web"
@@ -78,7 +78,7 @@ end
 group :test do
   # Playwright for E2E testing - unified system testing framework
   # Using 1.53.0 with Playwright 1.53.2: compatible versions
-  gem "playwright-ruby-client", "~> 1.57.1"
+  gem "playwright-ruby-client", "~> 1.58.1"
 
   # HTTP request stubbing for testing
   gem "webmock", "~> 3.26"
