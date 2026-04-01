@@ -129,9 +129,6 @@ jobs:
       run: |
         kamal lock release || echo "No existing lock to release"
 
-    - name: Update kamal-proxy
-      run: kamal proxy reboot -y
-
     - name: Deploy with Kamal
       run: kamal deploy
 
