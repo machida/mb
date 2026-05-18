@@ -20,7 +20,7 @@
 
 <article class="prose prose-lg max-w-none">
   <header class="l--article-header">
-    <h1 class="a--heading is--xxl spec--article-title"><%= @article.title %></h1>
+    <h1 class="a--heading is--xxxl spec--article-title"><%= @article.title %></h1>
     <div class="flex items-center gap-4 text-sm text-gray-500 mb-4">
       <% if show_author_info? %>
         <span class="spec--article-author">著者: <%= @article.author %></span>
@@ -43,17 +43,46 @@
     </div>
   <% end %>
 
-  <div class="a--long-text spec--article-content py-12">
+  <div class="a--prose spec--article-content py-12">
     <%= markdown(@article.body) %>
   </div>
 </article>
 
-<div class="mt-8 pt-4 flex gap-2">
-  <%= link_to "記事一覧に戻る", root_path, class: "a--button is--md is--secondary" %>
-  <% if current_user_signed_in? %>
+<nav class="mt-8 pt-4 border-t border-gray-200">
+  <div class="flex items-center justify-between gap-4">
+    <div class="flex-1">
+      <% if @prev_article %>
+        <%= link_to article_path(@prev_article), class: "group flex flex-col gap-1 text-sm text-gray-500 hover:text-gray-800 spec--prev-article-link" do %>
+          <span class="flex items-center gap-1">
+            <span class="material-symbols-outlined text-base">arrow_back</span>
+            前の記事
+          </span>
+          <span class="line-clamp-1 group-hover:underline"><%= @prev_article.title %></span>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="flex-none">
+      <%= link_to "記事一覧", root_path, class: "a--button is--md is--mono" %>
+    </div>
+    <div class="flex-1 text-right">
+      <% if @next_article %>
+        <%= link_to article_path(@next_article), class: "group flex flex-col items-end gap-1 text-sm text-gray-500 hover:text-gray-800 spec--next-article-link" do %>
+          <span class="flex items-center gap-1">
+            次の記事
+            <span class="material-symbols-outlined text-base">arrow_forward</span>
+          </span>
+          <span class="line-clamp-1 group-hover:underline"><%= @next_article.title %></span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</nav>
+
+<% if current_user_signed_in? %>
+  <div class="mt-8 flex justify-end gap-2">
     <%= link_to "編集", edit_admin_article_path(@article), class: "a--button is--md is--secondary" %>
     <%= link_to "削除", admin_article_path(@article), method: :delete,
                 data: { confirm: "この記事を削除しますか？削除すると元に戻せません。" },
                 class: "a--button is--md is--border-danger spec--delete-article-button" %>
-  <% end %>
-</div>
+  </div>
+<% end %>

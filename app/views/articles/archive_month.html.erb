@@ -1,32 +1,27 @@
 <div>
   <div class="mb-8">
-    <h1 class="text-3xl font-bold mb-2 spec--archive-month-title"><%= @year %>年<%= @month %>月の記事</h1>
+    <h1 class="a--heading is--xxl mb-2 spec--archive-month-title"><%= @year %>年<%= @month %>月の記事</h1>
     <p class="text-gray-500"><%= @articles.count %>件の記事があります</p>
   </div>
 
   <!-- ナビゲーション -->
-  <div class="mb-12 flex justify-center gap-12">
+  <nav class="mb-12 flex justify-center gap-8 items-baseline">
     <% if @month > 1 %>
-      <%= link_to archive_month_path(@year, @month - 1), class: "a--button is--md is--secondary" do %>
-        <span class="material-symbols-outlined">chevron_left</span>
-        <%= @month - 1 %>月
-      <% end %>
+      <%= link_to "← #{@month - 1}月", archive_month_path(@year, @month - 1),
+            class: "text-link hover-text-link" %>
     <% end %>
 
-    <%= link_to archive_year_path(@year), class: "a--button is--md is--primary" do %>
-      <%= @year %>年の一覧
-    <% end %>
+    <%= link_to "#{@year}年の一覧", archive_year_path(@year),
+          class: "text-link hover-text-link" %>
 
     <% if @month < 12 %>
-      <%= link_to archive_month_path(@year, @month + 1), class: "a--button is--md is--secondary" do %>
-        <%= @month + 1 %>月
-        <span class="material-symbols-outlined">chevron_right</span>
-      <% end %>
+      <%= link_to "#{@month + 1}月 →", archive_month_path(@year, @month + 1),
+            class: "text-link hover-text-link" %>
     <% end %>
-  </div>
+  </nav>
 
   <!-- 記事一覧 -->
-  <div class="l__articles">
+  <div class="l--articles">
     <%= render partial: "article_item", collection: @articles %>
   </div>
 
@@ -43,6 +38,6 @@
 
   <!-- ナビゲーション -->
   <div class="mt-8 text-center">
-    <%= link_to "トップページに戻る", root_path, class: "a--button is--lg is--secondary" %>
+    <%= link_to "← トップページに戻る", root_path, class: "text-link hover-text-link" %>
   </div>
 </div>

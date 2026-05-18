@@ -12,6 +12,8 @@ class ArticlesController < ApplicationController
       redirect_to root_path, alert: "この記事は非公開です。"
       nil
     end
+    @prev_article = Article.published.where('created_at < ?', @article.created_at).order(created_at: :desc).first
+    @next_article = Article.published.where('created_at > ?', @article.created_at).order(created_at: :asc).first
   end
 
   def archive_year

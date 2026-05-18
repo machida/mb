@@ -1,42 +1,36 @@
 /* Admin Text Utilities and Components */
+
 /* ========================================
- * ユーティリティクラス (Atomic Design)
+ * 管理画面用テキスト atom + モディファイア
+ * 使い方: <span class="a--admin-text is--strong is--lg">...</span>
  * ======================================== */
-/* Text colors - 管理画面用テキストカラー */
-.a--admin-text-light {
-  color: var(--color-admin-text-light);
-}
-.a--admin-text-medium {
-  color: var(--color-admin-text-medium);
-}
-.a--admin-text-default {
-  color: var(--color-admin-text-default);
-}
-.a--admin-text-strong {
-  color: var(--color-admin-text-strong);
-}
-.a--admin-text-heading {
-  color: var(--color-admin-text-heading);
-}
-.a--admin-text-contrast {
-  color: var(--color-admin-text-contrast);
-}
-/* Text sizes - 管理画面用テキストサイズ */
-.a--admin-text-sm {
+
+/* Color variants */
+.a--admin-text.is--light    { color: var(--color-admin-text-light); }
+.a--admin-text.is--medium   { color: var(--color-admin-text-medium); }
+.a--admin-text.is--default  { color: var(--color-admin-text-default); }
+.a--admin-text.is--strong   { color: var(--color-admin-text-strong); }
+.a--admin-text.is--heading  { color: var(--color-admin-text-heading); }
+.a--admin-text.is--contrast { color: var(--color-admin-text-contrast); }
+
+/* Size variants */
+.a--admin-text.is--sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
-.a--admin-text-base {
+.a--admin-text.is--base {
   font-size: 1rem;
   line-height: 1.5rem;
 }
-.a--admin-text-lg {
+.a--admin-text.is--lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
+
 /* ========================================
  * コンポーネント専用クラス
  * ======================================== */
+
 /* Empty state - 空状態表示 */
 .a--admin-empty-state__message {
   color: var(--color-admin-text-medium);
@@ -49,18 +43,21 @@
   line-height: 1.25rem;
   margin-top: 0.5rem;
 }
+
 /* Info text - 情報テキスト */
 .a--admin-info-text {
   font-size: 0.875rem;
   line-height: 1.25rem;
   color: var(--color-admin-text-medium);
 }
+
 /* Email display - メールアドレス表示 */
 .a--admin-email {
   color: var(--color-admin-text-default);
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
+
 /* Metadata display - メタデータ表示 */
 .a--admin-metadata {
   display: flex;

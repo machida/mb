@@ -1,10 +1,10 @@
 @import "./_theme.css";
 @import "tailwindcss";
 
-@source "app/views/**/*.erb"
-@source "app/components/**/*.rb"
-@source "app/helpers/**/*.rb"
-@source "app/javascript/**/*.js"
+@source "app/views/**/*.erb";
+@source "app/components/**/*.rb";
+@source "app/helpers/**/*.rb";
+@source "app/javascript/**/*.js";
 
 @import "./_base.css";
 @import "./_utilities.css";
@@ -19,8 +19,8 @@
 @import "./components/_card.css";
 @import "./components/_forms.css";
 @import "./components/_dropdown.css";
-@import "./components/_long-text.css";
-@import "./components/_short-text.css";
+@import "./components/_prose.css";
+@import "./components/_prose-compact.css";
 @import "./components/_image-upload.css";
 @import "./components/_modal.css";
 @import "./components/_crop.css";

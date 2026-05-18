@@ -1,10 +1,11 @@
-/* Short Text Content Styles - Compact version of long-text */
+/* Prose (compact)
+   .a--prose のコンパクト版。行間・余白を詰めた組版スタイル。 */
 
-.a--short-text {
+.a--prose-compact {
   /* Base settings */
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  color: var(--color-long-text-text);
+  color: var(--color-prose-text);
   background-color: transparent;
   font-size: 1rem;
   line-height: 1.5rem; /* 24px = 4px multiple */
@@ -16,49 +17,49 @@
    Typography
    ================================================================= */
 
-.a--short-text h1,
-.a--short-text h2,
-.a--short-text h3,
-.a--short-text h4,
-.a--short-text h5,
-.a--short-text h6 {
+.a--prose-compact h1,
+.a--prose-compact h2,
+.a--prose-compact h3,
+.a--prose-compact h4,
+.a--prose-compact h5,
+.a--prose-compact h6 {
   margin-top: 1.5rem; /* 24px = 4px multiple */
   margin-bottom: 0.75rem; /* 12px = 4px multiple */
   font-weight: 700;
   line-height: 1.25rem; /* 20px = 4px multiple */
-  color: var(--color-long-text-heading);
+  color: var(--color-prose-heading);
 }
 
-.a--short-text h1 {
+.a--prose-compact h1 {
   font-size: 2em;
   padding-bottom: 0.25rem; /* 4px = 4px multiple */
-  border-bottom: 1px solid var(--color-long-text-border);
+  border-bottom: 1px solid var(--color-prose-border);
 }
 
-.a--short-text h2 {
+.a--prose-compact h2 {
   font-size: 1.5em;
   padding-bottom: 0.25rem; /* 4px = 4px multiple */
-  border-bottom: 1px solid var(--color-long-text-border);
+  border-bottom: 1px solid var(--color-prose-border);
 }
 
-.a--short-text h3 {
+.a--prose-compact h3 {
   font-size: 1.25em;
 }
 
-.a--short-text h4 {
+.a--prose-compact h4 {
   font-size: 1em;
 }
 
-.a--short-text h5 {
+.a--prose-compact h5 {
   font-size: 0.875em;
 }
 
-.a--short-text h6 {
+.a--prose-compact h6 {
   font-size: 0.85em;
-  color: var(--color-long-text-muted);
+  color: var(--color-prose-muted);
 }
 
-.a--short-text p {
+.a--prose-compact p {
   margin-top: 0;
   margin-bottom: 0.75rem; /* 12px = 4px multiple */
   line-height: 1.5rem; /* 24px = 4px multiple */
@@ -68,13 +69,13 @@
    Links
    ================================================================= */
 
-.a--short-text a {
-  color: var(--color-long-text-link);
+.a--prose-compact a {
+  color: var(--color-prose-link);
   text-decoration: none;
 }
 
-.a--short-text a:hover {
-  color: var(--color-long-text-link-hover);
+.a--prose-compact a:hover {
+  color: var(--color-prose-link-hover);
   text-decoration: underline;
 }
 
@@ -82,39 +83,39 @@
    Lists
    ================================================================= */
 
-.a--short-text ul,
-.a--short-text ol {
+.a--prose-compact ul,
+.a--prose-compact ol {
   margin-top: 0;
   margin-bottom: 0.75rem; /* 12px = 4px multiple */
   padding-left: 2rem; /* 32px = 4px multiple */
 }
 
-.a--short-text ul {
+.a--prose-compact ul {
   list-style-type: disc;
 }
 
-.a--short-text ol {
+.a--prose-compact ol {
   list-style-type: decimal;
 }
 
-.a--short-text li {
-  margin: 0.25rem 0; /* 4px = 4px multiple */
+.a--prose-compact li {
+  margin-block: 0.25rem; /* 4px = 4px multiple */
   line-height: 1.5rem; /* 24px = 4px multiple */
 }
 
-.a--short-text ul ul {
+.a--prose-compact ul ul {
   list-style-type: circle;
 }
 
-.a--short-text ul ul ul {
+.a--prose-compact ul ul ul {
   list-style-type: square;
 }
 
-.a--short-text ol ol {
+.a--prose-compact ol ol {
   list-style-type: lower-alpha;
 }
 
-.a--short-text ol ol ol {
+.a--prose-compact ol ol ol {
   list-style-type: lower-roman;
 }
 
@@ -122,28 +123,28 @@
    Code
    ================================================================= */
 
-.a--short-text code {
-  background-color: var(--color-long-text-bg-code);
-  color: var(--color-long-text-code-text);
+.a--prose-compact code {
+  background-color: var(--color-prose-bg-code);
+  color: var(--color-prose-code-text);
   padding: 0.125rem 0.25rem;
   border-radius: 0.25rem;
   font-size: 0.875em;
   font-family: var(--font-family-mono);
 }
 
-.a--short-text pre {
+.a--prose-compact pre {
   background-color: var(--color-bg-muted);
   color: var(--color-text-primary);
   padding: 1rem; /* 16px = 4px multiple */
   border-radius: 0.5rem;
   overflow-x: auto;
-  margin: 1rem 0; /* 16px = 4px multiple */
+  margin-block: 1rem; /* 16px = 4px multiple */
   font-family: var(--font-family-mono);
   font-size: 0.875em;
   line-height: 1.25rem; /* 20px = 4px multiple */
 }
 
-.a--short-text pre code {
+.a--prose-compact pre code {
   background-color: transparent;
   color: inherit;
   padding: 0;
@@ -152,16 +153,16 @@
 }
 
 /* Syntax highlighting blocks */
-.a--short-text .highlight {
+.a--prose-compact .highlight {
   background-color: var(--color-syntax-dark-bg);
   color: var(--color-syntax-dark-text);
   padding: 1rem; /* 16px = 4px multiple */
   border-radius: 0.5rem;
   overflow-x: auto;
-  margin: 1rem 0; /* 16px = 4px multiple */
+  margin-block: 1rem; /* 16px = 4px multiple */
 }
 
-.a--short-text .highlight pre {
+.a--prose-compact .highlight pre {
   background-color: transparent;
   color: inherit;
   padding: 0;
@@ -169,7 +170,7 @@
   white-space: pre-wrap;
 }
 
-.a--short-text .highlight code {
+.a--prose-compact .highlight code {
   background-color: transparent;
   color: inherit;
   padding: 0;
@@ -179,20 +180,20 @@
    Blockquotes
    ================================================================= */
 
-.a--short-text blockquote {
-  margin: 1rem 0; /* 16px = 4px multiple */
+.a--prose-compact blockquote {
+  margin-block: 1rem; /* 16px = 4px multiple */
   padding: 0 1rem; /* 16px = 4px multiple */
-  color: var(--color-long-text-muted);
-  border-left: 0.25rem solid var(--color-long-text-quote-border);
+  color: var(--color-prose-muted);
+  border-left: 0.25rem solid var(--color-prose-quote-border);
   font-style: italic;
   line-height: 1.5rem; /* 24px = 4px multiple */
 }
 
-.a--short-text blockquote > :first-child {
+.a--prose-compact blockquote > :first-child {
   margin-top: 0;
 }
 
-.a--short-text blockquote > :last-child {
+.a--prose-compact blockquote > :last-child {
   margin-bottom: 0;
 }
 
@@ -200,26 +201,26 @@
    Tables
    ================================================================= */
 
-.a--short-text table {
+.a--prose-compact table {
   border-collapse: collapse;
   width: 100%;
-  margin: 1rem 0; /* 16px = 4px multiple */
+  margin-block: 1rem; /* 16px = 4px multiple */
 }
 
-.a--short-text table th,
-.a--short-text table td {
+.a--prose-compact table th,
+.a--prose-compact table td {
   padding: 0.5rem; /* 8px = 4px multiple */
-  border: 1px solid var(--color-long-text-border);
+  border: 1px solid var(--color-prose-border);
   text-align: left;
   line-height: 1.25rem; /* 20px = 4px multiple */
 }
 
-.a--short-text table th {
-  background-color: var(--color-long-text-bg-code);
+.a--prose-compact table th {
+  background-color: var(--color-prose-bg-code);
   font-weight: 600;
 }
 
-.a--short-text table tr:nth-child(even) {
+.a--prose-compact table tr:nth-child(even) {
   background-color: var(--color-bg-secondary);
 }
 
@@ -227,35 +228,35 @@
    Images
    ================================================================= */
 
-.a--short-text img {
+.a--prose-compact img {
   max-width: 100%;
   height: auto;
   border-radius: 0.5rem;
-  margin: 0.5rem 0; /* 8px = 4px multiple */
+  margin-block: 0.5rem; /* 8px = 4px multiple */
 }
 
 /* =================================================================
    Horizontal Rules
    ================================================================= */
 
-.a--short-text hr {
+.a--prose-compact hr {
   height: 1px;
   border: none;
-  background-color: var(--color-long-text-border);
-  margin: 1.5rem 0; /* 24px = 4px multiple */
+  background-color: var(--color-prose-border);
+  margin-block: 1.5rem; /* 24px = 4px multiple */
 }
 
 /* =================================================================
    Emphasis
    ================================================================= */
 
-.a--short-text strong,
-.a--short-text b {
+.a--prose-compact strong,
+.a--prose-compact b {
   font-weight: 600;
 }
 
-.a--short-text em,
-.a--short-text i {
+.a--prose-compact em,
+.a--prose-compact i {
   font-style: italic;
 }
 
@@ -263,11 +264,11 @@
    Spacing adjustments
    ================================================================= */
 
-.a--short-text > *:first-child {
+.a--prose-compact > *:first-child {
   margin-top: 0;
 }
 
-.a--short-text > *:last-child {
+.a--prose-compact > *:last-child {
   margin-bottom: 0;
 }
 
@@ -275,7 +276,7 @@
    Focus states
    ================================================================= */
 
-.a--short-text a:focus {
+.a--prose-compact a:focus {
   outline: 0.125rem solid var(--color-link);
   outline-offset: 0.125rem;
   border-radius: 0.25rem;
@@ -285,11 +286,11 @@
    Task lists (GitHub-style checkboxes)
    ================================================================= */
 
-.a--short-text .task-list-item {
+.a--prose-compact .task-list-item {
   list-style-type: none;
 }
 
-.a--short-text .task-list-item-checkbox {
+.a--prose-compact .task-list-item-checkbox {
   margin: 0 0.25rem 0.25rem -1.5rem;
   vertical-align: middle;
 }
@@ -298,76 +299,76 @@
    Size variants
    ================================================================= */
 
-.a--short-text.is--sm {
+.a--prose-compact.is--sm {
   font-size: 0.875rem;
   line-height: 1.25rem; /* 20px = 4px multiple for 14px font */
 }
 
-.a--short-text.is--sm h1 {
+.a--prose-compact.is--sm h1 {
   font-size: 1.75em; /* Proportionally smaller than default 2em */
 }
 
-.a--short-text.is--sm h2 {
+.a--prose-compact.is--sm h2 {
   font-size: 1.375em; /* Proportionally smaller than default 1.5em */
 }
 
-.a--short-text.is--sm h3 {
+.a--prose-compact.is--sm h3 {
   font-size: 1.125em; /* Proportionally smaller than default 1.25em */
 }
 
-.a--short-text.is--sm h4 {
+.a--prose-compact.is--sm h4 {
   font-size: 1em;
 }
 
-.a--short-text.is--sm h5 {
+.a--prose-compact.is--sm h5 {
   font-size: 0.875em;
 }
 
-.a--short-text.is--sm h6 {
+.a--prose-compact.is--sm h6 {
   font-size: 0.75em; /* Proportionally smaller than default 0.85em */
 }
 
-.a--short-text.is--sm code {
+.a--prose-compact.is--sm code {
   font-size: 0.8125em; /* Slightly smaller than default 0.875em */
 }
 
-.a--short-text.is--sm pre {
+.a--prose-compact.is--sm pre {
   font-size: 0.8125em; /* Slightly smaller than default 0.875em */
 }
 
-.a--short-text.is--xs {
+.a--prose-compact.is--xs {
   font-size: 0.75rem;
   line-height: 1rem; /* 16px = 4px multiple for 12px font */
 }
 
-.a--short-text.is--xs h1 {
+.a--prose-compact.is--xs h1 {
   font-size: 1.5em; /* Proportionally smaller than default 2em */
 }
 
-.a--short-text.is--xs h2 {
+.a--prose-compact.is--xs h2 {
   font-size: 1.25em; /* Proportionally smaller than default 1.5em */
 }
 
-.a--short-text.is--xs h3 {
+.a--prose-compact.is--xs h3 {
   font-size: 1.125em; /* Proportionally smaller than default 1.25em */
 }
 
-.a--short-text.is--xs h4 {
+.a--prose-compact.is--xs h4 {
   font-size: 1em;
 }
 
-.a--short-text.is--xs h5 {
+.a--prose-compact.is--xs h5 {
   font-size: 0.875em;
 }
 
-.a--short-text.is--xs h6 {
+.a--prose-compact.is--xs h6 {
   font-size: 0.75em; /* Proportionally smaller than default 0.85em */
 }
 
-.a--short-text.is--xs code {
+.a--prose-compact.is--xs code {
   font-size: 0.75em; /* Smaller than default 0.875em */
 }
 
-.a--short-text.is--xs pre {
+.a--prose-compact.is--xs pre {
   font-size: 0.75em; /* Smaller than default 0.875em */
 }

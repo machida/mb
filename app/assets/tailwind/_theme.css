@@ -26,7 +26,7 @@
   --border-width-thin: 0.0625rem;
 
   /* Font families */
-  --font-family-base: YakuHanJPs, "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  --font-family-base: YakuHanJPs, "Noto Sans", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
   --font-family-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 
   /* Primary colors */
@@ -133,19 +133,19 @@
   --color-syntax-regex: var(--color-green-300);
   --color-syntax-whitespace: var(--color-gray-100);
 
-  /* Long text colors */
-  --color-long-text-heading: var(--color-gray-900);
-  --color-long-text-text: var(--color-gray-700);
-  --color-long-text-muted: var(--color-gray-500);
-  --color-long-text-border: var(--color-gray-200);
-  --color-long-text-bg-code: var(--color-gray-50);
-  --color-long-text-link: var(--color-blue-600);
-  --color-long-text-link-hover: var(--color-blue-700);
-  --color-long-text-code-text: var(--color-red-500);
-  --color-long-text-table-text: var(--color-gray-600);
-  --color-long-text-quote-border: var(--color-gray-300);
+  /* Prose colors */
+  --color-prose-heading: var(--color-gray-900);
+  --color-prose-text: var(--color-gray-700);
+  --color-prose-muted: var(--color-gray-500);
+  --color-prose-border: var(--color-gray-200);
+  --color-prose-bg-code: var(--color-gray-50);
+  --color-prose-link: var(--color-blue-600);
+  --color-prose-link-hover: var(--color-blue-700);
+  --color-prose-code-text: var(--color-red-500);
+  --color-prose-table-text: var(--color-gray-600);
+  --color-prose-quote-border: var(--color-gray-300);
 
-  /* Syntax dark theme colors for long text content */
+  /* Syntax dark theme colors for prose content */
   --color-syntax-dark-bg: var(--color-gray-900);
   --color-syntax-dark-text: var(--color-gray-200);
 

@@ -23,13 +23,13 @@
                       aria-label="ユーザーメニューを開く">
                 <span class="material-symbols-outlined" aria-hidden="true">person</span>
               </button>
-              <div class="a--dropdown-menu js--dropdown-menu" id="user-menu" role="menu">
-                <%= link_to edit_admin_profile_path, class: "a--dropdown-menu-item spec--profile-edit-link", role: "menuitem" do %>
+              <div class="a--dropdown__menu js--dropdown-menu" id="user-menu" role="menu">
+                <%= link_to edit_admin_profile_path, class: "a--dropdown__menu-item spec--profile-edit-link", role: "menuitem" do %>
                   プロフィール編集
                 <% end %>
-                <div class="a--dropdown-menu-separator" role="separator"></div>
+                <div class="a--dropdown__menu-separator" role="separator"></div>
                 <%= button_to "サインアウト", admin_logout_path, method: :delete,
-                              class: "a--dropdown-menu-item spec--logout-button w-full text-left bg-transparent border-0 cursor-pointer", role: "menuitem" %>
+                              class: "a--dropdown__menu-item spec--logout-button w-full text-left bg-transparent border-0 cursor-pointer", role: "menuitem" %>
               </div>
             </div>
           </li>

@@ -7,7 +7,7 @@
     <div class="a--card">
       <div class="flex justify-between items-start mb-6">
         <div>
-          <h2 class="text-2xl font-bold spec--admin-user-id">
+          <h2 class="a--heading is--xl spec--admin-user-id">
             <%= @admin.user_id %>
           </h2>
           <p class="spec--admin-email">
@@ -74,7 +74,7 @@
 
     <% if @admin.articles.exists? %>
       <div class="mt-6">
-        <header class="a--card-header">
+        <header class="a--card__header">
           <h3 class="a--heading is--md">記事の処理</h3>
         </header>
         <div class="a--card">

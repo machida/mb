@@ -171,6 +171,22 @@
   box-shadow: 0 0 0 2px var(--color-button-common-focus-ring), 0 0 0 3px var(--color-button-danger-focus);
 }
 
+/* Monochrome Button Variant (公開ページ用) */
+.a--button.is--mono {
+  background-color: transparent;
+  border: 1px solid var(--color-gray-900);
+  color: var(--color-gray-900);
+}
+
+.a--button.is--mono:hover {
+  background-color: var(--color-gray-900);
+  color: var(--color-white);
+}
+
+.a--button.is--mono:focus {
+  box-shadow: 0 0 0 2px var(--color-button-common-focus-ring), 0 0 0 3px var(--color-gray-900);
+}
+
 /* Button States */
 .a--button:disabled {
   background-color: var(--color-bg-muted);

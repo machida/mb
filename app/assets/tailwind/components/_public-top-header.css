@@ -3,5 +3,8 @@
 }
 
 .l--public-body {
-  margin-block: 3rem;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin-block: 5rem;
 }

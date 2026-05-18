@@ -6,6 +6,11 @@
   font-weight: 800;
 }
 
+.a--heading.budoux-applied {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
 /* Size Variations */
 .a--heading.is--xs {
   font-size: 0.75rem;  /* 12px */

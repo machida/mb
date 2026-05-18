@@ -5,13 +5,17 @@
   color: var(--color-bg-primary);
   position: relative;
   overflow: hidden;
-  aspect-ratio: 40 / 21;
+  aspect-ratio: 191 / 100;
+  max-width: 63.75rem;
+  margin-inline: auto;
 }
 
-.a--hero.has-background {
-  background-image: var(--hero-bg-image);
-  background-size: cover;
-  background-position: center;
+.a--hero__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .a--hero.is--text-dark {

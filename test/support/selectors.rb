@@ -62,4 +62,11 @@ module TestSelectors
 
   # Pagination
   PAGINATION = ".spec--pagination"
+
+  # Article Navigation
+  PREV_ARTICLE_LINK = ".spec--prev-article-link"
+  NEXT_ARTICLE_LINK = ".spec--next-article-link"
+
+  # Article Thumbnail
+  ARTICLE_THUMBNAIL = ".spec--article-thumbnail"
 end

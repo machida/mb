@@ -84,7 +84,7 @@
         <div class="hidden lg:block" data-markdown-tab-target="previewPanel" id="markdown-preview-panel" role="tabpanel">
           <label class="a--form-label mb-2">プレビュー</label>
           <div class="l--admin-preview-panel" role="region" aria-label="Markdownプレビュー">
-            <div data-markdown-preview-target="preview" class="a--long-text js-markdown-preview">
+            <div data-markdown-preview-target="preview" class="a--prose js-markdown-preview">
               <% if article.body.present? %>
                 <%= markdown(article.body) %>
               <% else %>
@@ -190,7 +190,7 @@
          aria-modal="true"
          aria-labelledby="help-modal-title">
       <div class="sticky top-0 bg-sky-50 border-b border-sky-200 px-6 py-4 flex items-center justify-between">
-        <h2 id="help-modal-title" class="text-xl font-semibold">Markdown記法のヘルプ</h2>
+        <h2 id="help-modal-title" class="a--heading is--lg">Markdown記法のヘルプ</h2>
         <button type="button"
                 class="text-sky-400 hover:text-sky-600 cursor-pointer spec--help-modal-close"
                 data-action="click->help-modal#close"

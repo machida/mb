@@ -5,7 +5,7 @@
       <%= render AlertComponent.new(type: :danger, messages: @admin.errors.full_messages, spec_class: "spec--error-messages") if @admin.errors.any? %>
 
       <div>
-        <header class="a--card-header">
+        <header class="a--card__header">
           <h2 class="a--heading is--md spec--account-info-title">アカウント情報</h2>
         </header>
         <div class="a--card">
@@ -34,7 +34,7 @@
       </div>
 
       <div>
-        <header class="a--card-header">
+        <header class="a--card__header">
           <h2 class="a--heading is--md spec--theme-section-title">テーマカラー</h2>
         </header>
         <div class="a--card">
@@ -61,7 +61,7 @@
       </div>
 
       <div>
-        <header class="a--card-header">
+        <header class="a--card__header">
           <h2 class="a--heading is--md spec--password-section-title">パスワード</h2>
         </header>
         <div class="a--card">

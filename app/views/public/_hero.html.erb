@@ -1,4 +1,4 @@
-<% hero_background_image = SiteSetting.hero_background_image.presence %>
+<% hero_background_image = SiteSetting.hero_background_image.presence || "https://picsum.photos/seed/mb-hero/1020/536" %>
 <% hero_text_color = SiteSetting.hero_text_color %>
 <% hero_classes = ["a--hero"] %>
 <% hero_classes << "has-background" if hero_background_image %>
@@ -6,7 +6,10 @@
 <% heading_class = hero_text_color == "black" ? "text-gray-900" : "text-white" %>
 <% description_class = hero_text_color == "black" ? "text-gray-800" : "text-white/90" %>
 
-<%= tag.div class: hero_classes.join(" "), style: (hero_background_image ? "--hero-bg-image: url('#{hero_background_image}');" : nil) do %>
+<%= tag.div class: hero_classes.join(" ") do %>
+  <% if hero_background_image %>
+    <%= image_tag hero_background_image, alt: "", class: "a--hero__image" %>
+  <% end %>
   <div class="a--hero__inner">
     <h1 class="a--heading is--xxl spec--main-title <%= heading_class %>">
       <%= SiteSetting.site_title %>

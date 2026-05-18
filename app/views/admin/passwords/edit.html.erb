@@ -6,7 +6,7 @@
       <%= render AlertComponent.new(type: :danger, messages: @admin.errors.full_messages, spec_class: "spec--error-messages") if @admin.errors.any? %>
 
       <div class="a--card">
-        <h2 class="text-xl font-semibold mb-4 spec--password-section-title">パスワード変更</h2>
+        <h2 class="a--heading is--lg mb-4 spec--password-section-title">パスワード変更</h2>
         <p class="text-sm text-sky-500 mb-4">新しいパスワードを入力してください。</p>
 
         <div class="l--form-items">
