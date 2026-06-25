@@ -3,5 +3,6 @@
 }
 
 .l--public-body {
+  flex: 1 1 auto;
   margin-block: 3rem;
 }
