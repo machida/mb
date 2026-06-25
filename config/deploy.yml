@@ -7,7 +7,14 @@ image: machida/mb
 # Deploy to these servers.
 servers:
   web:
-    - 153.121.42.228
+    hosts:
+      - 153.121.42.228
+    # Cap the app container's RAM so a memory spike spills into swap and is
+    # contained to the container instead of OOM-killing the whole 1GB host.
+    # Requires host swap to be enabled first (see docs/operations.md). Tune as needed.
+    options:
+      memory: 768m
+      memory-swap: 2g
   # job:
   #   hosts:
   #     - 192.168.0.1

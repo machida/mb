@@ -74,6 +74,12 @@ RUN echo "=== Node.js built TailwindCSS info ===" && ls -la app/assets/builds/ta
 # Final stage for app image
 FROM base
 
+# Activate jemalloc to reduce Ruby's memory footprint and fragmentation.
+# libjemalloc2 is installed in the base stage but is inert without LD_PRELOAD.
+# narenas:2 / dirty_decay_ms keep RSS low on the 1GB production VPS (see docs/operations.md).
+ENV LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libjemalloc.so.2" \
+    MALLOC_CONF="dirty_decay_ms:1000,narenas:2,background_thread:true"
+
 # Copy built artifacts: gems, application
 COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
 COPY --from=build /rails /rails

@@ -206,6 +206,13 @@ bundle exec rails test:system
 - **システムテスト**: E2E全体フロー（Playwright）
 - **セキュリティテスト**: ロボットヘッダー、認証機能
 
+## 運用・本番デプロイ
+
+本番環境へのデプロイは Kamal を使用します。本番の障害対応（502復旧）・再発防止策（スワップ、監視＋自己修復、メモリ上限、jemalloc）は運用 Runbook にまとめています。
+
+- 運用 Runbook: [`docs/operations.md`](docs/operations.md)
+- 監視＋自己修復スクリプト: [`ops/health-check.sh`](ops/health-check.sh)（サーバ上で cron 実行）
+
 ## セキュリティ
 
 ### 管理画面の保護
