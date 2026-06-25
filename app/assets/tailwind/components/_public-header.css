@@ -1,10 +1,12 @@
 .l--public-header {
   background-color: var(--color-bg-primary);
+  border-bottom: 1px solid var(--color-border-light);
 }
 
 .l--public-header__inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 4rem;
+  min-height: 4.5rem;
+  padding-block: 0.75rem;
 }

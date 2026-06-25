@@ -1,5 +1,14 @@
 .l__articles {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+}
+
+.l__articles > article {
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.l__articles > article:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
 }
