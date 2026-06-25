@@ -99,6 +99,11 @@ bundle exec rails test test/lib/tailwind_config_test.rb  # パス検証テスト
 - CSSが再ビルドされない場合は `bin/rails assets:clobber && bin/dev` を実行してキャッシュをクリアします。
 - バグ修正時は必ず再発防止テストを追加し、タスクはメモ化して誰でも途中から再開できる状態を保ちます。
 
+## 運用・本番（Kamal）
+- 本番は Kamal で 1GB の VPS にデプロイ。障害対応・再発防止の手順は `docs/operations.md`（Runbook）に集約し、構成や運用ルールを変えたら必ず更新する。
+- 502（kamal-proxy生存・アプリ停止）時は Runbook の復旧手順に従う。OOM が疑わしいときは `docker inspect` の `OOMKilled`/`ExitCode` と `free -h` を確認する。
+- 監視＋自己修復は `ops/health-check.sh`（サーバ上で cron 実行）。本番のメモリ設定（swap・コンテナ上限・jemalloc）を変更したら Runbook に反映する。
+
 ## ドキュメント & ライセンス
 - 本リポジトリは [MIT License](LICENSE) で公開されています。コードや依存を追加するときはライセンス互換性を確認してください。
 - README と `AGENTS.md` / `CLAUDE.md` は常に最新状態を保持し、仕様変更やルール追加があれば3ファイルすべてを同一コミットで更新してください。

@@ -1,5 +1,6 @@
 import { Controller } from '@hotwired/stimulus';
-import Cropper from 'cropperjs';
+import { ImageCropper } from 'lib/image_cropper';
+import { validateImageFile, postImage } from 'lib/image_upload';
 
 export default class extends Controller {
   static targets = [
@@ -50,65 +51,41 @@ export default class extends Controller {
     event.preventDefault();
     this.dropzoneTarget.classList.remove('border-blue-500', 'bg-blue-50');
 
-    const files = event.dataTransfer.files;
-    if (files.length > 0) {
-      const file = files[0];
-      if (this.enableCropValue && this.hasCropModalTarget) {
-        await this.showCropModal(file);
-      } else {
-        await this.uploadFile(file);
-      }
+    const file = event.dataTransfer.files[0];
+    if (file) {
+      await this.handleSelectedFile(file);
     }
   }
 
   async fileSelected(event) {
     const file = event.target.files[0];
     if (file) {
-      if (this.enableCropValue && this.hasCropModalTarget) {
-        await this.showCropModal(file);
-      } else {
-        await this.uploadFile(file);
-      }
+      await this.handleSelectedFile(file);
+    }
+  }
+
+  async handleSelectedFile(file) {
+    if (this.enableCropValue && this.hasCropModalTarget) {
+      await this.showCropModal(file);
+    } else {
+      await this.uploadFile(file);
     }
   }
 
   async uploadFile(file) {
-    // ファイル形式チェック
-    if (!file.type.startsWith('image/')) {
-      this.showError('画像ファイルを選択してください');
-      return;
-    }
-
-    // ファイルサイズチェック (5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      this.showError('ファイルサイズは5MB以下にしてください');
+    const validationError = validateImageFile(file);
+    if (validationError) {
+      this.showError(validationError);
       return;
     }
 
     this.showLoading();
 
     try {
-      const formData = new FormData();
-      formData.append('image', file);
-
-      const response = await fetch(this.uploadUrlValue, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-        }
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        this.handleUploadSuccess(data);
-      } else {
-        const errorData = await response.json();
-        this.showError(errorData.error || 'アップロードに失敗しました');
-      }
+      const data = await postImage(this.uploadUrlValue, file);
+      this.handleUploadSuccess(data);
     } catch (error) {
-      // Upload error - show error to user via showError method
-      this.showError('アップロードに失敗しました');
+      this.showError(error.message);
     } finally {
       this.hideLoading();
     }
@@ -230,26 +207,10 @@ export default class extends Controller {
 
   initCropper() {
     this.destroyCropper();
-
-    const aspectRatio = this.hasAspectRatioValue
-      ? this.aspectRatioValue
-      : 16 / 9;
-
-    this.cropper = new Cropper(this.cropImageTarget, {
-      aspectRatio: aspectRatio,
-      viewMode: 1,
-      autoCropArea: 0.9,
-      responsive: true,
-      restore: false,
-      guides: true,
-      center: true,
-      highlight: false,
-      cropBoxMovable: true,
-      cropBoxResizable: true,
-      toggleDragModeOnDblclick: false,
-      background: false,
-      modal: true
-    });
+    this.cropper = new ImageCropper(this.cropImageTarget);
+    this.cropper.start(
+      this.hasAspectRatioValue ? this.aspectRatioValue : 16 / 9
+    );
   }
 
   destroyCropper() {
@@ -265,46 +226,12 @@ export default class extends Controller {
   }
 
   async confirmCrop() {
-    if (!this.cropper) return;
+    if (!this.cropper || !this.cropper.active) return;
 
     try {
-      const canvas = this.cropper.getCroppedCanvas();
-
-      if (!canvas) {
-        console.error('Crop error: getCroppedCanvas returned null');
-        this.showError('クロップ処理に失敗しました');
-        return;
-      }
-
-      // Wrap toBlob in a Promise to properly handle errors
-      const blob = await new Promise((resolve, reject) => {
-        canvas.toBlob(
-          (blob) => {
-            if (!blob) {
-              reject(new Error('toBlob returned null'));
-            } else {
-              resolve(blob);
-            }
-          },
-          this.selectedFile.type,
-          0.9 // quality parameter for image compression
-        );
-      });
-
-      if (!blob) {
-        console.error('Crop error: blob is null');
-        this.showError('クロップ処理に失敗しました');
-        return;
-      }
-
-      const file = new File([blob], this.selectedFile.name, {
-        type: this.selectedFile.type,
-        lastModified: Date.now()
-      });
-
+      const file = await this.cropper.toFile(this.selectedFile);
       this.closeCropModal();
       await this.uploadFile(file);
-
     } catch (error) {
       console.error('Crop error:', error);
       this.showError('クロップ処理に失敗しました');
