@@ -1,4 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
+import { postImage } from 'lib/image_upload';
 
 export default class extends Controller {
   static targets = ['textarea'];
@@ -56,40 +57,26 @@ export default class extends Controller {
   }
 
   async uploadImage(file) {
-    const formData = new FormData();
-    formData.append('image', file);
-
     // アップロード中の表示
     const uploadingText = `![アップロード中...](uploading-${Date.now()})`;
     this.insertTextAtCursor(uploadingText);
 
     try {
-      const response = await fetch(this.uploadUrlValue, {
-        method: 'POST',
-        headers: {
-          'X-CSRF-Token': document.querySelector('.js-csrf-token').content
-        },
-        body: formData
+      const data = await postImage(this.uploadUrlValue, file, {
+        csrfSelector: '.js-csrf-token'
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        // アップロード中テキストを実際のMarkdownに置換
-        this.replaceText(uploadingText, data.markdown);
+      // アップロード中テキストを実際のMarkdownに置換
+      this.replaceText(uploadingText, data.markdown);
 
-        // プレビューを更新
-        this.textareaTarget.dispatchEvent(new Event('input'));
+      // プレビューを更新
+      this.textareaTarget.dispatchEvent(new Event('input'));
 
-        // 成功メッセージを表示
-        this.showToast('画像をアップロードしました', 'success');
-      } else {
-        const errorData = await response.json();
-        this.replaceText(uploadingText, '');
-        this.showToast(errorData.error || 'アップロードに失敗しました', 'error');
-      }
+      // 成功メッセージを表示
+      this.showToast('画像をアップロードしました', 'success');
     } catch (error) {
       this.replaceText(uploadingText, '');
-      this.showToast('アップロードに失敗しました', 'error');
+      this.showToast(error.message || 'アップロードに失敗しました', 'error');
     }
   }
 
