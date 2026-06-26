@@ -85,7 +85,7 @@ group :test do
   gem "webmock", "~> 3.26"
 end
 
-gem "tailwindcss-rails", "~> 4.4", group: [ :development, :test ]
+gem "tailwindcss-rails", "~> 4.6", group: [ :development, :test ]
 gem "redcarpet", "~> 3.6"
 gem "google-cloud-storage", "~> 1.60"
 gem "kaminari", "~> 1.2"
