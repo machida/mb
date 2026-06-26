@@ -1,12 +1,12 @@
 <!-- Footer -->
 <footer class="l--footer">
   <div class="l--container is--lg">
-    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
       <% if SiteSetting.copyright.present? %>
-        <small class="text-sm text-primary">© <%= Date.current.year %> <%= SiteSetting.copyright %>. All rights reserved.</small>
+        <small class="text-sm text-primary leading-6">© <%= Date.current.year %> <%= SiteSetting.copyright %>. All rights reserved.</small>
       <% end %>
 
-      <nav class="flex items-center gap-4">
+      <nav class="flex flex-wrap items-center gap-x-4 gap-y-2">
         <% if current_user_signed_in? %>
           <%= link_to "記事管理", admin_articles_path, class: "text-primary hover:text-indigo-600 hover:underline text-sm spec--admin-link" %>
           <%= button_to "ログアウト", admin_logout_path, method: :delete,

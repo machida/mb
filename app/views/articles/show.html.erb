@@ -49,7 +49,7 @@
 </article>
 
 <div class="mt-8 pt-4 flex gap-2">
-  <%= link_to "記事一覧に戻る", root_path, class: "a--button is--md is--secondary" %>
+  <%= link_to "記事一覧に戻る", root_path, class: "text-link inline-flex items-center" %>
   <% if current_user_signed_in? %>
     <%= link_to "編集", edit_admin_article_path(@article), class: "a--button is--md is--secondary" %>
     <%= link_to "削除", admin_article_path(@article), method: :delete,

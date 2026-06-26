@@ -1,5 +1,9 @@
 .l__articles {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 2.25rem;
+}
+
+.l__articles > article {
+  padding-bottom: 0;
 }

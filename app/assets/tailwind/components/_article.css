@@ -1,7 +1,6 @@
 .l--article-header {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 2rem;
-  height: 15rem;
+  gap: 1rem;
+  padding-block: 2.5rem 1rem;
 }
