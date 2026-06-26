@@ -131,6 +131,24 @@ class Admin::ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_equal "Updated content", @article.body
   end
 
+  test "should preserve thumbnail when updating other article fields" do
+    login_as_admin
+    @article.update!(thumbnail: "https://example.com/thumbnail.jpg")
+
+    patch admin_article_path(@article), params: {
+      article: {
+        title: "Updated Title",
+        body: "Updated content",
+        thumbnail: @article.thumbnail
+      }
+    }
+
+    @article.reload
+    assert_equal "https://example.com/thumbnail.jpg", @article.thumbnail
+    assert_equal "Updated Title", @article.title
+    assert_equal "Updated content", @article.body
+  end
+
   test "should destroy article" do
     login_as_admin
 

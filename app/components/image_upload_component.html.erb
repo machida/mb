@@ -10,7 +10,11 @@
   <% if form %>
     <%= form.text_field field_name, class: input_classes, data: { thumbnail_upload_target: "url" } %>
   <% else %>
-    <input type="hidden" name="<%= field_name %>" class="<%= input_classes %>" data-thumbnail-upload-target="url">
+    <input type="hidden"
+           name="<%= field_name %>"
+           value="<%= preview_image_src %>"
+           class="<%= input_classes %>"
+           data-thumbnail-upload-target="url">
   <% end %>
 
   <!-- Drop zone -->

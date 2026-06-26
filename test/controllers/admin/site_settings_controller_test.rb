@@ -92,6 +92,25 @@ class Admin::SiteSettingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "", SiteSetting.hero_background_image
   end
 
+  test "should preserve existing images when updating other site settings" do
+    SiteSetting.set("default_og_image", "https://example.com/og-image.jpg")
+    SiteSetting.set("hero_background_image", "https://example.com/hero-image.jpg")
+
+    patch admin_site_settings_path, params: {
+      site_settings: {
+        site_title: "更新後タイトル",
+        default_og_image: SiteSetting.default_og_image,
+        hero_background_image: SiteSetting.hero_background_image,
+        top_page_description: "説明文だけ更新"
+      }
+    }
+
+    assert_redirected_to admin_site_settings_path
+    assert_equal "https://example.com/og-image.jpg", SiteSetting.default_og_image
+    assert_equal "https://example.com/hero-image.jpg", SiteSetting.hero_background_image
+    assert_equal "説明文だけ更新", SiteSetting.top_page_description
+  end
+
   test "should fallback to white for invalid hero_text_color" do
     patch admin_site_settings_path, params: {
       site_settings: {
