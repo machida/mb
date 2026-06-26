@@ -87,6 +87,6 @@ end
 
 gem "tailwindcss-rails", "~> 4.4", group: [ :development, :test ]
 gem "redcarpet", "~> 3.6"
-gem "google-cloud-storage", "~> 1.60"
+gem "google-cloud-storage", "~> 1.61"
 gem "kaminari", "~> 1.2"
 gem "rouge", "~> 4.7"
