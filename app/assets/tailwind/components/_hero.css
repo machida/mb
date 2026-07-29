@@ -14,7 +14,7 @@
 }
 
 .a--hero.is--text-dark {
-  color: var(--color-gray-900);
+  color: var(--public-ink, #1e4f86);
 }
 
 .a--hero.is--text-light {

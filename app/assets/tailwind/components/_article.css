@@ -10,19 +10,19 @@
 .l--article-header h1 { font-size: clamp(1.875rem, 3.2vw, 2.625rem); font-weight: 700; line-height: 1.45; letter-spacing: 0.08em; }
 .l--article-header__meta { font-size: 0.75rem; }
 .l--article-main__image { width: 100%; max-height: 32rem; object-fit: cover; margin-bottom: 2.4rem; filter: grayscale(1) sepia(0.18) contrast(1.15); }
-.l--article-main .a--long-text { color: #0b2d61; font-size: 1rem; line-height: 2; letter-spacing: 0.04em; }
-.l--article-main .a--long-text h1, .l--article-main .a--long-text h2 { color: #0b2d61; border: 0; }
-.l--article-main .a--long-text h1 { font-size: 2rem; border-left: 0.2rem solid #0b2d61; padding: 0 0 0 0.65rem; }
+.l--article-main .a--long-text { color: var(--public-ink); font-size: 1rem; line-height: 2; letter-spacing: 0.04em; }
+.l--article-main .a--long-text h1, .l--article-main .a--long-text h2 { color: var(--public-ink); border: 0; }
+.l--article-main .a--long-text h1 { font-size: 2rem; border-left: 0.2rem solid var(--public-ink); padding: 0 0 0 0.65rem; }
 .l--article-main .a--long-text h2 { font-size: 1.75rem; padding: 0; }
 .l--article-main .a--long-text h3 { font-size: 1.5rem; }
 .l--article-main .a--long-text h4 { font-size: 1.25rem; }
 .l--article-main .a--long-text h5 { font-size: 1.125rem; }
-.l--article-main .a--long-text h6 { color: #526987; font-size: 1rem; }
-.l--article-navigation { display: grid; grid-template-columns: 1fr 1fr; margin-top: 3rem; padding-block: 1.5rem; border-block: 0.0625rem solid #0b2d61; }
+.l--article-main .a--long-text h6 { color: var(--public-ink-muted); font-size: 1rem; }
+.l--article-navigation { display: grid; grid-template-columns: 1fr 1fr; margin-top: 3rem; padding-block: 1.5rem; border-block: 0.0625rem solid var(--public-line); }
 .l--article-navigation div:last-child { text-align: right; }
 .l--article-navigation a { display: inline-block; font-size: 0; }
 .l--article-navigation a::after { content: attr(data-label); white-space: pre; font-size: 0.78rem; font-weight: 700; line-height: 2; }
-.l--article-sidebar section { padding-bottom: 2rem; margin-bottom: 2rem; border-bottom: 0.0625rem dotted #0b2d61; }
+.l--article-sidebar section { padding-bottom: 2rem; margin-bottom: 2rem; border-bottom: 0.0625rem dotted var(--public-line); }
 .l--article-sidebar h2 { margin-bottom: 1.2rem; font-size: 0.78rem; font-weight: 700; }
 .l--article-sidebar p { font-family: var(--font-family-base); font-size: 0.78rem; line-height: 1.9; }
 .l--article-sidebar section > a { display: inline-block; margin-top: 1.2rem; padding-bottom: 0.2rem; border-bottom: 0.0625rem solid currentColor; font-size: 0.72rem; font-weight: 700; }

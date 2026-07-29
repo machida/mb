@@ -7,7 +7,7 @@
   justify-content: space-between;
   align-items: center;
   min-height: 8.25rem;
-  border-bottom: 0.0625rem solid #0b2d61;
+  border-bottom: 0.0625rem solid var(--public-line);
 }
 
 .l--public-header__brand { position: absolute; left: 50%; transform: translateX(-50%); font-size: 1.35rem; font-weight: 700; letter-spacing: 0.35em; }
