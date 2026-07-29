@@ -9,8 +9,10 @@ body.layout-public {
   --color-long-text-muted: var(--public-ink-muted);
   --color-long-text-border: var(--public-line);
   --color-long-text-quote-border: var(--public-line);
+  --font-family-base: "Noto Sans JP", sans-serif;
+  --font-family-mono: "Noto Sans JP", sans-serif;
   background: #f7f5f0;
   color: var(--public-ink);
-  font-family: var(--font-family-mono);
+  font-family: var(--font-family-base);
   letter-spacing: 0.06em;
 }

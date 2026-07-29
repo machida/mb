@@ -54,5 +54,6 @@ class TailwindConfigTest < ActiveSupport::TestCase
     assert_includes application_css, '@import "./components/_public-theme.css";'
     assert_includes public_theme_css, "body.layout-public"
     assert_includes public_theme_css, "--public-ink: #1e4f86"
+    assert_includes public_theme_css, '--font-family-base: "Noto Sans JP", sans-serif'
   end
 end
