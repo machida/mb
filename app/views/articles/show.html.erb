@@ -76,26 +76,4 @@
 <% end %>
   </article>
 
-<aside class="l--article-sidebar">
-  <% if SiteSetting.top_page_description.present? %>
-    <section>
-      <h2>ABOUT</h2>
-      <p><%= SiteSetting.top_page_description %></p>
-      <%= link_to "ABOUT ME →", root_path %>
-    </section>
-  <% end %>
-  <section>
-    <h2>RECENT</h2>
-    <ol>
-      <% @recent_articles.each do |article| %>
-        <li>
-          <%= link_to article_path(article) do %>
-            <% if article.thumbnail.present? %><%= image_tag article.thumbnail, alt: "", loading: "lazy" %><% end %>
-            <span><strong><%= article.title %></strong><time datetime="<%= article.created_at.iso8601 %>"><%= article.created_at.strftime("%Y-%m-%d") %></time></span>
-          <% end %>
-        </li>
-      <% end %>
-    </ol>
-  </section>
-</aside>
 </div>

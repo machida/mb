@@ -34,6 +34,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     get root_path
     assert_response :success
     assert_select ".spec--main-title", "マチダのブログ"
+    assert_select ".l--public-header__nav", text: "ABOUT"
   end
 
   test "index should only show published articles" do
@@ -58,8 +59,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".spec--article-title", @published_article.title
     assert_select ".spec--article-content"
     assert_select ".l--article-page"
-    assert_select ".l--article-sidebar"
-    assert_select ".l--article-sidebar li a[href=?]", article_path(@published_article)
+    assert_select ".l--article-sidebar", count: 0
   end
 
   test "should show previous and next article links for published article" do
