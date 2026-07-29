@@ -1,7 +1,7 @@
 .l__articles {
   display: flex;
   flex-direction: column;
-  gap: 2.25rem;
+  gap: 3rem;
 }
 
 .l__articles > article {

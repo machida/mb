@@ -11,6 +11,8 @@ class ArticlesController < ApplicationController
     if @article.draft? && !current_user_signed_in?
       redirect_to root_path, alert: "この記事は非公開です。"
       nil
+    else
+      set_article_navigation
     end
   end
 
@@ -84,5 +86,19 @@ class ArticlesController < ApplicationController
       .each_with_object(Hash.new(0)) do |timestamp, counts|
         counts[timestamp.strftime("%m")] += 1
       end
+  end
+
+  def set_article_navigation
+    visible_articles = current_user_signed_in? ? Article.all : Article.published
+
+    @previous_article = visible_articles
+      .where("created_at > ?", @article.created_at)
+      .order(created_at: :asc)
+      .first
+
+    @next_article = visible_articles
+      .where("created_at < ?", @article.created_at)
+      .order(created_at: :desc)
+      .first
   end
 end

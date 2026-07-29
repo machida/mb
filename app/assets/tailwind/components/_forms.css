@@ -5,7 +5,7 @@
   width: 100%;
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--color-form-border);
-  border-radius: 0.375rem;
+  border-radius: var(--radius-sm);
   font-size: 1rem;
   line-height: 1.5rem;
   color: var(--color-form-text);
@@ -36,7 +36,7 @@
   width: 100%;
   padding: 0.5rem 2rem 0.5rem 0.75rem;
   border: 1px solid var(--color-form-border);
-  border-radius: 0.375rem;
+  border-radius: var(--radius-sm);
   font-size: 0.875rem;
   line-height: 1.25rem;
   color: var(--color-form-text);

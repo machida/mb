@@ -27,7 +27,7 @@ class ToastComponent < ViewComponent::Base
   #
   # @return [String] 背景色のCSSクラス
   def background_color
-    type == :success ? "bg-green-500" : "bg-red-500"
+    type == :success ? "bg-emerald-600" : "bg-red-500"
   end
 
   # アイコンのSVGパスを取得

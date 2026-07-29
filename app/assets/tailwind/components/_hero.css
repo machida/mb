@@ -6,6 +6,7 @@
   position: relative;
   overflow: hidden;
   aspect-ratio: 40 / 21;
+  border-radius: var(--radius-lg);
 }
 
 .a--hero.has-background {

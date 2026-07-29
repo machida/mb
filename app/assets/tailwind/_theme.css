@@ -25,6 +25,12 @@
   /* Border widths */
   --border-width-thin: 0.0625rem;
 
+  /* Radius scale */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1.125rem;
+  --radius-pill: 9999px;
+
   /* Font families */
   --font-family-base: YakuHanJPs, "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
   --font-family-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;

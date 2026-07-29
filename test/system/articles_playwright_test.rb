@@ -44,12 +44,12 @@ class ArticlesPlaywrightTest < ApplicationPlaywrightTestCase
     assert_equal 1, article_items.count
     
     # Check published article appears
-    published_link = @page.query_selector(".spec--article-title a")
+    published_link = @page.query_selector(".spec--article-thumbnail-link")
     assert published_link, "Published article link should exist"
-    assert_equal @published_article.title, published_link.inner_text
-    
+    assert_includes published_link.inner_text, @published_article.title
+
     # Check draft article does not appear
-    draft_links = @page.query_selector_all(".spec--article-title a")
+    draft_links = @page.query_selector_all(".spec--article-thumbnail-link")
     draft_titles = draft_links.map(&:inner_text)
     assert_not_includes draft_titles, @draft_article.title
   end

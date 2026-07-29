@@ -37,15 +37,18 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "index should only show published articles" do
+    @published_article.update!(thumbnail: "https://example.com/thumbnail.jpg")
+
     get root_path
     assert_response :success
     
     # Check that only published articles are shown
-    assert_select ".spec--article-title a", text: @published_article.title
+    assert_select ".spec--article-title", text: @published_article.title
     assert_no_match @draft_article.title, response.body
     
     # Check that only one article is shown (the published one)
     assert_select ".spec--article-item", count: 1
+    assert_select ".spec--article-thumbnail-link[href=?]", article_path(@published_article), count: 1
   end
 
   test "should show published article" do
@@ -53,6 +56,132 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select ".spec--article-title", @published_article.title
     assert_select ".spec--article-content"
+  end
+
+  test "should show previous and next article links for published article" do
+    Article.destroy_all
+
+    older_article = Article.create!(
+      title: "Older Article",
+      body: "Older content",
+      summary: "Older summary",
+      author: @admin.user_id,
+      draft: false,
+      created_at: 2.days.ago
+    )
+
+    current_article = Article.create!(
+      title: "Current Article",
+      body: "Current content",
+      summary: "Current summary",
+      author: @admin.user_id,
+      draft: false,
+      created_at: 1.day.ago
+    )
+
+    newer_article = Article.create!(
+      title: "Newer Article",
+      body: "Newer content",
+      summary: "Newer summary",
+      author: @admin.user_id,
+      draft: false,
+      created_at: Time.current
+    )
+
+    get article_path(current_article)
+    assert_response :success
+    assert_select ".spec--previous-article-link[href=?]", article_path(newer_article), text: "前の記事"
+    assert_select ".spec--next-article-link[href=?]", article_path(older_article), text: "次の記事"
+  end
+
+  test "should hide previous article link on newest article" do
+    Article.destroy_all
+
+    older_article = Article.create!(
+      title: "Older Article",
+      body: "Older content",
+      summary: "Older summary",
+      author: @admin.user_id,
+      draft: false,
+      created_at: 2.days.ago
+    )
+
+    newer_article = Article.create!(
+      title: "Newer Article",
+      body: "Newer content",
+      summary: "Newer summary",
+      author: @admin.user_id,
+      draft: false,
+      created_at: Time.current
+    )
+
+    get article_path(newer_article)
+    assert_response :success
+    assert_select ".spec--previous-article-link", count: 0
+    assert_select ".spec--next-article-link[href=?]", article_path(older_article), text: "次の記事"
+  end
+
+  test "should hide next article link on oldest article" do
+    Article.destroy_all
+
+    older_article = Article.create!(
+      title: "Older Article",
+      body: "Older content",
+      summary: "Older summary",
+      author: @admin.user_id,
+      draft: false,
+      created_at: 2.days.ago
+    )
+
+    newer_article = Article.create!(
+      title: "Newer Article",
+      body: "Newer content",
+      summary: "Newer summary",
+      author: @admin.user_id,
+      draft: false,
+      created_at: Time.current
+    )
+
+    get article_path(older_article)
+    assert_response :success
+    assert_select ".spec--previous-article-link[href=?]", article_path(newer_article), text: "前の記事"
+    assert_select ".spec--next-article-link", count: 0
+  end
+
+  test "should not link draft articles from published article navigation" do
+    Article.destroy_all
+
+    older_article = Article.create!(
+      title: "Older Article",
+      body: "Older content",
+      summary: "Older summary",
+      author: @admin.user_id,
+      draft: false,
+      created_at: 2.days.ago
+    )
+
+    draft_article = Article.create!(
+      title: "Draft Middle Article",
+      body: "Draft content",
+      summary: "Draft summary",
+      author: @admin.user_id,
+      draft: true,
+      created_at: 1.day.ago
+    )
+
+    newer_article = Article.create!(
+      title: "Newer Article",
+      body: "Newer content",
+      summary: "Newer summary",
+      author: @admin.user_id,
+      draft: false,
+      created_at: Time.current
+    )
+
+    get article_path(older_article)
+    assert_response :success
+    assert_select ".spec--previous-article-link[href=?]", article_path(newer_article), text: "前の記事"
+    assert_no_match article_path(draft_article), response.body
   end
 
   test "should show archive year" do

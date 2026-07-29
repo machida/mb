@@ -48,12 +48,27 @@
   </div>
 </article>
 
-<div class="mt-8 pt-4 flex gap-2">
-  <%= link_to "記事一覧に戻る", root_path, class: "text-link inline-flex items-center" %>
-  <% if current_user_signed_in? %>
+<div class="mt-8 pt-4 flex flex-wrap items-center gap-y-2">
+  <div class="flex-1">
+    <% if @previous_article.present? %>
+      <%= link_to "前の記事", article_path(@previous_article), class: "text-link inline-flex items-center spec--previous-article-link" %>
+    <% end %>
+  </div>
+  <div class="px-4 text-center">
+    <%= link_to "記事一覧に戻る", root_path, class: "text-link inline-flex items-center spec--back-to-articles-link" %>
+  </div>
+  <div class="flex flex-1 justify-end">
+    <% if @next_article.present? %>
+      <%= link_to "次の記事", article_path(@next_article), class: "text-link inline-flex items-center spec--next-article-link" %>
+    <% end %>
+  </div>
+</div>
+
+<% if current_user_signed_in? %>
+  <div class="mt-4 flex gap-2">
     <%= link_to "編集", edit_admin_article_path(@article), class: "a--button is--md is--secondary" %>
     <%= link_to "削除", admin_article_path(@article), method: :delete,
                 data: { confirm: "この記事を削除しますか？削除すると元に戻せません。" },
                 class: "a--button is--md is--border-danger spec--delete-article-button" %>
-  <% end %>
-</div>
+  </div>
+<% end %>
