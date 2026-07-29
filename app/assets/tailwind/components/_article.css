@@ -5,7 +5,7 @@
   padding-block: 0 2rem;
 }
 
-.l--article-page { display: grid; grid-template-columns: minmax(0, 3fr) minmax(15rem, 1fr); gap: 4rem; }
+.l--article-page { display: grid; grid-template-columns: minmax(0, 48rem) minmax(12rem, 14rem); justify-content: center; gap: 5rem; }
 .l--article-header__date { font-size: 0.75rem; font-weight: 700; }
 .l--article-header h1 { font-size: clamp(1.75rem, 3vw, 2.45rem); font-weight: 700; line-height: 1.45; letter-spacing: 0.12em; }
 .l--article-header__summary { max-width: 44rem; font-family: var(--font-family-base); font-size: 0.9rem; line-height: 2; }
@@ -30,7 +30,7 @@
 .l--article-sidebar li span { display: flex; flex-direction: column; gap: 0.45rem; font-size: 0.7rem; line-height: 1.6; }
 .l--article-sidebar li time { font-size: 0.65rem; }
 
-@media (max-width: 63.9375rem) {
+@media (max-width: 71.9375rem) {
   .l--article-page { grid-template-columns: 1fr; }
   .l--article-sidebar { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
 }
