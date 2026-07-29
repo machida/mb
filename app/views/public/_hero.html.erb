@@ -1,20 +1,7 @@
 <% hero_background_image = SiteSetting.hero_background_image.presence %>
-<% hero_text_color = SiteSetting.hero_text_color %>
 <% hero_classes = ["a--hero"] %>
 <% hero_classes << "has-background" if hero_background_image %>
-<% hero_classes << (hero_text_color == "black" ? "is--text-dark" : "is--text-light") %>
-<% heading_class = hero_text_color == "black" ? "text-gray-900" : "text-white" %>
-<% description_class = hero_text_color == "black" ? "text-gray-800" : "text-white/90" %>
 
 <%= tag.div class: hero_classes.join(" "), style: (hero_background_image ? "--hero-bg-image: url('#{hero_background_image}');" : nil) do %>
-  <div class="a--hero__inner">
-    <h1 class="a--heading is--xxl spec--main-title <%= heading_class %>">
-      <%= SiteSetting.site_title %>
-    </h1>
-    <% if SiteSetting.top_page_description.present? %>
-      <p class="<%= "#{description_class}" %>">
-        <%= SiteSetting.top_page_description %>
-      </p>
-    <% end %>
-  </div>
+  <h1 class="sr-only spec--main-title"><%= SiteSetting.site_title %></h1>
 <% end %>

@@ -13,6 +13,7 @@ class ArticlesController < ApplicationController
       nil
     else
       set_article_navigation
+      @recent_articles = Article.published.order(created_at: :desc).limit(5)
     end
   end
 

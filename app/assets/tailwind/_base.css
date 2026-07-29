@@ -4,3 +4,10 @@ body {
   font-family: var(--font-family-base);
   overflow-y: scroll;
 }
+
+.layout-public {
+  background: #f7f5f0;
+  color: #0b2d61;
+  font-family: var(--font-family-mono);
+  letter-spacing: 0.06em;
+}

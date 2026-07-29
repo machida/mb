@@ -49,6 +49,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     # Check that only one article is shown (the published one)
     assert_select ".spec--article-item", count: 1
     assert_select ".spec--article-thumbnail-link[href=?]", article_path(@published_article), count: 1
+    assert_select ".l--article-item__more[href=?]", article_path(@published_article), text: "READ MORE →"
   end
 
   test "should show published article" do
@@ -56,6 +57,9 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select ".spec--article-title", @published_article.title
     assert_select ".spec--article-content"
+    assert_select ".l--article-page"
+    assert_select ".l--article-sidebar"
+    assert_select ".l--article-sidebar li a[href=?]", article_path(@published_article)
   end
 
   test "should show previous and next article links for published article" do

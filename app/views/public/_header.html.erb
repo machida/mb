@@ -1,12 +1,12 @@
 <!-- Regular Header for Public Pages -->
 <header class="l--public-header">
-  <div class="l--container">
+  <div class="l--container is--xl">
     <div class="l--public-header__inner">
-      <div>
-        <h1 class="a--heading is--lg">
-          <%= link_to SiteSetting.site_title, root_path, class: "hover:text-gray-600" %>
-        </h1>
-      </div>
+      <%= link_to "NOTE", root_path, class: "l--public-header__nav" %>
+      <p class="l--public-header__brand">
+        <%= link_to SiteSetting.site_title, root_path %>
+      </p>
+      <%= link_to "ARCHIVE", archive_year_path(Date.current.year), class: "l--public-header__nav" %>
     </div>
   </div>
 </header>

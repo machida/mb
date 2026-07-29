@@ -18,18 +18,22 @@
   <% end %>
 <% end %>
 
-<article class="prose prose-lg max-w-none">
+<div class="l--article-page">
+  <article class="l--article-main">
   <header class="l--article-header">
-    <h1 class="a--heading is--xxl spec--article-title"><%= @article.title %></h1>
-    <div class="flex items-center gap-4 text-sm text-gray-500 mb-4">
+    <time datetime="<%= @article.created_at.iso8601 %>" class="l--article-header__date">
+      <%= link_to @article.created_at.strftime("%Y-%m-%d"),
+                  archive_month_path(@article.created_at.year, @article.created_at.month),
+                  class: "spec--article-date" %>
+    </time>
+    <h1 class="spec--article-title"><%= @article.title %></h1>
+    <% if @article.summary.present? %>
+      <p class="l--article-header__summary"><%= @article.summary %></p>
+    <% end %>
+    <div class="l--article-header__meta">
       <% if show_author_info? %>
         <span class="spec--article-author">著者: <%= @article.author %></span>
       <% end %>
-      <time datetime="<%= @article.created_at.iso8601 %>">
-        <%= link_to archive_month_path(@article.created_at.year, @article.created_at.month), class: "text-gray-500 hover:text-gray-700 hover:underline spec--article-date" do %>
-          <%= format_date_with_weekday(@article.created_at) %>
-        <% end %>
-      </time>
     </div>
   </header>
 
@@ -43,26 +47,27 @@
     </div>
   <% end %>
 
-  <div class="a--long-text spec--article-content py-12">
+  <% if @article.thumbnail.present? %>
+    <%= image_tag @article.thumbnail, alt: "", class: "l--article-main__image" %>
+  <% end %>
+
+  <div class="a--long-text spec--article-content">
     <%= markdown(@article.body) %>
   </div>
-</article>
 
-<div class="mt-8 pt-4 flex flex-wrap items-center gap-y-2">
-  <div class="flex-1">
+<nav class="l--article-navigation" aria-label="前後の記事">
+  <div>
     <% if @previous_article.present? %>
-      <%= link_to "前の記事", article_path(@previous_article), class: "text-link inline-flex items-center spec--previous-article-link" %>
+      <%= link_to "前の記事", article_path(@previous_article), class: "spec--previous-article-link", data: { label: "← PREV\A#{@previous_article.title}" } %>
     <% end %>
   </div>
-  <div class="px-4 text-center">
-    <%= link_to "記事一覧に戻る", root_path, class: "text-link inline-flex items-center spec--back-to-articles-link" %>
-  </div>
-  <div class="flex flex-1 justify-end">
+  <%= link_to "NOTE", root_path, class: "sr-only spec--back-to-articles-link" %>
+  <div>
     <% if @next_article.present? %>
-      <%= link_to "次の記事", article_path(@next_article), class: "text-link inline-flex items-center spec--next-article-link" %>
+      <%= link_to "次の記事", article_path(@next_article), class: "spec--next-article-link", data: { label: "NEXT →\A#{@next_article.title}" } %>
     <% end %>
   </div>
-</div>
+</nav>
 
 <% if current_user_signed_in? %>
   <div class="mt-4 flex gap-2">
@@ -72,3 +77,28 @@
                 class: "a--button is--md is--border-danger spec--delete-article-button" %>
   </div>
 <% end %>
+  </article>
+
+<aside class="l--article-sidebar">
+  <% if SiteSetting.top_page_description.present? %>
+    <section>
+      <h2>ABOUT</h2>
+      <p><%= SiteSetting.top_page_description %></p>
+      <%= link_to "ABOUT ME →", root_path %>
+    </section>
+  <% end %>
+  <section>
+    <h2>RECENT</h2>
+    <ol>
+      <% @recent_articles.each do |article| %>
+        <li>
+          <%= link_to article_path(article) do %>
+            <% if article.thumbnail.present? %><%= image_tag article.thumbnail, alt: "", loading: "lazy" %><% end %>
+            <span><strong><%= article.title %></strong><time datetime="<%= article.created_at.iso8601 %>"><%= article.created_at.strftime("%Y-%m-%d") %></time></span>
+          <% end %>
+        </li>
+      <% end %>
+    </ol>
+  </section>
+</aside>
+</div>

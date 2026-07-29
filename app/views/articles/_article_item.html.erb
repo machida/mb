@@ -1,29 +1,26 @@
-<article class="<%= local_assigns[:css_class] || "spec--article-item" %> relative flex flex-col gap-2">
-  <%= link_to article_path(article_item), class: "group block rounded-[var(--radius-md)] focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400/60 focus-visible:ring-offset-4 spec--article-thumbnail-link" do %>
+<article class="<%= local_assigns[:css_class] || "spec--article-item" %> l--article-item">
+  <time class="l--article-item__date spec--article-date" datetime="<%= article_item.created_at.iso8601 %>">
+    <%= article_item.created_at.strftime("%Y-%m-%d") %>
+  </time>
+  <%= link_to article_path(article_item), class: "l--article-item__image spec--article-thumbnail-link", aria: { label: article_item.title } do %>
     <% if article_item.thumbnail.present? %>
-      <div class="absolute top-0 right-0">
-      <%= image_tag article_item.thumbnail,
-                    alt: "",
-                    class: "w-28 md:w-36 rounded-[var(--radius-md)] object-cover grayscale transition-all duration-200 ease-out group-hover:grayscale-0 group-focus-visible:grayscale-0 group-focus-visible:scale-[1.02]" %>
-      </div>
-    <% end %>
-
-    <header class="flex flex-col gap-2">
-      <h2 class="<%= local_assigns[:title_class] || "a--heading is--xl" %> spec--article-title pr-32 md:pr-40 transition-colors duration-200 ease-out group-hover:text-primary group-focus-visible:text-primary group-hover:underline group-focus-visible:underline underline-offset-4 decoration-[0.06em]">
-        <%= article_item.title %>
-      </h2>
-      <div class="flex flex-col justify-between items-start gap-2">
-        <time class="text-gray-500 text-sm whitespace-nowrap spec--article-date" datetime="<%= article_item.created_at.iso8601 %>">
-          <%= format_date_with_weekday(article_item.created_at) %>
-        </time>
-        <% if show_author_info? %>
-          <span class="text-sm text-gray-500 spec--article-author">著者: <%= article_item.author %></span>
-        <% end %>
-      </div>
-    </header>
-
-    <% if article_item.summary.present? %>
-      <p class="mt-1 text-muted text-sm spec--article-summary pr-32 md:pr-40"><%= article_item.summary %></p>
+      <%= image_tag article_item.thumbnail, alt: "", loading: "lazy" %>
+    <% else %>
+      <span aria-hidden="true"></span>
     <% end %>
   <% end %>
+  <div class="l--article-item__body">
+    <header>
+      <h2 class="<%= local_assigns[:title_class] || "a--heading is--xl" %> spec--article-title">
+        <%= link_to article_item.title, article_path(article_item) %>
+      </h2>
+      <% if show_author_info? %>
+        <span class="spec--article-author">著者: <%= article_item.author %></span>
+      <% end %>
+    </header>
+    <% if article_item.summary.present? %>
+      <p class="l--article-item__summary spec--article-summary"><%= article_item.summary %></p>
+    <% end %>
+    <%= link_to "READ MORE →", article_path(article_item), class: "l--article-item__more" %>
+  </div>
 </article>

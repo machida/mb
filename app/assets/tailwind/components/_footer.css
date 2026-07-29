@@ -1,4 +1,8 @@
 .l--footer {
-  margin-top: 2rem;
-  padding-block: 2rem 2.5rem;
+  margin-top: 0;
+  padding-block: 1.25rem 2rem;
+  border-top: 0.0625rem solid #0b2d61;
+  font-family: var(--font-family-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
 }
