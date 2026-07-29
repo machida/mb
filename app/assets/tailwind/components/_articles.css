@@ -8,7 +8,7 @@
   padding-block: 0;
 }
 
-.l--article-item { display: grid; grid-template-columns: 7rem 16rem minmax(0, 1fr); gap: 1.75rem; align-items: start; }
+.l--article-item { display: grid; grid-template-columns: 7rem 13rem minmax(0, 1fr); gap: 1.75rem; align-items: start; }
 .l--article-item__date { padding-top: 0.7rem; font-size: 1rem; font-weight: 700; }
 .l--article-item__image { display: block; position: relative; aspect-ratio: 2 / 1; overflow: hidden; background: #d8d9d5; }
 .l--article-item__image:has(img) { border-radius: 0.5rem; transform: translateY(0.25rem); }
@@ -24,7 +24,7 @@
 .l--article-item__body h2 a:hover { text-decoration: underline; text-underline-offset: 0.25rem; }
 .l--article-item__summary { margin-top: 0.75rem; max-width: 40rem; font-family: var(--font-family-base); font-size: 0.85rem; line-height: 1.85; letter-spacing: 0.04em; }
 @media (max-width: 63.9375rem) {
-  .l--article-item { grid-template-columns: 7rem 16rem minmax(0, 1fr); gap: 1.5rem; }
+  .l--article-item { grid-template-columns: 7rem 13rem minmax(0, 1fr); gap: 1.5rem; }
 }
 
 @media (max-width: 47.9375rem) {
