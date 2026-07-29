@@ -1,12 +1,11 @@
 .l__articles {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 5rem;
 }
 
 .l__articles > article {
-  padding-block: 1.75rem;
-  border-bottom: 0.0625rem dashed var(--public-line);
+  padding-block: 0;
 }
 
 .l--article-item { display: grid; grid-template-columns: 8rem 22rem minmax(0, 1fr); gap: 2rem; align-items: start; }
@@ -27,6 +26,7 @@
 }
 
 @media (max-width: 47.9375rem) {
+  .l__articles { gap: 4rem; }
   .l--article-item { grid-template-columns: minmax(0, 1fr); gap: 0.9rem; }
   .l--article-item__date { padding-top: 0; }
   .l--article-item__image { width: 100%; }
