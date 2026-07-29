@@ -19,7 +19,7 @@
 .l--article-item__image-sepia { position: absolute; inset: 0; background: var(--public-ink); opacity: 1; transition: opacity 480ms ease; }
 .l--article-item__image-sepia img { object-fit: cover; filter: grayscale(1) contrast(1.2); mix-blend-mode: screen; }
 .l--article-item__image:hover .l--article-item__image-sepia { opacity: 0; }
-.l--article-item__body h2 { font-size: 1.4rem; line-height: 1.4; letter-spacing: 0.05em; }
+.l--article-item__body h2 { font-size: 1.4rem; line-height: 1.4; letter-spacing: 0.05em; line-break: strict; word-break: auto-phrase; overflow-wrap: anywhere; }
 .l--article-item__body .a--heading.is--xl.spec--article-title { font-size: 1.625rem; line-height: 1.45; }
 .l--article-item__body h2 a:hover { text-decoration: underline; text-underline-offset: 0.25rem; }
 .l--article-item__summary { margin-top: 0.75rem; max-width: 40rem; font-family: var(--font-family-base); font-size: 0.85rem; line-height: 1.85; letter-spacing: 0.04em; }
