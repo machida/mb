@@ -35,6 +35,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select ".spec--main-title", "マチダのブログ"
     assert_select ".l--public-header__nav", text: "ABOUT"
+    assert_select ".l--public-header__inner.is--home", count: 1
     assert_select ".a--hero.has-background[style*='retro-hawaii-hero']", count: 1
   end
 
@@ -60,6 +61,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".spec--article-title", @published_article.title
     assert_select ".spec--article-content"
     assert_select ".l--article-page"
+    assert_select ".l--public-header__inner.is--home", count: 0
     assert_select ".l--article-sidebar", count: 0
   end
 
