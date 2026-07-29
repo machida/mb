@@ -10,17 +10,19 @@
 
 .l--article-item { display: grid; grid-template-columns: 8rem 16rem minmax(0, 1fr); gap: 2rem; align-items: start; }
 .l--article-item__date { padding-top: 0.7rem; font-size: 0.875rem; font-weight: 700; }
-.l--article-item__image { display: block; aspect-ratio: 2 / 1; overflow: hidden; background: #d8d9d5; transition: background-color 180ms; }
-.l--article-item__image:has(img) { background: var(--public-ink); border-radius: 0.5rem; transform: translateY(0.25rem); }
-.l--article-item__image img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.2); mix-blend-mode: screen; transition: filter 180ms; }
-.l--article-item__image:hover { background: transparent; }
-.l--article-item__image:hover img { filter: none; mix-blend-mode: normal; }
+.l--article-item__image { display: block; position: relative; aspect-ratio: 2 / 1; overflow: hidden; background: #d8d9d5; }
+.l--article-item__image:has(img) { border-radius: 0.5rem; transform: translateY(0.25rem); }
+.l--article-item__image-original,
+.l--article-item__image-sepia,
+.l--article-item__image-sepia img { display: block; width: 100%; height: 100%; }
+.l--article-item__image-original { object-fit: cover; }
+.l--article-item__image-sepia { position: absolute; inset: 0; background: var(--public-ink); opacity: 1; transition: opacity 480ms ease; }
+.l--article-item__image-sepia img { object-fit: cover; filter: grayscale(1) contrast(1.2); mix-blend-mode: screen; }
+.l--article-item__image:hover .l--article-item__image-sepia { opacity: 0; }
 .l--article-item__body h2 { font-size: 1.4rem; line-height: 1.4; letter-spacing: 0.12em; }
 .l--article-item__body .a--heading.is--xl.spec--article-title { font-size: 1.625rem; line-height: 1.45; }
 .l--article-item__body h2 a:hover { text-decoration: underline; text-underline-offset: 0.25rem; }
 .l--article-item__summary { margin-top: 1rem; max-width: 42rem; font-family: var(--font-family-base); font-size: 0.85rem; line-height: 1.9; letter-spacing: 0.08em; }
-.l--article-item__more { display: inline-block; margin-top: 1.15rem; padding-bottom: 0.2rem; border-bottom: 0.0625rem solid currentColor; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.16em; }
-
 @media (max-width: 63.9375rem) {
   .l--article-item { grid-template-columns: 7rem 16rem minmax(0, 1fr); gap: 1.5rem; }
 }

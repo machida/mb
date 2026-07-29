@@ -52,7 +52,9 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     # Check that only one article is shown (the published one)
     assert_select ".spec--article-item", count: 1
     assert_select ".spec--article-thumbnail-link[href=?]", article_path(@published_article), count: 1
-    assert_select ".l--article-item__more[href=?]", article_path(@published_article), text: "READ MORE →"
+    assert_select ".spec--article-thumbnail-link .l--article-item__image-original", count: 1
+    assert_select ".spec--article-thumbnail-link .l--article-item__image-sepia", count: 1
+    assert_select ".l--article-item__more", count: 0
   end
 
   test "should show published article" do

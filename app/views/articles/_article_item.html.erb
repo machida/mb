@@ -4,7 +4,10 @@
   </time>
   <%= link_to article_path(article_item), class: "l--article-item__image spec--article-thumbnail-link", aria: { label: article_item.title } do %>
     <% if article_item.thumbnail.present? %>
-      <%= image_tag article_item.thumbnail, alt: "", loading: "lazy" %>
+      <%= image_tag article_item.thumbnail, alt: "", loading: "lazy", class: "l--article-item__image-original" %>
+      <span class="l--article-item__image-sepia" aria-hidden="true">
+        <%= image_tag article_item.thumbnail, alt: "", loading: "lazy" %>
+      </span>
     <% else %>
       <span aria-hidden="true"></span>
     <% end %>
@@ -21,6 +24,5 @@
     <% if article_item.summary.present? %>
       <p class="l--article-item__summary spec--article-summary"><%= article_item.summary %></p>
     <% end %>
-    <%= link_to "READ MORE →", article_path(article_item), class: "l--article-item__more" %>
   </div>
 </article>
