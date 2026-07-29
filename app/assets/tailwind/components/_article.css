@@ -7,7 +7,7 @@
 
 .l--article-page { max-width: 42rem; margin-inline: auto; }
 .l--article-header__date { font-size: 1rem; font-weight: 700; }
-.l--article-header h1 { font-size: clamp(2rem, 3.4vw, 2.75rem); font-weight: 700; line-height: 1.4; letter-spacing: 0.04em; line-break: strict; word-break: auto-phrase; overflow-wrap: anywhere; border-left: 0.75rem solid currentColor; padding: 0.2em 0 0.4em 2.25rem; }
+.l--article-header h1 { font-size: clamp(2rem, 3.4vw, 2.5rem); font-weight: 700; line-height: 1.4; letter-spacing: 0.04em; line-break: strict; word-break: auto-phrase; overflow-wrap: anywhere; border-left: 0.75rem solid currentColor; padding: 0.2em 0 0.4em 2.25rem; }
 .l--article-header__meta { font-size: 0.75rem; }
 .l--article-main__image { width: 100%; height: auto; border-radius: 0.5rem; margin: 0.25rem 0 3.5rem; }
 .l--article-main .a--long-text { color: var(--public-ink); font-size: 1rem; line-height: 2; letter-spacing: 0.04em; }
@@ -23,7 +23,7 @@
 .l--article-main .a--long-text h6 { margin-top: 5rem; margin-bottom: 2rem; }
 .l--article-main .a--long-text h1, .l--article-main .a--long-text h2 { color: var(--public-ink); border: 0; }
 .l--article-main .a--long-text h1 { font-size: 2rem; border-left: 0.2rem solid var(--public-ink); padding: 0 0 0 0.65rem; }
-.l--article-main .a--long-text h2 { font-size: 1.75rem; padding: 0; }
+.l--article-main .a--long-text h2 { font-size: 2rem; padding: 0; }
 .l--article-main .a--long-text h3 { font-size: 1.5rem; }
 .l--article-main .a--long-text h4 { font-size: 1.25rem; }
 .l--article-main .a--long-text h5 { font-size: 1.125rem; }
