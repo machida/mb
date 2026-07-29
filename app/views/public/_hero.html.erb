@@ -1,7 +1,3 @@
-<% hero_background_image = SiteSetting.hero_background_image.presence %>
-<% hero_classes = ["a--hero"] %>
-<% hero_classes << "has-background" if hero_background_image %>
-
-<%= tag.div class: hero_classes.join(" "), style: (hero_background_image ? "--hero-bg-image: url('#{hero_background_image}');" : nil) do %>
+<%= tag.div class: "a--hero has-background", style: "--hero-bg-image: url('#{asset_path("retro-hawaii-hero.webp")}');" do %>
   <h1 class="sr-only spec--main-title"><%= SiteSetting.site_title %></h1>
 <% end %>

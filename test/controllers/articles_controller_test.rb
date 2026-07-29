@@ -35,6 +35,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select ".spec--main-title", "マチダのブログ"
     assert_select ".l--public-header__nav", text: "ABOUT"
+    assert_select ".a--hero.has-background[style*='retro-hawaii-hero']", count: 1
   end
 
   test "index should only show published articles" do
