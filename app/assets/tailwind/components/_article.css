@@ -5,17 +5,19 @@
   padding-block: 0 2rem;
 }
 
-.l--article-page { display: grid; grid-template-columns: minmax(0, 48rem) minmax(12rem, 14rem); justify-content: center; gap: 5rem; }
+.l--article-page { display: grid; grid-template-columns: minmax(0, 48rem) minmax(10rem, 11.5rem); justify-content: center; gap: 5rem; }
 .l--article-header__date { font-size: 0.75rem; font-weight: 700; }
-.l--article-header h1 { font-size: clamp(1.75rem, 3vw, 2.45rem); font-weight: 700; line-height: 1.45; letter-spacing: 0.12em; }
-.l--article-header__summary { max-width: 44rem; font-family: var(--font-family-base); font-size: 0.9rem; line-height: 2; }
+.l--article-header h1 { font-size: clamp(1.875rem, 3.2vw, 2.625rem); font-weight: 700; line-height: 1.45; letter-spacing: 0.08em; }
 .l--article-header__meta { font-size: 0.75rem; }
 .l--article-main__image { width: 100%; max-height: 32rem; object-fit: cover; margin-bottom: 2.4rem; filter: grayscale(1) sepia(0.18) contrast(1.15); }
 .l--article-main .a--long-text { color: #0b2d61; font-size: 1rem; line-height: 2; letter-spacing: 0.04em; }
 .l--article-main .a--long-text h1, .l--article-main .a--long-text h2 { color: #0b2d61; border: 0; }
-.l--article-main .a--long-text h1 { font-size: 1.75rem; border-left: 0.2rem solid #0b2d61; padding: 0 0 0 0.65rem; }
-.l--article-main .a--long-text h2 { font-size: 1.5rem; padding: 0; }
-.l--article-main .a--long-text h3 { font-size: 1.375rem; }
+.l--article-main .a--long-text h1 { font-size: 2rem; border-left: 0.2rem solid #0b2d61; padding: 0 0 0 0.65rem; }
+.l--article-main .a--long-text h2 { font-size: 1.75rem; padding: 0; }
+.l--article-main .a--long-text h3 { font-size: 1.5rem; }
+.l--article-main .a--long-text h4 { font-size: 1.25rem; }
+.l--article-main .a--long-text h5 { font-size: 1.125rem; }
+.l--article-main .a--long-text h6 { color: #526987; font-size: 1rem; }
 .l--article-navigation { display: grid; grid-template-columns: 1fr 1fr; margin-top: 3rem; padding-block: 1.5rem; border-block: 0.0625rem solid #0b2d61; }
 .l--article-navigation div:last-child { text-align: right; }
 .l--article-navigation a { display: inline-block; font-size: 0; }

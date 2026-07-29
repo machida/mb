@@ -27,9 +27,6 @@
                   class: "spec--article-date" %>
     </time>
     <h1 class="spec--article-title"><%= @article.title %></h1>
-    <% if @article.summary.present? %>
-      <p class="l--article-header__summary"><%= @article.summary %></p>
-    <% end %>
     <div class="l--article-header__meta">
       <% if show_author_info? %>
         <span class="spec--article-author">著者: <%= @article.author %></span>
