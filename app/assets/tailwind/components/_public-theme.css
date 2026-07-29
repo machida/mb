@@ -1,0 +1,16 @@
+body.layout-public {
+  --public-ink: #1e4f86;
+  --public-ink-muted: #58789b;
+  --public-line: #7894b2;
+  --color-text-primary: var(--public-ink);
+  --color-text-secondary: var(--public-ink-muted);
+  --color-long-text-heading: var(--public-ink);
+  --color-long-text-text: var(--public-ink);
+  --color-long-text-muted: var(--public-ink-muted);
+  --color-long-text-border: var(--public-line);
+  --color-long-text-quote-border: var(--public-line);
+  background: #f7f5f0;
+  color: var(--public-ink);
+  font-family: var(--font-family-mono);
+  letter-spacing: 0.06em;
+}

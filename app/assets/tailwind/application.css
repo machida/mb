@@ -35,6 +35,7 @@
 @import "./components/_page-notice.css";
 
 /* Import Public Components */
+@import "./components/_public-theme.css";
 @import "./components/_public-top-header.css";
 @import "./components/_public-header.css";
 @import "./components/_public-footer.css";
