@@ -21,7 +21,8 @@
 .l--article-main .a--long-text h3,
 .l--article-main .a--long-text h4,
 .l--article-main .a--long-text h5,
-.l--article-main .a--long-text h6 { margin-top: 5rem; margin-bottom: 2rem; }
+.l--article-main .a--long-text h6 { margin-top: 5rem; margin-bottom: 1.25rem; }
+.l--article-main .a--long-text > :is(h1, h2, h3, h4, h5, h6) + * { margin-top: 1.25rem; }
 .l--article-main .a--long-text h1, .l--article-main .a--long-text h2 { color: var(--public-ink); border: 0; }
 .l--article-main .a--long-text h1 { font-size: 2rem; border-left: 0.2rem solid var(--public-ink); padding: 0 0 0 0.65rem; }
 .l--article-main .a--long-text h2 { font-size: 2rem; padding: 0; }
