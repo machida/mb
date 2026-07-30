@@ -62,11 +62,14 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show published article" do
+    @published_article.update!(thumbnail: "https://example.com/article.jpg")
+
     get article_path(@published_article)
     assert_response :success
     assert_select ".spec--article-title", @published_article.title
     assert_select ".spec--article-content"
     assert_select ".l--article-page"
+    assert_select ".l--article-main > .l--article-main__image:first-child", count: 1
     assert_select ".l--public-header__inner.is--home", count: 0
     assert_select ".l--article-sidebar", count: 0
   end

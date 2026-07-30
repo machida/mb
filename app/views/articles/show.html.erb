@@ -20,6 +20,10 @@
 
 <div class="l--article-page">
   <article class="l--article-main">
+  <% if @article.thumbnail.present? %>
+    <%= image_tag @article.thumbnail, alt: "", class: "l--article-main__image" %>
+  <% end %>
+
   <header class="l--article-header">
     <time datetime="<%= @article.created_at.iso8601 %>" class="l--article-header__date">
       <%= link_to @article.created_at.strftime("%Y-%m-%d"),
@@ -42,10 +46,6 @@
       </h2>
       <p class="text-sm">この記事は現在下書き状態で、一般には公開されていません。</p>
     </div>
-  <% end %>
-
-  <% if @article.thumbnail.present? %>
-    <%= image_tag @article.thumbnail, alt: "", class: "l--article-main__image" %>
   <% end %>
 
   <div class="a--long-text spec--article-content">
