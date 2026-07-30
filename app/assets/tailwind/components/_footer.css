@@ -1,7 +1,6 @@
 .l--footer {
   margin-top: 0;
   padding-block: 1.25rem 2rem;
-  border-top: 0.0625rem solid var(--public-line);
   font-family: var(--font-family-mono);
   font-size: 0.72rem;
   letter-spacing: 0.1em;

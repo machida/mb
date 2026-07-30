@@ -36,6 +36,8 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_select "body.l--public-page main.l--public-main"
     assert_select ".l--articles-page .l--articles-index .l--articles-list"
     assert_select ".l--footer__inner .l--footer__copyright"
+    assert_select ".l--breadcrumbs + .l--footer"
+    assert_select ".l--breadcrumbs__item[aria-current='page']", "HOME"
     assert_select ".spec--main-title", "マチダのブログ"
     assert_select ".l--public-header__brand a[href=?]", root_path, text: "machida"
     assert_select ".l--public-header__links" do
@@ -77,6 +79,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".spec--article-title", @published_article.title
     assert_select ".spec--article-content"
     assert_select ".l--article-page .l--article-main .l--article-header__title"
+    assert_select ".l--breadcrumbs__item[aria-current='page']", @published_article.title
     assert_select ".l--article-main > .l--article-main__image:first-child", count: 1
     assert_select ".l--public-header__inner.is--home", count: 0
     assert_select ".l--article-sidebar", count: 0
@@ -216,6 +219,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".spec--archive-year-title", "#{@published_article.created_at.year}年の記事"
     assert_select ".l--archive-year > .l--archive-header"
     assert_select ".l--archive-year > .l--archive-months"
+    assert_select ".l--breadcrumbs__item[aria-current='page']", "#{@published_article.created_at.year}年"
   end
 
   test "should show archive month" do
@@ -223,6 +227,8 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select ".spec--archive-month-title", "#{@published_article.created_at.year}年#{@published_article.created_at.month}月の記事"
     assert_select ".l--archive-month .l--archive-header + .l--archive-month-navigation"
+    assert_select ".l--breadcrumbs__link[href=?]", archive_year_path(@published_article.created_at.year), text: "#{@published_article.created_at.year}年"
+    assert_select ".l--breadcrumbs__item[aria-current='page']", "#{@published_article.created_at.month}月"
   end
 
   test "archive should only show published articles" do
@@ -233,10 +239,11 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_no_match @draft_article.title, response.body
   end
 
-  test "should show login link when not logged in" do
+  test "should not show login link when not logged in" do
     get root_path
     assert_response :success
-    assert_select "a[href=?]", admin_login_path, text: "ログイン"
+    assert_select "a[href=?]", admin_login_path, count: 0
+    assert_select ".l--footer__navigation", count: 0
   end
 
   test "should show admin links when logged in" do

@@ -1,0 +1,24 @@
+<nav class="l--breadcrumbs" aria-label="パンくず">
+  <div class="l--breadcrumbs__inner l--container is--xl">
+    <ol class="l--breadcrumbs__list">
+      <% if controller_name == "articles" && action_name == "index" %>
+        <li class="l--breadcrumbs__item" aria-current="page">HOME</li>
+      <% else %>
+        <li class="l--breadcrumbs__item">
+          <%= link_to "HOME", root_path, class: "l--breadcrumbs__link" %>
+        </li>
+
+        <% if controller_name == "articles" && action_name == "show" %>
+          <li class="l--breadcrumbs__item" aria-current="page"><%= @article.title %></li>
+        <% elsif controller_name == "articles" && action_name == "archive_year" %>
+          <li class="l--breadcrumbs__item" aria-current="page"><%= @year %>年</li>
+        <% elsif controller_name == "articles" && action_name == "archive_month" %>
+          <li class="l--breadcrumbs__item">
+            <%= link_to "#{@year}年", archive_year_path(@year), class: "l--breadcrumbs__link" %>
+          </li>
+          <li class="l--breadcrumbs__item" aria-current="page"><%= @month %>月</li>
+        <% end %>
+      <% end %>
+    </ol>
+  </div>
+</nav>

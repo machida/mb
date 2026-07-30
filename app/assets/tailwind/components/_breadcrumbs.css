@@ -1,0 +1,36 @@
+.l--breadcrumbs {
+  height: 2.75rem;
+  background-color: #e3dfd4;
+  color: #676359;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+}
+
+.l--breadcrumbs__inner,
+.l--breadcrumbs__list {
+  height: 100%;
+}
+
+.l--breadcrumbs__list {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.l--breadcrumbs__item {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.l--breadcrumbs__item + .l--breadcrumbs__item::before {
+  content: "/";
+  margin-inline: 0.75rem;
+  opacity: 0.55;
+}
+
+.l--breadcrumbs__link:hover {
+  opacity: 0.55;
+}

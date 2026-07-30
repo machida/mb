@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "/login", to: redirect("/admin/login", status: 302)
+
   # Letter opener web for development email preview
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
