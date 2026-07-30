@@ -34,11 +34,12 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     get root_path
     assert_response :success
     assert_select ".spec--main-title", "マチダのブログ"
-    assert_select ".l--public-header__nav", text: "ABOUT"
     assert_select ".l--public-header__links" do
-      assert_select ".l--public-header__nav:nth-child(1)", "ABOUT"
+      assert_select ".l--public-header__nav:nth-child(1)[aria-label='ABOUT']" do
+        assert_select ".l--public-header__icon", "person"
+      end
       assert_select ".l--public-header__nav:nth-child(2)[aria-label='ARCHIVE']" do
-        assert_select ".l--public-header__archive-icon", "calendar_month"
+        assert_select ".l--public-header__icon", "calendar_month"
       end
     end
     assert_select ".l--public-header__inner.is--home", count: 1
