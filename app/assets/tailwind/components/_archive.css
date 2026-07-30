@@ -1,0 +1,16 @@
+@media (min-width: 48rem) {
+  .l--archive-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .l--archive-header__title {
+    margin-bottom: 0;
+  }
+
+  .l--archive-header__count {
+    flex-shrink: 0;
+  }
+}
