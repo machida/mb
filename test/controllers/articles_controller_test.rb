@@ -45,6 +45,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     end
     assert_select ".l--public-header__inner.is--home", count: 1
     assert_select ".a--hero.has-background[style*='retro-hawaii-hero']", count: 1
+    assert_select ".l--footer small", "© #{Date.current.year} @machida"
   end
 
   test "index should only show published articles" do
