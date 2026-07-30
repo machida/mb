@@ -10,7 +10,7 @@
 
 .l--article-item { display: grid; grid-template-columns: 7rem 12rem minmax(0, 1fr); gap: 1.75rem; align-items: start; }
 .l--article-item__date { padding-top: 0.7rem; font-size: 1rem; font-weight: 700; }
-.l--article-item__image { display: block; position: relative; aspect-ratio: 2 / 1; overflow: hidden; background: #d8d9d5; }
+.l--article-item__image { display: block; position: relative; aspect-ratio: 1.91 / 1; overflow: hidden; background: #d8d9d5; }
 .l--article-item__image:has(img) { border-radius: 0.5rem; transform: translateY(0.25rem); }
 .l--article-item__image-original,
 .l--article-item__image-sepia,

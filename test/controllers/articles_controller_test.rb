@@ -111,6 +111,8 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select ".spec--previous-article-link[href=?]", article_path(newer_article), text: "前の記事"
     assert_select ".spec--next-article-link[href=?]", article_path(older_article), text: "次の記事"
+    assert_equal "← PREV\n#{newer_article.title}", css_select(".spec--previous-article-link").first["data-label"]
+    assert_equal "NEXT →\n#{older_article.title}", css_select(".spec--next-article-link").first["data-label"]
   end
 
   test "should hide previous article link on newest article" do

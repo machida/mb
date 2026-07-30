@@ -55,13 +55,13 @@
 <nav class="l--article-navigation" aria-label="前後の記事">
   <div>
     <% if @previous_article.present? %>
-      <%= link_to "前の記事", article_path(@previous_article), class: "spec--previous-article-link", data: { label: "← PREV\A#{@previous_article.title}" } %>
+      <%= link_to "前の記事", article_path(@previous_article), class: "spec--previous-article-link", data: { label: "← PREV\n#{@previous_article.title}" } %>
     <% end %>
   </div>
   <%= link_to "NOTE", root_path, class: "sr-only spec--back-to-articles-link" %>
   <div>
     <% if @next_article.present? %>
-      <%= link_to "次の記事", article_path(@next_article), class: "spec--next-article-link", data: { label: "NEXT →\A#{@next_article.title}" } %>
+      <%= link_to "次の記事", article_path(@next_article), class: "spec--next-article-link", data: { label: "NEXT →\n#{@next_article.title}" } %>
     <% end %>
   </div>
 </nav>
