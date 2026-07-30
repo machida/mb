@@ -7,7 +7,9 @@
       </p>
       <nav class="l--public-header__links" aria-label="メインナビゲーション">
         <%= link_to "ABOUT", root_path, class: "l--public-header__nav" %>
-        <%= link_to "ARCHIVE", archive_year_path(Date.current.year), class: "l--public-header__nav" %>
+        <%= link_to archive_year_path(Date.current.year), class: "l--public-header__nav", aria: { label: "ARCHIVE" } do %>
+          <span class="material-symbols-outlined l--public-header__archive-icon" aria-hidden="true">calendar_month</span>
+        <% end %>
       </nav>
     </div>
   </div>
