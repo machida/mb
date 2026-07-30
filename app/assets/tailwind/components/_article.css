@@ -30,7 +30,7 @@
 .l--article-main .a--long-text h4 { font-size: 1.25rem; }
 .l--article-main .a--long-text h5 { font-size: 1.125rem; }
 .l--article-main .a--long-text h6 { color: var(--public-ink-muted); font-size: 1rem; }
-.l--article-navigation { display: grid; grid-template-columns: 1fr 1fr; margin-top: 5rem; padding-block: 2rem; border-block: 0.0625rem solid var(--public-line); }
+.l--article-navigation { display: grid; grid-template-columns: 1fr 1fr; margin-top: 7rem; }
 .l--article-navigation div:last-child { text-align: right; }
 .l--article-navigation a { display: inline-block; font-size: 0; }
 .l--article-navigation a::after { content: attr(data-label); white-space: pre; font-size: 0.78rem; font-weight: 700; line-height: 2; }
