@@ -1,48 +1,48 @@
-<div>
-  <div class="mb-8">
-    <h1 class="text-3xl font-bold mb-2 spec--archive-year-title"><%= @year %>年の記事</h1>
-    <p><%= @articles.count %>件の記事があります</p>
-  </div>
+<div class="l--archive-page l--archive-year">
+  <header class="l--archive-header mb-8">
+    <h1 class="l--archive-header__title text-3xl font-bold mb-2 spec--archive-year-title"><%= @year %>年の記事</h1>
+    <p class="l--archive-header__count"><%= @articles.count %>件の記事があります</p>
+  </header>
 
   <!-- 月別ナビゲーション -->
-  <div class="mb-12">
-    <h2 class="text-xl font-semibold mb-4">月別アーカイブ</h2>
-    <div class="grid grid-cols-3 md:grid-cols-6 gap-3">
+  <section class="l--archive-months mb-12" aria-labelledby="archive-months-title">
+    <h2 id="archive-months-title" class="l--archive-months__title text-xl font-semibold mb-4">月別アーカイブ</h2>
+    <div class="l--archive-months__grid grid grid-cols-3 md:grid-cols-6 gap-3">
       <% (1..12).each do |month| %>
         <% count = @monthly_counts[format("%02d", month)] || 0 %>
         <% if count > 0 %>
-          <%= link_to archive_month_path(@year, month), class: "a--button is--sm is--primary is--flex flex-col text-center" do %>
+          <%= link_to archive_month_path(@year, month), class: "l--archive-months__item a--button is--sm is--primary is--flex flex-col text-center" do %>
             <%= month %>月<br>
-            <span class="text-sm">(<%= count %>)</span>
+            <span class="l--archive-months__count text-sm">(<%= count %>)</span>
           <% end %>
         <% else %>
-          <div class="flex flex-col bg-gray-200 text-gray-500 px-3 py-2 rounded text-center">
+          <div class="l--archive-months__item is--empty flex flex-col bg-gray-200 text-gray-500 px-3 py-2 rounded text-center">
             <%= month %>月<br>
-            <span class="text-sm">(0)</span>
+            <span class="l--archive-months__count text-sm">(0)</span>
           </div>
         <% end %>
       <% end %>
     </div>
-  </div>
+  </section>
 
   <!-- 記事一覧 -->
-  <div class="l__articles">
+  <div class="l--articles-list">
     <%= render partial: "article_item", collection: @articles %>
   </div>
 
   <% if @articles.empty? %>
-    <div class="text-center py-12">
-      <p class="text-gray-500 text-lg"><%= @year %>年の記事はまだありません</p>
+    <div class="l--archive-empty text-center py-12">
+      <p class="l--archive-empty__message text-gray-500 text-lg"><%= @year %>年の記事はまだありません</p>
     </div>
   <% end %>
 
   <!-- Pagination -->
-  <div class="mt-8 flex justify-center spec--pagination">
+  <div class="l--archive-pagination mt-8 flex justify-center spec--pagination">
     <%= paginate @articles %>
   </div>
 
   <!-- ナビゲーション -->
-  <div class="mt-8 text-center">
+  <nav class="l--archive-back-navigation mt-8 text-center" aria-label="トップページへ戻る">
     <%= link_to "トップページに戻る", root_path, class: "a--button is--lg is--secondary" %>
-  </div>
+  </nav>
 </div>

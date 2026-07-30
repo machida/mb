@@ -30,22 +30,22 @@
                   archive_month_path(@article.created_at.year, @article.created_at.month),
                   class: "spec--article-date" %>
     </time>
-    <h1 class="spec--article-title"><%= @article.title %></h1>
+    <h1 class="l--article-header__title spec--article-title"><%= @article.title %></h1>
     <div class="l--article-header__meta">
       <% if show_author_info? %>
-        <span class="spec--article-author">著者: <%= @article.author %></span>
+        <span class="l--article-header__author spec--article-author">著者: <%= @article.author %></span>
       <% end %>
     </div>
   </header>
 
   <% if @article.draft? %>
-    <div class="a--card is--warning spec--draft-notice mb-6">
-      <h2 class="flex items-center gap-1 text-lg font-semibold mb-2">
-        <span class="material-symbols-outlined text-amber-600" style="font-size: 1.25rem;">warning</span>
+    <aside class="l--article-draft-notice a--card is--warning spec--draft-notice mb-6">
+      <h2 class="l--article-draft-notice__title flex items-center gap-1 text-lg font-semibold mb-2">
+        <span class="l--article-draft-notice__icon material-symbols-outlined text-amber-600" style="font-size: 1.25rem;">warning</span>
         この記事は下書きです
       </h2>
-      <p class="text-sm">この記事は現在下書き状態で、一般には公開されていません。</p>
-    </div>
+      <p class="l--article-draft-notice__message text-sm">この記事は現在下書き状態で、一般には公開されていません。</p>
+    </aside>
   <% end %>
 
   <div class="a--long-text spec--article-content">
@@ -53,13 +53,13 @@
   </div>
 
 <nav class="l--article-navigation" aria-label="前後の記事">
-  <div>
+  <div class="l--article-navigation__previous">
     <% if @previous_article.present? %>
       <%= link_to "前の記事", article_path(@previous_article), class: "spec--previous-article-link", data: { label: "← PREV\n#{@previous_article.title}" } %>
     <% end %>
   </div>
   <%= link_to "NOTE", root_path, class: "sr-only spec--back-to-articles-link" %>
-  <div>
+  <div class="l--article-navigation__next">
     <% if @next_article.present? %>
       <%= link_to "次の記事", article_path(@next_article), class: "spec--next-article-link", data: { label: "NEXT →\n#{@next_article.title}" } %>
     <% end %>
@@ -67,11 +67,11 @@
 </nav>
 
 <% if current_user_signed_in? %>
-  <div class="mt-4 flex gap-2">
-    <%= link_to "編集", edit_admin_article_path(@article), class: "a--button is--md is--secondary" %>
+  <div class="l--article-admin-actions mt-4 flex gap-2">
+    <%= link_to "編集", edit_admin_article_path(@article), class: "l--article-admin-actions__edit a--button is--md is--secondary" %>
     <%= link_to "削除", admin_article_path(@article), method: :delete,
                 data: { confirm: "この記事を削除しますか？削除すると元に戻せません。" },
-                class: "a--button is--md is--border-danger spec--delete-article-button" %>
+                class: "l--article-admin-actions__delete a--button is--md is--border-danger spec--delete-article-button" %>
   </div>
 <% end %>
   </article>

@@ -1,10 +1,10 @@
-.l__articles {
+.l--articles-list {
   display: flex;
   flex-direction: column;
   gap: clamp(4.5rem, 6vw, 5.5rem);
 }
 
-.l__articles > article {
+.l--articles-list > article {
   padding-block: 0;
 }
 
@@ -28,7 +28,7 @@
 }
 
 @media (max-width: 47.9375rem) {
-  .l__articles { gap: 4rem; }
+  .l--articles-list { gap: 4rem; }
   .l--article-item { grid-template-columns: minmax(0, 1fr); gap: 0.9rem; }
   .l--article-item__date { padding-top: 0; }
   .l--article-item__image { width: 100%; }

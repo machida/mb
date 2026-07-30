@@ -13,12 +13,12 @@
     <% end %>
   <% end %>
   <div class="l--article-item__body">
-    <header>
-      <h2 class="<%= local_assigns[:title_class] || "a--heading is--xl" %> spec--article-title">
+    <header class="l--article-item__header">
+      <h2 class="l--article-item__title <%= local_assigns[:title_class] || "a--heading is--xl" %> spec--article-title">
         <%= link_to article_item.title, article_path(article_item) %>
       </h2>
       <% if show_author_info? %>
-        <span class="spec--article-author">著者: <%= article_item.author %></span>
+        <span class="l--article-item__author spec--article-author">著者: <%= article_item.author %></span>
       <% end %>
     </header>
     <% if article_item.summary.present? %>

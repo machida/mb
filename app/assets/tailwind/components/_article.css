@@ -33,10 +33,10 @@
 .l--article-main .a--long-text h5 { font-size: 1rem; }
 .l--article-main .a--long-text h6 { color: var(--public-ink-muted); font-size: 0.875rem; }
 .l--article-navigation { display: grid; grid-template-columns: 1fr 1fr; margin-top: 7rem; }
-.l--article-navigation div:last-child { text-align: right; }
+.l--article-navigation__next { text-align: right; }
 .l--article-navigation a { display: inline-block; font-size: 0; }
 .l--article-navigation a::after { content: attr(data-label); display: block; white-space: pre-line; font-size: 0.78rem; font-weight: 700; line-height: 2; }
-.l--article-navigation div:last-child a::after { text-align: right; }
+.l--article-navigation__next a::after { text-align: right; }
 @media (max-width: 47.9375rem) {
   .l--public-header__inner { min-height: 6rem; }
   .l--public-header__brand { font-size: 1rem; letter-spacing: 0.2em; }

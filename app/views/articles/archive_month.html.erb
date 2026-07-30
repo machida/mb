@@ -1,11 +1,11 @@
-<div>
-  <div class="mb-8">
-    <h1 class="text-3xl font-bold mb-2 spec--archive-month-title"><%= @year %>年<%= @month %>月の記事</h1>
-    <p><%= @articles.count %>件の記事があります</p>
-  </div>
+<div class="l--archive-page l--archive-month">
+  <header class="l--archive-header mb-8">
+    <h1 class="l--archive-header__title text-3xl font-bold mb-2 spec--archive-month-title"><%= @year %>年<%= @month %>月の記事</h1>
+    <p class="l--archive-header__count"><%= @articles.count %>件の記事があります</p>
+  </header>
 
   <!-- ナビゲーション -->
-  <div class="mb-12 flex justify-center gap-12">
+  <nav class="l--archive-month-navigation mb-12 flex justify-center gap-12" aria-label="月別アーカイブ間の移動">
     <% if @month > 1 %>
       <%= link_to archive_month_path(@year, @month - 1), class: "a--button is--md is--secondary" do %>
         <span class="material-symbols-outlined">chevron_left</span>
@@ -23,26 +23,26 @@
         <span class="material-symbols-outlined">chevron_right</span>
       <% end %>
     <% end %>
-  </div>
+  </nav>
 
   <!-- 記事一覧 -->
-  <div class="l__articles">
+  <div class="l--articles-list">
     <%= render partial: "article_item", collection: @articles %>
   </div>
 
   <% if @articles.empty? %>
-    <div class="text-center py-12">
-      <p class="text-gray-500 text-lg"><%= @year %>年<%= @month %>月の記事はまだありません</p>
+    <div class="l--archive-empty text-center py-12">
+      <p class="l--archive-empty__message text-gray-500 text-lg"><%= @year %>年<%= @month %>月の記事はまだありません</p>
     </div>
   <% end %>
 
   <!-- Pagination -->
-  <div class="mt-8 flex justify-center spec--pagination">
+  <div class="l--archive-pagination mt-8 flex justify-center spec--pagination">
     <%= paginate @articles %>
   </div>
 
   <!-- ナビゲーション -->
-  <div class="mt-8 text-center">
+  <nav class="l--archive-back-navigation mt-8 text-center" aria-label="トップページへ戻る">
     <%= link_to "トップページに戻る", root_path, class: "a--button is--lg is--secondary" %>
-  </div>
+  </nav>
 </div>

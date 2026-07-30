@@ -1,16 +1,16 @@
 <!-- Footer -->
 <footer class="l--footer">
   <div class="l--container is--xl">
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-      <small>© <%= Date.current.year %> @machida</small>
+    <div class="l--footer__inner flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <small class="l--footer__copyright">© <%= Date.current.year %> @machida</small>
 
-      <nav class="flex flex-wrap items-center gap-x-4 gap-y-2">
+      <nav class="l--footer__navigation flex flex-wrap items-center gap-x-4 gap-y-2" aria-label="管理メニュー">
         <% if current_user_signed_in? %>
-          <%= link_to "記事管理", admin_articles_path, class: "text-primary hover:text-indigo-600 hover:underline text-sm spec--admin-link" %>
+          <%= link_to "記事管理", admin_articles_path, class: "l--footer__link text-primary hover:text-indigo-600 hover:underline text-sm spec--admin-link" %>
           <%= button_to "ログアウト", admin_logout_path, method: :delete,
-class: "text-primary hover:text-indigo-600 hover:underline text-sm spec--logout-link bg-transparent border-0 p-0 cursor-pointer" %>
+class: "l--footer__link text-primary hover:text-indigo-600 hover:underline text-sm spec--logout-link bg-transparent border-0 p-0 cursor-pointer" %>
         <% else %>
-          <%= link_to "ログイン", admin_login_path, class: "text-primary hover:text-indigo-600 hover:underline text-sm spec--login-link" %>
+          <%= link_to "ログイン", admin_login_path, class: "l--footer__link text-primary hover:text-indigo-600 hover:underline text-sm spec--login-link" %>
         <% end %>
       </nav>
     </div>
