@@ -1,21 +1,15 @@
-.l--breadcrumbs {
-  height: 2.75rem;
-  background-color: #e3dfd4;
-  color: #676359;
-  font-size: 0.75rem;
-  letter-spacing: 0.04em;
-}
-
-.l--breadcrumbs__inner,
-.l--breadcrumbs__list {
-  height: 100%;
-}
-
 .l--breadcrumbs__list {
   display: flex;
   align-items: center;
+  width: 100%;
+  height: 2.75rem;
   min-width: 0;
   overflow: hidden;
+  border-radius: 100rem;
+  background-color: #d6dde6;
+  color: #1f4f86;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
 }
 
 .l--breadcrumbs__item {
