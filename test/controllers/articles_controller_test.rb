@@ -34,6 +34,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     get root_path
     assert_response :success
     assert_select ".spec--main-title", "マチダのブログ"
+    assert_select ".l--public-header__brand a[href=?]", root_path, text: "machida"
     assert_select ".l--public-header__links" do
       assert_select ".l--public-header__nav:nth-child(1)[aria-label='ABOUT']" do
         assert_select ".l--public-header__icon", "person"
