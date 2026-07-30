@@ -79,6 +79,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".spec--article-title", @published_article.title
     assert_select ".spec--article-content"
     assert_select ".l--article-page .l--article-main .l--article-header__title"
+    assert_select ".l--article-header__meta", count: 0
     assert_select ".l--breadcrumbs__item[aria-current='page']", @published_article.title
     assert_select ".l--article-main > .l--article-main__image:first-child", count: 1
     assert_select ".l--public-header__inner.is--home", count: 0

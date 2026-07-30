@@ -31,11 +31,11 @@
                   class: "spec--article-date" %>
     </time>
     <h1 class="l--article-header__title spec--article-title"><%= @article.title %></h1>
-    <div class="l--article-header__meta">
-      <% if show_author_info? %>
+    <% if show_author_info? %>
+      <div class="l--article-header__meta">
         <span class="l--article-header__author spec--article-author">著者: <%= @article.author %></span>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </header>
 
   <% if @article.draft? %>
