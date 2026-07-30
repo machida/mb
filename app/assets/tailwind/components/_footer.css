@@ -9,3 +9,21 @@
 .l--footer small {
   font-size: 1rem;
 }
+
+.l--footer__inner {
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+.l--footer__copyright {
+  display: block;
+  text-align: center;
+}
+
+@media (min-width: 48rem) {
+  .l--footer__navigation {
+    position: absolute;
+    right: 0;
+  }
+}
