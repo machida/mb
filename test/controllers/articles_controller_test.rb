@@ -117,10 +117,14 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
 
     get article_path(current_article)
     assert_response :success
-    assert_select ".spec--previous-article-link[href=?]", article_path(newer_article), text: "前の記事"
-    assert_select ".spec--next-article-link[href=?]", article_path(older_article), text: "次の記事"
-    assert_equal "← PREV", css_select(".spec--previous-article-link").first["data-label"]
-    assert_equal "NEXT →", css_select(".spec--next-article-link").first["data-label"]
+    assert_select ".spec--previous-article-link[href=?][aria-label='前の記事']", article_path(newer_article) do
+      assert_select ".l--article-navigation__icon", "chevron_left"
+      assert_select ".l--article-navigation__label", "PREV"
+    end
+    assert_select ".spec--next-article-link[href=?][aria-label='次の記事']", article_path(older_article) do
+      assert_select ".l--article-navigation__label", "NEXT"
+      assert_select ".l--article-navigation__icon", "chevron_right"
+    end
   end
 
   test "should hide previous article link on newest article" do
@@ -147,7 +151,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     get article_path(newer_article)
     assert_response :success
     assert_select ".spec--previous-article-link", count: 0
-    assert_select ".spec--next-article-link[href=?]", article_path(older_article), text: "次の記事"
+    assert_select ".spec--next-article-link[href=?][aria-label='次の記事']", article_path(older_article)
   end
 
   test "should hide next article link on oldest article" do
@@ -173,7 +177,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
 
     get article_path(older_article)
     assert_response :success
-    assert_select ".spec--previous-article-link[href=?]", article_path(newer_article), text: "前の記事"
+    assert_select ".spec--previous-article-link[href=?][aria-label='前の記事']", article_path(newer_article)
     assert_select ".spec--next-article-link", count: 0
   end
 
@@ -209,7 +213,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
 
     get article_path(older_article)
     assert_response :success
-    assert_select ".spec--previous-article-link[href=?]", article_path(newer_article), text: "前の記事"
+    assert_select ".spec--previous-article-link[href=?][aria-label='前の記事']", article_path(newer_article)
     assert_no_match article_path(draft_article), response.body
   end
 
