@@ -35,6 +35,10 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select ".spec--main-title", "マチダのブログ"
     assert_select ".l--public-header__nav", text: "ABOUT"
+    assert_select ".l--public-header__links" do
+      assert_select ".l--public-header__nav:nth-child(1)", "ABOUT"
+      assert_select ".l--public-header__nav:nth-child(2)", "ARCHIVE"
+    end
     assert_select ".l--public-header__inner.is--home", count: 1
     assert_select ".a--hero.has-background[style*='retro-hawaii-hero']", count: 1
   end
