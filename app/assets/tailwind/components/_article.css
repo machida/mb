@@ -17,6 +17,7 @@
 .l--article-main .a--long-text p { margin-bottom: 2rem; }
 .l--article-main .a--long-text > :first-child { margin-top: 0; }
 .l--article-main .a--long-text > :last-child { margin-bottom: 0; }
+.l--article-main .a--long-text table th { background-color: #dde7f1; }
 .l--article-main .a--long-text h1,
 .l--article-main .a--long-text h2,
 .l--article-main .a--long-text h3,
