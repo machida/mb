@@ -15,7 +15,7 @@
             <span class="l--archive-months__count">(<%= count %>)</span>
           <% end %>
         <% else %>
-          <div class="l--archive-months__item<%= " is--empty" if count.zero? %><%= " is--future" if month_in_future %> flex flex-col bg-gray-200 text-gray-500 px-3 py-2 rounded text-center">
+          <div class="l--archive-months__item<%= " is--empty" if count.zero? %><%= " is--future" if month_in_future %> flex flex-col px-3 py-2 rounded text-center">
             <%= month %>月<br>
             <span class="l--archive-months__count">(<%= count %>)</span>
           </div>
