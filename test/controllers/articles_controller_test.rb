@@ -225,6 +225,10 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".l--archive-year > .l--archive-header"
     assert_select ".l--archive-year > .l--archive-months"
     assert_select ".l--breadcrumbs__item[aria-current='page']", "#{@published_article.created_at.year}年"
+    assert_select ".l--archive-back-navigation__link[href=?]", root_path do
+      assert_select ".l--archive-back-navigation__icon", "home"
+      assert_select ".l--archive-back-navigation__label", "トップページに戻る"
+    end
   end
 
   test "should show archive month" do
@@ -234,6 +238,10 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".l--archive-month .l--archive-header + .l--archive-month-navigation"
     assert_select ".l--breadcrumbs__link[href=?]", archive_year_path(@published_article.created_at.year), text: "#{@published_article.created_at.year}年"
     assert_select ".l--breadcrumbs__item[aria-current='page']", "#{@published_article.created_at.month}月"
+    assert_select ".l--archive-back-navigation__link[href=?]", root_path do
+      assert_select ".l--archive-back-navigation__icon", "home"
+      assert_select ".l--archive-back-navigation__label", "トップページに戻る"
+    end
   end
 
   test "archive should only show published articles" do

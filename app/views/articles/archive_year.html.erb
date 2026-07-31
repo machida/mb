@@ -43,6 +43,9 @@
 
   <!-- ナビゲーション -->
   <nav class="l--archive-back-navigation mt-8 text-center" aria-label="トップページへ戻る">
-    <%= link_to "トップページに戻る", root_path, class: "a--button is--lg is--secondary" %>
+    <%= link_to root_path, class: "l--archive-back-navigation__link" do %>
+      <span class="l--archive-back-navigation__icon material-symbols-outlined" aria-hidden="true">home</span>
+      <span class="l--archive-back-navigation__label">トップページに戻る</span>
+    <% end %>
   </nav>
 </div>
