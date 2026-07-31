@@ -9,20 +9,20 @@
   <!-- ナビゲーション -->
   <nav class="l--archive-month-navigation mb-12 flex justify-center gap-12" aria-label="月別アーカイブ間の移動">
     <% if @month > 1 %>
-      <%= link_to archive_month_path(@year, @month - 1), class: "a--button is--md is--secondary" do %>
-        <span class="material-symbols-outlined">chevron_left</span>
+      <%= link_to archive_month_path(@year, @month - 1), class: "l--archive-month-navigation__link is--previous" do %>
+        <span class="l--archive-month-navigation__icon material-symbols-outlined" aria-hidden="true">chevron_left</span>
         <%= @month - 1 %>月
       <% end %>
     <% end %>
 
-    <%= link_to archive_year_path(@year), class: "a--button is--md is--primary" do %>
+    <%= link_to archive_year_path(@year), class: "l--archive-month-navigation__link is--year" do %>
       <%= @year %>年の一覧
     <% end %>
 
     <% if @month < 12 %>
-      <%= link_to archive_month_path(@year, @month + 1), class: "a--button is--md is--secondary" do %>
+      <%= link_to archive_month_path(@year, @month + 1), class: "l--archive-month-navigation__link is--next" do %>
         <%= @month + 1 %>月
-        <span class="material-symbols-outlined">chevron_right</span>
+        <span class="l--archive-month-navigation__icon material-symbols-outlined" aria-hidden="true">chevron_right</span>
       <% end %>
     <% end %>
   </nav>

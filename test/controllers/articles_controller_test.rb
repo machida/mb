@@ -236,6 +236,8 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select ".spec--archive-month-title", "#{@published_article.created_at.year}年#{@published_article.created_at.month}月の記事"
     assert_select ".l--archive-month .l--archive-header + .l--archive-month-navigation"
+    assert_select ".l--archive-month-navigation__link.is--year[href=?]", archive_year_path(@published_article.created_at.year), text: "#{@published_article.created_at.year}年の一覧"
+    assert_select ".l--archive-month-navigation .a--button", count: 0
     assert_select ".l--breadcrumbs__link[href=?]", archive_year_path(@published_article.created_at.year), text: "#{@published_article.created_at.year}年"
     assert_select ".l--breadcrumbs__item[aria-current='page']", "#{@published_article.created_at.month}月"
     assert_select ".l--archive-back-navigation__link[href=?]", root_path do

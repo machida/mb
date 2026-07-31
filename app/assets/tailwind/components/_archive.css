@@ -11,6 +11,24 @@
   background-color: rgb(30, 79, 134);
 }
 
+.l--archive-month-navigation__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.125rem;
+  color: var(--color-button-primary);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.l--archive-month-navigation__icon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.l--archive-month-navigation__link:hover {
+  text-decoration: underline;
+}
+
 .l--archive-back-navigation__link {
   display: inline-flex;
   flex-direction: column;
