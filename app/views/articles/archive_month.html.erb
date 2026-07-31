@@ -11,17 +11,17 @@
     <% if @month > 1 %>
       <%= link_to archive_month_path(@year, @month - 1), class: "l--archive-month-navigation__link is--previous" do %>
         <span class="l--archive-month-navigation__icon material-symbols-outlined" aria-hidden="true">chevron_left</span>
-        <%= @month - 1 %>月
+        <span class="l--archive-month-navigation__label"><%= @month - 1 %>月</span>
       <% end %>
     <% end %>
 
     <%= link_to archive_year_path(@year), class: "l--archive-month-navigation__link is--year" do %>
-      <%= @year %>年の一覧
+      <span class="l--archive-month-navigation__label"><%= @year %>年の一覧</span>
     <% end %>
 
     <% if @month < 12 %>
       <%= link_to archive_month_path(@year, @month + 1), class: "l--archive-month-navigation__link is--next" do %>
-        <%= @month + 1 %>月
+        <span class="l--archive-month-navigation__label"><%= @month + 1 %>月</span>
         <span class="l--archive-month-navigation__icon material-symbols-outlined" aria-hidden="true">chevron_right</span>
       <% end %>
     <% end %>

@@ -25,7 +25,7 @@
   line-height: 1;
 }
 
-.l--archive-month-navigation__link:hover {
+.l--archive-month-navigation__link:hover .l--archive-month-navigation__label {
   text-decoration: underline;
 }
 
