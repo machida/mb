@@ -37,6 +37,11 @@
   outline-offset: 0.125rem;
 }
 
+.l--archive-months__item:not(a) {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 .l--archive-month > .l--archive-header__count,
 .l--archive-year > .l--archive-header__count {
   margin-bottom: 3rem;
