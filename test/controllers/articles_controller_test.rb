@@ -227,7 +227,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".l--breadcrumbs__item[aria-current='page']", "#{@published_article.created_at.year}年"
     assert_select ".l--archive-back-navigation__link[href=?]", root_path do
       assert_select ".l--archive-back-navigation__icon", "home"
-      assert_select ".l--archive-back-navigation__label", "トップページに戻る"
+      assert_select ".l--archive-back-navigation__label", "HOME"
     end
   end
 
@@ -240,7 +240,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".l--breadcrumbs__item[aria-current='page']", "#{@published_article.created_at.month}月"
     assert_select ".l--archive-back-navigation__link[href=?]", root_path do
       assert_select ".l--archive-back-navigation__icon", "home"
-      assert_select ".l--archive-back-navigation__label", "トップページに戻る"
+      assert_select ".l--archive-back-navigation__label", "HOME"
     end
   end
 
