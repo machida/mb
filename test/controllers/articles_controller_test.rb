@@ -235,6 +235,24 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "future archive months should not be links" do
+    future_year = Date.current.year + 1
+    future_article = Article.create!(
+      title: "Future Article",
+      body: "Future content",
+      summary: "Future summary",
+      author: @admin.user_id,
+      draft: false,
+      created_at: Time.zone.local(future_year, 1, 15)
+    )
+
+    get archive_year_path(future_year)
+    assert_response :success
+    assert_select "a.l--archive-months__item[href=?]", archive_month_path(future_year, 1), count: 0
+    assert_select ".l--archive-months__item.is--future", text: /1月\s*\(1\)/
+    assert_match future_article.title, response.body
+  end
+
   test "should show archive month" do
     get archive_month_path(@published_article.created_at.year, @published_article.created_at.month)
     assert_response :success

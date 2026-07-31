@@ -9,15 +9,16 @@
     <div class="l--archive-months__grid grid grid-cols-3 md:grid-cols-6 gap-3">
       <% (1..12).each do |month| %>
         <% count = @monthly_counts[format("%02d", month)] || 0 %>
-        <% if count > 0 %>
+        <% month_in_future = Date.new(@year, month, 1) > Date.current.beginning_of_month %>
+        <% if count > 0 && !month_in_future %>
           <%= link_to archive_month_path(@year, month), class: "l--archive-months__item flex-col text-center" do %>
             <%= month %>月<br>
             <span class="l--archive-months__count text-sm">(<%= count %>)</span>
           <% end %>
         <% else %>
-          <div class="l--archive-months__item is--empty flex flex-col bg-gray-200 text-gray-500 px-3 py-2 rounded text-center">
+          <div class="l--archive-months__item<%= " is--empty" if count.zero? %><%= " is--future" if month_in_future %> flex flex-col bg-gray-200 text-gray-500 px-3 py-2 rounded text-center">
             <%= month %>月<br>
-            <span class="l--archive-months__count text-sm">(0)</span>
+            <span class="l--archive-months__count text-sm">(<%= count %>)</span>
           </div>
         <% end %>
       <% end %>
