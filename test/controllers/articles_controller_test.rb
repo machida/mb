@@ -225,6 +225,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".spec--archive-year-title", "#{@published_article.created_at.year}年の記事"
     assert_select "section.l--archive-year[aria-labelledby='archive-year-title'] > .l--archive-header"
     assert_select ".l--archive-year > .l--archive-months"
+    assert_select ".l--archive-year .a--button", count: 0
     assert_select ".l--breadcrumbs__item[aria-current='page']", "#{@published_article.created_at.year}年"
     assert_select ".l--archive-back-navigation__link[href=?]", root_path do
       assert_select ".l--archive-back-navigation__icon", "home"
@@ -334,6 +335,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     get article_path(@published_article)
     assert_response :success
     assert_select ".spec--delete-article-button", text: "削除"
+    assert_select ".l--article-admin-actions .a--button", count: 0
   end
 
   test "should not show delete button on article page when not logged in" do

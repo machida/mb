@@ -27,7 +27,7 @@
 .l--article-main .a--long-text > :is(h1, h2, h3, h4, h5, h6) + * { margin-top: 1.75rem; }
 .l--article-main .a--long-text h1, .l--article-main .a--long-text h2 { color: var(--public-ink); border: 0; }
 .l--article-main .a--long-text h1 { font-size: 1.875rem; border-left: 0.2rem solid var(--public-ink); padding: 0 0 0 0.65rem; }
-.l--article-main .a--long-text h2 { font-size: 1.75rem; border-bottom: 0.0625rem solid currentColor; padding: 0 0 0.75rem; }
+.l--article-main .a--long-text h2 { font-size: 1.75rem; border-bottom: 0.0625rem solid var(--public-line); padding: 0 0 0.75rem; }
 .l--article-main .a--long-text h3 { font-size: 1.375rem; }
 .l--article-main .a--long-text h4 { font-size: 1.125rem; }
 .l--article-main .a--long-text h5 { font-size: 1rem; }
@@ -36,6 +36,14 @@
 .l--article-navigation__next { text-align: right; }
 .l--article-navigation__link { display: inline-flex; align-items: center; gap: 0.125rem; font-size: 0.78rem; font-weight: 700; line-height: 2; }
 .l--article-navigation__icon { font-size: 1.25rem; line-height: 1; }
+.l--article-admin-actions__edit,
+.l--article-admin-actions__delete { display: inline-flex; align-items: center; justify-content: center; min-height: 2.25rem; padding: 0.5rem 1.25rem; border-radius: var(--radius-sm); font-size: 0.875rem; font-weight: 500; line-height: 1.25rem; transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out; }
+.l--article-admin-actions__edit { border: 0.0625rem solid rgb(30, 79, 134); background-color: #fff; color: rgb(30, 79, 134); }
+.l--article-admin-actions__edit:hover { background-color: var(--color-indigo-50); }
+.l--article-admin-actions__delete { border: 0.0625rem solid var(--color-error); color: var(--color-error); }
+.l--article-admin-actions__delete:hover { background-color: var(--color-button-danger-bg-light); }
+.l--article-admin-actions__edit:focus-visible,
+.l--article-admin-actions__delete:focus-visible { outline: 0.125rem solid currentColor; outline-offset: 0.125rem; }
 @media (max-width: 47.9375rem) {
   .l--public-header__inner { min-height: 6rem; }
   .l--public-header__brand { font-size: 1rem; letter-spacing: 0.2em; }

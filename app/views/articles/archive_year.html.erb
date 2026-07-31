@@ -13,7 +13,7 @@
       <% (1..12).each do |month| %>
         <% count = @monthly_counts[format("%02d", month)] || 0 %>
         <% if count > 0 %>
-          <%= link_to archive_month_path(@year, month), class: "l--archive-months__item a--button is--sm is--primary is--flex flex-col text-center" do %>
+          <%= link_to archive_month_path(@year, month), class: "l--archive-months__item flex-col text-center" do %>
             <%= month %>月<br>
             <span class="l--archive-months__count text-sm">(<%= count %>)</span>
           <% end %>
