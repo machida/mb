@@ -279,6 +279,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     get archive_month_path(empty_year, 1)
     assert_response :success
     assert_select ".l--archive-header__count", count: 0
+    assert_select ".l--archive-empty__message", "#{empty_year}年1月の記事はありません"
   end
 
   test "month navigation should keep fixed columns at year boundaries" do
