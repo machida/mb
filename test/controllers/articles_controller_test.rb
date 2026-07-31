@@ -262,6 +262,22 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".l--archive-header__count", count: 0
   end
 
+  test "month navigation should keep fixed columns at year boundaries" do
+    year = @published_article.created_at.year
+
+    get archive_month_path(year, 1)
+    assert_response :success
+    assert_select ".l--archive-month-navigation__link.is--previous", count: 0
+    assert_select ".l--archive-month-navigation__link.is--year[href=?]", archive_year_path(year)
+    assert_select ".l--archive-month-navigation__link.is--next[href=?]", archive_month_path(year, 2)
+
+    get archive_month_path(year, 12)
+    assert_response :success
+    assert_select ".l--archive-month-navigation__link.is--previous[href=?]", archive_month_path(year, 11)
+    assert_select ".l--archive-month-navigation__link.is--year[href=?]", archive_year_path(year)
+    assert_select ".l--archive-month-navigation__link.is--next", count: 0
+  end
+
   test "archive should only show published articles" do
     get archive_year_path(@published_article.created_at.year)
     assert_response :success

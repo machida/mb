@@ -43,6 +43,28 @@
   text-align: center;
 }
 
+.l--archive-month-navigation {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+}
+
+.l--archive-month-navigation__link.is--previous {
+  grid-column: 1;
+  justify-self: start;
+}
+
+.l--archive-month-navigation__link.is--year {
+  grid-column: 2;
+  justify-self: center;
+}
+
+.l--archive-month-navigation__link.is--next {
+  grid-column: 3;
+  justify-self: end;
+}
+
 .l--archive-month-navigation__link {
   display: inline-flex;
   align-items: center;
@@ -61,6 +83,11 @@
   text-decoration: underline;
 }
 
+.l--archive-back-navigation {
+  margin-top: 5rem;
+  text-align: center;
+}
+
 .l--archive-back-navigation__link {
   display: inline-flex;
   flex-direction: column;
@@ -77,4 +104,10 @@
 
 .l--archive-back-navigation__link:hover .l--archive-back-navigation__label {
   text-decoration: underline;
+}
+
+@media (min-width: 48rem) {
+  .l--archive-month-navigation {
+    gap: 3rem;
+  }
 }

@@ -1,6 +1,6 @@
 <section class="l--archive-page l--archive-month" aria-labelledby="archive-month-title">
   <!-- ナビゲーション -->
-  <nav class="l--archive-month-navigation mb-12 flex justify-center gap-12" aria-label="月別アーカイブ間の移動">
+  <nav class="l--archive-month-navigation mb-12" aria-label="月別アーカイブ間の移動">
     <% if @month > 1 %>
       <%= link_to archive_month_path(@year, @month - 1), class: "l--archive-month-navigation__link is--previous" do %>
         <span class="l--archive-month-navigation__icon material-symbols-outlined" aria-hidden="true">chevron_left</span>
@@ -47,7 +47,7 @@
   <% end %>
 
   <!-- ナビゲーション -->
-  <nav class="l--archive-back-navigation mt-8 text-center" aria-label="トップページへ戻る">
+  <nav class="l--archive-back-navigation" aria-label="トップページへ戻る">
     <%= link_to root_path, class: "l--archive-back-navigation__link" do %>
       <span class="l--archive-back-navigation__icon material-symbols-outlined" aria-hidden="true">home</span>
       <span class="l--archive-back-navigation__label">HOME</span>
