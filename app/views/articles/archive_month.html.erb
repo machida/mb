@@ -1,8 +1,4 @@
 <section class="l--archive-page l--archive-month" aria-labelledby="archive-month-title">
-  <header class="l--archive-header mb-8">
-    <h1 id="archive-month-title" class="l--archive-header__title text-3xl font-bold mb-2 spec--archive-month-title"><%= @year %>年<%= @month %>月の記事</h1>
-  </header>
-
   <!-- ナビゲーション -->
   <nav class="l--archive-month-navigation mb-12 flex justify-center gap-12" aria-label="月別アーカイブ間の移動">
     <% if @month > 1 %>
@@ -23,6 +19,10 @@
       <% end %>
     <% end %>
   </nav>
+
+  <header class="l--archive-header mb-8">
+    <h1 id="archive-month-title" class="l--archive-header__title text-3xl font-bold mb-2 spec--archive-month-title"><%= @year %>年<%= @month %>月の記事</h1>
+  </header>
 
   <% unless @articles.empty? %>
     <p class="l--archive-header__count"><%= @articles.count %>件の記事があります</p>
