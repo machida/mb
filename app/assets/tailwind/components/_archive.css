@@ -41,6 +41,11 @@
   margin-top: 3rem;
 }
 
+.l--archive-month > .l--archive-header__count {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
 .l--archive-month-navigation__link {
   display: inline-flex;
   align-items: center;
