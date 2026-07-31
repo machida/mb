@@ -223,7 +223,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
   test "should show archive year" do
     get archive_year_path(@published_article.created_at.year)
     assert_response :success
-    assert_select ".spec--archive-year-title", "#{@published_article.created_at.year}年の記事"
+    assert_select ".spec--archive-year-title", "#{@published_article.created_at.year}年"
     assert_select "section.l--archive-year[aria-labelledby='archive-year-title'] > .l--archive-header"
     assert_select ".l--archive-year > .l--archive-months"
     assert_select ".l--archive-months + .l--archive-header__count", "1件の記事があります"

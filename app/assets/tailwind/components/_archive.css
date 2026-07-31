@@ -96,6 +96,9 @@
   align-items: center;
   gap: 0.25rem;
   color: var(--color-button-primary);
+}
+
+.l--archive-back-navigation__label {
   font-size: 0.875rem;
 }
 
