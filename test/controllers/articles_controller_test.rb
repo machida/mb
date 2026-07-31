@@ -241,7 +241,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".spec--archive-month-title", "#{@published_article.created_at.year}年#{@published_article.created_at.month}月の記事"
     assert_select "section.l--archive-month[aria-labelledby='archive-month-title'] > .l--archive-month-navigation + .l--archive-header"
     assert_select ".l--archive-header + .l--archive-header__count", "1件の記事があります"
-    assert_select ".l--archive-month-navigation__link.is--year[href=?]", archive_year_path(@published_article.created_at.year), text: "#{@published_article.created_at.year}年の一覧"
+    assert_select ".l--archive-month-navigation__link.is--year[href=?]", archive_year_path(@published_article.created_at.year), text: "#{@published_article.created_at.year}年"
     assert_select ".l--archive-month-navigation .a--button", count: 0
     assert_select ".l--breadcrumbs__link[href=?]", archive_year_path(@published_article.created_at.year), text: "#{@published_article.created_at.year}年"
     assert_select ".l--breadcrumbs__item[aria-current='page']", "#{@published_article.created_at.month}月"
