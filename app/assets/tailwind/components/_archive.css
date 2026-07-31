@@ -2,13 +2,13 @@
   text-align: center;
 }
 
+.l--archive-header__title {
+  letter-spacing: 0.08em;
+}
+
 .l--archive-months {
   margin-top: 3rem;
   margin-bottom: 4.25rem;
-}
-
-.l--archive-months__title {
-  margin-bottom: 1.5rem;
 }
 
 .l--archive-months__item:is(a) {
