@@ -41,7 +41,8 @@
   margin-top: 3rem;
 }
 
-.l--archive-month > .l--archive-header__count {
+.l--archive-month > .l--archive-header__count,
+.l--archive-year > .l--archive-header__count {
   margin-bottom: 3rem;
   text-align: center;
 }
