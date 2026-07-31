@@ -5,8 +5,8 @@
   </header>
 
   <!-- 月別ナビゲーション -->
-  <section class="l--archive-months mb-12" aria-labelledby="archive-months-title">
-    <h2 id="archive-months-title" class="l--archive-months__title text-xl font-semibold mb-4">月別アーカイブ</h2>
+  <section class="l--archive-months" aria-labelledby="archive-months-title">
+    <h2 id="archive-months-title" class="l--archive-months__title text-xl font-semibold">月別アーカイブ</h2>
     <div class="l--archive-months__grid grid grid-cols-3 md:grid-cols-6 gap-3">
       <% (1..12).each do |month| %>
         <% count = @monthly_counts[format("%02d", month)] || 0 %>
