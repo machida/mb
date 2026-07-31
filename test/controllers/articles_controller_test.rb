@@ -33,8 +33,9 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     get root_path
     assert_response :success
+    assert_select "html[lang='ja']"
     assert_select "body.l--public-page main.l--public-main"
-    assert_select ".l--articles-page .l--articles-index .l--articles-list"
+    assert_select "section.l--articles-page.l--articles-index[aria-labelledby='articles-index-title'] > .l--articles-list"
     assert_select ".l--footer__inner .l--footer__copyright"
     assert_select ".l--breadcrumbs + .l--footer"
     assert_select ".l--breadcrumbs__item[aria-current='page']", "HOME"
@@ -49,7 +50,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
       end
     end
     assert_select ".l--public-header__inner.is--home", count: 1
-    assert_select ".a--hero.has-background[style*='retro-hawaii-hero']", count: 1
+    assert_select "section.a--hero.has-background[aria-labelledby='main-title'][style*='retro-hawaii-hero']", count: 1
     assert_select ".l--footer small", "© #{Date.current.year} machida"
   end
 
@@ -222,7 +223,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     get archive_year_path(@published_article.created_at.year)
     assert_response :success
     assert_select ".spec--archive-year-title", "#{@published_article.created_at.year}年の記事"
-    assert_select ".l--archive-year > .l--archive-header"
+    assert_select "section.l--archive-year[aria-labelledby='archive-year-title'] > .l--archive-header"
     assert_select ".l--archive-year > .l--archive-months"
     assert_select ".l--breadcrumbs__item[aria-current='page']", "#{@published_article.created_at.year}年"
     assert_select ".l--archive-back-navigation__link[href=?]", root_path do
@@ -235,7 +236,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     get archive_month_path(@published_article.created_at.year, @published_article.created_at.month)
     assert_response :success
     assert_select ".spec--archive-month-title", "#{@published_article.created_at.year}年#{@published_article.created_at.month}月の記事"
-    assert_select ".l--archive-month .l--archive-header + .l--archive-month-navigation"
+    assert_select "section.l--archive-month[aria-labelledby='archive-month-title'] .l--archive-header + .l--archive-month-navigation"
     assert_select ".l--archive-month-navigation__link.is--year[href=?]", archive_year_path(@published_article.created_at.year), text: "#{@published_article.created_at.year}年の一覧"
     assert_select ".l--archive-month-navigation .a--button", count: 0
     assert_select ".l--breadcrumbs__link[href=?]", archive_year_path(@published_article.created_at.year), text: "#{@published_article.created_at.year}年"

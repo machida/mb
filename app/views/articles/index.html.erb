@@ -1,23 +1,21 @@
-<div class="l--articles-page spec--articles-container" role="main">
-  <section class="l--articles-index">
-    <header class="l--articles-index__header sr-only">
-      <h1 class="l--articles-index__title">記事一覧</h1>
-    </header>
+<section class="l--articles-page l--articles-index spec--articles-container" aria-labelledby="articles-index-title">
+  <header class="l--articles-index__header sr-only">
+    <h1 id="articles-index-title" class="l--articles-index__title">記事一覧</h1>
+  </header>
 
-    <div class="l--articles-list">
-      <%= render partial: "article_item", collection: @articles %>
+  <div class="l--articles-list">
+    <%= render partial: "article_item", collection: @articles %>
+  </div>
+
+  <% if @articles.empty? %>
+    <div class="l--articles-index__empty text-center py-12 spec--no-articles">
+      <p class="l--articles-index__empty-message text-gray-500 text-lg spec--no-articles-message">記事がまだありません</p>
     </div>
+  <% end %>
 
-    <% if @articles.empty? %>
-      <div class="l--articles-index__empty text-center py-12 spec--no-articles">
-        <p class="l--articles-index__empty-message text-gray-500 text-lg spec--no-articles-message">記事がまだありません</p>
-      </div>
-    <% end %>
-
-    <% if @articles.respond_to?(:total_pages) && @articles.total_pages > 1 %>
-      <nav class="l--articles-index__pagination mt-8 flex justify-center spec--pagination" aria-label="記事ページネーション">
-        <%= paginate @articles %>
-      </nav>
-    <% end %>
-  </section>
-</div>
+  <% if @articles.respond_to?(:total_pages) && @articles.total_pages > 1 %>
+    <nav class="l--articles-index__pagination mt-8 flex justify-center spec--pagination" aria-label="記事ページネーション">
+      <%= paginate @articles %>
+    </nav>
+  <% end %>
+</section>

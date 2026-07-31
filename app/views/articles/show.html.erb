@@ -73,12 +73,12 @@
 </nav>
 
 <% if current_user_signed_in? %>
-  <div class="l--article-admin-actions mt-4 flex gap-2">
+  <nav class="l--article-admin-actions mt-4 flex gap-2" aria-label="記事管理">
     <%= link_to "編集", edit_admin_article_path(@article), class: "l--article-admin-actions__edit a--button is--md is--secondary" %>
     <%= link_to "削除", admin_article_path(@article), method: :delete,
                 data: { confirm: "この記事を削除しますか？削除すると元に戻せません。" },
                 class: "l--article-admin-actions__delete a--button is--md is--border-danger spec--delete-article-button" %>
-  </div>
+  </nav>
 <% end %>
   </article>
 

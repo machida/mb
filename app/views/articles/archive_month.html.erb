@@ -1,6 +1,6 @@
-<div class="l--archive-page l--archive-month">
+<section class="l--archive-page l--archive-month" aria-labelledby="archive-month-title">
   <header class="l--archive-header mb-8">
-    <h1 class="l--archive-header__title text-3xl font-bold mb-2 spec--archive-month-title"><%= @year %>年<%= @month %>月の記事</h1>
+    <h1 id="archive-month-title" class="l--archive-header__title text-3xl font-bold mb-2 spec--archive-month-title"><%= @year %>年<%= @month %>月の記事</h1>
     <% unless @articles.empty? %>
       <p class="l--archive-header__count"><%= @articles.count %>件の記事があります</p>
     <% end %>
@@ -28,9 +28,9 @@
   </nav>
 
   <!-- 記事一覧 -->
-  <div class="l--articles-list">
+  <section class="l--articles-list" aria-label="<%= @year %>年<%= @month %>月の記事一覧">
     <%= render partial: "article_item", collection: @articles %>
-  </div>
+  </section>
 
   <% if @articles.empty? %>
     <div class="l--archive-empty text-center py-12">
@@ -39,9 +39,11 @@
   <% end %>
 
   <!-- Pagination -->
-  <div class="l--archive-pagination mt-8 flex justify-center spec--pagination">
-    <%= paginate @articles %>
-  </div>
+  <% if @articles.respond_to?(:total_pages) && @articles.total_pages > 1 %>
+    <nav class="l--archive-pagination mt-8 flex justify-center spec--pagination" aria-label="記事ページネーション">
+      <%= paginate @articles %>
+    </nav>
+  <% end %>
 
   <!-- ナビゲーション -->
   <nav class="l--archive-back-navigation mt-8 text-center" aria-label="トップページへ戻る">
@@ -50,4 +52,4 @@
       <span class="l--archive-back-navigation__label">HOME</span>
     <% end %>
   </nav>
-</div>
+</section>
