@@ -1,7 +1,9 @@
 <div class="l--archive-page l--archive-month">
   <header class="l--archive-header mb-8">
     <h1 class="l--archive-header__title text-3xl font-bold mb-2 spec--archive-month-title"><%= @year %>年<%= @month %>月の記事</h1>
-    <p class="l--archive-header__count"><%= @articles.count %>件の記事があります</p>
+    <% unless @articles.empty? %>
+      <p class="l--archive-header__count"><%= @articles.count %>件の記事があります</p>
+    <% end %>
   </header>
 
   <!-- ナビゲーション -->

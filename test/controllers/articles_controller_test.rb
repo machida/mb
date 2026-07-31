@@ -244,6 +244,18 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "should hide article count on empty archives" do
+    empty_year = @published_article.created_at.year - 1
+
+    get archive_year_path(empty_year)
+    assert_response :success
+    assert_select ".l--archive-header__count", count: 0
+
+    get archive_month_path(empty_year, 1)
+    assert_response :success
+    assert_select ".l--archive-header__count", count: 0
+  end
+
   test "archive should only show published articles" do
     get archive_year_path(@published_article.created_at.year)
     assert_response :success
