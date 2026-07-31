@@ -32,8 +32,10 @@
 .l--article-main .a--long-text h4 { font-size: 1.125rem; }
 .l--article-main .a--long-text h5 { font-size: 1rem; }
 .l--article-main .a--long-text h6 { color: var(--public-ink-muted); font-size: 0.875rem; }
-.l--article-navigation { display: grid; grid-template-columns: 1fr 1fr; margin-top: 7rem; }
-.l--article-navigation__next { text-align: right; }
+.l--article-navigation { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; margin-top: 7rem; }
+.l--article-navigation__previous { grid-column: 1; }
+.l--article-navigation__home { grid-column: 2; justify-self: center; }
+.l--article-navigation__next { grid-column: 3; text-align: right; }
 .l--article-navigation__link { display: inline-flex; align-items: center; gap: 0.125rem; font-size: 0.78rem; font-weight: 700; line-height: 2; }
 .l--article-navigation__icon { font-size: 1.25rem; line-height: 1; }
 .l--article-admin-actions__edit,

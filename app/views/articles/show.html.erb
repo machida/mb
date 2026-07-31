@@ -52,7 +52,7 @@
     <%= markdown(@article.body) %>
   </div>
 
-<nav class="l--article-navigation" aria-label="前後の記事">
+<nav class="l--article-navigation" aria-label="記事ナビゲーション">
   <div class="l--article-navigation__previous">
     <% if @previous_article.present? %>
       <%= link_to article_path(@previous_article), class: "l--article-navigation__link spec--previous-article-link", aria: { label: "前の記事" } do %>
@@ -61,7 +61,7 @@
       <% end %>
     <% end %>
   </div>
-  <%= link_to "NOTE", root_path, class: "sr-only spec--back-to-articles-link" %>
+  <%= link_to "HOME", root_path, class: "l--article-navigation__home l--article-navigation__link spec--back-to-articles-link" %>
   <div class="l--article-navigation__next">
     <% if @next_article.present? %>
       <%= link_to article_path(@next_article), class: "l--article-navigation__link spec--next-article-link", aria: { label: "次の記事" } do %>

@@ -127,6 +127,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
       assert_select ".l--article-navigation__label", "NEXT"
       assert_select ".l--article-navigation__icon", "chevron_right"
     end
+    assert_select ".spec--back-to-articles-link.l--article-navigation__home[href=?]", root_path, text: "HOME"
   end
 
   test "should hide previous article link on newest article" do
