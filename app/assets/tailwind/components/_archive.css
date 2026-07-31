@@ -42,6 +42,10 @@
   line-height: 1.25rem;
 }
 
+.l--archive-months__count {
+  font-size: 0.75rem;
+}
+
 .l--archive-month > .l--archive-header__count,
 .l--archive-year > .l--archive-header__count {
   margin-bottom: 3rem;

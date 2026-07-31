@@ -12,12 +12,12 @@
         <% if count > 0 && !month_in_future %>
           <%= link_to archive_month_path(@year, month), class: "l--archive-months__item flex-col text-center" do %>
             <%= month %>月<br>
-            <span class="l--archive-months__count text-sm">(<%= count %>)</span>
+            <span class="l--archive-months__count">(<%= count %>)</span>
           <% end %>
         <% else %>
           <div class="l--archive-months__item<%= " is--empty" if count.zero? %><%= " is--future" if month_in_future %> flex flex-col bg-gray-200 text-gray-500 px-3 py-2 rounded text-center">
             <%= month %>月<br>
-            <span class="l--archive-months__count text-sm">(<%= count %>)</span>
+            <span class="l--archive-months__count">(<%= count %>)</span>
           </div>
         <% end %>
       <% end %>
