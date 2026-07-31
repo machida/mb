@@ -48,17 +48,6 @@
   font-size: 0.75rem;
 }
 
-.l--archive-header__count {
-  font-size: 1.125rem;
-  font-weight: 700;
-}
-
-.l--archive-month > .l--archive-header__count,
-.l--archive-year > .l--archive-header__count {
-  margin-bottom: 3rem;
-  text-align: center;
-}
-
 .l--archive-month-navigation {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);

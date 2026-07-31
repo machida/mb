@@ -24,10 +24,6 @@
     </div>
   </section>
 
-  <% unless @articles.empty? %>
-    <p class="l--archive-header__count"><%= @articles.count %>件の記事があります</p>
-  <% end %>
-
   <!-- 記事一覧 -->
   <section class="l--articles-list" aria-label="<%= @year %>年の記事一覧">
     <%= render partial: "article_item", collection: @articles %>
