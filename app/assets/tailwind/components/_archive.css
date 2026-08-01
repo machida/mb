@@ -38,8 +38,6 @@
 }
 
 .l--archive-months__item:not(a) {
-  background-color: #e6e6e6;
-  color: var(--public-ink);
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
