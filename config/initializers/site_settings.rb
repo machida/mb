@@ -2,27 +2,19 @@
 Rails.application.configure do
   # デフォルト値の設定
   config.site_settings_defaults = {
-    site_title: "マチダのブログ",
     top_page_description: "プログラミングと日常の雑記ブログ",
-    copyright: "マチダのブログ",
-    default_og_image: "",
-    hero_background_image: "",
-    hero_text_color: "white"
+    default_og_image: ""
   }
 
   # 環境別設定
   case Rails.env
   when 'test'
     config.site_settings_defaults.merge!(
-      site_title: "テストブログ",
-      top_page_description: "テスト環境の説明",
-      copyright: "テストブログ"
+      top_page_description: "テスト環境の説明"
     )
   when 'development'
     config.site_settings_defaults.merge!(
-      site_title: "開発環境 - マチダのブログ",
-      top_page_description: "開発環境での動作確認用",
-      copyright: "開発環境"
+      top_page_description: "開発環境での動作確認用"
     )
   when 'production'
     # 本番環境では設定値をそのまま使用

@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="ja">
   <head>
-    <title><%= content_for(:title) || SiteSetting.site_title %></title>
+    <title><%= content_for(:title) || "マチダのブログ" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="description" content="<%= content_for(:description) || SiteSetting.top_page_description %>">
-    <meta property="og:title" content="<%= content_for(:title) || SiteSetting.site_title %>">
+    <meta property="og:title" content="<%= content_for(:title) || "マチダのブログ" %>">
     <meta property="og:description" content="<%= content_for(:description) || SiteSetting.top_page_description %>">
-    <meta property="og:site_name" content="<%= SiteSetting.site_title %>">
+    <meta property="og:site_name" content="マチダのブログ">
     <% default_og_image_url = SiteSetting.default_og_image_url %>
     <% if default_og_image_url.present? %>
       <meta property="og:image" content="<%= default_og_image_url %>">

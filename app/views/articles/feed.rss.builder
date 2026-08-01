@@ -1,7 +1,7 @@
 xml.instruct! :xml, version: "1.0"
 xml.rss version: "2.0", "xmlns:atom" => "http://www.w3.org/2005/Atom" do
   xml.channel do
-    xml.title SiteSetting.site_title
+    xml.title "マチダのブログ"
     xml.description SiteSetting.top_page_description
     xml.link root_url
     xml.language "ja"
@@ -15,7 +15,7 @@ xml.rss version: "2.0", "xmlns:atom" => "http://www.w3.org/2005/Atom" do
         xml.link article_url(article)
         xml.guid article_url(article), isPermaLink: "true"
         xml.pubDate article.created_at.rfc822
-        xml.author "#{SiteSetting.site_title}"
+        xml.author "マチダのブログ"
 
         # 記事にサムネイル画像がある場合は画像も含める
         if article.thumbnail.present?

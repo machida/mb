@@ -29,12 +29,8 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
     SiteSetting.delete_all
     
     # Reset default settings
-    SiteSetting.create!(name: "site_title", value: "マチダのブログ")
-    SiteSetting.create!(name: "copyright", value: "MB")
     SiteSetting.create!(name: "top_page_description", value: "ブログへようこそ。技術やライフスタイルについて書いています。")
     SiteSetting.create!(name: "default_og_image", value: "https://example.com/default-og-image.jpg")
-    SiteSetting.create!(name: "hero_background_image", value: "")
-    SiteSetting.create!(name: "hero_text_color", value: "white")
     
     # Clear cache
     Rails.cache.clear
@@ -239,20 +235,6 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
     create_article(attributes.merge(draft: false))
   end
 
-  # Helper method to get current copyright value with proper cache clearing
-  def get_current_copyright
-    # Force a new database connection and bypass all caching
-    ActiveRecord::Base.connection.clear_query_cache
-    Rails.cache.clear
-    
-    # Direct database query without any caching - using parameterized query for security
-    ActiveRecord::Base.connection.exec_query(
-      "SELECT value FROM site_settings WHERE name = ?",
-      "SQL",
-      ["copyright"]
-    ).first&.fetch("value") || "MB"
-  end
-  
   private
   
   def find_available_port

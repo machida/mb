@@ -9,7 +9,7 @@
   <meta property="og:url" content="<%= request.original_url %>">
   <meta property="og:type" content="article">
   <meta property="og:title" content="<%= @article.title %>">
-  <meta property="og:site_name" content="<%= SiteSetting.site_title %>">
+  <meta property="og:site_name" content="マチダのブログ">
   <% og_image_url = @article.og_image_url %>
   <% if og_image_url.present? %>
     <meta property="og:image" content="<%= og_image_url %>">

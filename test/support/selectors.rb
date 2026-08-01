@@ -30,10 +30,8 @@ module TestSelectors
   PASSWORD_CHANGE_LINK = ".spec--password-change-link"
 
   # Site Settings
-  SITE_TITLE_INPUT = ".spec--site-title-input"
   DEFAULT_OG_IMAGE_INPUT = ".spec--default-og-image-input"
   TOP_PAGE_DESCRIPTION_INPUT = ".spec--top-page-description-input"
-  COPYRIGHT_INPUT = ".spec--copyright-input"
 
   # Content Areas
   MAIN_TITLE = ".spec--main-title"
