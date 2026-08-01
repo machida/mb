@@ -1,7 +1,7 @@
 # リポジトリガイドライン
 
 ## プロジェクト概要
-- マチダのブログ (Rails 8.0.3 / Ruby 3.4.5 / Node.js 22) で、MiniTest + Playwright によるE2Eで品質を担保します。
+- マチダのブログ (Rails 8.1.3.1 / Ruby 3.4.5 / Node.js 22) で、MiniTest + Playwright によるE2Eで品質を担保します。
 - ブラウザUIは Tailwind CSS + Stimulus + Turbo、アップロードは開発で `public/uploads/images`、本番で Google Cloud Storage を使用します。
 - 既定の管理者は `admin@example.com` (`admin123`) なので、新環境ごとに必ずパスワードを変更し安全な保管場所(1Password等)に記録してください。
 
