@@ -16,7 +16,7 @@
         <% if count > 0 && !month_in_future %>
           <%= link_to month_content, archive_month_path(@year, month), class: "l--archive-months__item" %>
         <% else %>
-          <div class="l--archive-months__item<%= " is--empty" if count.zero? %><%= " is--future" if month_in_future %> rounded">
+          <div class="l--archive-months__item<%= " is--empty" if count.zero? %><%= " is--future" if month_in_future %>">
             <%= month_content %>
           </div>
         <% end %>
