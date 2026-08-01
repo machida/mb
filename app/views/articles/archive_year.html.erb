@@ -1,11 +1,11 @@
 <section class="l--archive-page l--archive-year" aria-labelledby="archive-year-title">
   <header class="l--archive-header">
-    <h1 id="archive-year-title" class="l--archive-header__title text-3xl font-bold mb-2 spec--archive-year-title"><%= @year %>年</h1>
+    <h1 id="archive-year-title" class="l--archive-header__title spec--archive-year-title"><%= @year %>年</h1>
   </header>
 
   <!-- 月別ナビゲーション -->
   <section class="l--archive-months" aria-label="月別アーカイブ">
-    <div class="l--archive-months__grid grid grid-cols-3 md:grid-cols-6 gap-3">
+    <div class="l--archive-months__grid">
       <% (1..12).each do |month| %>
         <% count = @monthly_counts[format("%02d", month)] || 0 %>
         <% month_in_future = Date.new(@year, month, 1) > Date.current.beginning_of_month %>
@@ -30,14 +30,14 @@
   </section>
 
   <% if @articles.empty? %>
-    <div class="l--archive-empty text-center py-12">
-      <p class="l--archive-empty__message text-gray-500 text-lg"><%= @year %>年の記事はまだありません</p>
+    <div class="l--archive-empty">
+      <p class="l--archive-empty__message"><%= @year %>年の記事はまだありません</p>
     </div>
   <% end %>
 
   <!-- Pagination -->
   <% if @articles.respond_to?(:total_pages) && @articles.total_pages > 1 %>
-    <nav class="l--archive-pagination mt-8 flex justify-center spec--pagination" aria-label="記事ページネーション">
+    <nav class="l--archive-pagination spec--pagination" aria-label="記事ページネーション">
       <%= paginate @articles %>
     </nav>
   <% end %>

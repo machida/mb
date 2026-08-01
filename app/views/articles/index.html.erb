@@ -8,13 +8,13 @@
   </div>
 
   <% if @articles.empty? %>
-    <div class="l--articles-index__empty text-center py-12 spec--no-articles">
-      <p class="l--articles-index__empty-message text-gray-500 text-lg spec--no-articles-message">記事がまだありません</p>
+    <div class="l--articles-index__empty spec--no-articles">
+      <p class="l--articles-index__empty-message spec--no-articles-message">記事がまだありません</p>
     </div>
   <% end %>
 
   <% if @articles.respond_to?(:total_pages) && @articles.total_pages > 1 %>
-    <nav class="l--articles-index__pagination mt-8 flex justify-center spec--pagination" aria-label="記事ページネーション">
+    <nav class="l--articles-index__pagination spec--pagination" aria-label="記事ページネーション">
       <%= paginate @articles %>
     </nav>
   <% end %>

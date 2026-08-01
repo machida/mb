@@ -39,12 +39,12 @@
   </header>
 
   <% if @article.draft? %>
-    <aside class="l--article-draft-notice a--card is--warning spec--draft-notice mb-6">
-      <h2 class="l--article-draft-notice__title flex items-center gap-1 text-lg font-semibold mb-2">
-        <span class="l--article-draft-notice__icon material-symbols-outlined text-amber-600" style="font-size: 1.25rem;">warning</span>
+    <aside class="l--article-draft-notice a--card is--warning spec--draft-notice">
+      <h2 class="l--article-draft-notice__title">
+        <span class="l--article-draft-notice__icon material-symbols-outlined">warning</span>
         この記事は下書きです
       </h2>
-      <p class="l--article-draft-notice__message text-sm">この記事は現在下書き状態で、一般には公開されていません。</p>
+      <p class="l--article-draft-notice__message">この記事は現在下書き状態で、一般には公開されていません。</p>
     </aside>
   <% end %>
 
@@ -73,7 +73,7 @@
 </nav>
 
 <% if current_user_signed_in? %>
-  <nav class="l--article-admin-actions mt-4 flex gap-2" aria-label="記事管理">
+  <nav class="l--article-admin-actions" aria-label="記事管理">
     <%= link_to "編集", edit_admin_article_path(@article), class: "l--article-admin-actions__edit" %>
     <%= link_to "削除", admin_article_path(@article), method: :delete,
                 data: { confirm: "この記事を削除しますか？削除すると元に戻せません。" },

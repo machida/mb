@@ -8,6 +8,22 @@
   padding-block: 0;
 }
 
+.l--articles-index__empty {
+  padding-block: 3rem;
+  text-align: center;
+}
+
+.l--articles-index__empty-message {
+  color: var(--public-ink-muted);
+  font-size: 1.125rem;
+}
+
+.l--articles-index__pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
 .l--article-item { display: grid; grid-template-columns: 7rem 12rem minmax(0, 1fr); gap: 1.75rem; align-items: start; }
 .l--article-item__date { padding-top: 0.7rem; font-size: 1rem; font-weight: 700; }
 .l--article-item__image { display: block; position: relative; aspect-ratio: 1.91 / 1; overflow: hidden; background: #d8d9d5; }

@@ -31,12 +31,12 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="l--public-page min-h-screen flex flex-col layout-public">
+  <body class="l--public-page layout-public">
     <%= render "public/header" %>
     <%= render "public/hero" if controller_name == "articles" && action_name == "index" %>
 
     <div class="l--public-body">
-      <main class="l--public-main flex-1 l--container is--md">
+      <main class="l--public-main l--container is--md">
         <%= yield %>
       </main>
     </div>
@@ -45,7 +45,7 @@
     <%= render "public/footer" %>
 
     <!-- Toast Container -->
-    <div id="toast-container" class="l--toast-container fixed top-4 right-4 z-50 flex flex-col gap-2 js--toast-container" role="status" aria-live="polite" aria-atomic="true">
+    <div id="toast-container" class="l--toast-container js--toast-container" role="status" aria-live="polite" aria-atomic="true">
       <%= render "shared/toasts" %>
     </div>
   </body>

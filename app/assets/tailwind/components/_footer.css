@@ -12,8 +12,11 @@
 
 .l--footer__inner {
   position: relative;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
 }
 
 .l--footer__copyright {
@@ -22,8 +25,16 @@
 }
 
 @media (min-width: 48rem) {
+  .l--footer__inner {
+    flex-direction: row;
+  }
+
   .l--footer__navigation {
     position: absolute;
-    right: 0;
+    inset-inline-end: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
   }
 }

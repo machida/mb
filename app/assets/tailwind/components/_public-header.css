@@ -8,10 +8,10 @@
   align-items: center;
   min-height: 7.5rem;
   border-bottom: 0.0625rem solid var(--public-line);
-}
 
-.l--public-header__inner.is--home {
-  border-bottom: 0;
+  &.is--home {
+    border-bottom: 0;
+  }
 }
 
 .l--public-header__brand { position: absolute; left: 50%; transform: translateX(-50%); font-family: "Elms Sans", sans-serif; font-size: 1.35rem; font-weight: 500; letter-spacing: 0.35em; }

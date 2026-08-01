@@ -1,6 +1,6 @@
 <section class="l--archive-page l--archive-month" aria-labelledby="archive-month-title">
   <!-- ナビゲーション -->
-  <nav class="l--archive-month-navigation mb-12" aria-label="月別アーカイブ間の移動">
+  <nav class="l--archive-month-navigation" aria-label="月別アーカイブ間の移動">
     <% if @month > 1 %>
       <%= link_to archive_month_path(@year, @month - 1), class: "l--archive-month-navigation__link is--previous" do %>
         <span class="l--archive-month-navigation__icon material-symbols-outlined" aria-hidden="true">chevron_left</span>
@@ -21,7 +21,7 @@
   </nav>
 
   <header class="l--archive-header">
-    <h1 id="archive-month-title" class="l--archive-header__title text-3xl font-bold mb-2 spec--archive-month-title"><%= @year %>年<%= @month %>月</h1>
+    <h1 id="archive-month-title" class="l--archive-header__title spec--archive-month-title"><%= @year %>年<%= @month %>月</h1>
   </header>
 
   <!-- 記事一覧 -->
@@ -30,14 +30,14 @@
   </section>
 
   <% if @articles.empty? %>
-    <div class="l--archive-empty text-center py-12">
-      <p class="l--archive-empty__message text-lg"><%= @year %>年<%= @month %>月の記事はありません</p>
+    <div class="l--archive-empty">
+      <p class="l--archive-empty__message"><%= @year %>年<%= @month %>月の記事はありません</p>
     </div>
   <% end %>
 
   <!-- Pagination -->
   <% if @articles.respond_to?(:total_pages) && @articles.total_pages > 1 %>
-    <nav class="l--archive-pagination mt-8 flex justify-center spec--pagination" aria-label="記事ページネーション">
+    <nav class="l--archive-pagination spec--pagination" aria-label="記事ページネーション">
       <%= paginate @articles %>
     </nav>
   <% end %>
