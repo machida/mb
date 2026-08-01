@@ -226,6 +226,11 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".spec--archive-year-title", "#{@published_article.created_at.year}年"
     assert_select "section.l--archive-year[aria-labelledby='archive-year-title'] > .l--archive-header"
     assert_select ".l--archive-year > .l--archive-months"
+    assert_select ".l--archive-months__item" do
+      assert_select "> .l--archive-months__month", count: 12
+      assert_select "> .l--archive-months__count", count: 12
+      assert_select "br", count: 0
+    end
     assert_select ".l--archive-header__count", count: 0
     assert_select ".l--archive-year .a--button", count: 0
     assert_select ".l--breadcrumbs__item[aria-current='page']", "#{@published_article.created_at.year}年"
