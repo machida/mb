@@ -1,6 +1,7 @@
 require "test_helper"
 require "playwright"
 require "socket"
+require "timeout"
 require_relative "support/selectors"
 
 # Custom exception for Playwright setup failures
@@ -37,6 +38,10 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
     
     setup_rails_server
     setup_playwright
+  rescue
+    teardown_playwright
+    teardown_rails_server
+    raise
   end
 
   def teardown
@@ -71,6 +76,8 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
       end
       @context = @browser.new_context
       @page = @context.new_page
+      @page.set_default_timeout(10_000)
+      @page.set_default_navigation_timeout(15_000)
       
       Rails.logger.info "Playwright setup completed successfully"
       
@@ -113,7 +120,7 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
     end
     
     begin
-      @context&.close  
+      @context&.close
     rescue => e
       Rails.logger.debug "Error closing Playwright context: #{e.message}"
     end
@@ -144,11 +151,13 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
     # In CI environment, use different server setup
     if ENV['CI'] || ENV['GITHUB_ACTIONS']
       # Use a different approach for CI with more verbose logging
-      @server_pid = spawn("rails", "server", "-p", @server_port.to_s, "-e", "test")
+      @server_pid = spawn("bin/rails", "server", "-p", @server_port.to_s, "-e", "test", pgroup: true)
       wait_for_server_ready(timeout: 60) # Longer timeout for CI
     else
-      @server_pid = spawn("rails", "server", "-p", @server_port.to_s, "-e", "test", 
-                          out: "/dev/null", err: "/dev/null")
+      @server_pid = spawn(
+        "bin/rails", "server", "-p", @server_port.to_s, "-e", "test",
+        pgroup: true, out: "/dev/null", err: "/dev/null"
+      )
       wait_for_server_ready
     end
   end
@@ -156,12 +165,17 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
   def teardown_rails_server
     if @server_pid
       begin
-        Process.kill("TERM", @server_pid)
+        Process.kill("TERM", -@server_pid)
+        Timeout.timeout(5) { Process.wait(@server_pid) }
+      rescue Timeout::Error
+        Process.kill("KILL", -@server_pid)
         Process.wait(@server_pid)
       rescue Errno::ESRCH
         # Process already dead
       rescue => e
         Rails.logger.debug "Error terminating Rails server: #{e.message}"
+      ensure
+        @server_pid = nil
       end
     end
   end
