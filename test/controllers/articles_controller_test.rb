@@ -40,7 +40,9 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".l--breadcrumbs + .l--footer"
     assert_select ".l--breadcrumbs__item[aria-current='page']", "HOME"
     assert_select ".spec--main-title", "マチダのブログ"
-    assert_select ".l--public-header__brand a[href=?]", root_path, text: "machida"
+    assert_select ".l--public-header__brand a[href=?][aria-label='machida']", root_path do
+      assert_select "img.l--public-header__logo[src*='machida-logo'][alt='']"
+    end
     assert_select ".l--public-header__links" do
       assert_select ".l--public-header__nav:nth-child(1)[aria-label='ABOUT']" do
         assert_select ".l--public-header__icon", "person"
@@ -66,7 +68,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     
     # Check that only one article is shown (the published one)
     assert_select ".spec--article-item", count: 1
-    assert_select ".spec--article-thumbnail-link[href=?]", article_path(@published_article), count: 1
+    assert_select ".spec--article-item[href=?]", article_path(@published_article), count: 1
     assert_select ".spec--article-thumbnail-link .l--article-item__image-original", count: 1
     assert_select ".spec--article-thumbnail-link .l--article-item__image-sepia", count: 1
     assert_select ".l--article-item__more", count: 0
