@@ -1,28 +1,32 @@
-<article class="<%= local_assigns[:css_class] || "spec--article-item" %> l--article-item">
-  <time class="l--article-item__date spec--article-date" datetime="<%= article_item.created_at.iso8601 %>">
-    <%= article_item.created_at.strftime("%Y-%m-%d") %>
-  </time>
-  <%= link_to article_path(article_item), class: "l--article-item__image spec--article-thumbnail-link", aria: { label: article_item.title } do %>
-    <% if article_item.thumbnail.present? %>
-      <%= image_tag article_item.thumbnail, alt: "", loading: "lazy", class: "l--article-item__image-original" %>
-      <span class="l--article-item__image-sepia" aria-hidden="true">
-        <%= image_tag article_item.thumbnail, alt: "", loading: "lazy" %>
-      </span>
-    <% else %>
-      <span aria-hidden="true"></span>
-    <% end %>
-  <% end %>
-  <div class="l--article-item__body">
-    <header class="l--article-item__header">
-      <h2 class="l--article-item__title <%= local_assigns[:title_class] || "a--heading is--xl" %> spec--article-title">
-        <%= link_to article_item.title, article_path(article_item) %>
-      </h2>
-      <% if show_author_info? %>
-        <span class="l--article-item__author spec--article-author">著者: <%= article_item.author %></span>
+<article>
+  <%= link_to article_path(article_item),
+              class: [local_assigns[:css_class] || "spec--article-item", "l--article-item"],
+              aria: { label: article_item.title } do %>
+    <time class="l--article-item__date spec--article-date" datetime="<%= article_item.created_at.iso8601 %>">
+      <%= article_item.created_at.strftime("%Y-%m-%d") %>
+    </time>
+    <span class="l--article-item__image spec--article-thumbnail-link">
+      <% if article_item.thumbnail.present? %>
+        <%= image_tag article_item.thumbnail, alt: "", loading: "lazy", class: "l--article-item__image-original" %>
+        <span class="l--article-item__image-sepia" aria-hidden="true">
+          <%= image_tag article_item.thumbnail, alt: "", loading: "lazy" %>
+        </span>
+      <% else %>
+        <span aria-hidden="true"></span>
       <% end %>
-    </header>
-    <% if article_item.summary.present? %>
-      <p class="l--article-item__summary spec--article-summary"><%= article_item.summary %></p>
-    <% end %>
-  </div>
+    </span>
+    <div class="l--article-item__body">
+      <header class="l--article-item__header">
+        <h2 class="l--article-item__title <%= local_assigns[:title_class] || "a--heading is--xl" %> spec--article-title">
+          <%= article_item.title %>
+        </h2>
+        <% if show_author_info? %>
+          <span class="l--article-item__author spec--article-author">著者: <%= article_item.author %></span>
+        <% end %>
+      </header>
+      <% if article_item.summary.present? %>
+        <p class="l--article-item__summary spec--article-summary"><%= article_item.summary %></p>
+      <% end %>
+    </div>
+  <% end %>
 </article>

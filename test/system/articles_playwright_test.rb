@@ -42,14 +42,15 @@ class ArticlesPlaywrightTest < ApplicationPlaywrightTestCase
     # Check article count (only published articles should appear)
     article_items = @page.query_selector_all(".spec--article-item")
     assert_equal 1, article_items.count
+    assert_equal "/article/#{@published_article.id}", article_items.first.get_attribute("href")
     
     # Check published article appears
-    published_link = @page.query_selector(".spec--article-title a")
+    published_link = @page.query_selector(".spec--article-title")
     assert published_link, "Published article link should exist"
     assert_includes published_link.inner_text, @published_article.title
 
     # Check draft article does not appear
-    draft_links = @page.query_selector_all(".spec--article-title a")
+    draft_links = @page.query_selector_all(".spec--article-title")
     draft_titles = draft_links.map(&:inner_text)
     assert_not_includes draft_titles, @draft_article.title
   end
@@ -224,7 +225,7 @@ class ArticlesPlaywrightTest < ApplicationPlaywrightTestCase
     assert_equal 1, articles.count
     
     # Click on month archive
-    @page.click("a:has-text('#{month}月')")
+    @page.click("a.l--archive-months__item:has-text('#{month}月')")
     
     @page.wait_for_load_state(state: 'networkidle')
     
