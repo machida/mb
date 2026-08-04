@@ -41,7 +41,8 @@
 .l--article-navigation__home { grid-column: 2; justify-self: center; }
 .l--article-navigation__next { grid-column: 3; text-align: right; }
 .l--article-navigation__link { display: inline-flex; align-items: center; gap: 0.125rem; font-size: 0.78rem; font-weight: 700; line-height: 2; }
-.l--article-navigation__next .l--article-navigation__link:hover { text-decoration: underline; text-underline-offset: 0.25rem; }
+.l--article-navigation__link:hover .l--article-navigation__label,
+.l--article-navigation__home:hover { text-decoration: underline; text-underline-offset: 0.25rem; }
 .l--article-navigation__icon { font-size: 1.25rem; line-height: 1; }
 .l--article-admin-actions { display: flex; gap: 0.5rem; margin-top: 1rem; }
 .l--article-admin-actions__edit,
