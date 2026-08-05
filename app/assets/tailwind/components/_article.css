@@ -6,7 +6,7 @@
 }
 
 .l--article-page { position: relative; max-width: 44rem; margin-inline: auto; }
-.l--article-author-profile { position: absolute; top: 3rem; right: calc(100% + 2.5rem); width: 10.5rem; color: var(--public-ink-muted); }
+.l--article-author-profile { position: absolute; top: 3rem; right: calc(50% + 24.5rem); width: 10.5rem; color: var(--public-ink-muted); }
 .l--article-author-profile__name { color: var(--public-ink); font-size: 1rem; font-weight: 700; letter-spacing: 0.08em; }
 .l--article-author-profile__description { margin-top: 0.75rem; font-size: 0.75rem; line-height: 1.8; letter-spacing: 0.04em; }
 .l--article-author-profile__link { display: inline-block; margin-top: 1rem; color: var(--public-ink); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; }
@@ -67,6 +67,6 @@
 }
 
 @media (max-width: 74.9375rem) {
-  .l--article-author-profile { position: static; width: auto; margin-bottom: 2rem; padding-inline: 0.25rem; }
+  .l--article-author-profile { position: static; width: auto; margin-top: 2rem; padding-inline: 0.25rem; }
   .l--article-author-profile__description { max-width: 24rem; }
 }

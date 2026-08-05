@@ -82,7 +82,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".spec--article-title", @published_article.title
     assert_select ".spec--article-content"
     assert_select ".l--article-page .l--article-main .l--article-header__title"
-    assert_select ".l--article-page > .l--article-author-profile" do
+    assert_select ".l--public-main + .l--article-author-profile" do
       assert_select ".l--article-author-profile__name", "machida"
       assert_select ".l--article-author-profile__link[href=?]", about_path, text: "ABOUT"
     end
