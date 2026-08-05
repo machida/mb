@@ -17,6 +17,5 @@
 .l--public-header__brand { position: absolute; left: 50%; transform: translateX(-50%); }
 .l--public-header__logo { display: block; width: 8.5rem; height: auto; }
 .l--public-header__links { display: flex; align-items: center; gap: 1.5rem; margin-left: auto; }
-.l--public-header__nav { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; }
 .l--public-header__icon { display: block; font-size: 1.5rem; line-height: 1; letter-spacing: 0; }
 .l--public-header a:hover { opacity: 0.55; }
