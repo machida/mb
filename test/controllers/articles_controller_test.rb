@@ -34,7 +34,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     get root_path
     assert_response :success
     assert_select "html[lang='ja']"
-    assert_select "body.l--public-page .l--public-body > .l--public-body__inner.l--container.is--xl > main.l--public-main"
+    assert_select "body.l--public-page .l--public-body > .l--container.is--xl > .l--public-body__inner > main.l--public-main"
     assert_select "section.l--articles-page.l--articles-index[aria-labelledby='articles-index-title'] > .l--articles-list"
     assert_select ".l--footer__inner .l--footer__copyright"
     assert_select ".l--breadcrumbs + .l--footer"

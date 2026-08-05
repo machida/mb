@@ -16,6 +16,7 @@
 
 .l--public-header__brand { position: absolute; left: 50%; transform: translateX(-50%); }
 .l--public-header__logo { display: block; width: 8.5rem; height: auto; }
-.l--public-header__links { display: flex; align-items: center; gap: 1.5rem; margin-left: auto; }
+.l--public-header__links { display: flex; align-items: center; gap: 2rem; margin-left: auto; }
+.l--public-header__nav { display: flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; margin: -0.625rem; }
 .l--public-header__icon { display: block; font-size: 1.5rem; line-height: 1; letter-spacing: 0; }
 .l--public-header a:hover { opacity: 0.55; }
