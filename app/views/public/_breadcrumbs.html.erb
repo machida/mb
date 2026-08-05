@@ -10,6 +10,8 @@
 
         <% if controller_name == "articles" && action_name == "show" %>
           <li class="l--breadcrumbs__item" aria-current="page"><%= @article.title %></li>
+        <% elsif controller_name == "pages" && action_name == "about" %>
+          <li class="l--breadcrumbs__item" aria-current="page">ABOUT</li>
         <% elsif controller_name == "articles" && action_name == "archive_year" %>
           <li class="l--breadcrumbs__item" aria-current="page"><%= @year %>年</li>
         <% elsif controller_name == "articles" && action_name == "archive_month" %>

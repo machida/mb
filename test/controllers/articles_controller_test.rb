@@ -44,7 +44,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
       assert_select "img.l--public-header__logo[src*='machida-logo'][alt='']"
     end
     assert_select ".l--public-header__links" do
-      assert_select ".l--public-header__nav:nth-child(1)[aria-label='ABOUT']" do
+      assert_select ".l--public-header__nav:nth-child(1)[href=?][aria-label='ABOUT']", about_path do
         assert_select ".l--public-header__icon", "person"
       end
       assert_select ".l--public-header__nav:nth-child(2)[aria-label='ARCHIVE']" do
@@ -82,6 +82,10 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".spec--article-title", @published_article.title
     assert_select ".spec--article-content"
     assert_select ".l--article-page .l--article-main .l--article-header__title"
+    assert_select ".l--article-page > .l--article-author-profile" do
+      assert_select ".l--article-author-profile__name", "machida"
+      assert_select ".l--article-author-profile__link[href=?]", about_path, text: "ABOUT"
+    end
     assert_select ".l--article-header__meta", count: 0
     assert_select ".l--breadcrumbs__item[aria-current='page']", @published_article.title
     assert_select ".l--article-main > .l--article-main__image:first-child", count: 1

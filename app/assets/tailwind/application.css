@@ -12,6 +12,7 @@
 /* Import Custom Components */
 @import "./components/_action-banner.css";
 @import "./components/_article.css";
+@import "./components/_about.css";
 @import "./components/_articles.css";
 @import "./components/_archive.css";
 @import "./components/_breadcrumbs.css";

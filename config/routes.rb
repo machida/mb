@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     post "articles/generate_summary", to: "articles#generate_summary"
   end
   root "articles#index"
+  get "about", to: "pages#about", as: :about
   resources :articles, path: "article", only: [:index, :show]
   
   get "feed", to: "articles#feed", defaults: { format: 'rss' }

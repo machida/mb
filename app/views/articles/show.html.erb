@@ -19,6 +19,11 @@
 <% end %>
 
 <div class="l--article-page">
+  <aside class="l--article-author-profile" aria-label="著者について">
+    <p class="l--article-author-profile__name">machida</p>
+    <p class="l--article-author-profile__description">デザインやプログラミングについて書いています。</p>
+    <%= link_to "ABOUT", about_path, class: "l--article-author-profile__link" %>
+  </aside>
   <article class="l--article-main">
   <% if @article.thumbnail.present? %>
     <%= image_tag @article.thumbnail, alt: "", class: "l--article-main__image" %>

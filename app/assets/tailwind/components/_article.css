@@ -5,7 +5,12 @@
   padding-block: 0 2.5rem;
 }
 
-.l--article-page { max-width: 44rem; margin-inline: auto; }
+.l--article-page { position: relative; max-width: 44rem; margin-inline: auto; }
+.l--article-author-profile { position: absolute; top: 3rem; right: calc(100% + 2.5rem); width: 10.5rem; color: var(--public-ink-muted); }
+.l--article-author-profile__name { color: var(--public-ink); font-size: 1rem; font-weight: 700; letter-spacing: 0.08em; }
+.l--article-author-profile__description { margin-top: 0.75rem; font-size: 0.75rem; line-height: 1.8; letter-spacing: 0.04em; }
+.l--article-author-profile__link { display: inline-block; margin-top: 1rem; color: var(--public-ink); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; }
+.l--article-author-profile__link:hover { text-decoration: underline; text-underline-offset: 0.25rem; }
 .l--article-main { overflow: hidden; background: #fff; border-radius: 0.75rem; padding: 3rem 2.75rem; }
 .l--article-header__date { font-size: 1rem; font-weight: 700; }
 .l--article-header h1 { position: relative; font-size: clamp(2rem, 3.4vw, 2.125rem); font-weight: 700; line-height: 1.4; letter-spacing: 0.04em; line-break: strict; word-break: auto-phrase; overflow-wrap: normal; text-wrap: pretty; padding: 0.1em 0 0.2em 2rem; }
@@ -59,4 +64,9 @@
   .a--hero { height: 7rem; }
   .l--article-main { border-radius: 0.625rem; padding: 2rem 1.5rem 2.5rem; }
   .l--article-main__image { width: calc(100% + 3rem); margin: -2rem -1.5rem 2.5rem; }
+}
+
+@media (max-width: 74.9375rem) {
+  .l--article-author-profile { position: static; width: auto; margin-bottom: 2rem; padding-inline: 0.25rem; }
+  .l--article-author-profile__description { max-width: 24rem; }
 }

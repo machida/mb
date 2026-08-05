@@ -8,7 +8,7 @@
         <% end %>
       </div>
       <nav class="l--public-header__links" aria-label="メインナビゲーション">
-        <%= link_to root_path, class: "l--public-header__nav", aria: { label: "ABOUT" } do %>
+        <%= link_to about_path, class: "l--public-header__nav", aria: { label: "ABOUT" } do %>
           <span class="material-symbols-outlined l--public-header__icon" aria-hidden="true">person</span>
         <% end %>
         <%= link_to archive_year_path(Date.current.year), class: "l--public-header__nav", aria: { label: "ARCHIVE" } do %>
