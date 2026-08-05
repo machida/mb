@@ -25,4 +25,7 @@ body.layout-public {
 
 .l--public-main {
   flex: 1 1 auto;
+  width: 100%;
+  max-width: 48rem;
+  margin-inline: auto;
 }
