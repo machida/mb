@@ -4,16 +4,6 @@
 
     <%= form_with url: admin_site_settings_path, method: :patch, local: true, class: "space-y-6" do |f| %>
       <div class="l--form-items">
-        <div class="l--form-item is--xs">
-          <%= label_tag "site_settings[site_title]", "サイトタイトル", class: "a--form-label mb-2" %>
-          <%= text_field_tag "site_settings[site_title]", @settings[:site_title],
-                             class: "a--text-input spec--site-title-input",
-                             autocomplete: "off" %>
-          <div class="a--form-help mt-1">
-            <p>ブラウザのタブやOGPで使用されるサイトタイトルです。</p>
-          </div>
-        </div>
-
         <div class="l--form-item is--sm">
           <label class="a--form-label mb-2">デフォルトOG画像</label>
           <%= render ImageUploadComponent.new(
@@ -31,58 +21,11 @@
         </div>
 
         <div class="l--form-item is--sm">
-          <label class="a--form-label mb-2">トップページヒーロー背景画像</label>
-          <%= render ImageUploadComponent.new(
-                field_name: "site_settings[hero_background_image]",
-                upload_url: admin_site_settings_upload_image_path(upload_type: "hero"),
-                current_image: @settings[:hero_background_image].presence,
-                spec_class: "hero-background-image",
-                help_text: "JPG、PNG、GIF（最大5MB）。アップロード時に16:9の比率でトリミングできます。",
-                enable_crop: true,
-                aspect_ratio: 16.0 / 9.0
-              ) %>
-          <div class="a--form-help mt-1">
-            <p>トップページヒーローセクションの背景に使用されます。画像選択後、トリミング範囲を調整できます。</p>
-          </div>
-        </div>
-
-        <div class="l--form-item is--sm">
           <%= label_tag "site_settings[top_page_description]", "トップページの説明文", class: "a--form-label mb-2" %>
           <%= text_area_tag "site_settings[top_page_description]",
                             @settings[:top_page_description], rows: 3, class: "a--text-input spec--top-page-description-input" %>
           <div class="a--form-help mt-1">
             <p>トップページのmeta descriptionとOGPで使用される説明文です。</p>
-          </div>
-        </div>
-
-        <div class="l--form-item is--xs">
-          <%= label_tag "site_settings[copyright]", "著作権者名", class: "a--form-label mb-2" %>
-          <%= text_field_tag "site_settings[copyright]", @settings[:copyright],
-                             class: "a--text-input spec--copyright-input",
-                             autocomplete: "off" %>
-          <div class="a--form-help mt-1">
-            <p>「© <%= Date.current.year %> [ここに入力した名前]. All rights reserved.」の形式で表示されます。</p>
-          </div>
-        </div>
-
-        <div class="l--form-item">
-          <%= label_tag "site_settings[hero_text_color]", "ヒーローテキストカラー", class: "a--form-label mb-2" %>
-          <div class="flex items-center space-x-4">
-            <label class="flex items-center">
-              <%= radio_button_tag "site_settings[hero_text_color]", "white",
-                                   @settings[:hero_text_color] == "white",
-                                   class: "mr-2 spec--hero-text-color-white" %>
-              <span class="text-sm">白</span>
-            </label>
-            <label class="flex items-center">
-              <%= radio_button_tag "site_settings[hero_text_color]", "black",
-                                   @settings[:hero_text_color] == "black",
-                                   class: "mr-2 spec--hero-text-color-black" %>
-              <span class="text-sm">黒</span>
-            </label>
-          </div>
-          <div class="a--form-help mt-1">
-            <p>背景画像に合わせてヒーロー内テキストの色を選択します。</p>
           </div>
         </div>
 

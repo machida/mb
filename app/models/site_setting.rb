@@ -20,10 +20,6 @@ class SiteSetting < ApplicationRecord
   end
 
   # 便利メソッド
-  def self.site_title
-    get("site_title", "ブログ")
-  end
-
   def self.default_og_image
     get("default_og_image")
   end
@@ -33,25 +29,8 @@ class SiteSetting < ApplicationRecord
     default_og_image
   end
 
-  def self.hero_background_image
-    get("hero_background_image")
-  end
-
-  def self.hero_text_color
-    value = get("hero_text_color", "white")
-    %w[white black].include?(value) ? value : "white"
-  end
-
   def self.top_page_description
     get("top_page_description", "ブログへようこそ。技術やライフスタイルについて書いています。")
-  end
-
-  def self.copyright
-    get("copyright", "MB")
-  end
-
-  def self.copyright_text
-    "© #{Date.current.year} #{copyright}. All rights reserved."
   end
 
   def self.author_display_enabled
@@ -69,6 +48,6 @@ class SiteSetting < ApplicationRecord
   private
 
   def allows_blank_value?
-    name.in?(%w[copyright default_og_image hero_background_image openai_api_key])
+    name.in?(%w[default_og_image openai_api_key])
   end
 end

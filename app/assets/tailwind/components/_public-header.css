@@ -1,11 +1,22 @@
 .l--public-header {
-  background-color: var(--color-bg-primary);
+  background-color: transparent;
 }
 
 .l--public-header__inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 4.5rem;
-  padding-block: 0.75rem;
+  min-height: 6.5rem;
+  border-bottom: 0.0625rem solid var(--public-line);
+
+  &.is--home {
+    border-bottom: 0;
+  }
 }
+
+.l--public-header__brand { position: absolute; left: 50%; transform: translateX(-50%); }
+.l--public-header__logo { display: block; width: 8.5rem; height: auto; }
+.l--public-header__links { display: flex; align-items: center; gap: 2rem; margin-left: auto; }
+.l--public-header__nav { display: flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; margin: -0.625rem; }
+.l--public-header__icon { display: block; font-size: 1.5rem; line-height: 1; letter-spacing: 0; }
+.l--public-header a:hover { opacity: 0.55; }

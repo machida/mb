@@ -33,7 +33,27 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     get root_path
     assert_response :success
+    assert_select "html[lang='ja']"
+    assert_select "body.l--public-page .l--public-body > .l--container.is--xl > .l--public-body__inner > main.l--public-main:not(.l--container)"
+    assert_select "section.l--articles-page.l--articles-index[aria-labelledby='articles-index-title'] > .l--articles-list"
+    assert_select ".l--footer__inner .l--footer__copyright"
+    assert_select ".l--breadcrumbs + .l--footer"
+    assert_select ".l--breadcrumbs__item[aria-current='page']", "HOME"
     assert_select ".spec--main-title", "マチダのブログ"
+    assert_select ".l--public-header__brand a[href=?][aria-label='machida']", root_path do
+      assert_select "img.l--public-header__logo[src*='machida-logo'][alt='']"
+    end
+    assert_select ".l--public-header__links" do
+      assert_select ".l--public-header__nav:nth-child(1)[href=?][aria-label='ABOUT']", about_path do
+        assert_select ".l--public-header__icon", "person"
+      end
+      assert_select ".l--public-header__nav:nth-child(2)[aria-label='ARCHIVE']" do
+        assert_select ".l--public-header__icon", "calendar_month"
+      end
+    end
+    assert_select ".l--public-header__inner.is--home", count: 1
+    assert_select "section.a--hero.has-background[aria-labelledby='main-title'][style*='retro-hawaii-hero']", count: 1
+    assert_select ".l--footer small", "© #{Date.current.year} machida"
   end
 
   test "index should only show published articles" do
@@ -48,14 +68,29 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     
     # Check that only one article is shown (the published one)
     assert_select ".spec--article-item", count: 1
-    assert_select ".spec--article-thumbnail-link[href=?]", article_path(@published_article), count: 1
+    assert_select ".spec--article-item[href=?]", article_path(@published_article), count: 1
+    assert_select ".spec--article-thumbnail-link .l--article-item__image-original", count: 1
+    assert_select ".spec--article-thumbnail-link .l--article-item__image-sepia", count: 1
+    assert_select ".l--article-item__more", count: 0
   end
 
   test "should show published article" do
+    @published_article.update!(thumbnail: "https://example.com/article.jpg")
+
     get article_path(@published_article)
     assert_response :success
     assert_select ".spec--article-title", @published_article.title
     assert_select ".spec--article-content"
+    assert_select ".l--article-page .l--article-main .l--article-header__title"
+    assert_select ".l--public-main + .l--article-author-profile" do
+      assert_select ".l--article-author-profile__name", "machida"
+      assert_select ".l--article-author-profile__link[href=?]", about_path, text: "ABOUT"
+    end
+    assert_select ".l--article-header__meta", count: 0
+    assert_select ".l--breadcrumbs__item[aria-current='page']", @published_article.title
+    assert_select ".l--article-main > .l--article-main__image:first-child", count: 1
+    assert_select ".l--public-header__inner.is--home", count: 0
+    assert_select ".l--article-sidebar", count: 0
   end
 
   test "should show previous and next article links for published article" do
@@ -90,8 +125,15 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
 
     get article_path(current_article)
     assert_response :success
-    assert_select ".spec--previous-article-link[href=?]", article_path(newer_article), text: "前の記事"
-    assert_select ".spec--next-article-link[href=?]", article_path(older_article), text: "次の記事"
+    assert_select ".spec--previous-article-link[href=?][aria-label='前の記事']", article_path(newer_article) do
+      assert_select ".l--article-navigation__icon", "chevron_left"
+      assert_select ".l--article-navigation__label", "PREV"
+    end
+    assert_select ".spec--next-article-link[href=?][aria-label='次の記事']", article_path(older_article) do
+      assert_select ".l--article-navigation__label", "NEXT"
+      assert_select ".l--article-navigation__icon", "chevron_right"
+    end
+    assert_select ".spec--back-to-articles-link.l--article-navigation__home[href=?]", root_path, text: "HOME"
   end
 
   test "should hide previous article link on newest article" do
@@ -118,7 +160,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     get article_path(newer_article)
     assert_response :success
     assert_select ".spec--previous-article-link", count: 0
-    assert_select ".spec--next-article-link[href=?]", article_path(older_article), text: "次の記事"
+    assert_select ".spec--next-article-link[href=?][aria-label='次の記事']", article_path(older_article)
   end
 
   test "should hide next article link on oldest article" do
@@ -144,7 +186,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
 
     get article_path(older_article)
     assert_response :success
-    assert_select ".spec--previous-article-link[href=?]", article_path(newer_article), text: "前の記事"
+    assert_select ".spec--previous-article-link[href=?][aria-label='前の記事']", article_path(newer_article)
     assert_select ".spec--next-article-link", count: 0
   end
 
@@ -180,20 +222,91 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
 
     get article_path(older_article)
     assert_response :success
-    assert_select ".spec--previous-article-link[href=?]", article_path(newer_article), text: "前の記事"
+    assert_select ".spec--previous-article-link[href=?][aria-label='前の記事']", article_path(newer_article)
     assert_no_match article_path(draft_article), response.body
   end
 
   test "should show archive year" do
     get archive_year_path(@published_article.created_at.year)
     assert_response :success
-    assert_select ".spec--archive-year-title", "#{@published_article.created_at.year}年の記事"
+    assert_select ".spec--archive-year-title", "#{@published_article.created_at.year}年"
+    assert_select "section.l--archive-year[aria-labelledby='archive-year-title'] > .l--archive-header"
+    assert_select ".l--archive-year > .l--archive-months"
+    assert_select ".l--archive-months__item" do
+      assert_select "> .l--archive-months__month", count: 12
+      assert_select "> .l--archive-months__count", count: 12
+      assert_select "br", count: 0
+    end
+    assert_select ".l--archive-header__count", count: 0
+    assert_select ".l--archive-year .a--button", count: 0
+    assert_select ".l--breadcrumbs__item[aria-current='page']", "#{@published_article.created_at.year}年"
+    assert_select ".l--archive-back-navigation__link[href=?]", root_path do
+      assert_select ".l--archive-back-navigation__icon", "home"
+      assert_select ".l--archive-back-navigation__label", "HOME"
+    end
+  end
+
+  test "future archive months should not be links" do
+    future_year = Date.current.year + 1
+    future_article = Article.create!(
+      title: "Future Article",
+      body: "Future content",
+      summary: "Future summary",
+      author: @admin.user_id,
+      draft: false,
+      created_at: Time.zone.local(future_year, 1, 15)
+    )
+
+    get archive_year_path(future_year)
+    assert_response :success
+    assert_select "a.l--archive-months__item[href=?]", archive_month_path(future_year, 1), count: 0
+    assert_select ".l--archive-months__item.is--future", text: /1月\s*\(1\)/
+    assert_match future_article.title, response.body
   end
 
   test "should show archive month" do
     get archive_month_path(@published_article.created_at.year, @published_article.created_at.month)
     assert_response :success
-    assert_select ".spec--archive-month-title", "#{@published_article.created_at.year}年#{@published_article.created_at.month}月の記事"
+    assert_select ".spec--archive-month-title", "#{@published_article.created_at.year}年#{@published_article.created_at.month}月"
+    assert_select "section.l--archive-month[aria-labelledby='archive-month-title'] > .l--archive-month-navigation + .l--archive-header"
+    assert_select ".l--archive-header__count", count: 0
+    assert_select ".l--archive-month-navigation__link.is--year[href=?]", archive_year_path(@published_article.created_at.year), text: "#{@published_article.created_at.year}年"
+    assert_select ".l--archive-month-navigation .a--button", count: 0
+    assert_select ".l--breadcrumbs__link[href=?]", archive_year_path(@published_article.created_at.year), text: "#{@published_article.created_at.year}年"
+    assert_select ".l--breadcrumbs__item[aria-current='page']", "#{@published_article.created_at.month}月"
+    assert_select ".l--archive-back-navigation__link[href=?]", root_path do
+      assert_select ".l--archive-back-navigation__icon", "home"
+      assert_select ".l--archive-back-navigation__label", "HOME"
+    end
+  end
+
+  test "should not show article count on empty archives" do
+    empty_year = @published_article.created_at.year - 1
+
+    get archive_year_path(empty_year)
+    assert_response :success
+    assert_select ".l--archive-header__count", count: 0
+
+    get archive_month_path(empty_year, 1)
+    assert_response :success
+    assert_select ".l--archive-header__count", count: 0
+    assert_select ".l--archive-empty__message", "#{empty_year}年1月の記事はありません"
+  end
+
+  test "month navigation should keep fixed columns at year boundaries" do
+    year = @published_article.created_at.year
+
+    get archive_month_path(year, 1)
+    assert_response :success
+    assert_select ".l--archive-month-navigation__link.is--previous", count: 0
+    assert_select ".l--archive-month-navigation__link.is--year[href=?]", archive_year_path(year)
+    assert_select ".l--archive-month-navigation__link.is--next[href=?]", archive_month_path(year, 2)
+
+    get archive_month_path(year, 12)
+    assert_response :success
+    assert_select ".l--archive-month-navigation__link.is--previous[href=?]", archive_month_path(year, 11)
+    assert_select ".l--archive-month-navigation__link.is--year[href=?]", archive_year_path(year)
+    assert_select ".l--archive-month-navigation__link.is--next", count: 0
   end
 
   test "archive should only show published articles" do
@@ -204,10 +317,11 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_no_match @draft_article.title, response.body
   end
 
-  test "should show login link when not logged in" do
+  test "should not show login link when not logged in" do
     get root_path
     assert_response :success
-    assert_select "a[href=?]", admin_login_path, text: "ログイン"
+    assert_select "a[href=?]", admin_login_path, count: 0
+    assert_select ".l--footer__navigation", count: 0
   end
 
   test "should show admin links when logged in" do
@@ -270,6 +384,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     get article_path(@published_article)
     assert_response :success
     assert_select ".spec--delete-article-button", text: "削除"
+    assert_select ".l--article-admin-actions .a--button", count: 0
   end
 
   test "should not show delete button on article page when not logged in" do

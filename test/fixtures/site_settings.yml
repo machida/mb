@@ -1,13 +1,5 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-site_title:
-  name: site_title
-  value: マチダのブログ
-
-copyright:
-  name: copyright
-  value: MB
-
 default_og_image:
   name: default_og_image
   value: https://example.com/default-og-image.jpg

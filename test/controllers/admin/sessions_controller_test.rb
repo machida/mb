@@ -1,6 +1,13 @@
 require "test_helper"
 
 class Admin::SessionsControllerTest < ActionDispatch::IntegrationTest
+  test "should redirect short login path to admin login" do
+    get "/login"
+
+    assert_response :found
+    assert_redirected_to admin_login_path
+  end
+
   def setup
     @admin = admins(:admin)
   end

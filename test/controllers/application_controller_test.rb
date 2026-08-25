@@ -20,8 +20,7 @@ class ApplicationControllerTest < ActionDispatch::IntegrationTest
   test "current_user_signed_in? should return false when not logged in" do
     get root_path
     assert_response :success
-    # Check that login link is present (indicates not signed in)
-    assert_select "a[href=?]", admin_login_path, text: "ログイン"
+    assert_select "a[href=?]", admin_login_path, count: 0
   end
 
   test "current_user_signed_in? should return true when logged in" do
