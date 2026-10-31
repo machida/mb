@@ -52,7 +52,8 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
       end
     end
     assert_select ".l--public-header__inner.is--home", count: 1
-    assert_select "section.a--hero.has-background[aria-labelledby='main-title'][style*='retro-hawaii-hero']", count: 1
+    assert_select "section.a--hero.has-background[aria-labelledby='main-title']", count: 1
+    assert_select "section.a--hero[style]", count: 0
     assert_select ".l--footer small", "© #{Date.current.year} machida"
   end
 

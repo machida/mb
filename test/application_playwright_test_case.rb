@@ -161,9 +161,9 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
     else
       @server_pid = spawn(
         "bin/rails", "server", "-p", @server_port.to_s, "-e", "test",
-        pgroup: true, out: "/dev/null", err: "/dev/null"
+        pgroup: true, out: Rails.root.join("log/playwright-server-#{@server_port}.log").to_s, err: [:child, :out]
       )
-      wait_for_server_ready
+      wait_for_server_ready(timeout: 60)
     end
   end
   
