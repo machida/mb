@@ -6,7 +6,7 @@
 ![Ruby 3.4.5](https://img.shields.io/badge/Ruby-3.4.5-red.svg)
 ![Node.js 22](https://img.shields.io/badge/Node.js-22.x-339933.svg)
 
-Rails 8.1.1で作成されたブログアプリケーション
+Rails 8.1.3.1で作成されたブログアプリケーション
 
 ## 機能
 
@@ -133,8 +133,8 @@ bin/dev
 ## 技術スタック
 
 - Ruby 3.4.5
-- Rails 8.1.1
-- SQLite3 (開発環境)
+- Rails 8.1.3.1
+- SQLite3（開発・テスト・本番。本番はKamalの永続ボリュームに保存）
 - Tailwind CSS v4.x
 - 独自のCSSカスタムプロパティ（`--app-spacing-*`, `@custom-media --breakpoint-*`）で余白・ブレークポイントを一元管理
 - Stimulus (Hotwire)

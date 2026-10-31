@@ -85,7 +85,7 @@
   --color-button-common-focus: var(--color-indigo-500);
 
   /* Primary */
-  --color-button-primary: var(--color-indigo-600);
+  --color-button-primary: rgb(30, 79, 134);
   --color-button-primary-background: var(--color-indigo-50);
 
   /* Primary hover */

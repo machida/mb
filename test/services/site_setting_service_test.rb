@@ -8,119 +8,67 @@ class SiteSettingServiceTest < ActiveSupport::TestCase
   test "defaults returns configured site settings" do
     defaults = SiteSettingService.defaults
 
-    assert_equal "テストブログ", defaults[:site_title]
     assert_equal "テスト環境の説明", defaults[:top_page_description]
-    assert_equal "テストブログ", defaults[:copyright]
     assert_equal "", defaults[:default_og_image]
-    assert_equal "", defaults[:hero_background_image]
-    assert_equal "white", defaults[:hero_text_color]
+    assert_equal %i[top_page_description default_og_image], defaults.keys
   end
 
   test "get returns value from database when exists" do
-    SiteSetting.set("site_title", "カスタムタイトル")
+    SiteSetting.set("top_page_description", "カスタム説明")
 
-    assert_equal "カスタムタイトル", SiteSettingService.get("site_title")
-    assert_equal "カスタムタイトル", SiteSettingService.get(:site_title)
+    assert_equal "カスタム説明", SiteSettingService.get("top_page_description")
+    assert_equal "カスタム説明", SiteSettingService.get(:top_page_description)
   end
 
-  test "get returns default value when not in database" do
-    result = SiteSettingService.get(:site_title)
-
-    assert_equal "テストブログ", result
+  test "get returns configured default when not in database" do
+    assert_equal "テスト環境の説明", SiteSettingService.get(:top_page_description)
   end
 
   test "get returns nil when key does not exist in defaults" do
-    result = SiteSettingService.get(:nonexistent_key)
-
-    assert_nil result
+    assert_nil SiteSettingService.get(:nonexistent_key)
   end
 
   test "set saves value to database" do
-    SiteSettingService.set(:site_title, "新しいタイトル")
+    SiteSettingService.set(:top_page_description, "新しい説明")
 
-    setting = SiteSetting.find_by(name: "site_title")
-    assert_equal "新しいタイトル", setting.value
+    setting = SiteSetting.find_by(name: "top_page_description")
+    assert_equal "新しい説明", setting.value
   end
 
-  test "set accepts both string and symbol keys" do
-    SiteSettingService.set("site_title", "文字列キー")
-    SiteSettingService.set(:copyright, "シンボルキー")
+  test "all_settings returns only configurable default keys" do
+    SiteSettingService.set(:top_page_description, "カスタム説明")
 
-    assert_equal "文字列キー", SiteSetting.find_by(name: "site_title").value
-    assert_equal "シンボルキー", SiteSetting.find_by(name: "copyright").value
+    assert_equal({
+      top_page_description: "カスタム説明",
+      default_og_image: ""
+    }, SiteSettingService.all_settings)
   end
 
-  test "all_settings returns hash with all default keys" do
-    SiteSettingService.set(:site_title, "カスタム")
+  test "update_settings updates valid settings and ignores removed keys" do
+    SiteSettingService.update_settings(
+      top_page_description: "一括更新した説明",
+      site_title: "更新されないタイトル",
+      copyright: "更新されない著作権者"
+    )
 
-    all = SiteSettingService.all_settings
-
-    assert_kind_of Hash, all
-    assert_equal "カスタム", all[:site_title]
-    assert_equal "テスト環境の説明", all[:top_page_description]
-    assert_includes all.keys, :site_title
-    assert_includes all.keys, :top_page_description
-    assert_includes all.keys, :copyright
-    assert_includes all.keys, :default_og_image
-    assert_includes all.keys, :hero_background_image
-    assert_includes all.keys, :hero_text_color
-  end
-
-  test "update_settings updates multiple valid settings" do
-    params = {
-      site_title: "一括更新タイトル",
-      copyright: "一括更新コピーライト"
-    }
-
-    SiteSettingService.update_settings(params)
-
-    assert_equal "一括更新タイトル", SiteSetting.get("site_title")
-    assert_equal "一括更新コピーライト", SiteSetting.get("copyright")
-  end
-
-  test "update_settings ignores invalid keys not in defaults" do
-    params = {
-      site_title: "有効なキー",
-      invalid_key: "無効なキー"
-    }
-
-    SiteSettingService.update_settings(params)
-
-    assert_equal "有効なキー", SiteSetting.get("site_title")
-    assert_nil SiteSetting.find_by(name: "invalid_key")
+    assert_equal "一括更新した説明", SiteSetting.get("top_page_description")
+    assert_nil SiteSetting.find_by(name: "site_title")
+    assert_nil SiteSetting.find_by(name: "copyright")
   end
 
   test "update_settings accepts string keys" do
-    params = {
-      "site_title" => "文字列キーの更新",
-      "copyright" => "文字列キーのコピーライト"
-    }
+    SiteSettingService.update_settings("top_page_description" => "文字列キーの更新")
 
-    SiteSettingService.update_settings(params)
-
-    assert_equal "文字列キーの更新", SiteSetting.get("site_title")
-    assert_equal "文字列キーのコピーライト", SiteSetting.get("copyright")
+    assert_equal "文字列キーの更新", SiteSetting.get("top_page_description")
   end
 
-  test "reset_to_defaults! sets all settings to default values" do
-    SiteSetting.set("site_title", "カスタム")
-    SiteSetting.set("copyright", "カスタムコピーライト")
+  test "reset_to_defaults sets remaining settings" do
+    SiteSetting.set("top_page_description", "カスタム説明")
 
     SiteSettingService.reset_to_defaults!
 
-    assert_equal "テストブログ", SiteSetting.get("site_title")
-    assert_equal "テストブログ", SiteSetting.get("copyright")
+    assert_equal "テスト環境の説明", SiteSetting.get("top_page_description")
     assert_equal "", SiteSetting.get("default_og_image")
-    assert_equal "", SiteSetting.get("hero_background_image")
-    assert_equal "white", SiteSetting.get("hero_text_color")
-  end
-
-  test "reset_to_defaults! creates settings if they don't exist" do
-    SiteSetting.delete_all
-
-    SiteSettingService.reset_to_defaults!
-
-    assert_equal 6, SiteSetting.count
-    assert_equal "テストブログ", SiteSetting.get("site_title")
+    assert_equal 2, SiteSetting.count
   end
 end

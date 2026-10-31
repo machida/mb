@@ -1,20 +1,20 @@
-<article class="a--card is--hover">
-  <div class="flex justify-between items-start mb-2">
-    <h2 class="text-xl font-semibold">
-      <%= link_to archive_article_item.title, article_path(archive_article_item), class: "text-link" %>
+<article class="l--archive-article a--card is--hover">
+  <header class="l--archive-article__header flex justify-between items-start mb-2">
+    <h2 class="l--archive-article__title text-xl font-semibold">
+      <%= link_to archive_article_item.title, article_path(archive_article_item), class: "l--archive-article__link text-link" %>
     </h2>
-    <time class="text-gray-500 text-sm">
+    <time class="l--archive-article__date text-gray-500 text-sm">
       <%= format_date_with_weekday(archive_article_item.created_at) %>
     </time>
-  </div>
+  </header>
 
   <% if archive_article_item.summary.present? %>
-    <p class="mb-3"><%= archive_article_item.summary %></p>
+    <p class="l--archive-article__summary mb-3"><%= archive_article_item.summary %></p>
   <% end %>
 
   <% if show_author_info? %>
-    <div class="flex justify-between items-center">
-      <span class="text-sm text-gray-500">著者: <%= archive_article_item.author %></span>
+    <div class="l--archive-article__meta flex justify-between items-center">
+      <span class="l--archive-article__author text-sm text-gray-500">著者: <%= archive_article_item.author %></span>
     </div>
   <% end %>
 </article>

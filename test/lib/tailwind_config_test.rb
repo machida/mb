@@ -46,4 +46,14 @@ class TailwindConfigTest < ActiveSupport::TestCase
       "@source paths should be relative to Rails.root, not to the CSS file.\n" \
       "Use './app/views/**/*.erb' or 'app/views/**/*.erb' instead of '../app/views/**/*.erb'"
   end
+
+  test "public theme is imported from a public component" do
+    application_css = File.read(Rails.root.join("app/assets/tailwind/application.css"))
+    public_theme_css = File.read(Rails.root.join("app/assets/tailwind/components/_public-theme.css"))
+
+    assert_includes application_css, '@import "./components/_public-theme.css";'
+    assert_includes public_theme_css, "body.layout-public"
+    assert_includes public_theme_css, "--public-ink: #1e4f86"
+    assert_includes public_theme_css, '--font-family-base: "Noto Sans JP", sans-serif'
+  end
 end

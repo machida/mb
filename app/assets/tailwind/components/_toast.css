@@ -7,6 +7,16 @@
   z-index: 50;
 }
 
+.l--toast-container {
+  position: fixed;
+  inset-block-start: 1rem;
+  inset-inline-end: 1rem;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .a--toast-notification .js--toast-element {
   margin-bottom: 0.5rem;
 }

@@ -1,12 +1,20 @@
 <!-- Regular Header for Public Pages -->
 <header class="l--public-header">
-  <div class="l--container">
-    <div class="l--public-header__inner">
-      <div>
-        <h1 class="a--heading is--lg">
-          <%= link_to SiteSetting.site_title, root_path, class: "hover:text-gray-600" %>
-        </h1>
+  <div class="l--container is--xl">
+    <div class="l--public-header__inner<%= " is--home" if controller_name == "articles" && action_name == "index" %>">
+      <div class="l--public-header__brand">
+        <%= link_to root_path, aria: { label: "machida" } do %>
+          <%= image_tag "machida-logo.svg", class: "l--public-header__logo", alt: "", width: 628, height: 75 %>
+        <% end %>
       </div>
+      <nav class="l--public-header__links" aria-label="メインナビゲーション">
+        <%= link_to about_path, class: "l--public-header__nav", aria: { label: "ABOUT" } do %>
+          <span class="material-symbols-outlined l--public-header__icon" aria-hidden="true">person</span>
+        <% end %>
+        <%= link_to archive_year_path(Date.current.year), class: "l--public-header__nav", aria: { label: "ARCHIVE" } do %>
+          <span class="material-symbols-outlined l--public-header__icon" aria-hidden="true">calendar_month</span>
+        <% end %>
+      </nav>
     </div>
   </div>
 </header>

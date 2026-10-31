@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
-    <title><%= content_for(:title) || SiteSetting.site_title %></title>
+    <title><%= content_for(:title) || "マチダのブログ" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="description" content="<%= content_for(:description) || SiteSetting.top_page_description %>">
-    <meta property="og:title" content="<%= content_for(:title) || SiteSetting.site_title %>">
+    <meta property="og:title" content="<%= content_for(:title) || "マチダのブログ" %>">
     <meta property="og:description" content="<%= content_for(:description) || SiteSetting.top_page_description %>">
-    <meta property="og:site_name" content="<%= SiteSetting.site_title %>">
+    <meta property="og:site_name" content="マチダのブログ">
     <% default_og_image_url = SiteSetting.default_og_image_url %>
     <% if default_og_image_url.present? %>
       <meta property="og:image" content="<%= default_og_image_url %>">
@@ -31,34 +31,26 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="min-h-screen flex flex-col layout-public">
+  <body class="l--public-page layout-public">
     <%= render "public/header" %>
-    <% if controller_name == 'articles' && action_name == 'index' %>
-      <header class="l--public-top-header">
-        <div class="l--container is--md">
-          <%= render "public/hero" %>
+    <%= render "public/hero" if controller_name == "articles" && action_name == "index" %>
+
+    <div class="l--public-body">
+      <div class="l--container is--xl">
+        <div class="l--public-body__inner">
+          <main class="l--public-main">
+            <%= yield %>
+          </main>
+          <%= yield :public_main_after %>
         </div>
-      </header>
-
-      <div class="l--public-body">
-        <!-- Public Main Content for Top Page -->
-        <main class="flex-1 l--container is--md">
-          <%= yield %>
-        </main>
       </div>
-    <% else %>
-      <div class="l--public-body">
-        <!-- Public Main Content for Other Pages -->
-        <main class="flex-1 l--container is--md">
-          <%= yield %>
-        </main>
-      </div>
-    <% end %>
+    </div>
 
+    <%= render "public/breadcrumbs" %>
     <%= render "public/footer" %>
 
     <!-- Toast Container -->
-    <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2 js--toast-container">
+    <div id="toast-container" class="l--toast-container js--toast-container" role="status" aria-live="polite" aria-atomic="true">
       <%= render "shared/toasts" %>
     </div>
   </body>

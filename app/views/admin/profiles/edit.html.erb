@@ -11,24 +11,24 @@
         <div class="a--card">
           <div class="l--form-items">
             <%= render FormFieldComponent.new(
-              form: f,
-              field: :email,
-              label: "メールアドレス",
-              type: "email",
-              required: true,
-              help_text: "ログイン時に使用するメールアドレスです。",
-              spec_class: "spec--email-input",
-              autocomplete: "email"
-            ) %>
+                  form: f,
+                  field: :email,
+                  label: "メールアドレス",
+                  type: "email",
+                  required: true,
+                  help_text: "ログイン時に使用するメールアドレスです。",
+                  spec_class: "spec--email-input",
+                  autocomplete: "email"
+                ) %>
             <%= render FormFieldComponent.new(
-              form: f,
-              field: :user_id,
-              label: "ユーザーID",
-              required: true,
-              help_text: "記事の著者として表示されるIDです。",
-              spec_class: "spec--user-id-input",
-              autocomplete: "username"
-            ) %>
+                  form: f,
+                  field: :user_id,
+                  label: "ユーザーID",
+                  required: true,
+                  help_text: "記事の著者として表示されるIDです。",
+                  spec_class: "spec--user-id-input",
+                  autocomplete: "username"
+                ) %>
           </div>
         </div>
       </div>
@@ -75,11 +75,11 @@
       </div>
 
       <%= render FormActionsComponent.new(
-        form: f,
-        primary_label: "更新",
-        primary_class: "spec--update-button",
-        cancel_path: admin_articles_path
-      ) %>
+            form: f,
+            primary_label: "更新",
+            primary_class: "spec--update-button",
+            cancel_path: admin_articles_path
+          ) %>
     <% end %>
 
   </div>

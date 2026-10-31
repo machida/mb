@@ -1,4 +1,7 @@
 ---
+exclude:
+  - "**/vendor/**/*"
+  - "**/node_modules/**/*"
 linters:
   # セキュリティ関連
   ErbSafety:
@@ -32,6 +35,9 @@ linters:
   Rubocop:
     enabled: true
     rubocop_config:
+      # ERB tags share local variables, but RuboCop analyzes each tag separately.
+      Lint/UselessAssignment:
+        Enabled: false
       Layout/LineLength:
         Max: 150  # ERBファイルでは少し長めに設定
       Style/FrozenStringLiteralComment:

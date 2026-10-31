@@ -1,0 +1,8 @@
+.l--about-page { max-width: 44rem; margin-inline: auto; padding: 3rem 2.75rem; border-radius: 0.75rem; background: #fff; }
+.l--about-page__title { font-size: 2rem; font-weight: 700; letter-spacing: 0.08em; }
+.l--about-page__body { margin-top: 2rem; font-size: 1rem; line-height: 2; letter-spacing: 0.04em; }
+.l--about-page__body > * + * { margin-top: 1.5rem; }
+
+@media (max-width: 47.9375rem) {
+  .l--about-page { padding: 2rem 1.5rem 2.5rem; border-radius: 0.625rem; }
+}

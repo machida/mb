@@ -4,12 +4,12 @@ one:
   title: MyString
   body: MyText
   summary: MyText
-  thumbnail: MyString
+  thumbnail: https://example.com/thumbnail-one.jpg
   author: MyString
 
 two:
   title: MyString
   body: MyText
   summary: MyText
-  thumbnail: MyString
+  thumbnail: https://example.com/thumbnail-two.jpg
   author: MyString

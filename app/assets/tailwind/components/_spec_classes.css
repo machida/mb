@@ -26,10 +26,8 @@
 .spec--thumbnail-input,
 .spec--user-id-input,
 .spec--password-confirmation-input,
-.spec--site-title-input,
 .spec--default-og-image-input,
-.spec--top-page-description-input,
-.spec--copyright-input {
+.spec--top-page-description-input {
   /* These classes are for testing only - no visual styles */
 }
 

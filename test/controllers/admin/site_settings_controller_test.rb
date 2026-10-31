@@ -17,25 +17,21 @@ class Admin::SiteSettingsControllerTest < ActionDispatch::IntegrationTest
     get admin_site_settings_path
     assert_response :success
     assert_select ".spec--site-settings-title", "サイト設定"
-    assert_select ".spec--site-title-input"
     assert_select ".spec--default-og-image-input"
     assert_select ".spec--top-page-description-input"
-    assert_select ".spec--copyright-input"
     # Check for thumbnail upload components
     assert_select "div[data-controller='thumbnail-upload']"
-    assert_select ".spec--hero-background-image-input"
-    assert_select ".spec--hero-text-color-white"
+    assert_select ".spec--site-title-input", count: 0
+    assert_select ".spec--copyright-input", count: 0
+    assert_select ".spec--hero-background-image-input", count: 0
+    assert_select ".spec--hero-text-color-white", count: 0
   end
 
   test "should update site settings" do
     patch admin_site_settings_path, params: {
       site_settings: {
-        site_title: "新しいブログタイトル",
         default_og_image: "https://example.com/new-image.jpg",
-        hero_background_image: "https://example.com/hero.jpg",
-        hero_text_color: "black",
-        top_page_description: "新しい説明文です",
-        copyright: "© 2025 新しいブログ. All rights reserved."
+        top_page_description: "新しい説明文です"
       }
     }
     
@@ -44,12 +40,8 @@ class Admin::SiteSettingsControllerTest < ActionDispatch::IntegrationTest
     assert_match "サイト設定を更新しました", response.body
     
     # 設定値が更新されているか確認
-    assert_equal "新しいブログタイトル", SiteSetting.site_title
     assert_equal "https://example.com/new-image.jpg", SiteSetting.default_og_image
-    assert_equal "https://example.com/hero.jpg", SiteSetting.hero_background_image
-    assert_equal "black", SiteSetting.hero_text_color
     assert_equal "新しい説明文です", SiteSetting.top_page_description
-    assert_equal "新しいブログ", SiteSetting.copyright
   end
 
   test "should not allow access without login" do
@@ -60,7 +52,7 @@ class Admin::SiteSettingsControllerTest < ActionDispatch::IntegrationTest
 
     patch admin_site_settings_path, params: {
       site_settings: {
-        site_title: "Test"
+        top_page_description: "Test"
       }
     }
     assert_redirected_to admin_login_path
@@ -71,7 +63,6 @@ class Admin::SiteSettingsControllerTest < ActionDispatch::IntegrationTest
 
     patch admin_site_settings_path, params: {
       site_settings: {
-        site_title: "Test",
         default_og_image: ""
       }
     }
@@ -79,75 +70,24 @@ class Admin::SiteSettingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "", SiteSetting.default_og_image
   end
 
-  test "should clear hero_background_image when blank" do
-    SiteSetting.set("hero_background_image", "https://example.com/old-hero.jpg")
-
-    patch admin_site_settings_path, params: {
-      site_settings: {
-        site_title: "Test",
-        hero_background_image: ""
-      }
-    }
-
-    assert_equal "", SiteSetting.hero_background_image
-  end
-
   test "should preserve existing images when updating other site settings" do
     SiteSetting.set("default_og_image", "https://example.com/og-image.jpg")
-    SiteSetting.set("hero_background_image", "https://example.com/hero-image.jpg")
 
     patch admin_site_settings_path, params: {
       site_settings: {
-        site_title: "更新後タイトル",
         default_og_image: SiteSetting.default_og_image,
-        hero_background_image: SiteSetting.hero_background_image,
         top_page_description: "説明文だけ更新"
       }
     }
 
     assert_redirected_to admin_site_settings_path
     assert_equal "https://example.com/og-image.jpg", SiteSetting.default_og_image
-    assert_equal "https://example.com/hero-image.jpg", SiteSetting.hero_background_image
     assert_equal "説明文だけ更新", SiteSetting.top_page_description
-  end
-
-  test "should fallback to white for invalid hero_text_color" do
-    patch admin_site_settings_path, params: {
-      site_settings: {
-        site_title: "Test",
-        hero_text_color: "purple"
-      }
-    }
-
-    assert_equal "white", SiteSetting.hero_text_color
-  end
-
-  test "should extract copyright name from full text" do
-    patch admin_site_settings_path, params: {
-      site_settings: {
-        site_title: "Test",
-        copyright: "© 2025 テスト会社. All rights reserved."
-      }
-    }
-
-    assert_equal "テスト会社", SiteSetting.copyright
-  end
-
-  test "should keep copyright name as is when not in full format" do
-    patch admin_site_settings_path, params: {
-      site_settings: {
-        site_title: "Test",
-        copyright: "シンプルな名前"
-      }
-    }
-
-    assert_equal "シンプルな名前", SiteSetting.copyright
   end
 
   test "should update author_display_enabled" do
     patch admin_site_settings_path, params: {
       site_settings: {
-        site_title: "Test",
         author_display_enabled: "false"
       }
     }
@@ -158,7 +98,6 @@ class Admin::SiteSettingsControllerTest < ActionDispatch::IntegrationTest
   test "should update openai_api_key" do
     patch admin_site_settings_path, params: {
       site_settings: {
-        site_title: "Test",
         openai_api_key: "sk-test-key"
       }
     }
@@ -220,7 +159,7 @@ class Admin::SiteSettingsControllerTest < ActionDispatch::IntegrationTest
 
     patch admin_site_settings_path, params: {
       site_settings: {
-        site_title: "Test"
+        top_page_description: "Test"
       }
     }
 

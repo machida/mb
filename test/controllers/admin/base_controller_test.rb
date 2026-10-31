@@ -73,9 +73,7 @@ class Admin::BaseControllerTest < ActionDispatch::IntegrationTest
     # Test set_success_message through site settings update
     patch admin_site_settings_path, params: {
       site_settings: {
-        site_title: "Updated Title",
-        top_page_description: "Updated Description",
-        copyright: "Updated Copyright"
+        top_page_description: "Updated Description"
       }
     }
 
@@ -177,9 +175,7 @@ class Admin::BaseControllerTest < ActionDispatch::IntegrationTest
     # Update site settings to trigger set_success_message
     patch admin_site_settings_path, params: {
       site_settings: {
-        site_title: "New Title",
-        top_page_description: "New Description",
-        copyright: "New Copyright"
+        top_page_description: "New Description"
       }
     }
 

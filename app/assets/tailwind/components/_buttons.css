@@ -57,13 +57,14 @@
 
 /* Button Variants */
 .a--button.is--primary {
-  background-color: var(--color-button-primary);
-  color: var(--color-bg-primary);
-  border: solid 1px transparent;
+  background-color: var(--color-button-primary-background);
+  color: var(--color-button-primary);
+  border: solid 1px var(--color-button-primary);
 }
 
 .a--button.is--primary:hover {
   background-color: var(--color-button-primary-hover-background);
+  color: var(--color-bg-primary);
 }
 
 .a--button.is--primary:focus {

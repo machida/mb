@@ -62,15 +62,16 @@
             </button>
           </div>
           <%= f.text_area :body,
-                          class: "a--text-input a--markdown-textarea font-mono text-sm spec--body-input js-markdown-textarea #{if article.errors[:body].any?
-                                                                                                                                 'border-red-300'
-                                                                                                                               end}",
+                          class: class_names("a--text-input a--markdown-textarea font-mono text-sm",
+                                             "spec--body-input js-markdown-textarea",
+                                             "border-red-300": article.errors[:body].any?),
                           aria_describedby: "body-help#{' body-error' if article.errors[:body].any?}",
                           aria_invalid: (article.errors[:body].any? ? "true" : "false"),
                           aria_required: "true",
                           data: {
                             controller: "image-upload",
-                            action: "input->markdown-preview#update keyup->markdown-preview#update dragover->image-upload#dragover dragleave->image-upload#dragleave drop->image-upload#drop",
+                            action: "input->markdown-preview#update keyup->markdown-preview#update dragover->image-upload#dragover
+                            dragleave->image-upload#dragleave drop->image-upload#drop",
                             image_upload_target: "textarea", image_upload_upload_url_value: admin_articles_upload_image_path
                           } %>
           <% if article.errors[:body].any? %>
@@ -133,9 +134,9 @@
   <div class="l--form-item is--xs">
     <%= f.label :published_at, "公開日", class: "a--form-label mb-2" %>
     <%= f.datetime_local_field :published_at,
-                                value: (article.published_at || Time.current).strftime("%Y-%m-%dT%H:%M"),
-                                class: "a--text-input spec--published-at-input #{'border-red-300' if article.errors[:published_at].any?}",
-                                aria_describedby: ("published-at-error" if article.errors[:published_at].any?) %>
+                               value: (article.published_at || Time.current).strftime("%Y-%m-%dT%H:%M"),
+                               class: "a--text-input spec--published-at-input #{'border-red-300' if article.errors[:published_at].any?}",
+                               aria_describedby: ("published-at-error" if article.errors[:published_at].any?) %>
     <div class="a--form-help mt-1">
       <p>記事の公開日時を指定できます。未指定の場合は現在日時が設定されます。</p>
     </div>
