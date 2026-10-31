@@ -61,7 +61,7 @@ group :development, :test do
 
   # Testing gems
   gem "mocha", "~> 3.0"
-  gem "simplecov", "~> 0.22", require: false
+  gem "simplecov", "~> 1.1", require: false
   gem "simplecov-lcov", "~> 0.8", require: false
 end
 
