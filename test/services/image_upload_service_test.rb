@@ -111,28 +111,22 @@ class ImageUploadServiceTest < ActiveSupport::TestCase
     assert hero_result[:url].starts_with?("/uploads/images/")
   end
 
-  test "should handle GCS upload errors" do
-    skip "GCS testing requires complex mocking - tested in integration"
+  test "should preserve GCS upload errors in production" do
+    Rails.env.stubs(:production?).returns(true)
+    result = { error: "アップロードに失敗しました" }
+    ImageUpload::GcsUploader.expects(:upload).with(@valid_image, regexp_matches(/\.webp\z/), "thumbnail").returns(result)
+
+    assert_equal result, ImageUploadService.upload(@valid_image)
   end
 
-  test "should return error when GCS credentials are missing" do
-    skip "GCS testing requires complex mocking - tested in integration"
-  end
+  %w[thumbnail content hero og].each do |upload_type|
+    test "should delegate #{upload_type} WebP uploads to GCS in production" do
+      Rails.env.stubs(:production?).returns(true)
+      result = { url: "https://example.com/image.webp" }
+      ImageUpload::GcsUploader.expects(:upload).with(@valid_image, regexp_matches(/\.webp\z/), upload_type).returns(result)
 
-  test "should upload to GCS successfully in production" do
-    skip "GCS testing requires complex mocking - tested in integration"
-  end
-
-  test "should handle missing GCS bucket error" do
-    skip "GCS testing requires complex mocking - tested in integration"
-  end
-
-  test "should process content type images as WebP in production" do
-    skip "GCS testing requires complex mocking - tested in integration"
-  end
-
-  test "should process hero type images as JPEG in production" do
-    skip "GCS testing requires complex mocking - tested in integration"
+      assert_equal result, ImageUploadService.upload(@valid_image, upload_type: upload_type)
+    end
   end
 
   test "should handle StringIO files in local upload" do

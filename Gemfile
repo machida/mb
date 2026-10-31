@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 8.1.3"
+gem "rails", "~> 8.1.4"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 # Use sqlite3 as the database for Active Record
@@ -27,7 +27,7 @@ gem "bcrypt", "~> 3.1.21"
 gem "view_component"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ mingw x64_mingw jruby ]
+gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 # Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
 gem "solid_cache"
@@ -79,7 +79,7 @@ end
 group :test do
   # Playwright for E2E testing - unified system testing framework
   # Browser automation client used by the Rails system tests
-  gem "playwright-ruby-client", "~> 1.62.0"
+  gem "playwright-ruby-client", "~> 1.64.0"
 
   # HTTP request stubbing for testing
   gem "webmock", "~> 3.26"
