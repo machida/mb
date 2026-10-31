@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 8.1.2"
+gem "rails", "~> 8.1.3"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 # Use sqlite3 as the database for Active Record
@@ -61,7 +61,7 @@ group :development, :test do
 
   # Testing gems
   gem "mocha", "~> 3.0"
-  gem "simplecov", "~> 0.22", require: false
+  gem "simplecov", "~> 1.1", require: false
   gem "simplecov-lcov", "~> 0.8", require: false
 end
 
@@ -89,4 +89,4 @@ gem "tailwindcss-rails", "~> 4.6", group: [ :development, :test ]
 gem "redcarpet", "~> 3.6"
 gem "google-cloud-storage", "~> 1.62"
 gem "kaminari", "~> 1.2"
-gem "rouge", "~> 4.7"
+gem "rouge", "~> 5.1"
