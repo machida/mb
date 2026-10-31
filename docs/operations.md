@@ -3,6 +3,7 @@
 本番は Kamal で 1台の VPS にデプロイしています。本書は障害対応・再発防止のための手順をまとめたものです。
 
 ## 構成サマリ
+- 次回ビルドのランタイム: Ruby 4.0.9 / Rails 8.1.4、アセット構築はNode.js 26系。実際の本番反映はGitHub Actionsのdeploy完了と `/up` で確認する。
 - ホスト: さくらVPS `153.121.42.228`（ドメイン `mxchida.com`）／ RAM 約1GB
 - 接続: SSH `ubuntu` ユーザ（root直ログイン不可）。鍵はローカルの `~/.ssh/id_rsa`
   ```bash

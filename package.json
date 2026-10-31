@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "npm run lint:js && npm run lint:erb",
     "lint:js": "eslint app/javascript/**/*.js",
-    "lint:erb": "bundle exec erblint --lint-all",
+    "lint:erb": "bundle exec erb_lint --lint-all",
     "lint:fix": "npm run lint:js -- --fix && npm run lint:erb -- --autocorrect",
     "format": "prettier --write app/javascript/**/*.js",
     "build": "rails assets:precompile",
@@ -20,12 +20,18 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@playwright/test": "1.62.0",
-    "eslint": "^10.8.0",
-    "globals": "^17.8.0",
-    "prettier": "^3.9.6"
+    "@playwright/test": "1.64.1",
+    "eslint": "^10.14.0",
+    "globals": "^17.13.0",
+    "prettier": "^3.9.10"
   },
   "dependencies": {
-    "cropperjs": "^1.6.2"
+    "cropperjs": "^1.7.0"
+  },
+  "engines": {
+    "node": ">=26.13.0 <27"
+  },
+  "overrides": {
+    "minimatch": "^11.0.3"
   }
 }

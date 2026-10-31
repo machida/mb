@@ -3,10 +3,10 @@
 ![CI](https://github.com/machida/mb/actions/workflows/ci.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/machida/mb/badge.svg?branch=main)](https://coveralls.io/github/machida/mb?branch=main)
 ![License](https://img.shields.io/github/license/machida/mb)
-![Ruby 3.4.5](https://img.shields.io/badge/Ruby-3.4.5-red.svg)
-![Node.js 22](https://img.shields.io/badge/Node.js-22.x-339933.svg)
+![Ruby 4.0.9](https://img.shields.io/badge/Ruby-4.0.9-red.svg)
+![Node.js 26.13.0](https://img.shields.io/badge/Node.js-26.13.0-339933.svg)
 
-Rails 8.1.3.1で作成されたブログアプリケーション
+Rails 8.1.4で作成されたブログアプリケーション
 
 ## 機能
 
@@ -132,8 +132,9 @@ bin/dev
 
 ## 技術スタック
 
-- Ruby 3.4.5
-- Rails 8.1.3.1
+- Ruby 4.0.9 / Bundler 4.0.23
+- Node.js 26.13.0 LTS（`.node-version`）
+- Rails 8.1.4
 - SQLite3（開発・テスト・本番。本番はKamalの永続ボリュームに保存）
 - Tailwind CSS v4.x
 - 独自のCSSカスタムプロパティ（`--app-spacing-*`, `@custom-media --breakpoint-*`）で余白・ブレークポイントを一元管理
@@ -141,7 +142,7 @@ bin/dev
 - Turbo (Hotwire)
 - Redcarpet (Markdown)
 - Google Cloud Storage
-- Cropper.js 1.6.2（画像クロップ、ゼロ依存）
+- Cropper.js 1.7.0（画像クロップ、ゼロ依存）
 
 ### テスト
 - Mini-test (システムテスト、コントローラーテスト)

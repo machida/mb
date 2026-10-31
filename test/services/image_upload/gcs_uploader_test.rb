@@ -1,12 +1,9 @@
 require "test_helper"
+require "google/cloud/storage"
+require "image_processing/vips"
 
 module ImageUpload
   class GcsUploaderTest < ActiveSupport::TestCase
-    # Skip GCS tests if google-cloud-storage gem is not available
-    # This is expected in development/test environments
-    def setup_gcs_mocks
-      skip "Google Cloud Storage gem not available" unless defined?(Google::Cloud::Storage)
-    end
     setup do
       @temp_file = Tempfile.new([ "test", ".jpg" ])
       @temp_file.write("test image content")
@@ -24,8 +21,6 @@ module ImageUpload
     end
 
     test "should upload content image to GCS" do
-      setup_gcs_mocks
-
       # Mock GCS objects
       mock_storage = mock("storage")
       mock_bucket = mock("bucket")
@@ -69,8 +64,6 @@ module ImageUpload
     end
 
     test "should upload hero image to GCS with correct processing" do
-      setup_gcs_mocks
-
       # Mock GCS objects
       mock_storage = mock("storage")
       mock_bucket = mock("bucket")
@@ -104,8 +97,6 @@ module ImageUpload
     end
 
     test "should upload og image to GCS" do
-      setup_gcs_mocks
-
       # Mock GCS objects
       mock_storage = mock("storage")
       mock_bucket = mock("bucket")
@@ -139,8 +130,6 @@ module ImageUpload
     end
 
     test "should return error when GCS credentials are missing" do
-      setup_gcs_mocks
-
       Rails.application.credentials.stubs(:dig).with(:gcp, :project_id).returns(nil)
       Rails.application.credentials.stubs(:dig).with(:gcp, :bucket).returns(nil)
       Rails.application.credentials.stubs(:dig).with(:gcp, :credentials).returns(nil)
@@ -163,8 +152,6 @@ module ImageUpload
     end
 
     test "should return error when bucket is not found" do
-      setup_gcs_mocks
-
       mock_storage = mock("storage")
 
       Rails.application.credentials.stubs(:dig).with(:gcp, :project_id).returns("test-project")
@@ -192,8 +179,6 @@ module ImageUpload
     end
 
     test "should handle image processing errors" do
-      setup_gcs_mocks
-
       Rails.application.credentials.stubs(:dig).with(:gcp, :project_id).returns("test-project")
       Rails.application.credentials.stubs(:dig).with(:gcp, :bucket).returns("test-bucket")
       Rails.application.credentials.stubs(:dig).with(:gcp, :credentials).returns({ "type" => "service_account" })

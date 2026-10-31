@@ -8,5 +8,4 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 pin_all_from "app/javascript/lib", under: "lib"
 pin "dropdown", to: "dropdown.js"
 pin "theme_color", to: "theme_color.js"
-pin "cropperjs" # @1.6.2
-
+pin "cropperjs" # @1.7.0

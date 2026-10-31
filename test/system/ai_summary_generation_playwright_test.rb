@@ -56,7 +56,21 @@ class AiSummaryGenerationPlaywrightTest < ApplicationPlaywrightTestCase
   end
 
   test "AI summary generation with valid inputs" do
-    skip "Skipping flaky test - successful API mocking is challenging in E2E environment"
+    login_as_admin(@admin)
+    SiteSetting.set("openai_api_key", "test-key")
+    @page.route("**/admin/articles/generate_summary", ->(route, request) {
+      assert_equal "POST", request.method
+      assert_equal "テスト記事", JSON.parse(request.post_data)["title"]
+      route.fulfill(status: 200, contentType: "application/json", body: { summary: "生成された概要" }.to_json)
+    })
+    @page.goto("http://localhost:#{@server_port}/admin/articles/new")
+    @page.fill(".spec--title-input", "テスト記事")
+    @page.fill(".spec--body-input", "テスト本文")
+    @page.click(".spec--generate-summary-button")
+    @page.wait_for_function("() => document.querySelector('.spec--summary-input').value === '生成された概要'")
+
+    assert_equal "生成された概要", @page.input_value(".spec--summary-input")
+    assert @page.enabled?(".spec--generate-summary-button")
   end
 
   test "AI summary generation shows confirmation when overwriting existing summary" do

@@ -27,11 +27,11 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v7
       with:
-        node-version: '22'
+        node-version-file: '.node-version'
         cache: 'npm'
 
     - name: Install JavaScript dependencies
-      run: npm install
+      run: npm ci
 
     # Playwright browsers not needed since we're skipping system tests
     # - name: Install Playwright browsers
