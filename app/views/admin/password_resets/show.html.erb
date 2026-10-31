@@ -19,7 +19,9 @@
           <%= form.password_field :password,
                                   required: true,
                                   minlength: 8,
-                                  class: "mt-1 appearance-none rounded-md relative block w-full px-3 py-2 border border-sky-300 placeholder-sky-500 text-sky-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm spec--new-password",
+                                  class: "mt-1 appearance-none rounded-md relative block w-full px-3 py-2 border border-sky-300
+                                  placeholder-sky-500 text-sky-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
+                                  focus:z-10 sm:text-sm spec--new-password",
                                   placeholder: "8文字以上で入力してください" %>
         </div>
 
@@ -28,7 +30,9 @@
           <%= form.password_field :password_confirmation,
                                   required: true,
                                   minlength: 8,
-                                  class: "mt-1 appearance-none rounded-md relative block w-full px-3 py-2 border border-sky-300 placeholder-sky-500 text-sky-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm spec--confirm-password",
+                                  class: "mt-1 appearance-none rounded-md relative block w-full px-3 py-2 border border-sky-300
+                                  placeholder-sky-500 text-sky-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
+                                  focus:z-10 sm:text-sm spec--confirm-password",
                                   placeholder: "同じパスワードを再入力してください" %>
         </div>
       </div>
@@ -52,7 +56,9 @@
 
       <div>
         <%= form.submit "パスワードを変更する",
-                        class: "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 spec--update-password" %>
+                        class: "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md
+                        text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2
+                        focus:ring-indigo-500 spec--update-password" %>
       </div>
     <% end %>
 

@@ -9,7 +9,8 @@
       </li>
 
       <li class="l--admin-nav__item">
-        <%= link_to admin_site_settings_path, class: "l--admin-nav__link #{controller_name == 'site_settings' ? 'is--active' : ''}", aria_label: "サイト設定" do %>
+        <%= link_to admin_site_settings_path, class: "l--admin-nav__link #{controller_name == 'site_settings' ? 'is--active' : ''}",
+aria_label: "サイト設定" do %>
           <span class="material-symbols-outlined l--admin-nav__icon" aria-hidden="true">settings</span>
           <span class="l--admin-nav__text">設定</span>
         <% end %>

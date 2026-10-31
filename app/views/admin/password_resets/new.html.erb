@@ -17,21 +17,21 @@
 
         <div class="l--form-items">
           <%= render FormFieldComponent.new(
-            form: form,
-            field: :email,
-            label: "メールアドレス",
-            type: "email",
-            required: true,
-            spec_class: "spec--email-input",
-            autocomplete: "email"
-          ) %>
+                form: form,
+                field: :email,
+                label: "メールアドレス",
+                type: "email",
+                required: true,
+                spec_class: "spec--email-input",
+                autocomplete: "email"
+              ) %>
         </div>
 
         <%= render FormActionsComponent.new(
-          form: form,
-          primary_label: "パスワードリセットメールを送信",
-          primary_class: "spec--password-reset-submit"
-        ) %>
+              form: form,
+              primary_label: "パスワードリセットメールを送信",
+              primary_class: "spec--password-reset-submit"
+            ) %>
 
         <div class="text-center mt-4">
           <%= link_to "ログイン画面に戻る", admin_login_path,

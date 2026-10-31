@@ -75,6 +75,11 @@ class ApplicationPlaywrightTestCase < ActiveSupport::TestCase
         @browser = @playwright_driver.playwright.chromium.launch(headless: true)
       end
       @context = @browser.new_context
+      # Font CDNs and fixture images must not make local E2E depend on the network.
+      @context.route(
+        %r{https://(?:fonts\.googleapis\.com|fonts\.gstatic\.com|cdn\.jsdelivr\.net|example\.com)/},
+        ->(route, _request) { route.abort }
+      )
       @page = @context.new_page
       @page.set_default_timeout(10_000)
       @page.set_default_navigation_timeout(15_000)

@@ -9,7 +9,8 @@
           <%= render ImageUploadComponent.new(
                 field_name: "site_settings[default_og_image]",
                 upload_url: admin_site_settings_upload_image_path,
-                current_image: @settings[:default_og_image].present? && !@settings[:default_og_image].include?("example.com") ? @settings[:default_og_image] : nil,
+                current_image: (@settings[:default_og_image] if @settings[:default_og_image].present? &&
+                               !@settings[:default_og_image].include?("example.com")),
                 spec_class: "default-og-image",
                 help_text: "JPG、PNG、GIF（最大5MB）。アップロード時に1200:630の比率でトリミングできます。",
                 enable_crop: true,
@@ -62,10 +63,10 @@
       </div>
 
       <%= render FormActionsComponent.new(
-        form: f,
-        primary_label: "設定を保存",
-        cancel_path: admin_articles_path
-      ) %>
+            form: f,
+            primary_label: "設定を保存",
+            cancel_path: admin_articles_path
+          ) %>
     <% end %>
   </div>
 </div>
