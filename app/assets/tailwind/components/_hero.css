@@ -8,7 +8,8 @@
 }
 
 .a--hero.has-background {
-  background-image: var(--hero-bg-image);
+  /* Inline style attributes are blocked by the production CSP nonce policy. */
+  background-image: url("retro-hawaii-hero.webp");
   background-size: cover;
   background-position: center 45%;
 }

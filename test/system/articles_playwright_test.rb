@@ -39,6 +39,14 @@ class ArticlesPlaywrightTest < ApplicationPlaywrightTestCase
     assert title_element, "Main title should exist"
     assert_equal "マチダのブログ", title_element.inner_text
     
+    # Test mode enforces the same nonce CSP as production: inline styles fail here.
+    background = @page.eval_on_selector(".a--hero", "element => getComputedStyle(element).backgroundImage")
+    assert_match(/retro-hawaii-hero.*\.webp/, background)
+    hero_url = background.delete_prefix('url("').delete_suffix('")')
+    response = @page.request.get(hero_url)
+    assert_equal 200, response.status
+    assert_includes response.headers["content-type"], "image/webp"
+
     # Check article count (only published articles should appear)
     article_items = @page.query_selector_all(".spec--article-item")
     assert_equal 1, article_items.count
