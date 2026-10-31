@@ -18,7 +18,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 # Image processing
 gem "image_processing", "~> 2.0"
-gem "ruby-vips", "~> 2.0"
+gem "ruby-vips", "~> 2.3"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem "bcrypt", "~> 3.1.21"
@@ -79,14 +79,14 @@ end
 group :test do
   # Playwright for E2E testing - unified system testing framework
   # Browser automation client used by the Rails system tests
-  gem "playwright-ruby-client", "~> 1.60.0"
+  gem "playwright-ruby-client", "~> 1.62.0"
 
   # HTTP request stubbing for testing
   gem "webmock", "~> 3.26"
 end
 
-gem "tailwindcss-rails", "~> 4.4", group: [ :development, :test ]
+gem "tailwindcss-rails", "~> 4.6", group: [ :development, :test ]
 gem "redcarpet", "~> 3.6"
-gem "google-cloud-storage", "~> 1.60"
+gem "google-cloud-storage", "~> 1.62"
 gem "kaminari", "~> 1.2"
 gem "rouge", "~> 4.7"
