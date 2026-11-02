@@ -94,6 +94,8 @@ bundle exec rails test test/lib/tailwind_config_test.rb  # パス検証テスト
 - READMEや依存更新を行ったときは必要に応じて本ガイドも更新します。
 
 ## セキュリティ & 設定
+- 依存更新時は `bundle exec bundler-audit check --update`、`bundle exec brakeman --no-pager`、`npm audit` を実行する。CIでも同じ検査を行い、DependabotでGem・npm・GitHub Actionsを監視する。
+- メール送信は利用者ごとの `SMTP_*` / `MAILER_FROM` 環境変数、または暗号化credentialsの `smtp` で設定する。実値を公開コードへ埋め込まない。設定手順はREADME、障害確認は `docs/operations.md` を参照。
 - GCSやAPIキーは `rails credentials:edit` に保存し、`.env` やJSON鍵ファイルをコミットしないでください。新しい秘密設定はPRで必ず説明します。
 - `storage/` と `public/uploads` は常に `.gitignore` されていることを確認し、アップロード系変更ではローカル・本番での保存先を明記します。
 - CSSが再ビルドされない場合は `bin/rails assets:clobber && bin/dev` を実行してキャッシュをクリアします。

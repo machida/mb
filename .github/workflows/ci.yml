@@ -33,6 +33,12 @@ jobs:
     - name: Install JavaScript dependencies
       run: npm ci
 
+    - name: Check dependencies and application security
+      run: |
+        bundle exec bundler-audit check --update
+        bundle exec brakeman --no-pager
+        npm audit
+
     # Playwright browsers not needed since we're skipping system tests
     # - name: Install Playwright browsers
     #   run: |

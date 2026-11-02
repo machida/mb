@@ -20,6 +20,16 @@ Rails 8.1.4で作成されたブログアプリケーション
 - 管理者認証
 - トースト通知
 
+## セキュリティチェック
+
+CIで次の検査を実行します。DependabotはGem・npm・GitHub Actionsの更新を毎日確認します。
+
+```bash
+bundle exec bundler-audit check --update
+bundle exec brakeman --no-pager
+npm audit
+```
+
 ## セットアップ
 
 ### 🚀 ワンコマンドセットアップ（推奨）
@@ -89,6 +99,50 @@ gcp:
       "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/your-service-account%40your-project.iam.gserviceaccount.com"
     }
 ```
+
+### メール送信の設定（本番環境用）
+
+パスワード再設定メールはSMTPで送信します。利用者ごとに送信元とSMTPアカウントを設定してください。個人のアドレスやパスワードをソースコードに埋め込む必要はありません。
+
+Kamalで運用する場合は、既存の本番credentialsに以下の `smtp` を追加する方法が簡単です。他の設定を消さずに編集してください。
+
+```bash
+bin/rails credentials:edit --environment production
+```
+
+```yaml
+smtp:
+  address: smtp.gmail.com
+  port: 587
+  user_name: sender@example.com
+  password: YOUR_APP_PASSWORD
+  from: sender@example.com
+  authentication: plain
+  ssl: false
+```
+
+Google Workspace / Gmailでは、送信アカウントの2段階認証を有効にし、利用可能な場合は専用のアプリパスワードを発行して `password` に指定します。通常のGoogleログイン用パスワードは使用しません。組織の設定などによりアプリパスワードを作成できない場合は、Workspace管理者にSMTPリレーなどの利用方法を確認してください。[Google公式の説明](https://support.google.com/accounts/answer/185833)
+
+別のSMTPサービスを使う場合は、そのサービスの接続情報に置き換えてください。465番ポートの暗黙TLSを使う場合は `ssl: true` にします。
+
+環境変数でも設定できます。空でない環境変数がcredentialsより優先されます。
+
+| 環境変数 | credentialsのキー | 省略時 |
+| --- | --- | --- |
+| `SMTP_ADDRESS` | `smtp.address` | `smtp.gmail.com` |
+| `SMTP_PORT` | `smtp.port` | 587（SSL有効時は465） |
+| `SMTP_USER_NAME` | `smtp.user_name` | なし |
+| `SMTP_PASSWORD` | `smtp.password` | なし |
+| `SMTP_AUTHENTICATION` | `smtp.authentication` | `plain` |
+| `SMTP_SSL` | `smtp.ssl` | `false`（STARTTLS） |
+| `MAILER_FROM` | `smtp.from` | SMTPユーザー名、未設定時は `noreply@example.com` |
+| `APP_HOST` | — | `example.com`（再設定URLのホスト） |
+
+本番では `APP_HOST` を自分のドメインに設定してください。再設定URLはHTTPSで生成されます。送信元はSMTPサービスで送信を許可されたアドレスを指定します。
+
+環境変数は実行環境に設定してください（`.env` ファイルは自動では読み込みません）。Kamalでは公開可能な設定を `config/deploy.yml` の `env.clear` に、`SMTP_USER_NAME` / `SMTP_PASSWORD` などを `env.secret` に追加し、`.kamal/secrets` で環境変数やパスワード管理ツールから取得します。credentialsを使う場合は既存の `RAILS_MASTER_KEY` の受け渡しを利用できます。
+
+暗号化credentialsはコミットできますが、復号鍵・平文のパスワード・環境設定ファイルはコミットしないでください。設定変更後は再デプロイが必要です。開発環境では外部に送信せず、`/letter_opener` でメールを確認します。
 
 ### 4. E2Eテスト環境の設定（Playwright）
 
