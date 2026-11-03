@@ -83,4 +83,14 @@ docker stats --no-stream
 ```
 
 ## 障害履歴
+### パスワード再設定メールの不達調査
+
+- 本番のSMTP設定はREADMEの「メール送信の設定」を参照。環境変数または本番credentialsの `smtp` を使い、変更後に再デプロイする。
+- GitHub ActionsからはRepository Secretsの `SMTP_USER_NAME`、`SMTP_PASSWORD`、`MAILER_FROM` をKamalへ渡す。ローカルからSSH接続できない場合でも、Actions側の接続可否はデプロイの結果で別途確認する。`/up` の成功だけではSMTP接続や送信の成功を判断しない。
+- 登録済み管理者と一致するメールアドレスで申請する。未登録アドレスでも存在を明かさないため同じ完了表示になるが、メールは送られない。
+- `SMTP_USER_NAME` / `SMTP_PASSWORD`（またはcredentials）と送信元の設定有無を確認する。秘密値や再設定トークンをログ・Issueに貼らない。
+- `Net::SMTPAuthenticationError` は認証情報、接続タイムアウトはSMTPホスト・ポート・ネットワークを確認する。GoogleのアプリパスワードはGoogleアカウントのパスワード変更で失効する。
+- 最終確認は登録済みアドレスで再設定を申請し、受信箱・迷惑メールフォルダ・リンク先のHTTPSホストを確認する。テスト成功と実際の受信確認は別に扱う。
+- 2026-11-02調査: 本番でSMTPユーザー名・パスワード・送信元が未設定。直近の申請で再設定記録も生成されていなかった。設定コード・READMEを整備し、認証情報の登録と本番受信確認は別途必要。
+
 - 2026-06-09: アプリコンテナが OOMKilled（ExitCode 137）。restart policy が `unless-stopped` でも再起動に失敗し、監視・アラートが無かったため約2週間ダウン（502）。本 Runbook 整備のきっかけ。

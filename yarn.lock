@@ -359,9 +359,9 @@ glob-parent@^6.0.2:
     is-glob "^4.0.3"
 
 globals@^17.13.0:
-  version "17.13.0"
-  resolved "https://registry.npmjs.org/globals/-/globals-17.13.0.tgz"
-  integrity sha512-RwMTC61u7hrG3ZJMkZQOK4JLJrKS8QtoTii63EmWvFXHqycY9FObBJQCbsLxSO8kjKhWE5kV1GC+Vb1g3RI0Zg==
+  version "17.14.0"
+  resolved "https://registry.npmjs.org/globals/-/globals-17.14.0.tgz"
+  integrity sha512-UtdkTVyAJePQv0J2M9Xe4L0ruNSDV314XiIJsADI2Zf40bcdAonE/D/OhAU8AT99oij9mhLByb+NvA3QWZYgCg==
 
 hashery@^1.4.0, hashery@^1.5.1:
   version "1.5.1"

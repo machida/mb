@@ -8,11 +8,11 @@ class PasswordResetMailerTest < ActionMailer::TestCase
 
   test "reset_email" do
     mail = PasswordResetMailer.reset_email(@admin)
-    
+
     assert_equal "パスワードリセットのお知らせ", mail.subject
-    assert_equal [@admin.email], mail.to
-    assert_equal [ENV.fetch("MAILER_FROM", "noreply@example.com")], mail.from
-    
+    assert_equal [ @admin.email ], mail.to
+    assert_equal [ MailDeliverySettings.new.from ], mail.from
+
     # メール本文が存在することを確認
     assert mail.text_part.present?
     assert mail.html_part.present?
@@ -28,5 +28,11 @@ class PasswordResetMailerTest < ActionMailer::TestCase
     mail = PasswordResetMailer.reset_email(@admin)
     # URLが含まれていることを確認
     assert mail.text_part.body.to_s.include?("password_resets")
+  end
+
+  test "reset_email uses configured sender" do
+    MailDeliverySettings.any_instance.stubs(:from).returns("sender@example.org")
+    mail = PasswordResetMailer.reset_email(@admin)
+    assert_equal [ "sender@example.org" ], mail.from
   end
 end
