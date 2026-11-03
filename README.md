@@ -142,6 +142,8 @@ Google Workspace / Gmailでは、送信アカウントの2段階認証を有効�
 
 環境変数は実行環境に設定してください（`.env` ファイルは自動では読み込みません）。Kamalでは公開可能な設定を `config/deploy.yml` の `env.clear` に、`SMTP_USER_NAME` / `SMTP_PASSWORD` などを `env.secret` に追加し、`.kamal/secrets` で環境変数やパスワード管理ツールから取得します。credentialsを使う場合は既存の `RAILS_MASTER_KEY` の受け渡しを利用できます。
 
+このリポジトリのGitHub Actionsデプロイでは、Repository Secretsに `SMTP_USER_NAME`、`SMTP_PASSWORD`、`MAILER_FROM` を登録してください。Kamalへ環境変数として渡し、アプリコンテナへsecretとして設定します。ローカルからKamalを実行する場合も、この3変数を設定してください。
+
 暗号化credentialsはコミットできますが、復号鍵・平文のパスワード・環境設定ファイルはコミットしないでください。設定変更後は再デプロイが必要です。開発環境では外部に送信せず、`/letter_opener` でメールを確認します。
 
 ### 4. E2Eテスト環境の設定（Playwright）

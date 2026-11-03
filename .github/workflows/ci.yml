@@ -134,7 +134,16 @@ jobs:
         kamal lock release || echo "No existing lock to release"
 
     - name: Deploy with Kamal
-      run: kamal deploy
+      env:
+        SMTP_USER_NAME: ${{ secrets.SMTP_USER_NAME }}
+        SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+        MAILER_FROM: ${{ secrets.MAILER_FROM }}
+      run: |
+        if [[ -z "$SMTP_USER_NAME" || -z "$SMTP_PASSWORD" || -z "$MAILER_FROM" ]]; then
+          echo "Error: SMTP_USER_NAME, SMTP_PASSWORD and MAILER_FROM secrets are required" >&2
+          exit 1
+        fi
+        kamal deploy
 
     - name: Cleanup secrets
       if: always()

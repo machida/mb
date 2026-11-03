@@ -86,6 +86,7 @@ docker stats --no-stream
 ### パスワード再設定メールの不達調査
 
 - 本番のSMTP設定はREADMEの「メール送信の設定」を参照。環境変数または本番credentialsの `smtp` を使い、変更後に再デプロイする。
+- GitHub ActionsからはRepository Secretsの `SMTP_USER_NAME`、`SMTP_PASSWORD`、`MAILER_FROM` をKamalへ渡す。ローカルからSSH接続できない場合でも、Actions側の接続可否はデプロイの結果で別途確認する。`/up` の成功だけではSMTP接続や送信の成功を判断しない。
 - 登録済み管理者と一致するメールアドレスで申請する。未登録アドレスでも存在を明かさないため同じ完了表示になるが、メールは送られない。
 - `SMTP_USER_NAME` / `SMTP_PASSWORD`（またはcredentials）と送信元の設定有無を確認する。秘密値や再設定トークンをログ・Issueに貼らない。
 - `Net::SMTPAuthenticationError` は認証情報、接続タイムアウトはSMTPホスト・ポート・ネットワークを確認する。GoogleのアプリパスワードはGoogleアカウントのパスワード変更で失効する。
