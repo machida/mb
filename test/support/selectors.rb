@@ -29,6 +29,11 @@ module TestSelectors
   PASSWORD_CHANGE_BUTTON = ".spec--password-change-button"
   PASSWORD_CHANGE_LINK = ".spec--password-change-link"
 
+  IMAGE_FILE_INPUT = ".spec--image-file-input"
+  CROP_MODAL = ".spec--crop-modal"
+  CROP_CANCEL = ".spec--crop-cancel"
+  CROP_CONFIRM = ".spec--crop-confirm"
+
   # Site Settings
   DEFAULT_OG_IMAGE_INPUT = ".spec--default-og-image-input"
   TOP_PAGE_DESCRIPTION_INPUT = ".spec--top-page-description-input"

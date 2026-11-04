@@ -4,7 +4,7 @@
      data-thumbnail-upload-enable-crop-value="<%= enable_crop %>"
      <% if aspect_ratio %> data-thumbnail-upload-aspect-ratio-value="<%= aspect_ratio %>"<% end %>>
   <!-- Hidden file input -->
-  <input type="file" accept="<%= accept %>" class="hidden" data-thumbnail-upload-target="input" data-action="change->thumbnail-upload#fileSelected">
+  <input type="file" accept="<%= accept %>" class="hidden spec--image-file-input" data-thumbnail-upload-target="input" data-action="change->thumbnail-upload#fileSelected">
 
   <!-- Hidden URL field -->
   <% if form %>
@@ -47,7 +47,7 @@
 
   <% if enable_crop %>
     <!-- Crop Modal -->
-    <div class="a--modal is--hidden" data-thumbnail-upload-target="cropModal">
+    <div class="a--modal is--hidden spec--crop-modal" data-thumbnail-upload-target="cropModal">
       <div class="a--modal__overlay" data-action="click->thumbnail-upload#cancelCrop"></div>
       <div class="a--modal__content is--lg">
         <div class="a--modal__header">
@@ -62,10 +62,10 @@
           </div>
         </div>
         <div class="a--modal__footer">
-          <button type="button" class="a--button is--md is--secondary" data-action="click->thumbnail-upload#cancelCrop">
+          <button type="button" class="a--button is--md is--secondary spec--crop-cancel" data-action="click->thumbnail-upload#cancelCrop">
             キャンセル
           </button>
-          <button type="button" class="a--button is--md is--primary" data-action="click->thumbnail-upload#confirmCrop">
+          <button type="button" class="a--button is--md is--primary spec--crop-confirm" data-action="click->thumbnail-upload#confirmCrop">
             確定
           </button>
         </div>
