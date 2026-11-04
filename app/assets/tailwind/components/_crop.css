@@ -16,25 +16,8 @@
   display: block;
 }
 
-/* Cropperjs overrides for better integration */
-.cropper-container {
-  direction: ltr;
-  font-size: 0;
-  line-height: 0;
-  position: relative;
-  touch-action: none;
-  user-select: none;
-}
-
-.cropper-view-box {
-  outline: 0.0625rem solid var(--color-admin-primary-500);
-  outline-color: rgba(59, 130, 246, 0.75);
-}
-
-.cropper-point {
-  background-color: var(--color-admin-primary-500);
-}
-
-.cropper-line {
-  background-color: var(--color-admin-primary-500);
+/* Cropper.js 2 uses custom elements with their own shadow styles. */
+.a--crop-container cropper-canvas {
+  width: 100%;
+  height: min(60vh, 30rem);
 }

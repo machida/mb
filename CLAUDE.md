@@ -48,6 +48,7 @@ npm run test:playwright                         # Playwright E2E
 
 ## CSS/HTMLクラス規約
 - `.a--` はAtomレベルの最小パーツ、`.l--` はレイアウト、`.spec--` はテスト専用でCSSセレクタには使わないこと。
+- Cropper.js 2系の配布ESMは `npm ci` / `npm install` のpostinstallで `vendor/javascript/cropperjs.js` に同期する。更新時はOG画像の切り抜き・キャンセルを本番相当CSP下のシステムテストで確認する。
 - `.spec--` クラスはPlaywright/MiniTestから参照し、追加・変更時は `test/support/selectors.rb` も更新します。
 
 ## Tailwind CSS 設定

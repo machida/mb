@@ -198,7 +198,7 @@ bin/dev
 - Turbo (Hotwire)
 - Redcarpet (Markdown)
 - Google Cloud Storage
-- Cropper.js 1.7.0（画像クロップ、ゼロ依存）
+- Cropper.js 2.3.1（画像クロップ、Web Components）。`npm ci` / `npm install` のpostinstallで配布ESMを `vendor/javascript/cropperjs.js` に同期します。
 
 ### テスト
 - Mini-test (システムテスト、コントローラーテスト)
@@ -318,9 +318,9 @@ Playwrightテストは並列実行を無効化しています（`parallelize(wor
 - この組み合わせで安定動作を確認済み
 
 #### JavaScript開発ツール
-- **ESLint**: 9.39.2（Flat Config形式に移行済み）
-- **Prettier**: 3.7.4
-- **Cropper.js**: 1.6.2（jQuery依存なし、ゼロ依存ライブラリ）
+- **ESLint**: 10.14.0（Flat Config形式に移行済み）
+- **Prettier**: 3.9.10
+- **Cropper.js**: 2.3.1（jQuery依存なし、Web Components）
 
 ## デプロイ
 

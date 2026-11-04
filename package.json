@@ -14,7 +14,7 @@
     "playwright:install-force": "playwright install --force",
     "test:playwright": "bundle exec rails test test/system/",
     "setup": "npm install && npm run playwright:install",
-    "postinstall": "mkdir -p public/assets/cropperjs && cp node_modules/cropperjs/dist/cropper.min.css public/assets/cropperjs/ && echo '✅ Node.js dependencies installed. Run bin/setup for complete setup.'",
+    "postinstall": "cp node_modules/cropperjs/dist/cropper.esm.js vendor/javascript/cropperjs.js",
     "dev": "bundle exec bin/dev",
     "help": "bundle exec bin/dev-help"
   },
@@ -26,7 +26,7 @@
     "prettier": "^3.9.10"
   },
   "dependencies": {
-    "cropperjs": "^1.7.0"
+    "cropperjs": "^2.3.1"
   },
   "engines": {
     "node": ">=26.13.0 <27"
