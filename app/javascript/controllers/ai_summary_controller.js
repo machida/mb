@@ -66,7 +66,9 @@ export default class extends Controller {
       } else {
         this.showError(data.error || '概要の生成に失敗しました');
       }
-    } catch {
+    } catch (error) {
+      // eslint-disable-next-line no-console -- Preserve exception details to distinguish response parsing failures from network errors.
+      console.error('AI Summary generation error:', error);
       this.showError('ネットワークエラーが発生しました');
     } finally {
       button.disabled = false;
