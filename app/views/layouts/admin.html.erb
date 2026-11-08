@@ -11,6 +11,9 @@
     <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, nocache">
     <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, nocache">
 
+    <% if current_admin %>
+      <meta name="admin-csrf-url" content="<%= admin_csrf_token_path %>">
+    <% end %>
     <%= csrf_meta_tags %>
     <meta name="csrf-token" content="<%= form_authenticity_token %>" class="js-csrf-token">
     <%= csp_meta_tag %>

@@ -1,4 +1,5 @@
 class InitialAdminSeeder
+  # Bootstrap only an empty installation; production must supply its own secrets.
   def self.call(environment: Rails.env, env: ENV)
     # Never add a known account to an installation with existing administrators.
     return if Admin.exists?

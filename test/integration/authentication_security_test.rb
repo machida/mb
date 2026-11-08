@@ -71,6 +71,27 @@ class AuthenticationSecurityTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "missing password digests invalidate sessions instead of raising" do
+    login_as(@admin)
+    @admin.update_column(:password_digest, nil)
+    get edit_admin_profile_path
+    assert_redirected_to admin_login_path
+    assert_nil session[:admin_id]
+  end
+
+  test "CSRF token refresh requires authentication and cannot be cached" do
+    get admin_csrf_token_path
+    assert_redirected_to admin_login_path
+    login_as(@admin)
+    get admin_csrf_token_path
+    assert_response :success
+    assert_equal "no-store", response.headers["Cache-Control"]
+    assert response.parsed_body["token"].present?
+    @admin.update!(password: "changed-password-123")
+    get admin_csrf_token_path
+    assert_redirected_to admin_login_path
+  end
+
   private
 
   def signed_in_browser

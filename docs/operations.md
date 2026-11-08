@@ -105,3 +105,19 @@ docker stats --no-stream
 - 回帰確認: `bundle exec rails test test/integration/authentication_security_test.rb test/services/initial_admin_seeder_test.rb test/helpers/application_helper_test.rb`。
 - Markdownは危険なプロトコルのリンクを出力せず、コードブロックの言語指定をHTMLエスケープします。
 - 検証結果（2026-11-08）: `bundle exec rails test:all` は396件・1460 assertions、失敗/エラー/スキップ0。bundler-audit・npm auditは脆弱性0件、Brakemanは警告0件。`npm run lint` はエラー0件（既存JS警告3件）。専用ブランチでのローカル検証であり、本番反映は別途必要。
+
+### 初回seed失敗後の復旧
+
+新規環境の `db:prepare` はスキーマ作成後にseedを呼ぶため、認証情報不足でseedが失敗してもスキーマは残ります。次の `db:prepare` はseedを再実行しない場合があります。
+
+1. GitHub Repository Secretsに `INITIAL_ADMIN_EMAIL` / `INITIAL_ADMIN_USER_ID` / `INITIAL_ADMIN_PASSWORD`（16文字以上）を登録する。ローカルKamalではパスワード管理ツール等から同名の環境変数を設定する。値をコマンド引数や履歴へ書かない。
+2. 同じ設定を渡して再デプロイする。ActionsのDeployステップから `.kamal/secrets` と `env.secret` を経てコンテナーへ渡る。未設定のbootstrap変数はKamalの必須シークレットに含めないので、既存環境の通常デプロイは影響を受けない。
+3. 初回構築途中のDBであり、既存の記事・設定を持たないことを確認してから `bundle exec kamal app exec --reuse "bin/rails db:seed"` を実行する。起動済みコンテナーへ渡した認証情報を使う。既存ブログの管理者復旧にこのコマンドを使わない。
+4. 管理者ログインを確認する。初期作成後はbootstrap用Repository Secretsを削除して再デプロイできる。既存管理者は追加・上書きされない。
+
+### PR #217 レビュー対応
+
+- `password_digest` が失われた管理者のCookieを破棄し、500ではなくログインへ戻す。
+- 同じブラウザーでパスワード変更後に別タブの管理フォームを送る場合、認証が必要なno-storeのCSRFエンドポイントから新しいトークンを取得する。古いトークンとトークンなしのPOSTは引き続き拒否する。セッション再生成も維持する。
+- 確認コマンド: `bundle exec rails test test/integration/authentication_security_test.rb test/services/initial_admin_seeder_test.rb test/lib/bootstrap_deployment_test.rb test/system/password_change_csrf_playwright_test.rb`。
+- レビュー対応後の全体検証: 401件・1514 assertions、失敗/エラー/スキップ0。lintエラー0、Brakeman警告0。

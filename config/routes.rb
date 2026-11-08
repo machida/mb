@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
   
   namespace :admin do
+    resource :csrf_token, only: :show
     get "login", to: "sessions#new"
     post "login", to: "sessions#create"
     delete "logout", to: "sessions#destroy"

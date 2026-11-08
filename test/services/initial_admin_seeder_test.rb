@@ -4,8 +4,13 @@ class InitialAdminSeederTest < ActiveSupport::TestCase
   setup { Admin.delete_all }
 
   test "production refuses missing or short credentials without creating an administrator" do
-    [ {}, { "INITIAL_ADMIN_EMAIL" => "owner@example.com", "INITIAL_ADMIN_USER_ID" => "owner",
-             "INITIAL_ADMIN_PASSWORD" => "short" } ].each do |env|
+    credentials = { "INITIAL_ADMIN_EMAIL" => "owner@example.com", "INITIAL_ADMIN_USER_ID" => "owner",
+                    "INITIAL_ADMIN_PASSWORD" => "a" * 16 }
+    invalid_inputs = credentials.keys.flat_map do |key|
+      [ credentials.except(key), credentials.merge(key => "") ]
+    end
+    invalid_inputs << credentials.merge("INITIAL_ADMIN_PASSWORD" => "a" * 15)
+    invalid_inputs.each do |env|
       assert_no_difference "Admin.count" do
         assert_raises(ArgumentError) { InitialAdminSeeder.call(environment: "production", env: env) }
       end
@@ -14,7 +19,7 @@ class InitialAdminSeederTest < ActiveSupport::TestCase
 
   test "production creates the explicitly configured administrator" do
     env = { "INITIAL_ADMIN_EMAIL" => "owner@example.com", "INITIAL_ADMIN_USER_ID" => "owner",
-            "INITIAL_ADMIN_PASSWORD" => "a-long-initial-password" }
+            "INITIAL_ADMIN_PASSWORD" => "a" * 16 }
     assert_difference "Admin.count", 1 do
       InitialAdminSeeder.call(environment: "production", env: env)
     end

@@ -95,6 +95,8 @@ bundle exec rails test test/lib/tailwind_config_test.rb  # パス検証テスト
 - READMEや依存更新を行ったときは必要に応じて本ガイドも更新します。
 
 ## セキュリティ & 設定
+- 管理フォームはTurbo送信前にCSRFトークンを更新する。検証は無効化しない。2タブ回帰テストでは `TEST_CSRF_PROTECTION=true` で別プロセスのテストサーバーを起動する。
+- 初回管理者の `INITIAL_ADMIN_*` はGitHub Repository Secrets → `.kamal/secrets` → Kamal `env.secret` で渡す。既存環境では未設定可。初回seed失敗後の再実行手順はRunbookを参照する。
 - Markdownは危険なプロトコルのリンクを出力せず、コードブロックの言語指定をHTMLエスケープします。
 - ログインはIPごとに3分10回、再設定メール申請は15分5回まで。本番ではSolid Cacheを共有カウンターに使用します。パスワード変更・再設定時は他のセッションを無効化します。
 - 依存更新時は `bundle exec bundler-audit check --update`、`bundle exec brakeman --no-pager`、`npm audit` を実行する。CIでも同じ検査を行い、DependabotでGem・npm・GitHub Actionsを監視する。
