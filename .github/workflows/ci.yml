@@ -70,6 +70,8 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         file: coverage/lcov.info
         format: lcov
+        # Avoid the latest download redirect returning an HTML gateway error.
+        coverage-reporter-version: v0.6.22
 
     - name: Run system tests
       env:
