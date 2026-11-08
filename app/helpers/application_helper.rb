@@ -5,7 +5,7 @@ module ApplicationHelper
         formatter = Rouge::Formatters::HTML.new
         lexer = Rouge::Lexer.find(language) || Rouge::Lexers::PlainText
         highlighted = formatter.format(lexer.lex(code))
-        "<div class=\"highlight\"><pre><code class=\"language-#{language}\">#{highlighted}</code></pre></div>"
+        "<div class=\"highlight\"><pre><code class=\"language-#{ERB::Util.html_escape(language)}\">#{highlighted}</code></pre></div>"
       else
         # インデントを保持するためにpreタグ内でエスケープ
         "<pre><code>#{ERB::Util.html_escape(code)}</code></pre>"
@@ -18,11 +18,12 @@ module ApplicationHelper
 
     renderer = HTMLWithSyntaxHighlighting.new(
       filter_html: true,
+      safe_links_only: true,
       no_links: false,
       no_images: false,
       with_toc_data: false,
       hard_wrap: true,
-      link_attributes: { target: "_blank" }
+      link_attributes: { target: "_blank", rel: "noopener noreferrer" }
     )
 
     markdown = Redcarpet::Markdown.new(renderer,

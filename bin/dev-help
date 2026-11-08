@@ -36,7 +36,7 @@ puts "   npm run playwright:install                - package.json経由"
 
 puts "\n📱 開発環境情報:"
 puts "   - 開発サーバー: http://localhost:3000"
-puts "   - 管理者ログイン: admin@example.com / admin123"
+puts "   - 管理者ログイン: admin@example.com / development-password（初回seed時）"
 puts "   - 画像保存先: public/uploads/images/"
 puts "   - データベース: storage/development.sqlite3"
 

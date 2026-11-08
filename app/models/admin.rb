@@ -14,6 +14,11 @@ class Admin < ApplicationRecord
 
   has_many :articles, foreign_key: :author, primary_key: :user_id
 
+  # A password change invalidates cookies issued with the previous credential.
+  def session_credential
+    Digest::SHA256.hexdigest(password_digest)
+  end
+
   # 初回ログイン後のパスワード変更が必要かどうか
   def needs_password_change?
     password_changed_at.blank?

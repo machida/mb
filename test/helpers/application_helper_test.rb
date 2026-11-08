@@ -33,6 +33,26 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_includes result, 'href="https://example.com"'
   end
 
+  test "markdown rejects executable link protocols" do
+    %w[javascript:alert%281%29 data:text/html;base64,PHNjcmlwdD4= vbscript:msgbox%281%29].each do |url|
+      fragment = Nokogiri::HTML.fragment(markdown("[unsafe](#{url})"))
+      assert_empty fragment.css("a[href]")
+    end
+  end
+
+  test "markdown escapes code language attributes" do
+    result = markdown("```x\"><img/src=x/onerror=alert(1)>\nhello\n```")
+    fragment = Nokogiri::HTML.fragment(result)
+    assert_empty fragment.css("img, script, [onclick], [onerror]")
+    assert_includes fragment.text, "hello"
+  end
+
+  test "markdown preserves safe links and isolates new windows" do
+    fragment = Nokogiri::HTML.fragment(markdown("[safe](https://example.com)"))
+    assert_equal "https://example.com", fragment.at_css("a")["href"]
+    assert_equal "noopener noreferrer", fragment.at_css("a")["rel"]
+  end
+
   test "format_date_with_weekday should format date correctly" do
     date = Date.new(2025, 1, 9) # Thursday
     result = format_date_with_weekday(date)

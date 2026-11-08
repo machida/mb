@@ -29,11 +29,24 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def start_admin_session(admin)
+    reset_session
+    session[:admin_id] = admin.id
+    session[:admin_credential] = admin.session_credential
+  end
+
   def current_admin
-    @current_admin ||= Admin.find(session[:admin_id]) if session[:admin_id]
-  rescue ActiveRecord::RecordNotFound
-    session[:admin_id] = nil
-    nil
+    return @current_admin if defined?(@current_admin)
+
+    admin = Admin.find_by(id: session[:admin_id]) if session[:admin_id]
+    if admin && ActiveSupport::SecurityUtils.secure_compare(
+      session[:admin_credential].to_s, admin.session_credential
+    )
+      @current_admin = admin
+    else
+      reset_session if session[:admin_id]
+      @current_admin = nil
+    end
   end
 
   def current_user_signed_in?
