@@ -20,6 +20,7 @@ class Admin::PasswordsController < Admin::BaseController
 
     # password_changed_atを現在時刻に設定
     if @admin.update(password_params.merge(password_changed_at: Time.current))
+      start_admin_session(@admin)
       redirect_to edit_admin_profile_path, notice: "パスワードが正常に更新されました。"
     else
       render :edit, status: :unprocessable_content

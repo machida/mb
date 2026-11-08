@@ -1,4 +1,5 @@
 class Admin::PasswordResetsController < ApplicationController
+  rate_limit to: 5, within: 15.minutes, only: :create, with: -> { head :too_many_requests }
   layout "admin"
   before_action :find_admin_by_token, only: [ :show, :update ]
 
@@ -43,8 +44,7 @@ class Admin::PasswordResetsController < ApplicationController
 
     if @admin.reset_password(params[:admin][:password])
       # セッション固定化攻撃対策: パスワードリセット後に自動ログイン
-      reset_session
-      session[:admin_id] = @admin.id
+      start_admin_session(@admin)
       redirect_to root_path, notice: "パスワードが正常に変更されました。ログインしました。"
     else
       flash.now[:alert] = "パスワードの変更に失敗しました"

@@ -2,18 +2,14 @@
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 
+# Validate bootstrap credentials before writing any seed data.
+InitialAdminSeeder.call
+
 # Create initial site settings
 SiteSetting.set('top_page_description', '技術やライフスタイルについて書いています。')
 SiteSetting.set('default_og_image', 'https://example.com/default-og-image.jpg')
 
 puts "初期サイト設定を作成しました！"
-
-# Create admin user
-Admin.find_or_create_by!(email: 'admin@example.com') do |admin|
-  admin.user_id = 'admin'
-  admin.password = 'admin123'
-  admin.password_confirmation = 'admin123'
-end
 
 # Create sample articles for design customization
 sample_articles = [
@@ -404,7 +400,7 @@ sample_articles.each do |article_data|
 end
 
 puts "初期データの作成が完了しました！"
-puts "Admin: admin@example.com / admin123"
+puts "管理者の初期設定を確認しました（認証情報は表示しません）"
 puts "Articles: #{Article.count}件の記事が作成されました"
 puts "Published: #{Article.published.count}件"
 puts "Drafts: #{Article.drafts.count}件"

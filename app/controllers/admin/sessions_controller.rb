@@ -1,4 +1,5 @@
 class Admin::SessionsController < Admin::BaseController
+  rate_limit to: 10, within: 3.minutes, only: :create, with: -> { head :too_many_requests }
   skip_before_action :require_admin, only: [ :new, :create ]
   def new
   end
@@ -8,8 +9,7 @@ class Admin::SessionsController < Admin::BaseController
 
     if admin && admin.authenticate(params[:password])
       # セッション固定化攻撃対策: ログイン時にセッションIDを再生成
-      reset_session
-      session[:admin_id] = admin.id
+      start_admin_session(admin)
       redirect_to root_path, notice: "ログインしました"
     else
       flash.now[:alert] = "メールアドレスまたはパスワードが間違っています"
@@ -18,7 +18,7 @@ class Admin::SessionsController < Admin::BaseController
   end
 
   def destroy
-    session[:admin_id] = nil
+    reset_session
     redirect_to root_path, notice: "ログアウトしました"
   end
 end

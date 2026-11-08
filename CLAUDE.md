@@ -1,9 +1,9 @@
 # リポジトリガイドライン
 
 ## プロジェクト概要
-- マチダのブログ (Rails 8.1.4 / Ruby 4.0.9 / Node.js 26.13.0) で、MiniTest + Playwright によるE2Eで品質を担保します。
+- マチダのブログ (Rails 8.1.4.1 / Ruby 4.0.9 / Node.js 26.13.0) で、MiniTest + Playwright によるE2Eで品質を担保します。
 - ブラウザUIは Tailwind CSS + Stimulus + Turbo、アップロードは開発で `public/uploads/images`、本番で Google Cloud Storage を使用します。
-- 既定の管理者は `admin@example.com` (`admin123`) なので、新環境ごとに必ずパスワードを変更し安全な保管場所(1Password等)に記録してください。
+- 開発用の初期管理者は `admin@example.com` (`development-password`)。本番の初回seedには `INITIAL_ADMIN_EMAIL` / `INITIAL_ADMIN_USER_ID` / `INITIAL_ADMIN_PASSWORD`（16文字以上）を環境変数で指定し、安全な保管場所に記録してください。既存管理者がいる場合は追加・上書きしません。
 
 ## メタルール
 - `AGENTS.md` は `CLAUDE.md` へのシンボリックリンクです。`CLAUDE.md` のみを編集してください。
@@ -95,6 +95,10 @@ bundle exec rails test test/lib/tailwind_config_test.rb  # パス検証テスト
 - READMEや依存更新を行ったときは必要に応じて本ガイドも更新します。
 
 ## セキュリティ & 設定
+- 管理フォームはTurbo送信前にCSRFトークンを更新する。検証は無効化しない。2タブ回帰テストでは `TEST_CSRF_PROTECTION=true` で別プロセスのテストサーバーを起動する。
+- 初回管理者の `INITIAL_ADMIN_*` はGitHub Repository Secrets → `.kamal/secrets` → Kamal `env.secret` で渡す。既存環境では未設定可。初回seed失敗後の再実行手順はRunbookを参照する。
+- Markdownは危険なプロトコルのリンクを出力せず、コードブロックの言語指定をHTMLエスケープします。
+- ログインはIPごとに3分10回、再設定メール申請は15分5回まで。本番ではSolid Cacheを共有カウンターに使用します。パスワード変更・再設定時は他のセッションを無効化します。
 - 依存更新時は `bundle exec bundler-audit check --update`、`bundle exec brakeman --no-pager`、`npm audit` を実行する。CIでも同じ検査を行い、DependabotでGem・npm・GitHub Actionsを監視する。
 - メール送信は利用者ごとの `SMTP_*` / `MAILER_FROM` 環境変数、または暗号化credentialsの `smtp` で設定する。実値を公開コードへ埋め込まない。設定手順はREADME、障害確認は `docs/operations.md` を参照。
 - GitHub Actionsでの本番デプロイにはRepository Secretsの `SMTP_USER_NAME`、`SMTP_PASSWORD`、`MAILER_FROM` を使用し、Kamalのsecretとしてコンテナへ渡す。
