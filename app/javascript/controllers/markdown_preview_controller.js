@@ -40,7 +40,7 @@ export default class extends Controller {
       } else {
         this.previewTarget.innerHTML = '<p class="text-red-500">プレビューの生成に失敗しました</p>';
       }
-    } catch (error) {
+    } catch {
       // Preview generation error - show error message to user
       this.previewTarget.innerHTML = '<p class="text-red-500">プレビューの生成に失敗しました</p>';
     }

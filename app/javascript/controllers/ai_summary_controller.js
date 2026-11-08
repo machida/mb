@@ -66,8 +66,7 @@ export default class extends Controller {
       } else {
         this.showError(data.error || '概要の生成に失敗しました');
       }
-    } catch (error) {
-      console.error('AI Summary generation error:', error);
+    } catch {
       this.showError('ネットワークエラーが発生しました');
     } finally {
       button.disabled = false;

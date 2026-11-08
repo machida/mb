@@ -232,8 +232,7 @@ export default class extends Controller {
       const file = await this.cropper.toFile(this.selectedFile);
       this.closeCropModal();
       await this.uploadFile(file);
-    } catch (error) {
-      console.error('Crop error:', error);
+    } catch {
       this.showError('クロップ処理に失敗しました');
     }
   }
