@@ -66,11 +66,14 @@ jobs:
 
     - name: Upload coverage to Coveralls
       uses: coverallsapp/github-action@v2
+      env:
+        # The action uses curl without HTTP failure detection or retries.
+        CURL_HOME: ${{ github.workspace }}/.github/coveralls-curl
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         file: coverage/lcov.info
         format: lcov
-        # Avoid the latest download redirect returning an HTML gateway error.
+        # Keep the binary and checksum on the same release.
         coverage-reporter-version: v0.6.22
 
     - name: Run system tests

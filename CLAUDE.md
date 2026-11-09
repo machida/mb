@@ -100,6 +100,7 @@ bundle exec rails test test/lib/tailwind_config_test.rb  # パス検証テスト
 - Markdownは危険なプロトコルのリンクを出力せず、コードブロックの言語指定をHTMLエスケープします。
 - ログインはIPごとに3分10回、再設定メール申請は15分5回まで。本番ではSolid Cacheを共有カウンターに使用します。パスワード変更・再設定時は他のセッションを無効化します。
 - 依存更新時は `bundle exec bundler-audit check --update`、`bundle exec brakeman --no-pager`、`npm audit` を実行する。CIでも同じ検査を行い、DependabotでGem・npm・GitHub Actionsを監視する。
+- Coverallsの取得用curl設定は当該CIステップの `CURL_HOME` に限定する。HTTPエラーは有限回再試行し、チェックサム検証や失敗判定を無効化しない。詳細はRunbookを参照する。
 - メール送信は利用者ごとの `SMTP_*` / `MAILER_FROM` 環境変数、または暗号化credentialsの `smtp` で設定する。実値を公開コードへ埋め込まない。設定手順はREADME、障害確認は `docs/operations.md` を参照。
 - GitHub Actionsでの本番デプロイにはRepository Secretsの `SMTP_USER_NAME`、`SMTP_PASSWORD`、`MAILER_FROM` を使用し、Kamalのsecretとしてコンテナへ渡す。
 - GCSやAPIキーは `rails credentials:edit` に保存し、`.env` やJSON鍵ファイルをコミットしないでください。新しい秘密設定はPRで必ず説明します。
