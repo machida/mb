@@ -73,6 +73,7 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         file: coverage/lcov.info
         format: lcov
+        fail-on-error: true
         # Keep the binary and checksum on the same release.
         coverage-reporter-version: v0.6.22
 

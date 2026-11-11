@@ -11,7 +11,7 @@ class CoverallsDownloadTest < ActiveSupport::TestCase
     upload = steps.find { |step| step["uses"] == "coverallsapp/github-action@v2" }
     assert_equal "${{ github.workspace }}/.github/coveralls-curl", upload.dig("env", "CURL_HOME")
     assert_nil upload["continue-on-error"]
-    assert_not_equal false, upload.dig("with", "fail-on-error")
+    assert_equal true, upload.dig("with", "fail-on-error")
   end
 
   test "download retries a gateway error and saves only the successful response" do
