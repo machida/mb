@@ -24,6 +24,8 @@ Rails 8.1.4.1で作成されたブログアプリケーション
 
 CIで次の検査を実行します。DependabotはGem・npm・GitHub Actionsの更新を毎日確認します。
 
+Coverallsの配布ファイル取得にはHTTPエラー検知と最大3回の再試行を設定しています。継続的な障害時もチェックサム検証を省略せず、CIを失敗させます。詳細は[運用Runbook](docs/operations.md#ciのcoverallsダウンロード障害)を参照してください。
+
 ```bash
 bundle exec bundler-audit check --update
 bundle exec brakeman --no-pager

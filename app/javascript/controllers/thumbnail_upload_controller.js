@@ -233,6 +233,7 @@ export default class extends Controller {
       this.closeCropModal();
       await this.uploadFile(file);
     } catch (error) {
+      // eslint-disable-next-line no-console -- Preserve crop failure details and stack traces for troubleshooting.
       console.error('Crop error:', error);
       this.showError('クロップ処理に失敗しました');
     }
