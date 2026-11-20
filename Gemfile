@@ -80,7 +80,7 @@ end
 group :test do
   # Playwright for E2E testing - unified system testing framework
   # Browser automation client used by the Rails system tests
-  gem "playwright-ruby-client", "~> 1.64.0"
+  gem "playwright-ruby-client", "~> 1.65.0"
 
   # HTTP request stubbing for testing
   gem "webmock", "~> 3.26"
